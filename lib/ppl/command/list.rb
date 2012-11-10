@@ -6,15 +6,9 @@ class Ppl::Command::List < Ppl::Command::Base
 
   def index
 
-    pattern  = @options[:path] + "/*.vcard"
-    contacts = Dir.glob pattern
+    vcards = all_vcards
 
-    contacts.each do |filename|
-
-      id = File.basename(filename).slice(0..-7)
-
-      vcard = IO.read filename
-      vcard = Vpim::Vcard.decode(vcard).first
+    vcards.each do |id, vcard|
 
       puts(
         sprintf("%-20s", id).red +
