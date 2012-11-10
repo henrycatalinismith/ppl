@@ -1,7 +1,4 @@
 
-require "vpim/vcard"
-require "colored"
-
 require "ppl/command/base"
 
 class Ppl::Command::Show < Ppl::Command::Base

@@ -1,7 +1,4 @@
 
-require "vpim/vcard"
-require "colored"
-
 class Ppl::Command::List < Ppl::Command::Base
 
   def index
