@@ -1,0 +1,21 @@
+GIT
+  remote: git://github.com/defunkt/colored.git
+  revision: 829bde0f8832406be1cacc5c99c49d976e05ccfc
+  specs:
+    colored (1.2)
+
+GIT
+  remote: git://github.com/sam-github/vpim.git
+  revision: 6753a367cda64e53eab745414cedc130d2f149c8
+  specs:
+    vpim (12.1.12)
+
+GEM
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  colored (~> 1.2)!
+  vpim (= 12.1.12)!
