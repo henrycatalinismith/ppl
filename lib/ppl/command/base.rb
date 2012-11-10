@@ -11,6 +11,13 @@ class Ppl::Command::Base
     @options   = options
   end
 
+  private
+
+  def load_vcard(id)
+    filename = @options[:path] + "/" + id + ".vcard"
+    vcard    = IO.read filename
+    vcard    = Vpim::Vcard.decode(vcard).first
+  end
 
 end
 
