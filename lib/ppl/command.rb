@@ -14,7 +14,10 @@ module Ppl
         :path => "/home/h2s/doc/contacts"
       }
 
+      klass = command.capitalize
+
       command = Ppl::Command::List.new(arguments, options)
+      command = Ppl::Command.const_get(klass).new(arguments, options)
       command.send("index")
     end
 
