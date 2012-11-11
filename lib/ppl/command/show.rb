@@ -3,6 +3,14 @@ require "ppl/command/base"
 
 class Ppl::Command::Show < Ppl::Command::Base
 
+  def name
+    "show"
+  end
+
+  def summary
+    "Show full details of a single contact"
+  end
+
   def index
     vcard = load_vcard @arguments.first
 
