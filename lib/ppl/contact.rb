@@ -12,6 +12,14 @@ class Ppl::Contact
     @vcard.birthday
   end
 
+  def until_birthday(now)
+    birthday = self.birthday.dup
+    while birthday < now
+      birthday = birthday.advance :years => 1
+    end
+    birthday - now
+  end
+
   def email
     @vcard.emails.first
   end
