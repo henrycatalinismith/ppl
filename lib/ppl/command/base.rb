@@ -14,6 +14,15 @@ class Ppl::Command::Base
     @options   = options
   end
 
+
+  def name
+  end
+
+
+  def summary
+  end
+
+
   private
 
   def all_vcards
