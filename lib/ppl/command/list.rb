@@ -1,6 +1,14 @@
 
 class Ppl::Command::List < Ppl::Command::Base
 
+  def name
+    "list"
+  end
+
+  def summary
+    "Show a list of all contacts"
+  end
+
   def index
 
     vcards = all_vcards
