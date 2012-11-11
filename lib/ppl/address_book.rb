@@ -34,5 +34,9 @@ class Ppl::Address_Book
     self.contacts.each { |c| yield c }
   end
 
+  def with_birthday
+    self.find_all { |contact| contact.birthday.nil? == false }
+  end
+
 end
 
