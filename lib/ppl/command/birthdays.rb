@@ -1,7 +1,4 @@
 
-require "active_support/core_ext/time/calculations.rb"
-require "active_support/core_ext/date_time/calculations.rb"
-
 class Ppl::Command::Birthdays < Ppl::Command::Base
 
   def name
