@@ -16,20 +16,12 @@ class Ppl::Command::Birthdays < Ppl::Command::Base
     today = Date.today
 
     @address_book.with_birthday.each do |contact|
-
-      birthday = contact.birthday.dup
-      while birthday < today
-        birthday = birthday.advance :years => 1
-      end
-      days = birthday - today
-
       puts(
         sprintf("%-20s", contact.id)       +
         sprintf("%-20s", contact.name)     +
         sprintf("%-20s", contact.birthday) +
-        sprintf("%d days", days)
+        sprintf("%d days", contact.until_birthday(today))
       )
-
     end
 
   end
