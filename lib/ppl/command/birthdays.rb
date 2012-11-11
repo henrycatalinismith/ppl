@@ -13,10 +13,9 @@ class Ppl::Command::Birthdays < Ppl::Command::Base
   end
 
   def index
-    vcards = all_vcards
     today = Date.today
 
-    vcards.each do |id, vcard|
+    @address_book.each do |id, vcard|
       if vcard.birthday.nil?
         next
       end

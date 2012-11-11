@@ -10,19 +10,13 @@ class Ppl::Command::List < Ppl::Command::Base
   end
 
   def index
-
-    vcards = all_vcards
-
-    vcards.each do |id, vcard|
-
+    @address_book.each do |id, vcard|
       puts(
         sprintf("%-20s", id).red +
         sprintf("%-20s", vcard.name.fullname).yellow +
         sprintf("%-20s", vcard.email).blue
       )
-
     end
-
   end
 
 end
