@@ -15,17 +15,12 @@ class Ppl::Command::Birthdays < Ppl::Command::Base
   def index
     today = Date.today
 
-    @address_book.each do |contact|
-      if contact.birthday.nil?
-        next
-      end
+    @address_book.with_birthday.each do |contact|
 
       birthday = contact.birthday.dup
-
       while birthday < today
         birthday = birthday.advance :years => 1
       end
-
       days = birthday - today
 
       puts(
