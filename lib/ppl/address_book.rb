@@ -14,19 +14,19 @@ class Ppl::Address_Book
     filename = File.join @path, id + ".vcard"
     vcard    = IO.read filename
     vcard    = Vpim::Vcard.decode(vcard).first
+    contact  = Ppl::Contact.new(id, vcard)
   end
 
   def contacts
     pattern   = File.join @path, "*.vcard"
     filenames = Dir.glob pattern
-    vcards    = {}
+    contacts  = []
 
     filenames.each do |filename|
       id = File.basename(filename).slice(0..-7)
-      vcard = self.contact(id)
-      vcards[id] = vcard
+      contacts.push self.contact(id);
     end
-    vcards
+    contacts
 
   end
 
