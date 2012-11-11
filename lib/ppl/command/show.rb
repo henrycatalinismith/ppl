@@ -12,10 +12,10 @@ class Ppl::Command::Show < Ppl::Command::Base
   end
 
   def index
-    vcard = @address_book.contact @arguments.first
+    contact = @address_book.contact @arguments.first
 
-    puts vcard.name.fullname.yellow
-    vcard.emails.each do |email|
+    puts contact.name.yellow
+    contact.emails.each do |email|
       puts email.blue
     end
 

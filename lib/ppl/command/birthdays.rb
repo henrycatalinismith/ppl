@@ -15,12 +15,12 @@ class Ppl::Command::Birthdays < Ppl::Command::Base
   def index
     today = Date.today
 
-    @address_book.each do |id, vcard|
-      if vcard.birthday.nil?
+    @address_book.each do |contact|
+      if contact.birthday.nil?
         next
       end
 
-      birthday = vcard.birthday.dup
+      birthday = contact.birthday.dup
 
       while birthday < today
         birthday = birthday.advance :years => 1
@@ -29,9 +29,9 @@ class Ppl::Command::Birthdays < Ppl::Command::Base
       days = birthday - today
 
       puts(
-        sprintf("%-20s", id)                  +
-        sprintf("%-20s", vcard.name.fullname) +
-        sprintf("%-20s", vcard.birthday)      +
+        sprintf("%-20s", contact.id)       +
+        sprintf("%-20s", contact.name)     +
+        sprintf("%-20s", contact.birthday) +
         sprintf("%d days", days)
       )
 
