@@ -1,6 +1,4 @@
 
-require "ppl"
-
 class Ppl::Command
 
   def initialize(arguments=[], options={}, address_book)

@@ -9,7 +9,7 @@ class Ppl::Command::Help < Ppl::Command
     "Show a list of available commands"
   end
 
-  def index
+  def execute
 
     puts
     Ppl::Command.constants.each do |constant|
