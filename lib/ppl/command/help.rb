@@ -1,5 +1,5 @@
 
-class Ppl::Command::Help < Ppl::Command::Base
+class Ppl::Command::Help < Ppl::Command
 
   def name
     "help"

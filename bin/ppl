@@ -11,5 +11,6 @@ class String
     alias_method :each, :each_line
 end
 
-Ppl::CLI.start *ARGV
+cli = Ppl::CLI.new ARGV
+cli.run
 
