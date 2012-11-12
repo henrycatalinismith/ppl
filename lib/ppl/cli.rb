@@ -1,6 +1,5 @@
 
 require "ppl"
-require "ppl/command"
 
 class Ppl::CLI
 
