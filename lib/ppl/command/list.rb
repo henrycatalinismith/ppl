@@ -1,5 +1,5 @@
 
-class Ppl::Command::List < Ppl::Command::Base
+class Ppl::Command::List < Ppl::Command
 
   def name
     "list"

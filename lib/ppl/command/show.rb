@@ -1,7 +1,5 @@
 
-require "ppl/command/base"
-
-class Ppl::Command::Show < Ppl::Command::Base
+class Ppl::Command::Show < Ppl::Command
 
   def name
     "show"
@@ -14,9 +12,9 @@ class Ppl::Command::Show < Ppl::Command::Base
   def index
     contact = @address_book.contact @arguments.first
 
-    puts contact.name.yellow
+    puts contact.name
     contact.emails.each do |email|
-      puts email.blue
+      puts email
     end
 
   end
