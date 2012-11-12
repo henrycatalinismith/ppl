@@ -9,7 +9,7 @@ class Ppl::Command::Show < Ppl::Command
     "Show full details of a single contact"
   end
 
-  def index
+  def execute
     contact = @address_book.contact @arguments.first
 
     puts contact.name
