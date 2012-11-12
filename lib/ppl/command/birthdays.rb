@@ -1,5 +1,5 @@
 
-class Ppl::Command::Birthdays < Ppl::Command::Base
+class Ppl::Command::Birthdays < Ppl::Command
 
   def name
     "birthdays"
