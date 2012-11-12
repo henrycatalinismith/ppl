@@ -12,9 +12,9 @@ class Ppl::Command::List < Ppl::Command::Base
   def index
     @address_book.each do |contact|
       puts(
-        sprintf("%-20s", contact.id).red +
-        sprintf("%-20s", contact.name).yellow +
-        sprintf("%-20s", contact.email).blue
+        sprintf("%-10s", contact.id + ":") +
+        sprintf("%s ", contact.name)   +
+        sprintf("%-20s", "<" + contact.email + ">")
       )
     end
   end
