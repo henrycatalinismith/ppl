@@ -9,7 +9,7 @@ class Ppl::Command::Birthdays < Ppl::Command
     "Show a list of upcoming birthdays"
   end
 
-  def index
+  def execute
     today = Date.today
 
     @address_book.with_birthday.each do |contact|
