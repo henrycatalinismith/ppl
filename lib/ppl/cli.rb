@@ -24,15 +24,12 @@ class Ppl::CLI
 
   def commands
     @commands = []
-    Dir[File.join(File.dirname(__FILE__), "command", "*.rb")].each do |file|
-      require file
-    end
     Ppl::Command.constants.each do |name|
       constant = Ppl::Command.const_get(name)
       command = constant.new(@arguments, {}, @address_book)
       @commands.push command
     end
-    @commands
+    @commands.sort! { |a,b| a.name <=> b.name }
   end
 
   def find_command(name)
