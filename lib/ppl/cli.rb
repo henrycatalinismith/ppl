@@ -18,7 +18,7 @@ class Ppl::CLI
       command = find_command "help"
     end
 
-    command.send "index"
+    command.send "execute"
   end
 
   private
