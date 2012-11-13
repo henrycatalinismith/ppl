@@ -42,10 +42,25 @@ class Ppl::Address_Book
     self.find_all { |contact| contact.birthday.nil? == false }
   end
 
-  def create_contact(id)
-    contact = Ppl::Contact.new(id, Vpim::Vcard.create)
+  def create_contact(id, full_name)
+
+    vcard = Vpim::Vcard::Maker.make2 do |maker|
+      maker.add_name do |name|
+        name.given = full_name
+      end
+    end
+
+    contact = Ppl::Contact.new(id, vcard)
     self.save_contact contact
     contact
+  end
+
+  def delete_contact(id)
+    filename = File.join @path, id + ".vcard"
+    if !File.exists? filename
+      return false
+    end
+    File.delete filename
   end
 
   def save_contact(contact)
