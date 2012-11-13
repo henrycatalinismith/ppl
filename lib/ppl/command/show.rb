@@ -13,16 +13,10 @@ class Ppl::Command::Show < Ppl::Command
     "Usage: ppl show <contact>"
   end
 
-  def options
-    @option_parser.on("-n", "Test") do |v|
-      @options[:n] = true
-    end
+  def options(parser)
   end
 
   def execute(argv, options)
-
-    puts argv
-    puts options
 
     contact = @address_book.contact argv.first
 
