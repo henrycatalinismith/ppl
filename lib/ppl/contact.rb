@@ -39,5 +39,14 @@ class Ppl::Contact
     @vcard.to_s
   end
 
+  def email=(address)
+    @vcard.delete_if { |line|
+      line.name == "EMAIL" && line.value == address
+    }
+    @vcard.make do |maker|
+      maker.add_email(address)
+    end
+  end
+
 end
 
