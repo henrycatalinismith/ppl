@@ -18,11 +18,16 @@ class Ppl::Command::List < Ppl::Command
 
   def execute(argv, options)
     @address_book.each do |contact|
-      puts(
-        sprintf("%-10s", contact.id + ":") +
-        sprintf("%s ", contact.name)   +
-        sprintf("%-20s", "<" + contact.email + ">")
-      )
+
+      line  = ""
+      line += sprintf("%-10s", contact.id + ":")
+      line += sprintf("%s ", contact.name)
+
+      if !contact.email.nil?
+        line += sprintf("%-20s", "<" + contact.email + ">")
+      end
+
+      puts line
     end
     return true
   end
