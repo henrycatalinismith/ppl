@@ -9,7 +9,11 @@ class Ppl::Command::Birthdays < Ppl::Command
     "Show a list of upcoming birthdays"
   end
 
-  def execute
+  def banner
+    "Usage: ppl birthdays"
+  end
+
+  def execute(argv, options)
     today = Date.today
 
     @address_book.with_birthday.each do |contact|

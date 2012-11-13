@@ -1,21 +1,37 @@
 
 class Ppl::Command
 
-  def initialize(arguments=[], options={}, address_book)
-    @arguments    = arguments
-    @options      = options
-    @address_book = address_book
+  def initialize(address_book, option_parser, sub_commands = [])
+    @address_book  = address_book
+    @option_parser = option_parser
+
+    @option_parser.banner = banner
+    @options = {}
+    options
   end
 
   def name
-    raise NotImplementedError
+    "ppl"
   end
 
   def summary
-    raise NotImplementedError
+    ""
   end
 
-  def execute
+  def banner
+    "Usage: ppl <command>"
+  end
+
+  def options
+  end
+
+  def run(argv)
+    @options = {}
+    @option_parser.parse! argv
+    execute(argv, @options)
+  end
+
+  def execute(argv, options)
     raise NotImplementedError
   end
 

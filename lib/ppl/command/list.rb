@@ -9,7 +9,11 @@ class Ppl::Command::List < Ppl::Command
     "Show a list of all contacts"
   end
 
-  def execute
+  def banner
+    "Usage: ppl list"
+  end
+
+  def execute(argv, options)
     @address_book.each do |contact|
       puts(
         sprintf("%-10s", contact.id + ":") +

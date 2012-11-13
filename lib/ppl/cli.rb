@@ -1,23 +1,25 @@
 
 require "ppl"
+require "optparse"
 
 class Ppl::CLI
 
-  def initialize(arguments=[])
-    @arguments = arguments
+  def initialize
     @address_book = Ppl::Address_Book.new("/home/h2s/doc/contacts")
-    @commands  = commands
+    @commands     = commands
+
+    find_command("help").commands = @commands
   end
 
-  def run
-    command_name = @arguments.shift
+  def run(argv)
+    command_name = argv.shift
     command      = find_command command_name
 
     if command.nil?
       command = find_command "help"
     end
 
-    command.send "execute"
+    command.run argv
   end
 
   private
@@ -25,8 +27,9 @@ class Ppl::CLI
   def commands
     @commands = []
     Ppl::Command.constants.each do |name|
+      optparse = OptionParser.new
       constant = Ppl::Command.const_get(name)
-      command = constant.new(@arguments, {}, @address_book)
+      command = constant.new(@address_book, optparse)
       @commands.push command
     end
     @commands.sort! { |a,b| a.name <=> b.name }
