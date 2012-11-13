@@ -10,5 +10,6 @@ require "ppl/command/add"
 require "ppl/command/birthdays"
 require "ppl/command/help"
 require "ppl/command/list"
+require "ppl/command/set"
 require "ppl/command/show"
 
