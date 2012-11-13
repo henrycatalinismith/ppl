@@ -10,7 +10,7 @@ class Ppl::Command::Add < Ppl::Command
   end
 
   def banner
-    "Usage: ppl add <contact>"
+    "Usage: ppl add <contact> <name>"
   end
 
   def options(parser)
