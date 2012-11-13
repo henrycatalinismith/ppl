@@ -13,6 +13,9 @@ class Ppl::Command::Birthdays < Ppl::Command
     "Usage: ppl birthdays"
   end
 
+  def options(parser)
+  end
+
   def execute(argv, options)
     today = Date.today
 
