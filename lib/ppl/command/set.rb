@@ -34,9 +34,7 @@ class Ppl::Command::Set < Ppl::Command
     end
 
     if !options[:email].nil?
-      contact.vcard.make do |maker|
-        maker.add_email(options[:email])
-      end
+      contact.email = options[:email]
     end
 
     @address_book.save_contact contact
