@@ -4,6 +4,7 @@ require "active_support/core_ext/time/calculations.rb"
 class Ppl::Contact
 
   attr_reader :id
+  attr_reader :vcard
 
   def initialize(id, vcard)
     @id    = id
