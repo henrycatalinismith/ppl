@@ -33,16 +33,13 @@ class Ppl::Command::Set < Ppl::Command
       raise "contact '#{contact_id}' not found"
     end
 
-    contact.vcard.make do |maker|
-      maker.name do |name|
-        name.fullname = 's'
+    if !options[:email].nil?
+      contact.vcard.make do |maker|
+        maker.add_email(options[:email])
       end
-      puts maker
     end
 
-    if !options[:email].nil?
-      #contact.vcard.add_email options[:email]
-    end
+    @address_book.save_contact contact
   end
 
 end
