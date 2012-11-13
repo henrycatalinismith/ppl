@@ -24,6 +24,7 @@ class Ppl::Command::List < Ppl::Command
         sprintf("%-20s", "<" + contact.email + ">")
       )
     end
+    return true
   end
 
 end
