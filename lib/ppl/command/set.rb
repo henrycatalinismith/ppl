@@ -17,6 +17,9 @@ class Ppl::Command::Set < Ppl::Command
     parser.on("-e", "--email <email>", "Email address") do |email|
       @options[:email] = email
     end
+    parser.on("-b", "--birthday <date>", "Birthday") do |birthday|
+      @options[:birthday] = Date.parse birthday
+    end
   end
 
   def execute(argv, options)
@@ -35,6 +38,10 @@ class Ppl::Command::Set < Ppl::Command
 
     if !options[:email].nil?
       contact.email = options[:email]
+    end
+
+    if !options[:birthday].nil?
+      contact.birthday = options[:birthday]
     end
 
     @address_book.save_contact contact
