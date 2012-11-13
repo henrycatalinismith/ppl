@@ -38,7 +38,13 @@ class Ppl::Command
       return false
     end
 
-    return self.execute(argv, @options)
+    begin
+      status = self.execute argv, @options
+    rescue RuntimeError
+      $stderr.puts "ppl: " + $!.to_s
+    end
+
+    return status
   end
 
   def execute(argv, options)

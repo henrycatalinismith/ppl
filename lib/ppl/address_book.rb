@@ -12,9 +12,13 @@ class Ppl::Address_Book
 
   def contact(id)
     filename = File.join @path, id + ".vcard"
-    vcard    = IO.read filename
-    vcard    = Vpim::Vcard.decode(vcard).first
-    contact  = Ppl::Contact.new(id, vcard)
+    if !File.exists? filename
+      return nil
+    end
+
+    vcard   = IO.read filename
+    vcard   = Vpim::Vcard.decode(vcard).first
+    contact = Ppl::Contact.new(id, vcard)
   end
 
   def contacts
