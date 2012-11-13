@@ -18,9 +18,10 @@ class Ppl::Command::Add < Ppl::Command
 
   def execute(argv, options)
 
-    contact_id = argv.first
+    contact_id = argv.shift
+    name       = argv.shift
 
-    if contact_id.nil?
+    if contact_id.nil? || name.nil?
       $stderr.puts @option_parser
       return false
     end
@@ -30,7 +31,7 @@ class Ppl::Command::Add < Ppl::Command
       raise "contact '#{contact_id}' already exists"
     end
 
-    contact = @address_book.create_contact contact_id
+    contact = @address_book.create_contact contact_id, name
     puts contact
 
   end
