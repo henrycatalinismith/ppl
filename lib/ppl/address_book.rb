@@ -42,5 +42,18 @@ class Ppl::Address_Book
     self.find_all { |contact| contact.birthday.nil? == false }
   end
 
+  def create_contact(id)
+    contact = Ppl::Contact.new(id, Vpim::Vcard.create)
+    self.save_contact contact
+    contact
+  end
+
+  def save_contact(contact)
+    filename = File.join @path, contact.id + ".vcard"
+    File.open(filename, "w") do |file|
+      file.write contact.to_s
+    end
+  end
+
 end
 

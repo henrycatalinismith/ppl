@@ -1,16 +1,16 @@
 
-class Ppl::Command::Show < Ppl::Command
+class Ppl::Command::Add < Ppl::Command
 
   def name
-    "show"
+    "add"
   end
 
   def summary
-    "Show full details of a single contact"
+    "Add a new contact"
   end
 
   def banner
-    "Usage: ppl show <contact>"
+    "Usage: ppl add <contact>"
   end
 
   def options(parser)
@@ -26,17 +26,13 @@ class Ppl::Command::Show < Ppl::Command
     end
 
     contact = @address_book.contact contact_id
-    if contact.nil?
-      raise "contact '#{contact_id}' not found"
+    if !contact.nil?
+      raise "contact '#{contact_id}' already exists"
     end
 
+    contact = @address_book.create_contact contact_id
+    puts contact
 
-    puts contact.name
-    contact.emails.each do |email|
-      puts email
-    end
-
-    return true
   end
 
 end
