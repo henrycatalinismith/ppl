@@ -13,12 +13,12 @@ class Ppl::Command::Help < Ppl::Command
     "Usage: ppl <command> [options]"
   end
 
-  def commands=(commands)
-    @commands = commands
+  def options(parser)
   end
 
   def execute(argv, options)
     puts @option_parser
+    puts
     @commands.each do |command|
       puts(
         sprintf(" %-10s", command.name) +

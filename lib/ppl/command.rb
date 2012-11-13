@@ -1,34 +1,44 @@
 
 class Ppl::Command
 
-  def initialize(address_book, option_parser, sub_commands = [])
-    @address_book  = address_book
-    @option_parser = option_parser
+  attr_accessor :address_book
+  attr_accessor :commands
 
-    @option_parser.banner = banner
-    @options = {}
-    options
+  def initialize
+    @option_parser = OptionParser.new do |parser|
+      parser.banner = self.banner
+      self.options parser
+    end
   end
 
   def name
-    "ppl"
+    raise NotImplementedError
   end
 
   def summary
-    ""
+    raise NotImplementedError
   end
 
   def banner
-    "Usage: ppl <command>"
+    raise NotImplementedError
   end
 
-  def options
+  def options(parser)
+    raise NotImplementedError
   end
 
   def run(argv)
+
     @options = {}
-    @option_parser.parse! argv
-    execute(argv, @options)
+    begin
+      @option_parser.parse! ARGV
+    rescue OptionParser::ParseError
+      $stderr.puts $!
+      $stderr.puts @option_parser
+      return false
+    end
+
+    return self.execute(argv, @options)
   end
 
   def execute(argv, options)

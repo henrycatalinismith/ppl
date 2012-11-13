@@ -13,6 +13,9 @@ class Ppl::Command::List < Ppl::Command
     "Usage: ppl list"
   end
 
+  def options(parser)
+  end
+
   def execute(argv, options)
     @address_book.each do |contact|
       puts(

@@ -22,23 +22,28 @@ class Ppl::CLI
     command.run argv
   end
 
+
   private
 
   def commands
     @commands = []
     Ppl::Command.constants.each do |name|
-      optparse = OptionParser.new
       constant = Ppl::Command.const_get(name)
-      command = constant.new(@address_book, optparse)
-      @commands.push command
+      @commands.push constant.new
     end
     @commands.sort! { |a,b| a.name <=> b.name }
+
+    @commands.each do |command|
+      command.address_book  = @address_book
+      command.commands      = @commands
+    end
   end
 
   def find_command(name)
     matches = @commands.select { |command| command.name == name }
     matches.first
   end
+
 
 end
 
