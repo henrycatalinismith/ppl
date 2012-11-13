@@ -15,6 +15,12 @@ like "people". You might be interested in ppl if:
 Usage
 -----
 
+### Add a contact
+
+```bash
+$ ppl add adam "Adam Brown"
+```
+
 ### List all contacts
 
 ```bash
@@ -44,15 +50,16 @@ dave      Dave Jones 1980-01-02  100 days
 joe       Joe Bloggs 1980-01-03  101 days
 ```
 
+### Delete a contact
+
+```bash
+$ ppl rm workadam
+```
+
 Roadmap
 -------
 
 Support for the following commands is planned.
-
-### Add a contact
-```bash
-$ ppl add adam --email=adam.brown@example.org --birthday=1980-01-04
-```
 
 ### Update a contact
 ```bash
@@ -62,11 +69,6 @@ $ ppl set adam --email=adam.brown@example.com
 ### Rename a contact
 ```bash
 $ ppl mv adam workadam
-```
-
-### Delete a contact
-```bash
-$ ppl rm workadam
 ```
 
 In a highly optimistic version of the future, I plan to integrate Git.
