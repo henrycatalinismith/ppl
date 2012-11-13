@@ -9,8 +9,22 @@ class Ppl::Command::Show < Ppl::Command
     "Show full details of a single contact"
   end
 
-  def execute
-    contact = @address_book.contact @arguments.first
+  def banner
+    "Usage: ppl show <contact>"
+  end
+
+  def options
+    @option_parser.on("-n", "Test") do |v|
+      @options[:n] = true
+    end
+  end
+
+  def execute(argv, options)
+
+    puts argv
+    puts options
+
+    contact = @address_book.contact argv.first
 
     puts contact.name
     contact.emails.each do |email|

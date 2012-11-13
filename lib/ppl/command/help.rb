@@ -9,20 +9,23 @@ class Ppl::Command::Help < Ppl::Command
     "Show a list of available commands"
   end
 
-  def execute
+  def banner
+    "Usage: ppl <command> [options]"
+  end
 
-    puts
-    Ppl::Command.constants.each do |constant|
-      if constant.to_s != "Base"
-        command = Ppl::Command.const_get(constant).new(@arguments, @options)
-        puts(
-          sprintf(" %-10s", command.name) +
-          sprintf("%s", command.summary)
-        )
-      end
+  def commands=(commands)
+    @commands = commands
+  end
+
+  def execute(argv, options)
+    puts @option_parser
+    @commands.each do |command|
+      puts(
+        sprintf(" %-10s", command.name) +
+        sprintf("%s", command.summary)
+      )
     end
     puts
-
   end
 
 end
