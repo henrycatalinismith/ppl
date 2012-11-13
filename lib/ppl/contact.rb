@@ -34,5 +34,9 @@ class Ppl::Contact
     @vcard.name.fullname
   end
 
+  def to_s
+    @vcard.to_s
+  end
+
 end
 
