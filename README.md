@@ -11,6 +11,9 @@ like "people". You might be interested in ppl if:
 * You want ownership of your address book data back from the cloud
 * You prefer to keep your data stored in an open format
 
+ppl makes your address book into a Git repository. Changes to your address book
+are commits. The plan is to use remotes, pushing and pulling to handle address
+book syncing.
 
 Usage
 -----
@@ -56,6 +59,17 @@ joe       Joe Bloggs 1980-01-03  101 days
 $ ppl rm workadam
 ```
 
+Configuration
+-------------
+
+ppl is configured using `~/.pplconfig`. This is intended to be familiar to Git
+users, and thus the file has similar syntax to `.gitconfig`.
+
+```ini
+[address_book]
+path = "~/ppl"
+```
+
 Roadmap
 -------
 
@@ -71,9 +85,7 @@ $ ppl set adam --email=adam.brown@example.com
 $ ppl mv adam workadam
 ```
 
-In a highly optimistic version of the future, I plan to integrate Git.
-Any commands that modify the address book will also commit their changes.
-Then this will be posisble:
+### Sync contacts using Git
 ```bash
 $ ppl sync
 Pulling latest changes from all remotes...
