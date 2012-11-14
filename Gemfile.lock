@@ -1,10 +1,4 @@
 GIT
-  remote: git://github.com/defunkt/colored.git
-  revision: 829bde0f8832406be1cacc5c99c49d976e05ccfc
-  specs:
-    colored (1.2)
-
-GIT
   remote: git://github.com/sam-github/vpim.git
   revision: 6753a367cda64e53eab745414cedc130d2f149c8
   specs:
@@ -12,10 +6,17 @@ GIT
 
 GEM
   specs:
+    active_support (3.0.0)
+      activesupport (= 3.0.0)
+    activesupport (3.0.0)
+    colored (1.2)
+    rugged (0.17.0.b7)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  colored (~> 1.2)!
+  active_support
+  colored (~> 1.2)
+  rugged (= 0.17.0.b7)
   vpim (= 12.1.12)!

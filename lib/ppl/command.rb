@@ -23,11 +23,17 @@ class Ppl::Command
     raise NotImplementedError
   end
 
+  def commit_on_success
+    false
+  end
+
   def options(parser)
     raise NotImplementedError
   end
 
   def run(argv)
+
+    commit_message = self.name + " " + argv.join(" ")
 
     @options = {}
     begin
@@ -42,6 +48,10 @@ class Ppl::Command
       status = self.execute argv, @options
     rescue RuntimeError
       $stderr.puts "ppl: " + $!.to_s
+    end
+
+    if status == true && self.commit_on_success == true
+      @address_book.commit(commit_message)
     end
 
     return status

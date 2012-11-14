@@ -16,6 +16,10 @@ class Ppl::Command::Add < Ppl::Command
   def options(parser)
   end
 
+  def commit_on_success
+    true
+  end
+
   def execute(argv, options)
 
     contact_id = argv.shift
