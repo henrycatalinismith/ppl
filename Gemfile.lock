@@ -10,6 +10,8 @@ GEM
       activesupport (= 3.0.0)
     activesupport (3.0.0)
     colored (1.2)
+    deep_merge (1.0.0)
+    inifile (2.0.2)
     rugged (0.17.0.b7)
 
 PLATFORMS
@@ -18,5 +20,7 @@ PLATFORMS
 DEPENDENCIES
   active_support
   colored (~> 1.2)
+  deep_merge
+  inifile
   rugged (= 0.17.0.b7)
   vpim (= 12.1.12)!
