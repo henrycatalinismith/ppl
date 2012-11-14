@@ -3,13 +3,22 @@ require "ppl"
 require "optparse"
 require "optparse/date"
 require "rugged"
+require "fileutils"
 
 class Ppl::CLI
 
   def initialize
-    @repository   = Rugged::Repository.new("/home/h2s/doc/contacts")
-    @address_book = Ppl::Address_Book.new("/home/h2s/doc/contacts", @repository)
+    @config = Ppl::Configuration.new
+
+    if !File.exists? @config["address_book"]["path"]
+      $stderr.puts "ppl: #{@config["address_book"]["path"]} does not exist, creating"
+      FileUtils.mkdir_p @config["address_book"]["path"]
+    end
+
+    @repository   = Rugged::Repository.new @config["address_book"]["path"]
+    @address_book = Ppl::Address_Book.new(@config["address_book"]["path"], @repository)
     @commands     = commands
+
   end
 
   def run(argv)
