@@ -1,6 +1,7 @@
 
 require "ppl"
 require "optparse"
+require "optparse/date"
 
 class Ppl::CLI
 

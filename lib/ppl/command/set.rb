@@ -17,8 +17,8 @@ class Ppl::Command::Set < Ppl::Command
     parser.on("-e", "--email <email>", "Email address") do |email|
       @options[:email] = email
     end
-    parser.on("-b", "--birthday <date>", "Birthday") do |birthday|
-      @options[:birthday] = Date.parse birthday
+    parser.on("-b", "--birthday <date>", Date, "Birthday") do |birthday|
+      @options[:birthday] = birthday
     end
   end
 
