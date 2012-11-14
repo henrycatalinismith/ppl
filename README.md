@@ -24,6 +24,12 @@ Usage
 $ ppl add adam "Adam Brown"
 ```
 
+### Update a contact
+
+```bash
+$ ppl set adam --email=adam.brown@example.com
+```
+
 ### List all contacts
 
 ```bash
@@ -75,20 +81,18 @@ Roadmap
 
 Support for the following commands is planned.
 
-### Update a contact
-```bash
-$ ppl set adam --email=adam.brown@example.com
-```
-
 ### Rename a contact
+
 ```bash
 $ ppl mv adam workadam
 ```
 
 ### Sync contacts using Git
+
 ```bash
 $ ppl sync
 Pulling latest changes from all remotes...
 Pushing local changes to all remotes...
 Done
 ```
+
