@@ -1,13 +1,15 @@
 
 require "vpim/vcard"
 require "enumerator"
+require "socket"
 
 class Ppl::Address_Book
 
   include Enumerable
 
-  def initialize(path)
-    @path = path
+  def initialize(path, repository)
+    @path       = path
+    @repository = repository
   end
 
   def contact(id)
@@ -64,10 +66,45 @@ class Ppl::Address_Book
   end
 
   def save_contact(contact)
-    filename = File.join @path, contact.id + ".vcard"
-    File.open(filename, "w") do |file|
+    basename = contact.id + ".vcard"
+    absolute = File.join @path, contact.id + ".vcard"
+    File.open(absolute, "w") do |file|
       file.write contact.to_s
     end
+  end
+
+  def commit(message)
+
+    index = @repository.index
+    index.reload
+    self.each do |contact|
+      index.add contact.id + ".vcard"
+    end
+    index.write
+
+    hash    = index.write_tree
+    tree    = @repository.lookup hash
+    parents = [ @repository.lookup( @repository.head.target ).oid ]
+
+    name = ENV['USER']
+    host = Socket.gethostname
+
+    author = {
+      :email => name + "@" + host,
+      :time  => Time.now,
+      :name  => name,
+    }
+
+    data = {
+      :author     => author,
+      :message    => message,
+      :committer  => author,
+      :tree       => tree,
+      :parents    => parents,
+      :update_ref => "HEAD",
+    }
+
+    commit = Rugged::Commit.create(@repository, data)
   end
 
 end

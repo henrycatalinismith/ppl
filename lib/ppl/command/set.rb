@@ -13,6 +13,10 @@ class Ppl::Command::Set < Ppl::Command
     "Usage: ppl set <contact> [options]"
   end
 
+  def commit_on_success
+    true
+  end
+
   def options(parser)
     parser.on("-e", "--email <email>", "Email address") do |email|
       @options[:email] = email
@@ -45,6 +49,8 @@ class Ppl::Command::Set < Ppl::Command
     end
 
     @address_book.save_contact contact
+
+    true
   end
 
 end

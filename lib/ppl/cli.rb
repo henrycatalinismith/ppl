@@ -2,14 +2,14 @@
 require "ppl"
 require "optparse"
 require "optparse/date"
+require "rugged"
 
 class Ppl::CLI
 
   def initialize
-    @address_book = Ppl::Address_Book.new("/home/h2s/doc/contacts")
+    @repository   = Rugged::Repository.new("/home/h2s/doc/contacts")
+    @address_book = Ppl::Address_Book.new("/home/h2s/doc/contacts", @repository)
     @commands     = commands
-
-    find_command("help").commands = @commands
   end
 
   def run(argv)
