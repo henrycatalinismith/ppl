@@ -33,7 +33,7 @@ $ ppl set adam --email=adam.brown@example.com
 ### List all contacts
 
 ```bash
-$ ppl list
+$ ppl ls
 fred       Fred Smith   fred.smith@example.org
 dave       Dave Jones   dave.jones@example.org
 joe        Joe Bloggs   joe.bloggs@example.org
