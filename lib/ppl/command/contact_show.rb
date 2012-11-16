@@ -1,16 +1,16 @@
 
-class Ppl::Command::Rm < Ppl::Command
+class Ppl::Command::Show < Ppl::Command
 
   def name
-    "rm"
+    "contact:show"
   end
 
   def summary
-    "Delete a contact"
+    "Show full details of a single contact"
   end
 
   def banner
-    "Usage: ppl rm <contact>"
+    "Usage: ppl contact:show <contact>"
   end
 
   def options(parser)
@@ -30,8 +30,13 @@ class Ppl::Command::Rm < Ppl::Command
       raise "contact '#{contact_id}' not found"
     end
 
-    @address_book.delete_contact contact_id
 
+    puts contact.name
+    contact.emails.each do |email|
+      puts email
+    end
+
+    return true
   end
 
 end
