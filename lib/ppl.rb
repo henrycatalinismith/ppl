@@ -13,5 +13,8 @@ require "ppl/command/help"
 require "ppl/command/list"
 require "ppl/command/rm"
 require "ppl/command/set"
+require "ppl/command/set_address"
+require "ppl/command/set_email"
+require "ppl/command/set_name"
 require "ppl/command/show"
 
