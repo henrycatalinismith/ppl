@@ -2,7 +2,7 @@
 class Ppl::Command::List < Ppl::Command
 
   def name
-    "ls"
+    "contact:list"
   end
 
   def summary
@@ -10,7 +10,7 @@ class Ppl::Command::List < Ppl::Command
   end
 
   def banner
-    "Usage: ppl ls"
+    "Usage: ppl contact:list"
   end
 
   def options(parser)
