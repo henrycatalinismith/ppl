@@ -73,6 +73,13 @@ class Ppl::Address_Book
     end
   end
 
+  def rename_contact(contact, new_id)
+    src = File.join @path, contact.id + ".vcard"
+    dst = File.join @path, new_id     + ".vcard"
+
+    File.rename src, dst
+  end
+
   def commit(message)
 
     index = @repository.index
