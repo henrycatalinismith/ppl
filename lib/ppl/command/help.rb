@@ -14,9 +14,17 @@ class Ppl::Command::Help < Ppl::Command
   end
 
   def options(parser)
+    parser.on("-v", "--version", "Show the version number") do |v|
+      @options[:version] = true
+    end
   end
 
   def execute(argv, options)
+
+    if options[:version]
+      puts "ppl version " + Ppl::Version
+      return true
+    end
 
     max_length = 0
     @commands.each do |command|

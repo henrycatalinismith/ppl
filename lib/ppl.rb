@@ -1,5 +1,6 @@
 
 module Ppl
+  Version = "0.0.5"
 end
 
 require "ppl/address_book"
