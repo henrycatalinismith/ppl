@@ -22,8 +22,18 @@ class Ppl::CLI
   end
 
   def run(argv)
+
     command_name = argv.shift
-    command      = find_command command_name
+    alias_match  = @config["alias"][command_name]
+
+    if !alias_match.nil?
+      alias_match.split.reverse.each do |piece|
+        argv.unshift piece
+      end
+      command_name = argv.shift
+    end
+
+    command = find_command command_name
 
     if command.nil?
       command = find_command "help"
