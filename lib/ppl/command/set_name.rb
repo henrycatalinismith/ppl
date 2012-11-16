@@ -46,7 +46,9 @@ class Ppl::Command::SetName < Ppl::Command
       raise "contact '#{contact_id}' not found"
     end
 
-    false
+    contact.set_name(options)
+    @address_book.save_contact(contact)
+    true
   end
 
 end
