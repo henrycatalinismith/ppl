@@ -83,5 +83,24 @@ class Ppl::Contact
     end
   end
 
+  def set_name(options)
+    @vcard.make do |maker|
+      maker.name do |name|
+        if !options[:given].nil?
+          name.given = options[:given]
+        end
+        if !options[:surname].nil?
+          name.family = options[:surname]
+        end
+        if !options[:prefix].nil?
+          name.prefix = options[:prefix]
+        end
+        if !options[:suffix].nil?
+          name.suffix = options[:suffix]
+        end
+      end
+    end
+  end
+
 end
 
