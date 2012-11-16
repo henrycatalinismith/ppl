@@ -1,6 +1,11 @@
 
 class Ppl::Command::Help < Ppl::Command
 
+  @@default_colors = {
+    :name => "white",
+    :desc => "blue",
+  }
+
   def name
     "help"
   end
@@ -46,10 +51,10 @@ class Ppl::Command::Help < Ppl::Command
       if command.name == self.name
         next
       end
-      puts(
-        sprintf(" %-#{max_length}s", command.name) +
-        sprintf("%s", command.summary)
-      )
+      output({
+        :name => sprintf(" %-#{max_length}s", command.name),
+        :desc => sprintf("%s", command.summary),
+      })
     end
     puts
   end
