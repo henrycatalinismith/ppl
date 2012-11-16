@@ -18,7 +18,7 @@ class Ppl::Command::SetEmail < Ppl::Command
   end
 
   def options(parser)
-    parser.on("--location <location>", "Location, e.g. 'home' or 'work'") do |email|
+    parser.on("--location <location>", "Location, e.g. 'home' or 'work'") do |location|
       @options[:location] = location
     end
     parser.on("--preferred", "Make this the preferred address for this contact") do |preferred|
@@ -28,9 +28,10 @@ class Ppl::Command::SetEmail < Ppl::Command
 
   def execute(argv, options)
 
-    contact_id = argv.first
+    contact_id    = argv.shift
+    email_address = argv.shift
 
-    if contact_id.nil?
+    if contact_id.nil? || email_address.nil?
       $stderr.puts @option_parser
       return false
     end
@@ -40,7 +41,11 @@ class Ppl::Command::SetEmail < Ppl::Command
       raise "contact '#{contact_id}' not found"
     end
 
-    false
+    contact.set_email(email_address, options[:location], options[:preferred])
+
+    @address_book.save_contact contact
+
+    true
   end
 
 end

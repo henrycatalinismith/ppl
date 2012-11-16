@@ -45,12 +45,15 @@ class Ppl::Contact
     end
   end
 
-  def email=(address)
+  def set_email(address, location = nil, preferred = nil)
     @vcard.delete_if { |line|
       line.name == "EMAIL" && line.value == address
     }
     @vcard.make do |maker|
-      maker.add_email(address)
+      maker.add_email(address) do |email|
+        email.location  = location
+        email.preferred = preferred
+      end
     end
   end
 
