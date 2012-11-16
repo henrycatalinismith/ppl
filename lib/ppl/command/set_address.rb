@@ -10,7 +10,7 @@ class Ppl::Command::SetAddress < Ppl::Command
   end
 
   def banner
-    "Usage: ppl set:address <contact> [options]"
+    "Usage: ppl set:address <contact> <location> [options]"
   end
 
   def commit_on_success
@@ -18,31 +18,29 @@ class Ppl::Command::SetAddress < Ppl::Command
   end
 
   def options(parser)
-    parser.on("--city <city>", "City or locality") do |email|
+    parser.on("--city <city>", "City or locality") do |city|
       @options[:city] = city
     end
-    parser.on("--country <country>", "Country") do |email|
+    parser.on("--country <country>", "Country") do |country|
       @options[:country] = country
     end
-    parser.on("--postalcode <postalcode>", "Postal code or ZIP") do |email|
-      @options[:city] = city
+    parser.on("--postalcode <postalcode>", "Postal code or ZIP") do |postalcode|
+      @options[:postalcode] = postalcode
     end
-    parser.on("--region <region>", "Region, province or state") do |email|
+    parser.on("--region <region>", "Region, province or state") do |region|
       @options[:region] = region
     end
-    parser.on("--street <street>", "Street address") do |email|
+    parser.on("--street <street>", "Street address") do |street|
       @options[:street] = street
-    end
-    parser.on("--location <location>", "Location, e.g. 'home' or 'work'") do |email|
-      @options[:location] = location
     end
   end
 
   def execute(argv, options)
 
-    contact_id = argv.first
+    contact_id = argv.shift
+    location   = argv.shift
 
-    if contact_id.nil?
+    if contact_id.nil? || location.nil?
       $stderr.puts @option_parser
       return false
     end
@@ -51,6 +49,12 @@ class Ppl::Command::SetAddress < Ppl::Command
     if contact.nil?
       raise "contact '#{contact_id}' not found"
     end
+
+    contact.set_address(location, options)
+
+    puts contact.to_s
+
+    @address_book.save_contact contact
 
     false
   end
