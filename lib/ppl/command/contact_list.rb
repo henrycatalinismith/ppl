@@ -1,6 +1,12 @@
 
 class Ppl::Command::List < Ppl::Command
 
+  @@default_colors = {
+    :contact => "blue",
+    :name    => "green",
+    :email   => "yellow",
+  }
+
   def name
     "contact:list"
   end
@@ -18,16 +24,11 @@ class Ppl::Command::List < Ppl::Command
 
   def execute(argv, options)
     @address_book.each do |contact|
-
-      line  = ""
-      line += sprintf("%-10s", contact.id + ":")
-      line += sprintf("%s ", contact.name)
-
-      if !contact.email.nil?
-        line += sprintf("%-20s", "<" + contact.email + ">")
-      end
-
-      puts line
+      output({
+        :contact => sprintf("%-10s", contact.id + ":"),
+        :name    => sprintf("%s ", contact.name),
+        :email   => sprintf("%-20s", "<" + contact.email + ">"),
+      })
     end
     return true
   end

@@ -1,5 +1,6 @@
 
 require "ppl"
+require "colored"
 require "optparse"
 require "optparse/date"
 require "rugged"
@@ -56,6 +57,7 @@ class Ppl::CLI
     @commands.each do |command|
       command.address_book  = @address_book
       command.commands      = @commands
+      command.config        = @config
     end
   end
 

@@ -11,6 +11,9 @@ class Ppl::Configuration
       "path" => "~/ppl"
     },
     "alias" => {},
+    "color" => {
+      "contact:list" => false,
+    },
   }
 
   def to_h

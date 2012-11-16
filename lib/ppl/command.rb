@@ -3,6 +3,9 @@ class Ppl::Command
 
   attr_accessor :address_book
   attr_accessor :commands
+  attr_accessor :config
+
+  @@default_colors = {}
 
   def initialize
     @option_parser = OptionParser.new do |parser|
@@ -63,5 +66,36 @@ class Ppl::Command
     raise NotImplementedError
   end
 
+  
+  protected
+
+  def output(line)
+    parts = []
+    line.each do |i, part|
+      color = self.color_for(i)
+      if color.nil?
+        parts.push(part)
+      else
+        parts.push(part.send(color))
+      end
+    end
+    puts parts.join
+  end
+
+
+  def color?
+    @config["color"][self.name]
+  end
+
+  def color_for(element)
+    if self.color?
+      section = "color \"#{self.name}\""
+      if @config[section][element.to_s].nil?
+        @@default_colors[element]
+      else
+        @config[section][element.to_s]
+      end
+    end
+  end
 end
 
