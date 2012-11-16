@@ -48,6 +48,8 @@ class Ppl::Command
       status = self.execute argv, @options
     rescue RuntimeError
       $stderr.puts "ppl: " + $!.to_s
+    rescue Vpim::InvalidEncodingError
+      $stderr.puts "ppl: invalid vcard content '" + $!.to_s + "'"
     end
 
     if status == true && self.commit_on_success == true
