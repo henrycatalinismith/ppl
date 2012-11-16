@@ -57,6 +57,18 @@ class Ppl::Contact
     end
   end
 
+  def set_phone(number, location = nil, preferred = nil)
+    @vcard.delete_if { |line|
+      line.name == "TEL" && line.value == number
+    }
+    @vcard.make do |maker|
+      maker.add_tel(number) do |tel|
+        tel.location  = location
+        tel.preferred = preferred
+      end
+    end
+  end
+
   def set_address(location, address)
     @vcard.delete_if { |line|
       line.name == "ADR" && line.value.location.first == location
