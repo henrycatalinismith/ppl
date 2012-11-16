@@ -20,17 +20,24 @@ class Ppl::Command::Help < Ppl::Command
 
     max_length = 0
     @commands.each do |command|
+      if command.name == self.name
+        next
+      end
+
       length = command.name.length
       if length > max_length
         max_length = length
       end
     end
 
-    max_length += 1
+    max_length += 4
 
     puts @option_parser
     puts
     @commands.each do |command|
+      if command.name == self.name
+        next
+      end
       puts(
         sprintf(" %-#{max_length}s", command.name) +
         sprintf("%s", command.summary)
