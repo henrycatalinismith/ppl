@@ -37,6 +37,7 @@ class Ppl::CLI
     command = find_command command_name
 
     if command.nil?
+      argv.unshift command_name
       command = find_command "help"
     end
 
