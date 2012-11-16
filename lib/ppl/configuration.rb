@@ -9,7 +9,8 @@ class Ppl::Configuration
   @@defaults = {
     "address_book" => {
       "path" => "~/ppl"
-    }
+    },
+    "alias" => {},
   }
 
   def to_h
