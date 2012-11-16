@@ -57,5 +57,31 @@ class Ppl::Contact
     end
   end
 
+  def set_address(location, address)
+    @vcard.delete_if { |line|
+      line.name == "ADR" && line.value.location.first == location
+    }
+    @vcard.make do |maker|
+      maker.add_addr do |addr|
+        addr.location = location
+        if !address[:country].nil?
+          addr.country = address[:country]
+        end
+        if !address[:city].nil?
+          addr.locality = address[:city]
+        end
+        if !address[:postalcode].nil?
+          addr.postalcode = address[:postalcode]
+        end
+        if !address[:region].nil?
+          addr.region = address[:region]
+        end
+        if !address[:street].nil?
+          addr.street = address[:street]
+        end
+      end
+    end
+  end
+
 end
 
