@@ -2,7 +2,7 @@
 class Ppl::Command::SetPhone < Ppl::Command
 
   def name
-    "set:phone"
+    "phone"
   end
 
   def summary
@@ -10,7 +10,7 @@ class Ppl::Command::SetPhone < Ppl::Command
   end
 
   def banner
-    "Usage: ppl set:phone <contact> <number>"
+    "Usage: ppl phone <contact> <number>"
   end
 
   def commit_on_success

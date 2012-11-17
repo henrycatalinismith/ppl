@@ -2,7 +2,7 @@
 class Ppl::Command::Rm < Ppl::Command
 
   def name
-    "contact:rm"
+    "rm"
   end
 
   def summary
@@ -10,7 +10,7 @@ class Ppl::Command::Rm < Ppl::Command
   end
 
   def banner
-    "Usage: ppl contact:rm <contact>"
+    "Usage: ppl rm <contact>"
   end
 
   def options(parser)

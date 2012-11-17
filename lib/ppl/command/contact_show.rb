@@ -2,7 +2,7 @@
 class Ppl::Command::Show < Ppl::Command
 
   def name
-    "contact:show"
+    "show"
   end
 
   def summary
@@ -10,7 +10,7 @@ class Ppl::Command::Show < Ppl::Command
   end
 
   def banner
-    "Usage: ppl contact:show <contact>"
+    "Usage: ppl show <contact>"
   end
 
   def options(parser)
