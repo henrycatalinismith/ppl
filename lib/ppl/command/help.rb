@@ -15,7 +15,7 @@ class Ppl::Command::Help < Ppl::Command
   end
 
   def banner
-    "Usage: ppl <command> [options]"
+    "Usage: ppl [--version] [--help] <command> [<args>]"
   end
 
   def options(parser)
@@ -45,14 +45,14 @@ class Ppl::Command::Help < Ppl::Command
 
     max_length += 4
 
-    puts @option_parser
+    puts self.banner
     puts
     @commands.each do |command|
       if command.name == self.name
         next
       end
       output({
-        :name => sprintf(" %-#{max_length}s", command.name),
+        :name => sprintf("   %-#{max_length}s", command.name),
         :desc => sprintf("%s", command.summary),
       })
     end

@@ -2,7 +2,7 @@
 class Ppl::Command::SetAddress < Ppl::Command
 
   def name
-    "set:address"
+    "address"
   end
 
   def summary
@@ -10,7 +10,7 @@ class Ppl::Command::SetAddress < Ppl::Command
   end
 
   def banner
-    "Usage: ppl set:address <contact> <location> [options]"
+    "Usage: ppl address <contact> <location> [options]"
   end
 
   def commit_on_success

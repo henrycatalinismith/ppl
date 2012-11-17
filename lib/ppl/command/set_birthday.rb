@@ -2,7 +2,7 @@
 class Ppl::Command::SetBirthday < Ppl::Command
 
   def name
-    "set:birthday"
+    "birthday"
   end
 
   def summary
@@ -10,7 +10,7 @@ class Ppl::Command::SetBirthday < Ppl::Command
   end
 
   def banner
-    "Usage: ppl set:birthday <contact> <date>"
+    "Usage: ppl birthday <contact> <date>"
   end
 
   def commit_on_success
