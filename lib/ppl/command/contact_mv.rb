@@ -2,7 +2,7 @@
 class Ppl::Command::Move < Ppl::Command
 
   def name
-    "contact:mv"
+    "mv"
   end
 
   def summary
@@ -10,7 +10,7 @@ class Ppl::Command::Move < Ppl::Command
   end
 
   def banner
-    "Usage: ppl contact:mv <contact> <new name>"
+    "Usage: ppl mv <contact> <new name>"
   end
 
   def options(parser)

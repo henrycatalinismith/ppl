@@ -2,7 +2,7 @@
 class Ppl::Command::Add < Ppl::Command
 
   def name
-    "contact:add"
+    "add"
   end
 
   def summary
@@ -10,7 +10,7 @@ class Ppl::Command::Add < Ppl::Command
   end
 
   def banner
-    "Usage: ppl contact:add <contact> <name>"
+    "Usage: ppl add <contact> <name>"
   end
 
   def options(parser)
@@ -38,6 +38,7 @@ class Ppl::Command::Add < Ppl::Command
     contact = @address_book.create_contact contact_id, name
     puts contact
 
+    true
   end
 
 end

@@ -2,7 +2,7 @@
 class Ppl::Command::SetEmail < Ppl::Command
 
   def name
-    "set:email"
+    "email"
   end
 
   def summary
@@ -10,7 +10,7 @@ class Ppl::Command::SetEmail < Ppl::Command
   end
 
   def banner
-    "Usage: ppl set:email <contact> <email> [options]"
+    "Usage: ppl email <contact> <email> [options]"
   end
 
   def commit_on_success
