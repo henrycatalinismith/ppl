@@ -12,8 +12,7 @@ class Ppl::CLI
     @config = Ppl::Configuration.new
 
     if !File.exists? @config["address_book"]["path"]
-      $stderr.puts "ppl: #{@config["address_book"]["path"]} does not exist, creating"
-      FileUtils.mkdir_p @config["address_book"]["path"]
+      $stderr.puts "ppl: #{@config["address_book"]["path"]} does not exist"
     end
 
     @repository   = Rugged::Repository.new @config["address_book"]["path"]
