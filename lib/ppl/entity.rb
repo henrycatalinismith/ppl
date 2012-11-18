@@ -1,0 +1,4 @@
+
+class Ppl::Entity
+end
+
