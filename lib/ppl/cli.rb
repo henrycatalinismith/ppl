@@ -16,7 +16,7 @@ class Ppl::CLI
     end
 
     @repository   = Rugged::Repository.new @config["address_book"]["path"]
-    @address_book = Ppl::Address_Book.new(@config["address_book"]["path"], @repository)
+    @address_book = Ppl::Address_Book.new @repository
     @commands     = commands
 
   end
