@@ -2,7 +2,7 @@
 class Ppl::Command::SetBirthday < Ppl::Command
 
   def name
-    "birthday"
+    "bday"
   end
 
   def summary

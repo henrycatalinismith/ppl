@@ -2,7 +2,7 @@
 class Ppl::Command::SetAddress < Ppl::Command
 
   def name
-    "address"
+    "addr"
   end
 
   def summary
