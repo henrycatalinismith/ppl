@@ -7,33 +7,28 @@ class Ppl::Address_Book
 
   include Enumerable
 
-  def initialize(path, repository)
-    @path       = path
+  def initialize(repository)
     @repository = repository
+    @path       = File.dirname repository.path
   end
 
   def contact(id)
-    filename = File.join @path, id + ".vcard"
-    if !File.exists? filename
-      return nil
+    vcard = @repository.file_at(@repository.head.target, id + ".vcard")
+    if !vcard.nil?
+      vcard   = Vpim::Vcard.decode(vcard).first
+      contact = Ppl::Contact.new(id, vcard)
     end
-
-    vcard   = IO.read filename
-    vcard   = Vpim::Vcard.decode(vcard).first
-    contact = Ppl::Contact.new(id, vcard)
   end
 
   def contacts
-    pattern   = File.join @path, "*.vcard"
-    filenames = Dir.glob pattern
     contacts  = []
-
-    filenames.each do |filename|
-      id = File.basename(filename).slice(0..-7)
-      contacts.push self.contact(id);
+    @repository.last_commit.tree.each_blob do |blob|
+      if blob[:name].slice(-6 .. -1) == ".vcard"
+        id = blob[:name].slice(0 .. -7)
+        contacts.push(self.contact(id))
+      end
     end
     contacts
-
   end
 
   def each
