@@ -35,37 +35,25 @@ class Ppl::Command
   end
 
   def run(argv)
-
-    commit_message = self.name + " " + argv.join(" ")
-
-    @options = {}
     begin
-      @option_parser.parse! ARGV
+      execute_with_options(argv)
     rescue OptionParser::ParseError
       $stderr.puts $!
       $stderr.puts @option_parser
       return false
-    end
-
-    begin
-      status = self.execute argv, @options
     rescue RuntimeError
       $stderr.puts "ppl: " + $!.to_s
+      return false
     rescue Vpim::InvalidEncodingError
       $stderr.puts "ppl: invalid vcard content '" + $!.to_s + "'"
+      return false
     end
-
-    if status == true && self.commit_on_success == true
-      @address_book.commit(commit_message)
-    end
-
-    return status
+    return true
   end
 
   def execute(argv, options)
     raise NotImplementedError
   end
-
   
   protected
 
@@ -97,5 +85,20 @@ class Ppl::Command
       end
     end
   end
+
+
+  private
+
+  def execute_with_options(argv)
+    @options = {}
+    commit_message = self.name + " " + argv.join(" ")
+    @option_parser.parse! ARGV
+    status = self.execute argv, @options
+
+    if status == true && self.commit_on_success == true
+      @address_book.commit(commit_message)
+    end
+  end
+
 end
 
