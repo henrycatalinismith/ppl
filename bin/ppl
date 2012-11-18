@@ -12,5 +12,5 @@ class String
 end
 
 cli = Ppl::CLI.new
-cli.run ARGV
+exit(cli.run ARGV)
 
