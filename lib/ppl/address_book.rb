@@ -16,7 +16,7 @@ class Ppl::Address_Book
     vcard = @repository.file_at(@repository.head.target, id + ".vcard")
     if !vcard.nil?
       vcard   = Vpim::Vcard.decode(vcard).first
-      contact = Ppl::Contact.new(id, vcard)
+      contact = Ppl::Entity::Contact.new(id, vcard)
     end
   end
 
@@ -53,7 +53,7 @@ class Ppl::Address_Book
       end
     end
 
-    contact = Ppl::Contact.new(id, vcard)
+    contact = Ppl::Entity::Contact.new(id, vcard)
     self.save_contact contact
     contact
   end

@@ -5,7 +5,6 @@ end
 
 require "ppl/address_book"
 require "ppl/configuration"
-require "ppl/contact"
 require "ppl/cli"
 require "ppl/command"
 require "ppl/command/contact_add"
@@ -20,4 +19,7 @@ require "ppl/command/set_name"
 require "ppl/command/set_phone"
 require "ppl/command/help"
 require "ppl/command/init"
+
+require "ppl/entity"
+require "ppl/entity/contact"
 

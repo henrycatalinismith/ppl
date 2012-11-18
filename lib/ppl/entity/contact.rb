@@ -1,7 +1,7 @@
 
 require "active_support/core_ext/time/calculations.rb"
 
-class Ppl::Contact
+class Ppl::Entity::Contact < Ppl::Entity
 
   attr_reader :id
   attr_reader :vcard
