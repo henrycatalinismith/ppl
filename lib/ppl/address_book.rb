@@ -21,7 +21,13 @@ class Ppl::Address_Book
   end
 
   def contacts
-    contacts  = []
+    contacts = []
+    commit   = @repository.last_commit
+
+    if commit.nil?
+      return contacts
+    end
+
     @repository.last_commit.tree.each_blob do |blob|
       if blob[:name].slice(-6 .. -1) == ".vcard"
         id = blob[:name].slice(0 .. -7)
