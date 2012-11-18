@@ -19,4 +19,5 @@ require "ppl/command/set_email"
 require "ppl/command/set_name"
 require "ppl/command/set_phone"
 require "ppl/command/help"
+require "ppl/command/init"
 
