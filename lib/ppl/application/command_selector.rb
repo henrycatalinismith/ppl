@@ -14,6 +14,7 @@ class Ppl::Application::CommandSelector
   end
 
   def add_command(command)
+    @commands.push command
   end
 
 end
