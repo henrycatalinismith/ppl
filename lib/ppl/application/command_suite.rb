@@ -1,7 +1,9 @@
 
+require "enumerator"
+
 class Ppl::Application::CommandSuite
 
-  attr_reader :commands
+  include Enumerable
 
   def initialize
     @commands = []
@@ -9,6 +11,10 @@ class Ppl::Application::CommandSuite
 
   def add_command(command)
     @commands.push command
+  end
+
+  def each
+    @commands.each { |command| yield command }
   end
 
   def find_command(name)
