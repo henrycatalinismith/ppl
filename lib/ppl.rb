@@ -1,6 +1,9 @@
 
 module Ppl
 
+  module Adapter
+  end
+
   module Entity
   end
 
@@ -10,4 +13,6 @@ module Ppl
 end
 
 require "ppl/entity/contact"
+
+require "ppl/factory/contact"
 
