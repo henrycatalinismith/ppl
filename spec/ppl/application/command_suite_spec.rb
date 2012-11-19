@@ -1,6 +1,5 @@
 
-
-describe Ppl::Application::CommandSuite, "#commands" do
+describe Ppl::Application::CommandSuite do
 
   before(:each) do
     @command_suite = Ppl::Application::CommandSuite.new
