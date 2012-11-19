@@ -4,7 +4,7 @@ describe Ppl::Entity::Contact, "#email_addresses" do
     @contact = Ppl::Entity::Contact.new
   end
   it "is an array" do
-      @contact.email_addresses.should be_an(Array)
+    @contact.email_addresses.should be_an(Array)
   end
 end
 
@@ -13,7 +13,7 @@ describe Ppl::Entity::Contact, "#nicknames" do
     @contact = Ppl::Entity::Contact.new
   end
   it "is an array" do
-      @contact.nicknames.should be_an(Array)
+    @contact.nicknames.should be_an(Array)
   end
 end
 
@@ -22,7 +22,7 @@ describe Ppl::Entity::Contact, "#organizations" do
     @contact = Ppl::Entity::Contact.new
   end
   it "is an array" do
-      @contact.organizations.should be_an(Array)
+    @contact.organizations.should be_an(Array)
   end
 end
 
@@ -31,7 +31,7 @@ describe Ppl::Entity::Contact, "#phone_numbers" do
     @contact = Ppl::Entity::Contact.new
   end
   it "is an array" do
-      @contact.phone_numbers.should be_an(Array)
+    @contact.phone_numbers.should be_an(Array)
   end
 end
 
@@ -40,7 +40,7 @@ describe Ppl::Entity::Contact, "#postal_addresses" do
     @contact = Ppl::Entity::Contact.new
   end
   it "is an array" do
-      @contact.postal_addresses.should be_an(Array)
+    @contact.postal_addresses.should be_an(Array)
   end
 end
 
