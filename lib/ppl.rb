@@ -7,6 +7,9 @@ module Ppl
   module Application
   end
 
+  module Command
+  end
+
   module Entity
   end
 
@@ -23,6 +26,8 @@ require "ppl/application/bootstrap"
 require "ppl/application/command"
 require "ppl/application/command_suite"
 require "ppl/application/shell"
+
+require "ppl/command/ls"
 
 require "ppl/entity/contact"
 require "ppl/entity/name"
