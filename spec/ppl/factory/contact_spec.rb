@@ -1,6 +1,4 @@
 
-require "ppl/factory/contact"
-
 describe Ppl::Factory::Contact, "#load_contact" do
 
   before(:each) do
