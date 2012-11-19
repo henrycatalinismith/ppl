@@ -19,6 +19,7 @@ end
 require "ppl/adapter/vcard"
 require "ppl/adapter/vcard/vpim"
 
+require "ppl/application/bootstrap"
 require "ppl/application/command"
 require "ppl/application/command_suite"
 require "ppl/application/shell"
