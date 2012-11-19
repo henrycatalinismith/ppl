@@ -1,6 +1,7 @@
 
 class Ppl::Entity::Contact
 
+  attr_accessor :birthday
   attr_accessor :email_addresses
   attr_accessor :nicknames
   attr_accessor :organizations
