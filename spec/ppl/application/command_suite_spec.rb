@@ -4,10 +4,10 @@ describe Ppl::Application::CommandSuite do
   before(:each) do
     @command_suite = Ppl::Application::CommandSuite.new
 
-    @foo_command      = Ppl::Command.new
+    @foo_command      = Ppl::Application::Command.new
     @foo_command.name = "foo"
 
-    @bar_command      = Ppl::Command.new
+    @bar_command      = Ppl::Application::Command.new
     @bar_command.name = "bar"
 
     @command_suite.add_command(@foo_command)
@@ -16,7 +16,7 @@ describe Ppl::Application::CommandSuite do
 
   describe "#add_command" do
     it "should accept a command" do
-      @command_suite.add_command(Ppl::Command.new)
+      @command_suite.add_command(Ppl::Application::Command.new)
       @command_suite.count.should be 3
     end
   end
