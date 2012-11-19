@@ -17,3 +17,23 @@ describe Ppl::Application::CommandSelector, "#commands" do
   end
 end
 
+describe Ppl::Application::CommandSelector, "#add_alias" do
+  before(:each) do
+    @selector = Ppl::Application::CommandSelector.new
+  end
+  it "should add an alias" do
+    @selector.add_alias(Ppl::Entity::Alias.new("l", "ls"))
+    @selector.aliases.length.should be 1
+  end
+end
+
+describe Ppl::Application::CommandSelector, "#add_command" do
+  before(:each) do
+    @selector = Ppl::Application::CommandSelector.new
+  end
+  it "should add a command" do
+    @selector.add_alias(Ppl::Entity::Alias.new("l", "ls"))
+    @selector.aliases.length.should be 1
+  end
+end
+
