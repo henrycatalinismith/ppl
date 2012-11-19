@@ -11,5 +11,9 @@ class Ppl::Application::CommandSuite
     @commands.push command
   end
 
+  def find_command(name)
+    @commands.select { |command| command.name == name }.first
+  end
+
 end
 
