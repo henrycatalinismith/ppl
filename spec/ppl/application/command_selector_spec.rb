@@ -32,8 +32,8 @@ describe Ppl::Application::CommandSelector, "#add_command" do
     @selector = Ppl::Application::CommandSelector.new
   end
   it "should add a command" do
-    @selector.add_alias(Ppl::Entity::Alias.new("l", "ls"))
-    @selector.aliases.length.should be 1
+    @selector.add_command(Ppl::Command.new)
+    @selector.commands.length.should be 1
   end
 end
 
