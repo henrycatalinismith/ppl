@@ -3,7 +3,7 @@ class Ppl::Application::Bootstrap
 
   def command_suite
     suite = Ppl::Application::CommandSuite.new
-    suite.add_command(Ppl::Command::ListContacts.new)
+    suite.add_command(Ppl::Command::ContactList.new)
     return suite
   end
 

@@ -1,8 +1,8 @@
 
-describe Ppl::Command::ShowContact do
+describe Ppl::Command::ContactShow do
 
   before(:each) do
-    @command = Ppl::Command::ShowContact.new
+    @command = Ppl::Command::ContactShow.new
   end
 
   describe "#name" do

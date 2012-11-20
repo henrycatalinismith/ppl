@@ -30,8 +30,8 @@ require "ppl/application/command_suite"
 require "ppl/application/input"
 require "ppl/application/shell"
 
-require "ppl/command/list_contacts"
-require "ppl/command/show_contact"
+require "ppl/command/contact_list"
+require "ppl/command/contact_show"
 
 require "ppl/entity/address_book"
 require "ppl/entity/contact"
