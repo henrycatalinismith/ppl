@@ -1,5 +1,5 @@
 
-class Ppl::Command::CommandHelp < Ppl::Application::Command
+class Ppl::Command::CommandList < Ppl::Application::Command
 
   def initialize
     @name        = "help"
