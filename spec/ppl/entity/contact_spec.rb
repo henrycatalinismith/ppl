@@ -1,46 +1,39 @@
 
-describe Ppl::Entity::Contact, "#email_addresses" do
-  before(:each) do
-    @contact = Ppl::Entity::Contact.new
-  end
-  it "is an array" do
-    @contact.email_addresses.should be_an(Array)
-  end
-end
+describe Ppl::Entity::Contact do
 
-describe Ppl::Entity::Contact, "#nicknames" do
   before(:each) do
     @contact = Ppl::Entity::Contact.new
   end
-  it "is an array" do
-    @contact.nicknames.should be_an(Array)
-  end
-end
 
-describe Ppl::Entity::Contact, "#organizations" do
-  before(:each) do
-    @contact = Ppl::Entity::Contact.new
+  describe "#email_addresses" do
+    it "should be an array" do
+      @contact.email_addresses.should be_an(Array)
+    end
   end
-  it "is an array" do
-    @contact.organizations.should be_an(Array)
-  end
-end
 
-describe Ppl::Entity::Contact, "#phone_numbers" do
-  before(:each) do
-    @contact = Ppl::Entity::Contact.new
+  describe "#nicknames" do
+    it "should be an array" do
+      @contact.nicknames.should be_an(Array)
+    end
   end
-  it "is an array" do
-    @contact.phone_numbers.should be_an(Array)
-  end
-end
 
-describe Ppl::Entity::Contact, "#postal_addresses" do
-  before(:each) do
-    @contact = Ppl::Entity::Contact.new
+  describe "#organizations" do
+    it "should be an array" do
+      @contact.organizations.should be_an(Array)
+    end
   end
-  it "is an array" do
-    @contact.postal_addresses.should be_an(Array)
+
+  describe "#phone_numbers" do
+    it "should be an array" do
+      @contact.phone_numbers.should be_an(Array)
+    end
   end
+
+  describe "#postal_addresses" do
+    it "should be an array" do
+      @contact.postal_addresses.should be_an(Array)
+    end
+  end
+
 end
 
