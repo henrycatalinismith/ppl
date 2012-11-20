@@ -3,11 +3,11 @@ class Ppl::Application::Shell
 
   attr_writer :router
 
-  def run(input)
+  def run(input, output)
     outcome = false
     begin
       command = select_command(input)
-      outcome = execute_command(command, input)
+      outcome = execute_command(command, input, output)
     rescue
       outcome = false
     end
@@ -21,8 +21,8 @@ class Ppl::Application::Shell
     @router.route(input.arguments.first)
   end
 
-  def execute_command(command, input)
-    command.execute
+  def execute_command(command, input, output)
+    command.execute(input, output)
   end
 
 end

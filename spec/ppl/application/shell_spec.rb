@@ -2,8 +2,9 @@
 describe Ppl::Application::Shell do
 
   before(:each) do
-    @shell = Ppl::Application::Shell.new
-    @input = Ppl::Application::Input.new
+    @shell  = Ppl::Application::Shell.new
+    @input  = Ppl::Application::Input.new
+    @output = Ppl::Application::Output.new(nil, nil)
 
     @router  = double(Ppl::Application::Router)
     @command = double(Ppl::Application::Command)
@@ -19,7 +20,7 @@ describe Ppl::Application::Shell do
         .should_receive(:route)
         .with("foo")
         .and_return(nil)
-      @shell.run(@input).should eq false
+      @shell.run(@input, @output).should eq false
     end
 
     it "should execute the given command" do
@@ -33,7 +34,7 @@ describe Ppl::Application::Shell do
         .should_receive(:execute)
         .and_return(true)
 
-      @shell.run(@input).should eq true
+      @shell.run(@input, @output).should eq true
     end
 
     it "should return false if the command throws an exception" do
@@ -45,7 +46,7 @@ describe Ppl::Application::Shell do
         .should_receive(:route)
         .and_return(@command)
 
-      @shell.run(@input)
+      @shell.run(@input, @output)
     end
 
   end
