@@ -3,6 +3,7 @@ class Ppl::Application::Bootstrap
 
   def command_suite
     suite = Ppl::Application::CommandSuite.new
+    suite.add_command(Ppl::Command::CommandList.new)
     suite.add_command(Ppl::Command::ContactDelete.new)
     suite.add_command(Ppl::Command::ContactList.new)
     suite.add_command(Ppl::Command::ContactRename.new)
