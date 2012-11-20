@@ -1,7 +1,7 @@
 
 class Ppl::Application::Shell
 
-  attr_writer :command_suite
+  attr_writer :router
 
   def run(input)
 
@@ -18,7 +18,7 @@ class Ppl::Application::Shell
   private
 
   def select_command(input)
-    @command_suite.find_command(input.arguments.first)
+    @router.route(input.arguments.first)
   end
 
   def execute_command(command, input)

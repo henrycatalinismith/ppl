@@ -5,18 +5,18 @@ describe Ppl::Application::Shell do
     @shell = Ppl::Application::Shell.new
     @input = Ppl::Application::Input.new
 
-    @command_suite = double(Ppl::Application::CommandSuite)
-    @command       = double(Ppl::Application::Command)
+    @router  = double(Ppl::Application::Router)
+    @command = double(Ppl::Application::Command)
 
-    @shell.command_suite = @command_suite
+    @shell.router = @router
   end
 
   describe "#run" do
 
     it "should return false if the given command isn't found" do
       @input.arguments = ["foo"]
-      @command_suite
-        .should_receive(:find_command)
+      @router
+        .should_receive(:route)
         .with("foo")
         .and_return(nil)
       @shell.run(@input).should eq false
@@ -24,8 +24,8 @@ describe Ppl::Application::Shell do
 
     it "should execute the given command" do
       @input.arguments = ["foo"]
-      @command_suite
-        .should_receive(:find_command)
+      @router
+        .should_receive(:route)
         .with("foo")
         .and_return(@command)
       @command
