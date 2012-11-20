@@ -7,7 +7,7 @@ class Ppl::Command::CommandList < Ppl::Application::Command
   end
 
   def execute(input, output)
-    puts "help text goes here"
+    output.line "help text goes here"
     return true
   end
 
