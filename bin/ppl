@@ -8,9 +8,10 @@ $:.unshift File.expand_path("../../lib", bin_file)
 require "ppl"
 
 bootstrap = Ppl::Application::Bootstrap.new
-input = bootstrap.input
-shell = bootstrap.shell
+input  = bootstrap.input
+output = bootstrap.output
+shell  = bootstrap.shell
 
-exit(shell.run(input))
+exit(shell.run(input, output))
 
 
