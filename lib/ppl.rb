@@ -19,6 +19,7 @@ module Ppl
 end
 
 
+require "ppl/adapter/storage"
 require "ppl/adapter/vcard"
 require "ppl/adapter/vcard/vpim"
 
