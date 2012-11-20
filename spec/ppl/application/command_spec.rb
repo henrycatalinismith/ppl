@@ -6,7 +6,7 @@ describe Ppl::Application::Command, "#execute" do
   end
 
   it "should raise not implemented error" do
-    expect{@command.execute}.to raise_error(NotImplementedError)
+    expect{@command.execute(nil, nil)}.to raise_error(NotImplementedError)
   end
 
 end
