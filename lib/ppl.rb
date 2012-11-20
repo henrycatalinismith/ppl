@@ -25,6 +25,7 @@ require "ppl/adapter/vcard/vpim"
 require "ppl/application/bootstrap"
 require "ppl/application/command"
 require "ppl/application/command_suite"
+require "ppl/application/input"
 require "ppl/application/shell"
 
 require "ppl/command/ls"
