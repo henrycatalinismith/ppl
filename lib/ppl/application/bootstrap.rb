@@ -15,6 +15,12 @@ class Ppl::Application::Bootstrap
     return input
   end
 
+  def router
+    router = Ppl::Application::Router.new(command_suite)
+    router.default = "help"
+    return router
+  end
+
   def shell
     shell = Ppl::Application::Shell.new
     shell.command_suite = command_suite
