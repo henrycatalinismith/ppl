@@ -23,7 +23,7 @@ class Ppl::Application::Bootstrap
 
   def shell
     shell = Ppl::Application::Shell.new
-    shell.command_suite = command_suite
+    shell.router = router
     return shell
   end
 
