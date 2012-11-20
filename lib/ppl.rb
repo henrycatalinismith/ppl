@@ -30,6 +30,7 @@ require "ppl/application/shell"
 
 require "ppl/command/list_contacts"
 
+require "ppl/entity/address_book"
 require "ppl/entity/contact"
 require "ppl/entity/name"
 
