@@ -9,12 +9,12 @@ describe Ppl::Adapter::Vcard::Vpim, "#encode" do
     @contact.name.given = "Minimum"
   end
 
-  it "encodes birthday" do
+  it "should encode the contact's birthday" do
     @contact.birthday = Date.parse "2000-01-01"
     @adapter.encode(@contact).should include("BDAY:20000101")
   end
 
-  it "encodes name" do
+  it "should encode the contact's name" do
     @contact.name.additional = "Johnny"
     @contact.name.full       = "John Doe"
     @contact.name.family     = "Doe"
@@ -24,7 +24,7 @@ describe Ppl::Adapter::Vcard::Vpim, "#encode" do
     @adapter.encode(@contact).should include("N:Doe;John;Johnny;Mr.;PhD")
   end
 
-  it "encodes full name" do
+  it "should encode the contact's full name" do
     @contact.name.full = "John Doe"
     @adapter.encode(@contact).should include("FN:John Doe")
   end
