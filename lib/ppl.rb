@@ -28,7 +28,7 @@ require "ppl/application/command_suite"
 require "ppl/application/input"
 require "ppl/application/shell"
 
-require "ppl/command/ls"
+require "ppl/command/list_contacts"
 
 require "ppl/entity/contact"
 require "ppl/entity/name"

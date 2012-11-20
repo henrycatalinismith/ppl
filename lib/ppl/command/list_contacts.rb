@@ -1,5 +1,5 @@
 
-class Ppl::Command::Ls < Ppl::Application::Command
+class Ppl::Command::ListContacts < Ppl::Application::Command
 
   def initialize
     @name        = "ls"
