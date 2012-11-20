@@ -28,10 +28,24 @@ describe Ppl::Application::Shell do
         .should_receive(:route)
         .with("foo")
         .and_return(@command)
+
       @command
         .should_receive(:execute)
         .and_return(true)
+
       @shell.run(@input).should eq true
+    end
+
+    it "should return false if the command throws an exception" do
+      @command
+        .should_receive(:execute)
+        .and_raise(StandardError)
+
+      @router
+        .should_receive(:route)
+        .and_return(@command)
+
+      @shell.run(@input)
     end
 
   end
