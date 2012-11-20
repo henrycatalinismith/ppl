@@ -9,5 +9,13 @@ class Ppl::Application::Output
     @stderr = stderr
   end
 
+  def error(string)
+    @stderr.puts string
+  end
+
+  def line(string)
+    @stdout.puts string
+  end
+
 end
 

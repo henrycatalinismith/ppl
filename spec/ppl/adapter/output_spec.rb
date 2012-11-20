@@ -15,3 +15,29 @@ describe Ppl::Application::Output, "#initialize" do
 
 end
 
+describe Ppl::Application::Output do
+
+  before(:each) do
+    @stderr = double(IO)
+    @stdout = double(IO)
+    @output = Ppl::Application::Output.new(@stdout, @stderr)
+  end
+
+  describe "#error" do
+    it "should delegate to stderr's puts method" do
+      string = "COMPUTER OVER. VIRUS = VERY YES"
+      @stderr.should_receive(:puts).with(string)
+      @output.error(string)
+    end
+  end
+
+  describe "#line" do
+    it "should delegate to stdout's puts method" do
+      string = "The quick brown fox"
+      @stdout.should_receive(:puts).with(string)
+      @output.line(string)
+    end
+  end
+
+end
+
