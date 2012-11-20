@@ -3,25 +3,25 @@ class Ppl::Application::Shell
 
   attr_writer :command_suite
 
-  def run(arguments)
+  def run(input)
 
-    command = select_command(arguments)
+    command = select_command(input)
     if command.nil?
       return false
     end
 
-    execute_command(command, arguments)
+    execute_command(command, input)
 
   end
 
 
   private
 
-  def select_command(arguments)
-    @command_suite.find_command(arguments.first)
+  def select_command(input)
+    @command_suite.find_command(input.arguments.first)
   end
 
-  def execute_command(command, arguments)
+  def execute_command(command, input)
     command.execute
   end
 
