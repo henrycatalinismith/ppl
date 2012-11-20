@@ -33,6 +33,7 @@ require "ppl/application/shell"
 require "ppl/command/contact_delete"
 require "ppl/command/contact_list"
 require "ppl/command/contact_show"
+require "ppl/command/contact_rename"
 
 require "ppl/entity/address_book"
 require "ppl/entity/contact"
