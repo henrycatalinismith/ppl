@@ -28,6 +28,7 @@ require "ppl/application/bootstrap"
 require "ppl/application/command"
 require "ppl/application/command_suite"
 require "ppl/application/input"
+require "ppl/application/output"
 require "ppl/application/router"
 require "ppl/application/shell"
 

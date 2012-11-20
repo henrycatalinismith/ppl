@@ -11,9 +11,14 @@ class Ppl::Application::Bootstrap
     return suite
   end
 
-  def input(arguments=[])
-    input = Ppl::Application::Input.new(arguments)
+  def input
+    input = Ppl::Application::Input.new(ARGV.dup)
     return input
+  end
+
+  def output
+    output = Ppl::Application::Output.new($stdout, $stderr)
+    return output
   end
 
   def router
