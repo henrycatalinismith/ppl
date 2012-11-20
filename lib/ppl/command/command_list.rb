@@ -6,5 +6,10 @@ class Ppl::Command::CommandList < Ppl::Application::Command
     @description = "Show a list of commands"
   end
 
+  def execute
+    puts "help text goes here"
+    return true
+  end
+
 end
 
