@@ -24,6 +24,15 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
+  describe "#router" do
+    it "should return a Ppl::Application::Router" do
+      @bootstrap.router.should be_a(Ppl::Application::Router)
+    end
+    it "should set the 'help' command as the default" do
+      @bootstrap.router.default.should eq "help"
+    end
+  end
+
   describe "#shell" do
     it "should return a Ppl::Application::Shell" do
       @bootstrap.shell.should be_a(Ppl::Application::Shell)
