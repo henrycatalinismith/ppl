@@ -1,8 +1,8 @@
 
-describe Ppl::Command::CommandHelp do
+describe Ppl::Command::CommandList do
 
   before(:each) do
-    @command = Ppl::Command::CommandHelp.new
+    @command = Ppl::Command::CommandList.new
   end
 
   describe "#name" do
