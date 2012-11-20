@@ -4,14 +4,14 @@ class Ppl::Application::Shell
   attr_writer :router
 
   def run(input)
-
-    command = select_command(input)
-    if command.nil?
-      return false
+    outcome = false
+    begin
+      command = select_command(input)
+      outcome = execute_command(command, input)
+    rescue
+      outcome = false
     end
-
-    execute_command(command, input)
-
+    return outcome
   end
 
 
