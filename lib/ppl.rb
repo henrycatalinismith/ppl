@@ -31,6 +31,7 @@ require "ppl/application/input"
 require "ppl/application/shell"
 
 require "ppl/command/list_contacts"
+require "ppl/command/show_contact"
 
 require "ppl/entity/address_book"
 require "ppl/entity/contact"
