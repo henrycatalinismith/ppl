@@ -5,6 +5,17 @@ describe Ppl::Application::Bootstrap do
     @bootstrap = Ppl::Application::Bootstrap.new
   end
 
+  describe "#commands" do
+    it "should return an array" do
+      @bootstrap.commands.should be_an(Array)
+    end
+    it "should return commands" do
+      @bootstrap.commands.each do |command|
+        command.should be_a(Ppl::Application::Command)
+      end
+    end
+  end
+
   describe "#command_suite" do
     it "should return a Ppl::Application::CommandSuite" do
       @bootstrap.command_suite.should be_a(Ppl::Application::CommandSuite)
