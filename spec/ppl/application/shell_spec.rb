@@ -4,7 +4,7 @@ describe Ppl::Application::Shell do
   before(:each) do
     @shell  = Ppl::Application::Shell.new
     @input  = Ppl::Application::Input.new
-    @output = Ppl::Application::Output.new(nil, nil)
+    @output = double(Ppl::Application::Output)
 
     @router  = double(Ppl::Application::Router)
     @command = double(Ppl::Application::Command)
@@ -45,6 +45,17 @@ describe Ppl::Application::Shell do
       @router
         .should_receive(:route)
         .and_return(@command)
+
+      @output.should_receive(:error)
+
+      @shell.run(@input, @output)
+    end
+
+    it "should send exception messages to stderr" do
+      @command.should_receive(:execute) { raise "Pool's Closed" }
+      @router.should_receive(:route).and_return(@command)
+
+      @output.should_receive(:error).with("Pool's Closed")
 
       @shell.run(@input, @output)
     end

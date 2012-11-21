@@ -9,6 +9,7 @@ class Ppl::Application::Shell
       command = select_command(input)
       outcome = execute_command(command, input, output)
     rescue
+      output.error($!.message)
       outcome = false
     end
     return outcome
@@ -22,7 +23,11 @@ class Ppl::Application::Shell
   end
 
   def execute_command(command, input, output)
-    command.execute(input, output)
+    outcome = false
+    if !command.nil?
+      outcome = command.execute(input, output)
+    end
+    return outcome
   end
 
 end
