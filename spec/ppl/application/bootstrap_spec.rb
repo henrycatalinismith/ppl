@@ -52,5 +52,17 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
+  describe "#storage_adapter" do
+    it "should return a Ppl::Adapter::Storage::Disk" do
+      @bootstrap.storage_adapter.should be_a(Ppl::Adapter::Storage::Disk)
+    end
+  end
+
+  describe "#vcard_adapter" do
+    it "should return a Ppl::Adapter::Vcard::Vpim" do
+      @bootstrap.vcard_adapter.should be_a(Ppl::Adapter::Vcard::Vpim)
+    end
+  end
+
 end
 

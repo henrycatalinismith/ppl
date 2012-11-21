@@ -9,5 +9,11 @@ describe Ppl::Application::Command, "#execute" do
     expect{@command.execute(nil, nil)}.to raise_error(NotImplementedError)
   end
 
+  it "should accept a storage adapter" do
+    storage = double(Ppl::Adapter::Storage)
+    @command.storage = storage
+    @command.storage.should be storage
+  end
+
 end
 
