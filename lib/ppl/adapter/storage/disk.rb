@@ -27,8 +27,11 @@ class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
     filename = File.join @path, id + ".vcard"
     contact  = nil
     if File.exists?(filename)
-      vcard    = File.read filename
-      contact  = @vcard_adapter.decode(vcard)
+      vcard   = File.read filename
+      contact = @vcard_adapter.decode(vcard)
+      if !contact.nil? && contact.is_a?(Ppl::Entity::Contact)
+        contact.id = id
+      end
     end
     return contact
   end

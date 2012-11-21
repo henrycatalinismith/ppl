@@ -71,6 +71,12 @@ describe Ppl::Adapter::Storage::Disk do
       @storage.load_contact("one").should be_a(Ppl::Entity::Contact)
     end
 
+    it "should populate the contact's id" do
+      FileUtils.touch "/contacts/one.vcard"
+      @adapter.should_receive(:decode).once.and_return(@contact)
+      @storage.load_contact("one").id.should eq "one"
+    end
+
   end
 
 end
