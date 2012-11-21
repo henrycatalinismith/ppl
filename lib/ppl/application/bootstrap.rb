@@ -20,6 +20,7 @@ class Ppl::Application::Bootstrap
     commands.each do |command|
       suite.add_command(command)
     end
+    suite.find_command("help").command_suite = suite
     return suite
   end
 
