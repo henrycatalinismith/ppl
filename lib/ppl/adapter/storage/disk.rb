@@ -24,6 +24,13 @@ class Ppl::Adapter::Storage::Disk
   end
 
   def load_contact(id)
+    filename = File.join @path, id + ".vcard"
+    contact  = nil
+    if File.exists?(filename)
+      vcard    = File.read filename
+      contact  = @vcard_adapter.decode(vcard)
+    end
+    return contact
   end
 
 end
