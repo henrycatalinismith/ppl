@@ -10,6 +10,7 @@ class Ppl::Application::Bootstrap
       Ppl::Command::ContactShow.new,
     ]
     commands.each do |command|
+      command.storage = storage_adapter
     end
     return commands
   end
