@@ -37,6 +37,9 @@ describe Ppl::Application::Bootstrap do
     it "should contain the 'show' command" do
       @bootstrap.command_suite.find_command("show").should_not be nil
     end
+    it "should contain the 'help' command" do
+      @bootstrap.command_suite.find_command("help").should_not be nil
+    end
   end
 
   describe "#input" do
