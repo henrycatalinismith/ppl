@@ -57,6 +57,23 @@ describe Ppl::Adapter::Vcard::Vpim, "#decode" do
     @adapter.decode(vcard).birthday.strftime('%Y-%m-%d').should eq "2012-01-02"
   end
 
+  it "should decode the contact's name" do
+
+    vcard = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "N:Doe;John;Johnny;Mr.;PhD",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+
+    contact.name.given.should      eq "John"
+    contact.name.family.should     eq "Doe"
+    contact.name.additional.should eq "Johnny"
+    contact.name.prefix.should     eq "Mr."
+    contact.name.suffix.should     eq "PhD"
+  end
+
   it "should decode the contact's email address" do
     vcard = [
       "BEGIN:VCARD",

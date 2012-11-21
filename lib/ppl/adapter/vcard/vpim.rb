@@ -39,6 +39,21 @@ class Ppl::Adapter::Vcard::Vpim
       contact.email_addresses.push(email_address)
     end
 
+    name = nil
+    begin
+      name = vcard.name
+    rescue
+    end
+
+    if !name.nil?
+      contact.name = Ppl::Entity::Name.new
+      contact.name.given = name.given
+      contact.name.family = name.family
+      contact.name.additional = name.additional
+      contact.name.prefix = name.prefix
+      contact.name.suffix = name.suffix
+    end
+
     return contact
   end
 
