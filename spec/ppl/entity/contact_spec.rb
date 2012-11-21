@@ -5,6 +5,19 @@ describe Ppl::Entity::Contact do
     @contact = Ppl::Entity::Contact.new
   end
 
+  describe "#id" do
+    it "should return a value" do
+      @contact.id.should be nil
+    end
+  end
+
+  describe "#id=" do
+    it "should accept a value" do
+      @contact.id = "john"
+      @contact.id.should eq "john"
+    end
+  end
+
   describe "#email_addresses" do
     it "should be an array" do
       @contact.email_addresses.should be_an(Array)
