@@ -36,10 +36,24 @@ describe Ppl::Adapter::Storage::Disk do
   end
 
   after(:each) do
+    FileUtils.rm_rf "/contacts"
     FakeFS.deactivate!
   end
 
-  it "is cool to swear" do
+  describe "#load_address_book" do
+
+    it "should return a Ppl::Entity::AddressBook" do
+      @storage.load_address_book.should be_a(Ppl::Entity::AddressBook)
+    end
+
+    it "should fill the address book with the contacts in the directory" do
+      FileUtils.touch "/contacts/one.vcard"
+      FileUtils.touch "/contacts/two.vcard"
+
+      address_book = @storage.load_address_book
+      address_book.count.should eq 2
+    end
+
   end
 
 end
