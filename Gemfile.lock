@@ -1,0 +1,16 @@
+GIT
+  remote: git://github.com/sam-github/vpim.git
+  revision: 6753a367cda64e53eab745414cedc130d2f149c8
+  specs:
+    vpim (12.1.12)
+
+GEM
+  specs:
+    fakefs (0.4.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  fakefs
+  vpim (= 12.1.12)!
