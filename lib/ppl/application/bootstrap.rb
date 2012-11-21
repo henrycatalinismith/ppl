@@ -9,6 +9,8 @@ class Ppl::Application::Bootstrap
       Ppl::Command::ContactRename.new,
       Ppl::Command::ContactShow.new,
     ]
+    commands.each do |command|
+    end
     return commands
   end
 
@@ -40,6 +42,17 @@ class Ppl::Application::Bootstrap
     shell = Ppl::Application::Shell.new
     shell.router = router
     return shell
+  end
+
+  def storage_adapter
+    storage = Ppl::Adapter::Storage::Disk.new("/home/h2s/src/ppl/tmp")
+    storage.vcard_adapter = vcard_adapter
+    return storage
+  end
+
+  def vcard_adapter
+    vcard = Ppl::Adapter::Vcard::Vpim.new
+    return vcard
   end
 
 end
