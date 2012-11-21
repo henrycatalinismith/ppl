@@ -31,3 +31,42 @@ describe Ppl::Adapter::Vcard::Vpim, "#encode" do
 
 end
 
+
+describe Ppl::Adapter::Vcard::Vpim, "#decode" do
+
+  before(:each) do
+    @adapter = Ppl::Adapter::Vcard::Vpim.new
+  end
+
+  it "should return a Ppl::Entity::Contact" do
+    vcard = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "END:VCARD",
+    ].join("\n")
+    @adapter.decode(vcard).should be_a(Ppl::Entity::Contact)
+  end
+
+  it "should decode the contact's birthday" do
+    vcard = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "BDAY:20120102",
+      "END:VCARD",
+    ].join("\n")
+    @adapter.decode(vcard).birthday.strftime('%Y-%m-%d').should eq "2012-01-02"
+  end
+
+  it "should decode the contact's email address" do
+    vcard = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "EMAIL;TYPE=home:home@example.org",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+
+  end
+
+end
+
