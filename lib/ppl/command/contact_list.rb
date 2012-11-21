@@ -6,5 +6,9 @@ class Ppl::Command::ContactList < Ppl::Application::Command
     @description = "List all contacts"
   end
 
+  def execute(input, output)
+    return true
+  end
+
 end
 
