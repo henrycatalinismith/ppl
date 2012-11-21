@@ -28,6 +28,15 @@ describe Ppl::Application::Bootstrap do
     it "should contain the 'ls' command" do
       @bootstrap.command_suite.find_command("ls").should_not be nil
     end
+    it "should contain the 'mv' command" do
+      @bootstrap.command_suite.find_command("mv").should_not be nil
+    end
+    it "should contain the 'rm' command" do
+      @bootstrap.command_suite.find_command("rm").should_not be nil
+    end
+    it "should contain the 'show' command" do
+      @bootstrap.command_suite.find_command("show").should_not be nil
+    end
   end
 
   describe "#input" do
