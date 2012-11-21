@@ -33,6 +33,12 @@ class Ppl::Adapter::Vcard::Vpim
       contact.birthday = vcard.birthday
     end
 
+    vcard.emails.each do |email|
+      email_address = Ppl::Entity::Email.new
+      email_address.address = email.to_s
+      contact.email_addresses.push(email_address)
+    end
+
     return contact
   end
 
