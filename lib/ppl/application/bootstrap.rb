@@ -1,13 +1,22 @@
 
 class Ppl::Application::Bootstrap
 
+  def commands
+    commands = [
+      Ppl::Command::CommandList.new,
+      Ppl::Command::ContactDelete.new,
+      Ppl::Command::ContactList.new,
+      Ppl::Command::ContactRename.new,
+      Ppl::Command::ContactShow.new,
+    ]
+    return commands
+  end
+
   def command_suite
     suite = Ppl::Application::CommandSuite.new
-    suite.add_command(Ppl::Command::CommandList.new)
-    suite.add_command(Ppl::Command::ContactDelete.new)
-    suite.add_command(Ppl::Command::ContactList.new)
-    suite.add_command(Ppl::Command::ContactRename.new)
-    suite.add_command(Ppl::Command::ContactShow.new)
+    commands.each do |command|
+      suite.add_command(command)
+    end
     return suite
   end
 
