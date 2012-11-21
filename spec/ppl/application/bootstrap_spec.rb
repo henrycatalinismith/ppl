@@ -14,6 +14,11 @@ describe Ppl::Application::Bootstrap do
         command.should be_a(Ppl::Application::Command)
       end
     end
+    it "should inject a storage adapter into each command" do
+      @bootstrap.commands.each do |command|
+        command.storage.should be_a(Ppl::Adapter::Storage)
+      end
+    end
   end
 
   describe "#command_suite" do

@@ -1,5 +1,5 @@
 
-class Ppl::Adapter::Storage::Disk
+class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
 
   attr_accessor :path
   attr_accessor :vcard_adapter
