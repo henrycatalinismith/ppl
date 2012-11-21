@@ -10,7 +10,7 @@ class Ppl::Command::ContactList < Ppl::Application::Command
     address_book = @storage.load_address_book
 
     address_book.each do |contact|
-      puts contact
+      puts contact.email_addresses.first.address
     end
 
     return true
