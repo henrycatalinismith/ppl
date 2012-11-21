@@ -10,7 +10,11 @@ class Ppl::Command::ContactList < Ppl::Application::Command
     address_book = @storage.load_address_book
 
     address_book.each do |contact|
-      puts contact.email_addresses.first.address
+      line = sprintf("%s: %s",
+        contact.id,
+        contact.email_addresses.first.address
+      )
+      output.line(line)
     end
 
     return true
