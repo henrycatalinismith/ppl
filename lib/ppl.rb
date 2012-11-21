@@ -40,7 +40,12 @@ require "ppl/command/contact_rename"
 
 require "ppl/entity/address_book"
 require "ppl/entity/contact"
+require "ppl/entity/email"
 require "ppl/entity/name"
 
 require "ppl/factory/contact"
+
+class String
+  alias_method :each, :each_line
+end
 

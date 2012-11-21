@@ -26,6 +26,14 @@ class Ppl::Adapter::Vcard::Vpim
   end
 
   def decode(string)
+    vcard   = Vpim::Vcard.decode(string).first
+    contact = Ppl::Entity::Contact.new
+
+    if !vcard.birthday.nil?
+      contact.birthday = vcard.birthday
+    end
+
+    return contact
   end
 
 end
