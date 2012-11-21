@@ -1,4 +1,5 @@
 
+require "fakefs/safe"
 require "pathname"
 
 bin_file = Pathname.new(__FILE__).realpath
