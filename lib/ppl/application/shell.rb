@@ -19,7 +19,7 @@ class Ppl::Application::Shell
   private
 
   def select_command(input)
-    @router.route(input.arguments.first)
+    @router.route(input.arguments.shift)
   end
 
   def execute_command(command, input, output)
