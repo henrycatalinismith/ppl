@@ -13,6 +13,9 @@ module Ppl
   module Entity
   end
 
+  module Error
+  end
+
   module Factory
   end
 
@@ -42,6 +45,8 @@ require "ppl/entity/address_book"
 require "ppl/entity/contact"
 require "ppl/entity/email"
 require "ppl/entity/name"
+
+require "ppl/error/contact_not_found"
 
 require "ppl/factory/contact"
 
