@@ -13,6 +13,8 @@ class Ppl::Command::ContactDelete < Ppl::Application::Command
     if contact.nil?
       raise Ppl::Error::ContactNotFound
     end
+
+    @storage.delete_contact(contact)
   end
 
 end
