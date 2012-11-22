@@ -37,6 +37,19 @@ describe Ppl::Application::Shell do
       @shell.run(@input, @output).should eq true
     end
 
+    it "should not pass the command name in the input to the command itself" do
+      @input.arguments = ["mv", "foo", "bar"]
+      @router
+        .should_receive(:route)
+        .with("mv")
+        .and_return(@command)
+
+      @command.should_receive(:execute) do |input, output|
+        input.arguments.should eq ["foo", "bar"]
+      end
+      @shell.run(@input, @output)
+    end
+
     it "should return false if the command throws an exception" do
       @command
         .should_receive(:execute)
