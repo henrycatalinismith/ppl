@@ -9,7 +9,7 @@ class Ppl::Application::Shell
       command = select_command(input)
       outcome = execute_command(command, input, output)
     rescue
-      output.error($!.message)
+      output.error("ppl: " + $!.message)
       outcome = false
     end
     return outcome
