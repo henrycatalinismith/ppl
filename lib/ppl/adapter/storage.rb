@@ -16,7 +16,7 @@ class Ppl::Adapter::Storage
   def require_contact(id)
     contact = load_contact(id)
     if contact.nil?
-      raise Ppl::Error::ContactNotFound
+      raise Ppl::Error::ContactNotFound, id
     end
   end
 
