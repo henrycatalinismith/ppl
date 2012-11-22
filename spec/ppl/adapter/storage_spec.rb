@@ -36,5 +36,11 @@ describe Ppl::Adapter::Storage do
     end
   end
 
+  describe "#save_contact" do
+    it "should raise not implemented error" do
+      expect{@storage.save_contact(nil)}.to raise_error(NotImplementedError)
+    end
+  end
+
 end
 

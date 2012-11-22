@@ -20,5 +20,9 @@ class Ppl::Adapter::Storage
     end
   end
 
+  def save_contact(contact)
+    raise NotImplementedError
+  end
+
 end
 
