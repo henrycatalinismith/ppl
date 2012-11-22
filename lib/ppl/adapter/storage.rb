@@ -13,5 +13,12 @@ class Ppl::Adapter::Storage
     raise NotImplementedError
   end
 
+  def require_contact(id)
+    contact = load_contact(id)
+    if contact.nil?
+      raise Ppl::Error::ContactNotFound
+    end
+  end
+
 end
 

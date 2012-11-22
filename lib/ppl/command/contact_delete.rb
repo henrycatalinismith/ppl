@@ -8,12 +8,7 @@ class Ppl::Command::ContactDelete < Ppl::Application::Command
 
   def execute(input, output)
     contact_id = input.arguments.first
-    contact    = @storage.load_contact(contact_id)
-
-    if contact.nil?
-      raise Ppl::Error::ContactNotFound
-    end
-
+    contact    = @storage.require_contact(contact_id)
     @storage.delete_contact(contact)
   end
 

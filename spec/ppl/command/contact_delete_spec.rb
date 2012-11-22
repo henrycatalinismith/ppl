@@ -19,14 +19,8 @@ describe Ppl::Command::ContactDelete do
 
   describe "#execute" do
 
-    it "should throw a Ppl::Error::ContactNotFound for invalid contacts" do
-      @storage.should_receive(:load_contact).and_return(nil)
-      @input.arguments.push("nobody")
-      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::ContactNotFound)
-    end
-
     it "should delete the given contact" do
-      @storage.should_receive(:load_contact).and_return(@contact)
+      @storage.should_receive(:require_contact).and_return(@contact)
       @storage.should_receive(:delete_contact).with(@contact)
       @command.execute(@input, @output)
     end
