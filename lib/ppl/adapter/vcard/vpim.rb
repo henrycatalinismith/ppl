@@ -42,7 +42,11 @@ class Ppl::Adapter::Vcard::Vpim
     name = nil
     begin
       name = vcard.name
-    rescue
+    rescue Vpim::InvalidEncodingError
+      # Vpim is quite strict about its requirement that vcards must have a name
+      # field specified. It's so strict that it throws a
+      # Vpim::InvalidEncodingError exception if it doesn't find one. This isn't
+      # helpful for the purposes of ppl so this exception is silently discarded.
     end
 
     if !name.nil?
