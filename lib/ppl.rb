@@ -48,8 +48,6 @@ require "ppl/entity/name"
 
 require "ppl/error/contact_not_found"
 
-require "ppl/factory/contact"
-
 class String
   alias_method :each, :each_line
 end
