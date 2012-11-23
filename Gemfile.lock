@@ -7,10 +7,12 @@ GIT
 GEM
   specs:
     fakefs (0.4.1)
+    rake (10.0.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   fakefs
+  rake
   vpim (= 12.1.12)!
