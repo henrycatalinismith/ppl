@@ -5,6 +5,7 @@ GIT
     vpim (12.1.12)
 
 GEM
+  remote: http://rubygems.org/
   specs:
     fakefs (0.4.1)
     rake (10.0.1)
