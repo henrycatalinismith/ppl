@@ -47,11 +47,6 @@ fred@example.org
 $ ppl rm dave
 ```
 
-### Delete a contact
-```bash
-$ ppl rm dave
-```
-
 ### Rename a contact
 ```bash
 $ ppl mv dave david
