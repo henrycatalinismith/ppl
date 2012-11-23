@@ -11,5 +11,5 @@ like "people". You might be interested in ppl if:
 * You want ownership of your address book data back from the cloud
 * You prefer to keep your data stored in an open format
 
-[![Build Status](https://secure.travis-ci.org/h2s/ppl)](http://travis-ci.org/h2s/ppl)
+[![Build Status](https://secure.travis-ci.org/h2s/ppl.png)](http://travis-ci.org/h2s/ppl)
 
