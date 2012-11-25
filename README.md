@@ -35,6 +35,11 @@ fred: fred@example.org
 john: john@example.org
 ```
 
+### Add a contact
+```bash
+$ ppl add paul "Paul Baker"
+```
+
 ### Show a contact
 ```bash
 $ ppl show fred
@@ -56,11 +61,6 @@ Roadmap
 -------
 
 Support for the following commands is planned.
-
-### Add a contact
-```bash
-$ ppl add paul "Paul Baker"
-```
 
 ### Change a contact's email address
 ```bash
