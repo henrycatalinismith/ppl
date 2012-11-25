@@ -11,6 +11,7 @@ class Ppl::Application::Bootstrap
       Ppl::Command::ContactShow.new,
       Ppl::Command::SetBirthday.new,
       Ppl::Command::SetEmail.new,
+      Ppl::Command::SetName.new,
     ]
     commands.each do |command|
       command.storage = storage_adapter
