@@ -3,11 +3,22 @@ describe Ppl::Command::ContactAdd do
 
   before(:each) do
     @command = Ppl::Command::ContactAdd.new
+    @input   = Ppl::Application::Input.new
   end
 
   describe "#name" do
     it "should be 'add'" do
       @command.name.should eq "add"
+    end
+  end
+
+  describe "#execute" do
+    it "should raise a Ppl::Error::IncorrectUsage if no id is given" do
+      expect{@command.execute(@input, nil)}.to raise_error(Ppl::Error::IncorrectUsage)
+    end
+    it "should raise a Ppl::Error::IncorrectUsage if no name is given" do
+      @input.arguments = ["some_id"]
+      expect{@command.execute(@input, nil)}.to raise_error(Ppl::Error::IncorrectUsage)
     end
   end
 

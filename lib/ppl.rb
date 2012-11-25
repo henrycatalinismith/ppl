@@ -48,6 +48,7 @@ require "ppl/entity/email"
 require "ppl/entity/name"
 
 require "ppl/error/contact_not_found"
+require "ppl/error/incorrect_usage"
 
 class String
   alias_method :each, :each_line
