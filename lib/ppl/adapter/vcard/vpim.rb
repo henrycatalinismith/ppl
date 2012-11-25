@@ -28,9 +28,7 @@ class Ppl::Adapter::Vcard::Vpim
     end
 
     vcard.emails.each do |email|
-      email_address = Ppl::Entity::Email.new
-      email_address.address = email.to_s
-      contact.email_addresses.push(email_address)
+      contact.email_address = email.to_s
     end
 
     name = nil

@@ -70,7 +70,7 @@ describe Ppl::Adapter::Vcard::Vpim, "#decode" do
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
-    contact.email_addresses.first.address.should eq "home@example.org"
+    contact.email_address.should eq "home@example.org"
   end
 
 end
