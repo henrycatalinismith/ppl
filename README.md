@@ -57,6 +57,11 @@ $ ppl rm dave
 $ ppl mv dave david
 ```
 
+### Change a contact's name
+```bash
+$ ppl name john "John Smith"
+```
+
 ### Change a contact's email address
 ```bash
 $ ppl email dave david@example.org
@@ -65,16 +70,6 @@ $ ppl email dave david@example.org
 ### Change a contact's birthday
 ```bash
 $ ppl birthday john 1980-01-01
-```
-
-Roadmap
--------
-
-Support for the following commands is planned.
-
-### Change a contact's name
-```bash
-$ ppl name john "John Smith"
 ```
 
 Contributing
