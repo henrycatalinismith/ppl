@@ -36,6 +36,7 @@ require "ppl/application/router"
 require "ppl/application/shell"
 
 require "ppl/command/command_list"
+require "ppl/command/contact_add"
 require "ppl/command/contact_delete"
 require "ppl/command/contact_list"
 require "ppl/command/contact_show"
