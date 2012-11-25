@@ -48,8 +48,8 @@ describe Ppl::Adapter::Storage::Disk do
     end
 
     it "should fill the address book with the contacts in the directory" do
-      FileUtils.touch "/contacts/one.vcard"
-      FileUtils.touch "/contacts/two.vcard"
+      FileUtils.touch "/contacts/one.vcf"
+      FileUtils.touch "/contacts/two.vcf"
 
       @adapter.should_receive(:decode).twice
 
@@ -66,13 +66,13 @@ describe Ppl::Adapter::Storage::Disk do
     end
 
     it "should return a Ppl::Entity::Contact" do
-      FileUtils.touch "/contacts/one.vcard"
+      FileUtils.touch "/contacts/one.vcf"
       @adapter.should_receive(:decode).once.and_return(@contact)
       @storage.load_contact("one").should be_a(Ppl::Entity::Contact)
     end
 
     it "should populate the contact's id" do
-      FileUtils.touch "/contacts/one.vcard"
+      FileUtils.touch "/contacts/one.vcf"
       @adapter.should_receive(:decode).once.and_return(@contact)
       @storage.load_contact("one").id.should eq "one"
     end
