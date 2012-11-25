@@ -11,6 +11,7 @@ class Ppl::Command::ContactShow < Ppl::Application::Command
     contact     = @storage.require_contact(contact_id)
 
     output.line(contact.name)
+    output.line(contact.email_address)
 
     return true
   end
