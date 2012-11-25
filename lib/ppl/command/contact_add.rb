@@ -7,13 +7,18 @@ class Ppl::Command::ContactAdd < Ppl::Application::Command
   end
 
   def execute(input, output)
-    contact_id = input.arguments.shift
-    full_name  = input.arguments.shift
+    contact_id   = input.arguments.shift
+    contact_name = input.arguments.shift
 
-    if contact_id.nil? || full_name.nil?
+    if contact_id.nil? || contact_name.nil?
       raise Ppl::Error::IncorrectUsage
     end
 
+    contact = Ppl::Entity::Contact.new
+    contact.id = contact_id
+    contact.name = contact_name
+
+    @storage.save_contact(contact)
     return true
   end
 
