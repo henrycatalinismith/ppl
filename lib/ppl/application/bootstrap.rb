@@ -48,7 +48,7 @@ class Ppl::Application::Bootstrap
   end
 
   def storage_adapter
-    storage = Ppl::Adapter::Storage::Disk.new("/home/h2s/src/ppl/tmp")
+    storage = Ppl::Adapter::Storage::Disk.new(Dir.pwd)
     storage.vcard_adapter = vcard_adapter
     return storage
   end
