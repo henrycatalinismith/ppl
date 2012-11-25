@@ -18,33 +18,15 @@ describe Ppl::Entity::Contact do
     end
   end
 
-  describe "#email_addresses" do
-    it "should be an array" do
-      @contact.email_addresses.should be_an(Array)
+  describe "#email_address" do
+    it "should return a value" do
+      @contact.email_address.should eq nil
     end
   end
 
-  describe "#nicknames" do
-    it "should be an array" do
-      @contact.nicknames.should be_an(Array)
-    end
-  end
-
-  describe "#organizations" do
-    it "should be an array" do
-      @contact.organizations.should be_an(Array)
-    end
-  end
-
-  describe "#phone_numbers" do
-    it "should be an array" do
-      @contact.phone_numbers.should be_an(Array)
-    end
-  end
-
-  describe "#postal_addresses" do
-    it "should be an array" do
-      @contact.postal_addresses.should be_an(Array)
+  describe "#birthday" do
+    it "should return a value" do
+      @contact.birthday.should eq nil
     end
   end
 

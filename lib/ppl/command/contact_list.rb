@@ -12,7 +12,7 @@ class Ppl::Command::ContactList < Ppl::Application::Command
     address_book.each do |contact|
       line = sprintf("%s: %s",
         contact.id,
-        contact.email_addresses.first.address
+        contact.email_address
       )
       output.line(line)
     end
