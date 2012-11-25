@@ -17,6 +17,11 @@ describe Ppl::Adapter::Vcard::Vpim, "#encode" do
     @adapter.encode(@contact).should include("FN:John Doe")
   end
 
+  it "should encode the contact's email address" do
+    @contact.email_address = "john@example.org"
+    @adapter.encode(@contact).should include("EMAIL:john@example.org")
+  end
+
 end
 
 

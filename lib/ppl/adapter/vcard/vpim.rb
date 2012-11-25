@@ -14,6 +14,11 @@ class Ppl::Adapter::Vcard::Vpim
         name.given    = contact.id   unless contact.id.nil?
         name.fullname = contact.name unless contact.name.nil?
       end
+
+      if !contact.email_address.nil?
+        maker.add_email(contact.email_address)
+      end
+
     end
 
     return vcard.to_s
