@@ -11,11 +11,11 @@ class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
   def load_address_book
     address_book = Ppl::Entity::AddressBook.new
 
-    pattern   = File.join @path, "*.vcard"
+    pattern   = File.join @path, "*.vcf"
     filenames = Dir.glob pattern
 
     filenames.each do |filename|
-      contact_id = File.basename(filename).slice(0..-7)
+      contact_id = File.basename(filename).slice(0..-5)
       contact    = load_contact(contact_id)
       address_book.add_contact(contact)
     end
@@ -24,7 +24,7 @@ class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
   end
 
   def load_contact(id)
-    filename = File.join @path, id + ".vcard"
+    filename = File.join @path, id + ".vcf"
     contact  = nil
     if File.exists?(filename)
       vcard   = File.read filename
