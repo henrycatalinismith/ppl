@@ -10,15 +10,9 @@ class Ppl::Adapter::Vcard::Vpim
         maker.birthday = contact.birthday
       end
 
-      if !contact.name.nil?
-        maker.add_name do |name|
-          name.additional = contact.name.additional unless contact.name.additional.nil?
-          name.family     = contact.name.family unless contact.name.family.nil?
-          name.fullname   = contact.name.full   unless contact.name.full.nil?
-          name.given      = contact.name.given  unless contact.name.given.nil?
-          name.prefix     = contact.name.prefix unless contact.name.prefix.nil?
-          name.suffix     = contact.name.suffix unless contact.name.suffix.nil?
-        end
+      maker.add_name do |name|
+        name.given    = contact.id   unless contact.id.nil?
+        name.fullname = contact.name unless contact.name.nil?
       end
     end
 
@@ -40,22 +34,10 @@ class Ppl::Adapter::Vcard::Vpim
     end
 
     name = nil
-    begin
-      name = vcard.name
-    rescue Vpim::InvalidEncodingError
-      # Vpim is quite strict about its requirement that vcards must have a name
-      # field specified. It's so strict that it throws a
-      # Vpim::InvalidEncodingError exception if it doesn't find one. This isn't
-      # helpful for the purposes of ppl so this exception is silently discarded.
-    end
+    name = vcard.name
 
     if !name.nil?
-      contact.name = Ppl::Entity::Name.new
-      contact.name.given = name.given
-      contact.name.family = name.family
-      contact.name.additional = name.additional
-      contact.name.prefix = name.prefix
-      contact.name.suffix = name.suffix
+      contact.name = name.fullname
     end
 
     return contact

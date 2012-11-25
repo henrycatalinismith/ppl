@@ -10,7 +10,7 @@ class Ppl::Command::ContactShow < Ppl::Application::Command
     contact_id  = input.arguments.shift
     contact     = @storage.require_contact(contact_id)
 
-    output.line(contact.name.full)
+    output.line(contact.name)
 
     return true
   end
