@@ -9,6 +9,7 @@ class Ppl::Application::Bootstrap
       Ppl::Command::ContactList.new,
       Ppl::Command::ContactRename.new,
       Ppl::Command::ContactShow.new,
+      Ppl::Command::SetEmail.new,
     ]
     commands.each do |command|
       command.storage = storage_adapter

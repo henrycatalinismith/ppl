@@ -52,7 +52,7 @@ fred@example.org
 $ ppl rm dave
 ```
 
-### Rename a contact
+### Change a contact's ID
 ```bash
 $ ppl mv dave david
 ```

@@ -28,6 +28,9 @@ describe Ppl::Application::Bootstrap do
     it "should contain the 'add' command" do
       @bootstrap.command_suite.find_command("add").should_not be nil
     end
+    it "should contain the 'email' command" do
+      @bootstrap.command_suite.find_command("email").should_not be nil
+    end
     it "should contain the 'ls' command" do
       @bootstrap.command_suite.find_command("ls").should_not be nil
     end
