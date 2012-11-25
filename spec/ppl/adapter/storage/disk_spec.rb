@@ -79,5 +79,21 @@ describe Ppl::Adapter::Storage::Disk do
 
   end
 
+  describe "#save_contact" do
+
+    before(:each) do
+    end
+
+    it "should write the contact to disk" do
+      @adapter.should_receive(:encode).with(@contact).and_return("asdfg")
+
+      @contact.id = "test"
+      @storage.save_contact(@contact)
+
+      File.read("/contacts/test.vcf").should eq "asdfg"
+    end
+
+  end
+
 end
 

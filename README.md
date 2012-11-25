@@ -57,15 +57,15 @@ $ ppl rm dave
 $ ppl mv dave david
 ```
 
-Roadmap
--------
-
-Support for the following commands is planned.
-
 ### Change a contact's email address
 ```bash
 $ ppl email dave david@example.org
 ```
+
+Roadmap
+-------
+
+Support for the following commands is planned.
 
 ### Change a contact's name
 ```bash
