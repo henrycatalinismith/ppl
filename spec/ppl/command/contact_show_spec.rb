@@ -21,9 +21,11 @@ describe Ppl::Command::ContactShow do
     it "should show the contact's name" do
       @storage.should_receive(:require_contact).and_return(@contact)
 
-      @contact.name = "John Doe"
+      @contact.name          = "John Doe"
+      @contact.email_address = "johndoe@example.org"
 
       @output.should_receive(:line).with("John Doe")
+      @output.should_receive(:line).with("johndoe@example.org")
 
       @command.execute(@input, @output)
     end
