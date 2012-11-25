@@ -18,6 +18,7 @@ class Ppl::Adapter::Storage
     if contact.nil?
       raise Ppl::Error::ContactNotFound, id
     end
+    return contact
   end
 
   def save_contact(contact)
