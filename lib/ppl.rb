@@ -45,6 +45,7 @@ require "ppl/command/contact_show"
 require "ppl/command/contact_rename"
 require "ppl/command/set_birthday"
 require "ppl/command/set_email"
+require "ppl/command/set_name"
 
 require "ppl/entity/address_book"
 require "ppl/entity/contact"
