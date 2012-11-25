@@ -4,9 +4,7 @@ describe Ppl::Adapter::Vcard::Vpim, "#encode" do
   before(:each) do
     @adapter = Ppl::Adapter::Vcard::Vpim.new
     @contact = Ppl::Entity::Contact.new
-
-    @contact.name = Ppl::Entity::Name.new
-    @contact.name.given = "Minimum"
+    @contact.id = "test"
   end
 
   it "should encode the contact's birthday" do
@@ -15,17 +13,7 @@ describe Ppl::Adapter::Vcard::Vpim, "#encode" do
   end
 
   it "should encode the contact's name" do
-    @contact.name.additional = "Johnny"
-    @contact.name.full       = "John Doe"
-    @contact.name.family     = "Doe"
-    @contact.name.given      = "John"
-    @contact.name.prefix     = "Mr."
-    @contact.name.suffix     = "PhD"
-    @adapter.encode(@contact).should include("N:Doe;John;Johnny;Mr.;PhD")
-  end
-
-  it "should encode the contact's full name" do
-    @contact.name.full = "John Doe"
+    @contact.name = "John Doe"
     @adapter.encode(@contact).should include("FN:John Doe")
   end
 
@@ -42,6 +30,7 @@ describe Ppl::Adapter::Vcard::Vpim, "#decode" do
     vcard = [
       "BEGIN:VCARD",
       "VERSION:3.0",
+      "N:,test",
       "END:VCARD",
     ].join("\n")
     @adapter.decode(vcard).should be_a(Ppl::Entity::Contact)
@@ -51,6 +40,7 @@ describe Ppl::Adapter::Vcard::Vpim, "#decode" do
     vcard = [
       "BEGIN:VCARD",
       "VERSION:3.0",
+      "N:,test",
       "BDAY:20120102",
       "END:VCARD",
     ].join("\n")
@@ -62,21 +52,19 @@ describe Ppl::Adapter::Vcard::Vpim, "#decode" do
     vcard = [
       "BEGIN:VCARD",
       "VERSION:3.0",
-      "N:Doe;John;Johnny;Mr.;PhD",
+      "N:,test",
+      "FN:John Doe",
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
 
-    contact.name.given.should      eq "John"
-    contact.name.family.should     eq "Doe"
-    contact.name.additional.should eq "Johnny"
-    contact.name.prefix.should     eq "Mr."
-    contact.name.suffix.should     eq "PhD"
+    contact.name.should eq "John Doe"
   end
 
   it "should decode the contact's email address" do
     vcard = [
       "BEGIN:VCARD",
+      "N:,test",
       "VERSION:3.0",
       "EMAIL;TYPE=home:home@example.org",
       "END:VCARD",

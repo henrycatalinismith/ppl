@@ -6,11 +6,9 @@ describe Ppl::Command::ContactShow do
     @input   = Ppl::Application::Input.new
     @output  = double(Ppl::Application::Output)
     @contact = Ppl::Entity::Contact.new
-    @name    = Ppl::Entity::Name.new
     @storage = double(Ppl::Adapter::Storage)
 
     @command.storage = @storage
-    @contact.name    = @name
   end
 
   describe "#name" do
@@ -23,7 +21,7 @@ describe Ppl::Command::ContactShow do
     it "should show the contact's name" do
       @storage.should_receive(:require_contact).and_return(@contact)
 
-      @contact.name.full = "John Doe"
+      @contact.name = "John Doe"
 
       @output.should_receive(:line).with("John Doe")
 
