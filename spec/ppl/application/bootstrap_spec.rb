@@ -25,6 +25,9 @@ describe Ppl::Application::Bootstrap do
     it "should return a Ppl::Application::CommandSuite" do
       @bootstrap.command_suite.should be_a(Ppl::Application::CommandSuite)
     end
+    it "should contain the 'add' command" do
+      @bootstrap.command_suite.find_command("add").should_not be nil
+    end
     it "should contain the 'ls' command" do
       @bootstrap.command_suite.find_command("ls").should_not be nil
     end
