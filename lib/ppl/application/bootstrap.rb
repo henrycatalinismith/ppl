@@ -4,6 +4,7 @@ class Ppl::Application::Bootstrap
   def commands
     commands = [
       Ppl::Command::CommandList.new,
+      Ppl::Command::ContactAdd.new,
       Ppl::Command::ContactDelete.new,
       Ppl::Command::ContactList.new,
       Ppl::Command::ContactRename.new,
