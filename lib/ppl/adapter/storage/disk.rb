@@ -36,5 +36,15 @@ class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
     return contact
   end
 
+  def save_contact(contact)
+    vcard = @vcard_adapter.encode(contact)
+
+    basename = contact.id +  ".vcf"
+    filename = File.join @path, basename
+    File.open(filename, "w") do |file|
+      file.write(vcard)
+    end
+  end
+
 end
 
