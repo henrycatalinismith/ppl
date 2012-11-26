@@ -4,6 +4,8 @@ describe Ppl::Command::CommandList do
   before(:each) do
     @command = Ppl::Command::CommandList.new
     @output  = double(Ppl::Application::Output)
+
+    @command.command_suite = Ppl::Application::CommandSuite.new
   end
 
   describe "#command_suite=" do
@@ -21,16 +23,40 @@ describe Ppl::Command::CommandList do
   end
 
   describe "#execute" do
+
     it "should list available commands" do
       command = double(Ppl::Application::Command)
-      command.should_receive(:name).and_return("one")
+      command.should_receive(:name).twice.and_return("one")
       command.should_receive(:description).and_return("The first command")
-      @command.command_suite = [command]
+      @command.command_suite.add_command(command)
 
-      @output.should_receive(:line).with("one: The first command")
+      @output.should_receive(:line).with("  one  The first command")
 
       @command.execute(nil, @output)
     end
+
+    it "should arrange output into columns" do
+      command_foo = Ppl::Application::Command.new
+      command_foo.name = "shortname"
+      command_foo.description = "This is a command with a short name"
+
+      command_bar = Ppl::Application::Command.new
+      command_bar.name = "veryverylongname"
+      command_bar.description = "This is a command with a longer name"
+
+      @command.command_suite.add_command(command_foo)
+      @command.command_suite.add_command(command_bar)
+
+      [
+        "  shortname         This is a command with a short name",
+        "  veryverylongname  This is a command with a longer name",
+      ].each do |line|
+        @output.should_receive(:line).with(line)
+      end
+
+      @command.execute(nil, @output)
+    end
+
   end
 
 end
