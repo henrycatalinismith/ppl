@@ -9,6 +9,7 @@ class Ppl::Command::CommandList < Ppl::Application::Command
   end
 
   def execute(input, output)
+    @command_suite.sort_by_name
     @command_suite.each do |command|
       name        = command.name
       description = command.description
