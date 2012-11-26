@@ -20,6 +20,14 @@ class Ppl::Application::CommandSuite
   def find_command(name)
     @commands.select { |command| command.name == name }.first
   end
+  
+  def sort_by_name
+    @commands.sort! { |a, b| a.name <=> b.name }
+  end
+
+  def [](index)
+    @commands[index]
+  end
 
 end
 

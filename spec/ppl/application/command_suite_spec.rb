@@ -40,5 +40,13 @@ describe Ppl::Application::CommandSuite do
     end
   end
 
+  describe "#sort_by_name" do
+    it "should sort the commands alphabetically by name" do
+      @command_suite.sort_by_name
+      @command_suite[0].name.should eq "bar"
+      @command_suite[1].name.should eq "foo"
+    end
+  end
+
 end
 
