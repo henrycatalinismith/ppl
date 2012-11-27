@@ -1,22 +1,21 @@
 
 class Ppl::Command::ContactList < Ppl::Application::Command
 
+  attr_writer :format
+
   def initialize
     @name        = "ls"
     @description = "List all contacts"
+
+    @format = Ppl::Format::AddressBook::OneLine.new
   end
 
   def execute(input, output)
     address_book = @storage.load_address_book
 
-    address_book.each do |contact|
-      line = sprintf("%s: %s",
-        contact.id,
-        contact.email_address
-      )
-      output.line(line)
-    end
+    formatted = @format.process(address_book)
 
+    output.line(formatted)
     return true
   end
 
