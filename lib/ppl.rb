@@ -18,7 +18,7 @@ module Ppl
   module Error
   end
 
-  module Factory
+  module Format
   end
 
 end
@@ -52,6 +52,9 @@ require "ppl/entity/contact"
 
 require "ppl/error/contact_not_found"
 require "ppl/error/incorrect_usage"
+
+require "ppl/format/contact"
+require "ppl/format/contact/full"
 
 class String
   alias_method :each, :each_line
