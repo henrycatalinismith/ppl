@@ -25,8 +25,6 @@ describe Ppl::Command::ContactShow do
       @format.should_receive(:process).and_return("John Doe")
 
       @output.should_receive(:line).with("John Doe")
-      #@output.should_receive(:line).with("johndoe@example.org")
-
       @command.execute(@input, @output)
     end
   end
