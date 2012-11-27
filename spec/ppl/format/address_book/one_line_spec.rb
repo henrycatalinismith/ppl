@@ -33,6 +33,27 @@ describe Ppl::Format::AddressBook::OneLine do
       @format.process(@address_book).should include "John Doe <john@example.org>"
     end
 
+    it "should arrage the list into readable columns" do
+      @contact.name          = "John Doe"
+      @contact.email_address = "john@example.org"
+
+      long_contact = Ppl::Entity::Contact.new
+      long_contact.id            = "reallyreallylongid"
+      long_contact.name          = "Really Really Long Name"
+      long_contact.email_address = "reallyreallylong@example.org"
+      @address_book.add_contact(long_contact)
+
+      output = @format.process(@address_book)
+
+      [
+        "test:               John Doe                <john@example.org>",
+        "reallyreallylongid: Really Really Long Name <reallyreallylong@example.org>",
+      ].each do |line|
+        output.should include line
+      end
+
+    end
+
   end
 
 end
