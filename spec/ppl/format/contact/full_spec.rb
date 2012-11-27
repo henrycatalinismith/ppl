@@ -23,6 +23,11 @@ describe Ppl::Format::Contact::Full do
       @format.process(@contact).should eq "John Doe <john@example.org>"
     end
 
+    it "should show their birthday if available" do
+      @contact.birthday = Date.parse("1980-01-01")
+      @format.process(@contact).should include "1980-01-01"
+    end
+
   end
 
 end
