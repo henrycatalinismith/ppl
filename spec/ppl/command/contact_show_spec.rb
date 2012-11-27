@@ -7,8 +7,10 @@ describe Ppl::Command::ContactShow do
     @output  = double(Ppl::Application::Output)
     @contact = Ppl::Entity::Contact.new
     @storage = double(Ppl::Adapter::Storage)
+    @format  = double(Ppl::Format::Contact)
 
     @command.storage = @storage
+    @command.format  = @format
   end
 
   describe "#name" do
@@ -20,12 +22,10 @@ describe Ppl::Command::ContactShow do
   describe "#execute" do
     it "should show the contact's name" do
       @storage.should_receive(:require_contact).and_return(@contact)
-
-      @contact.name          = "John Doe"
-      @contact.email_address = "johndoe@example.org"
+      @format.should_receive(:process).and_return("John Doe")
 
       @output.should_receive(:line).with("John Doe")
-      @output.should_receive(:line).with("johndoe@example.org")
+      #@output.should_receive(:line).with("johndoe@example.org")
 
       @command.execute(@input, @output)
     end
