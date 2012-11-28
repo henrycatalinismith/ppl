@@ -12,8 +12,11 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
     @repository = Rugged::Repository.new(@disk.directory.path)
   end
 
+  def load_address_book
+  end
+
   def load_contact(id)
-    filename = @disk.filename_for_contact_id(id)
+    filename = id + ".vcf"
     target   = @repository.head.target
     vcard    = @repository.file_at(target, filename)
     contact  = @vcard_adapter.decode(vcard)
