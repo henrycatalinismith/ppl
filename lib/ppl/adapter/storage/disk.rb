@@ -24,7 +24,7 @@ class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
   end
 
   def load_contact(id)
-    filename = File.join @path, id + ".vcf"
+    filename = filename_for_contact_id(id)
     contact  = nil
     if File.exists?(filename)
       vcard   = File.read filename
@@ -39,11 +39,20 @@ class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
   def save_contact(contact)
     vcard = @vcard_adapter.encode(contact)
 
-    basename = contact.id +  ".vcf"
-    filename = File.join @path, basename
+    filename = filename_for_contact(contact)
     File.open(filename, "w") do |file|
       file.write(vcard)
     end
+  end
+
+  protected
+
+  def filename_for_contact(contact)
+    filename_for_contact_id(contact.id)
+  end
+
+  def filename_for_contact_id(id)
+    File.join(@path, id + ".vcf")
   end
 
 end
