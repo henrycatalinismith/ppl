@@ -13,6 +13,16 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
   end
 
   def load_address_book
+    address_book = Ppl::Entity::AddressBook.new
+
+    head = @repository.lookup(@repository.head.target)
+    head.tree.each do |file|
+      contact_id = file[:name].slice(0..-5)
+      contact    = load_contact(contact_id)
+      address_book.add_contact(contact)
+    end
+
+    return address_book
   end
 
   def load_contact(id)
