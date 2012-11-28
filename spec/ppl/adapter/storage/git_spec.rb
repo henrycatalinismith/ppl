@@ -1,4 +1,6 @@
 
+require "ostruct"
+
 describe Ppl::Adapter::Storage::Git, "#initialize" do
 
   before(:each) do
@@ -7,14 +9,16 @@ describe Ppl::Adapter::Storage::Git, "#initialize" do
 
     @disk    = double(Ppl::Adapter::Storage::Disk)
     @contact = double(Ppl::Entity::Contact)
-    @rugged  = double(Rugged::Repository)
+    @repo    = double(Rugged::Repository)
+    @vcard   = double(Ppl::Adapter::Vcard)
 
-    Rugged::Repository.stub(:new).and_return(@rugged)
+    Rugged::Repository.stub(:new).and_return(@repo)
 
     @disk.stub(:directory).and_return(Dir.new("/contacts"))
     @contact.stub(:id).and_return("test")
 
     @git = Ppl::Adapter::Storage::Git.new(@disk)
+    @git.vcard_adapter = @vcard
   end
 
   after(:each) do
@@ -27,8 +31,25 @@ describe Ppl::Adapter::Storage::Git, "#initialize" do
       @git.disk.should be @disk
     end
     it "should instantiate rugged" do
-      @git.repository.should be @rugged
+      @git.repository.should be @repo
     end
+  end
+
+  describe "#load_contact" do
+
+    it "should return a contact" do
+      head        = OpenStruct.new
+      head.target = "asdfg"
+
+      @disk.should_receive(:filename_for_contact_id).and_return("/contacts/test.vcf")
+      @repo.should_receive(:head).and_return(head)
+      @repo.should_receive(:file_at).and_return("vcard contents")
+      @vcard.should_receive(:decode).and_return(@contact)
+      @contact.should_receive(:id=).with("test")
+
+      contact = @git.load_contact("test")
+    end
+
   end
 
   describe "#save_contact" do
