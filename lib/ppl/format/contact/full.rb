@@ -13,10 +13,9 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
     if vitals != ""
       lines.push("")
       lines.push(vitals)
+      lines.push("")
+      lines.push("")
     end
-
-    lines.push("")
-    lines.push("")
 
     return lines.join("\n")
   end
