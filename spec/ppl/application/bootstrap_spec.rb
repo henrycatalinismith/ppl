@@ -85,8 +85,8 @@ describe Ppl::Application::Bootstrap do
   end
 
   describe "#storage_adapter" do
-    it "should return a Ppl::Adapter::Storage::Disk" do
-      @bootstrap.storage_adapter.should be_a(Ppl::Adapter::Storage::Disk)
+    it "should return a Ppl::Adapter::Storage" do
+      @bootstrap.storage_adapter.should be_a(Ppl::Adapter::Storage)
     end
   end
 
