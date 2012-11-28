@@ -9,5 +9,8 @@ class Ppl::Application::Command
     raise NotImplementedError
   end
 
+  def options(parser, options)
+  end
+
 end
 
