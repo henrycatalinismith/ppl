@@ -84,9 +84,6 @@ describe Ppl::Adapter::Storage::Disk do
 
   describe "#save_contact" do
 
-    before(:each) do
-    end
-
     it "should write the contact to disk" do
       @adapter.should_receive(:encode).with(@contact).and_return("asdfg")
 
@@ -96,6 +93,19 @@ describe Ppl::Adapter::Storage::Disk do
       File.read("/contacts/test.vcf").should eq "asdfg"
     end
 
+  end
+
+  describe "#filename_for_contact" do
+    it "should base the filename on the contact's id" do
+      @contact.id = "test"
+      @storage.filename_for_contact(@contact).should eq "/contacts/test.vcf"
+    end
+  end
+
+  describe "#filename_for_contact_id" do
+    it "should base the filename on the directory path" do
+      @storage.filename_for_contact_id("test").should eq "/contacts/test.vcf"
+    end
   end
 
 end

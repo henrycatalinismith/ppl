@@ -45,8 +45,6 @@ class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
     end
   end
 
-  protected
-
   def filename_for_contact(contact)
     filename_for_contact_id(contact.id)
   end

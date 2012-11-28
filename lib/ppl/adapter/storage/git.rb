@@ -1,10 +1,14 @@
 
+require "rugged"
+
 class Ppl::Adapter::Storage::Git
 
   attr_accessor :disk
+  attr_accessor :repository
 
   def initialize(disk)
     @disk = disk
+    @repository = Rugged::Repository.new(@disk.directory.path)
   end
 
   def load_contact(id)
