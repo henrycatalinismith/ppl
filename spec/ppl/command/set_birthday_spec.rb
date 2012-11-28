@@ -41,7 +41,7 @@ describe Ppl::Command::SetBirthday do
 
     it "should raise an error if the birthday isn't a valid date" do
       @input.arguments = ["jim", "poiuytrewq"]
-      expect{@command.execute(@input, @output)}.to raise_error(ArgumentError)
+      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
     end
 
   end
