@@ -15,6 +15,9 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
       lines.push(vitals)
     end
 
+    lines.push("")
+    lines.push("")
+
     return lines.join("\n")
   end
 
