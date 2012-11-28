@@ -5,6 +5,7 @@ class Ppl::Adapter::Storage::Git
 
   attr_accessor :disk
   attr_accessor :repository
+  attr_accessor :vcard_adapter
 
   def initialize(disk)
     @disk = disk
@@ -12,6 +13,14 @@ class Ppl::Adapter::Storage::Git
   end
 
   def load_contact(id)
+    filename = @disk.filename_for_contact_id(id)
+    target   = @repository.head.target
+    vcard    = @repository.file_at(target, filename)
+    contact  = @vcard_adapter.decode(vcard)
+
+    contact.id = id
+
+    return contact
   end
 
   def save_contact(contact)
