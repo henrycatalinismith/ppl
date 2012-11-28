@@ -17,6 +17,9 @@ class Ppl::Application::Shell
     rescue OptionParser::MissingArgument
       output.error($!)
       output.error(@optparse.to_s)
+    rescue Ppl::Error::IncorrectUsage
+      output.error($!)
+      output.error(@optparse.to_s)
     rescue
       output.error("ppl: " + $!.message)
       outcome = false
