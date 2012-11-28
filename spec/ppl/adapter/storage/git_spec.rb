@@ -41,7 +41,6 @@ describe Ppl::Adapter::Storage::Git, "#initialize" do
       head        = OpenStruct.new
       head.target = "asdfg"
 
-      @disk.should_receive(:filename_for_contact_id).and_return("/contacts/test.vcf")
       @repo.should_receive(:head).and_return(head)
       @repo.should_receive(:file_at).and_return("vcard contents")
       @vcard.should_receive(:decode).and_return(@contact)
