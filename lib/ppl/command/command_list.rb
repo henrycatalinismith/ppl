@@ -23,7 +23,7 @@ class Ppl::Command::CommandList < Ppl::Application::Command
       name        = command.name
       description = command.description
 
-      line = sprintf("  %-#{max_name_length}s  %s", name, description)
+      line = sprintf("   %-#{max_name_length}s   %s", name, description)
 
       output.line(line)
     end
