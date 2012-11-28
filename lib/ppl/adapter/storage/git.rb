@@ -1,7 +1,7 @@
 
 require "rugged"
 
-class Ppl::Adapter::Storage::Git
+class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
 
   attr_accessor :disk
   attr_accessor :repository
