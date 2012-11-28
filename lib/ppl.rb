@@ -26,6 +26,7 @@ end
 
 require "ppl/adapter/storage"
 require "ppl/adapter/storage/disk"
+require "ppl/adapter/storage/factory"
 require "ppl/adapter/storage/git"
 require "ppl/adapter/vcard"
 require "ppl/adapter/vcard/vpim"
