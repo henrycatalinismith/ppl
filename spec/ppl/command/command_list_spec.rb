@@ -24,6 +24,16 @@ describe Ppl::Command::CommandList do
 
   describe "#execute" do
 
+    it "should not list itself" do
+      @command.command_suite.add_command(@command)
+
+      @output.should_receive(:line).with("usage: ppl <command>")
+      @output.should_receive(:line).with(nil)
+      @output.should_receive(:line).with(nil)
+
+      @command.execute(nil, @output)
+    end
+
     it "should list available commands" do
       command = double(Ppl::Application::Command)
       command.should_receive(:name).twice.and_return("one")
