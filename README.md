@@ -127,9 +127,7 @@ Bug reports, fixes, and additional features are encouraged. The project uses
 [Github issues](https://github.com/h2s/ppl/issues) to track bug reports.
 
 If you'd like to contribute code, please just bear in mind that ppl development
-is test-driven and attempts to follow the "Object Mentor school of clean code"
-as described in the book [Clean
-Code](http://books.google.co.uk/books?id=_i6bDeoCQzsC).
+is test-driven.
 
 License
 -------
