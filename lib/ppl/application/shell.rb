@@ -9,7 +9,12 @@ class Ppl::Application::Shell
     outcome = false
     begin
       command = select_command(input)
+      prepare_command(command, input)
       outcome = execute_command(command, input, output)
+    rescue OptionParser::InvalidOption
+    rescue OptionParser::MissingArgument
+      output.error($!)
+      output.error(@optparse.to_s)
     rescue
       output.error("ppl: " + $!.message)
       outcome = false
@@ -24,14 +29,18 @@ class Ppl::Application::Shell
     @router.route(input.arguments.shift)
   end
 
+  def prepare_command(command, input)
+    if !command.nil?
+      @optparse = OptionParser.new do |parser|
+        command.options(parser, input.options)
+      end
+      @optparse.parse!(input.arguments)
+    end
+  end
+
   def execute_command(command, input, output)
     outcome = false
     if !command.nil?
-
-      OptionParser.new do |parser|
-        command.options(parser, input.options)
-      end
-
       outcome = command.execute(input, output)
     end
     return outcome

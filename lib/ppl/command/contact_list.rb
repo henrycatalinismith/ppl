@@ -11,13 +11,12 @@ class Ppl::Command::ContactList < Ppl::Application::Command
   end
 
   def options(parser, options)
+    parser.banner = "usage: ppl ls"
   end
 
   def execute(input, output)
-
     address_book = @storage.load_address_book
-
-    formatted = @format.process(address_book)
+    formatted    = @format.process(address_book)
 
     output.line(formatted)
     return true
