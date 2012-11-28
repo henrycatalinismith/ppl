@@ -20,9 +20,17 @@ describe Ppl::Command::ContactShow do
   end
 
   describe "#execute" do
+
+    it "should raise an error if no contact is specified" do
+      @input.arguments = []
+      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
+    end
+
     it "should show the contact's name" do
       @storage.should_receive(:require_contact).and_return(@contact)
       @format.should_receive(:process).and_return("John Doe")
+
+      @input.arguments = ["john"]
 
       @output.should_receive(:line).with("John Doe")
       @command.execute(@input, @output)
