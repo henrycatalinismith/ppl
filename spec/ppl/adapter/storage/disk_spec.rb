@@ -1,9 +1,10 @@
 
 describe Ppl::Adapter::Storage::Disk, "#initialize" do
 
-  it "should accept a path" do
-    @storage = Ppl::Adapter::Storage::Disk.new("/tmp")
-    @storage.path.should eq "/tmp"
+  it "should accept a Dir object" do
+    directory = Dir.new("/tmp")
+    @storage = Ppl::Adapter::Storage::Disk.new(directory)
+    @storage.directory.should be directory
   end
 
 end
@@ -27,13 +28,15 @@ end
 describe Ppl::Adapter::Storage::Disk do
 
   before(:each) do
-    @storage = Ppl::Adapter::Storage::Disk.new("/contacts")
+    FakeFS.activate!
+
+    Dir.mkdir "/contacts"
+    directory = Dir.new("/contacts")
+
+    @storage = Ppl::Adapter::Storage::Disk.new(directory)
     @adapter = double(Ppl::Adapter::Vcard)
     @contact = Ppl::Entity::Contact.new
     @storage.vcard_adapter = @adapter
-
-    FakeFS.activate!
-    Dir.mkdir "/contacts"
   end
 
   after(:each) do
