@@ -12,6 +12,8 @@ class Ppl::Application::Shell
       prepare_command(command, input)
       outcome = execute_command(command, input, output)
     rescue OptionParser::InvalidOption
+      output.error($!)
+      output.error(@optparse.to_s)
     rescue OptionParser::MissingArgument
       output.error($!)
       output.error(@optparse.to_s)
