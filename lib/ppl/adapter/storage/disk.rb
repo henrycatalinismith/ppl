@@ -1,17 +1,17 @@
 
 class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
 
-  attr_accessor :path
+  attr_accessor :directory
   attr_accessor :vcard_adapter
 
-  def initialize(path)
-    @path = path
+  def initialize(directory)
+    @directory = directory
   end
 
   def load_address_book
     address_book = Ppl::Entity::AddressBook.new
 
-    pattern   = File.join @path, "*.vcf"
+    pattern   = File.join @directory.path, "*.vcf"
     filenames = Dir.glob pattern
 
     filenames.each do |filename|
@@ -52,7 +52,7 @@ class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
   end
 
   def filename_for_contact_id(id)
-    File.join(@path, id + ".vcf")
+    File.join(@directory.path, id + ".vcf")
   end
 
 end
