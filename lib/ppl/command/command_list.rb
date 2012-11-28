@@ -19,6 +19,9 @@ class Ppl::Command::CommandList < Ppl::Application::Command
       end
     end
 
+    output.line("usage: ppl <command>")
+    output.line(nil)
+
     @command_suite.each do |command|
       name        = command.name
       description = command.description
@@ -27,6 +30,8 @@ class Ppl::Command::CommandList < Ppl::Application::Command
 
       output.line(line)
     end
+
+    output.line(nil)
     return true
   end
 

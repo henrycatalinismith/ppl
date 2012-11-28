@@ -30,7 +30,10 @@ describe Ppl::Command::CommandList do
       command.should_receive(:description).and_return("The first command")
       @command.command_suite.add_command(command)
 
+      @output.should_receive(:line).with("usage: ppl <command>")
+      @output.should_receive(:line).with(nil)
       @output.should_receive(:line).with("   one   The first command")
+      @output.should_receive(:line).with(nil)
 
       @command.execute(nil, @output)
     end
@@ -47,12 +50,15 @@ describe Ppl::Command::CommandList do
       @command.command_suite.add_command(command_foo)
       @command.command_suite.add_command(command_bar)
 
+      @output.should_receive(:line).with("usage: ppl <command>")
+      @output.should_receive(:line).with(nil)
       [
         "   shortname          This is a command with a short name",
         "   veryverylongname   This is a command with a longer name",
       ].each do |line|
         @output.should_receive(:line).with(line)
       end
+      @output.should_receive(:line).with(nil)
 
       @command.execute(nil, @output)
     end
