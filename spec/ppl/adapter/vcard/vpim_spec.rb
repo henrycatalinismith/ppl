@@ -22,6 +22,11 @@ describe Ppl::Adapter::Vcard::Vpim, "#encode" do
     @adapter.encode(@contact).should include("EMAIL:john@example.org")
   end
 
+  it "should encode the contact's phone number" do
+    @contact.phone_number = "01234567890"
+    @adapter.encode(@contact).should include("TEL:01234567890")
+  end
+
 end
 
 
@@ -76,6 +81,18 @@ describe Ppl::Adapter::Vcard::Vpim, "#decode" do
     ].join("\n")
     contact = @adapter.decode(vcard)
     contact.email_address.should eq "home@example.org"
+  end
+
+  it "should decode the contact's phone number" do
+    vcard = [
+      "BEGIN:VCARD",
+      "N:,test",
+      "VERSION:3.0",
+      "TEL:01234567890",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+    contact.phone_number.should eq "01234567890"
   end
 
 end

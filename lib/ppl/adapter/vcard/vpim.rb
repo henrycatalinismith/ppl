@@ -19,6 +19,10 @@ class Ppl::Adapter::Vcard::Vpim
         maker.add_email(contact.email_address)
       end
 
+      if !contact.phone_number.nil?
+        maker.add_tel(contact.phone_number)
+      end
+
     end
 
     return vcard.to_s
@@ -34,6 +38,10 @@ class Ppl::Adapter::Vcard::Vpim
 
     vcard.emails.each do |email|
       contact.email_address = email.to_s
+    end
+
+    if !vcard.telephones.empty?
+      contact.phone_number = vcard.telephones.first
     end
 
     name = nil

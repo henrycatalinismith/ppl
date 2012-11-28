@@ -34,10 +34,16 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
   def vitals(contact)
     vitals = []
     if !contact.birthday.nil?
-      line = sprintf("  %-12s %s", "Birthday", contact.birthday.strftime("%Y-%m-%d"))
-      vitals.push(line)
+      vitals.push(format_vital("Birthday", contact.birthday.strftime("%Y-%m-%d")))
+    end
+    if !contact.phone_number.nil?
+      vitals.push(format_vital("Telephone", contact.phone_number))
     end
     return vitals.join("\n")
+  end
+
+  def format_vital(name, value)
+    return sprintf("  %-12s %s", name, value)
   end
 
 end

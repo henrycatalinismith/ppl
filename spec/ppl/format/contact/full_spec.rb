@@ -28,6 +28,11 @@ describe Ppl::Format::Contact::Full do
       @format.process(@contact).should include "1980-01-01"
     end
 
+    it "should show their phone number if available" do
+      @contact.phone_number = "01234567890"
+      @format.process(@contact).should include "01234567890"
+    end
+
   end
 
 end
