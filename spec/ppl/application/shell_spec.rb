@@ -30,6 +30,7 @@ describe Ppl::Application::Shell do
         .with("foo")
         .and_return(@command)
 
+      @command.should_receive(:options)
       @command
         .should_receive(:execute)
         .and_return(true)
@@ -44,6 +45,7 @@ describe Ppl::Application::Shell do
         .with("mv")
         .and_return(@command)
 
+      @command.should_receive(:options)
       @command.should_receive(:execute) do |input, output|
         input.arguments.should eq ["foo", "bar"]
       end
@@ -51,6 +53,7 @@ describe Ppl::Application::Shell do
     end
 
     it "should return false if the command throws an exception" do
+      @command.should_receive(:options)
       @command
         .should_receive(:execute)
         .and_raise(StandardError)
@@ -65,6 +68,7 @@ describe Ppl::Application::Shell do
     end
 
     it "should send exception messages to stderr" do
+      @command.should_receive(:options)
       @command.should_receive(:execute) { raise "Pool's Closed" }
       @router.should_receive(:route).and_return(@command)
 

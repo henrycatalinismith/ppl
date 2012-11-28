@@ -1,4 +1,6 @@
 
+require "optparse"
+
 class Ppl::Application::Shell
 
   attr_writer :router
@@ -25,6 +27,11 @@ class Ppl::Application::Shell
   def execute_command(command, input, output)
     outcome = false
     if !command.nil?
+
+      OptionParser.new do |parser|
+        command.options(parser, input.options)
+      end
+
       outcome = command.execute(input, output)
     end
     return outcome

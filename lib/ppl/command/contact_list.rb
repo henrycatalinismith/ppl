@@ -10,7 +10,11 @@ class Ppl::Command::ContactList < Ppl::Application::Command
     @format = Ppl::Format::AddressBook::OneLine.new
   end
 
+  def options(parser, options)
+  end
+
   def execute(input, output)
+
     address_book = @storage.load_address_book
 
     formatted = @format.process(address_book)
