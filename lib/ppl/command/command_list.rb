@@ -26,6 +26,10 @@ class Ppl::Command::CommandList < Ppl::Application::Command
       name        = command.name
       description = command.description
 
+      if @name == name
+        next
+      end
+
       line = sprintf("   %-#{max_name_length}s   %s", name, description)
 
       output.line(line)
