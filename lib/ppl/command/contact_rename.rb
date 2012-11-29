@@ -11,7 +11,7 @@ class Ppl::Command::ContactRename < Ppl::Application::Command
     new_id  = input.arguments.shift
 
     old_contact = @storage.require_contact(old_id)
-    new_contact = @storage.require_contact(new_id)
+    new_contact = @storage.load_contact(new_id)
 
     if !new_contact.nil?
       output.error("There is already a contact with ID '#{new_id}'")
