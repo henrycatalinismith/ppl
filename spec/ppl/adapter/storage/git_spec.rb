@@ -55,11 +55,16 @@ describe Ppl::Adapter::Storage::Git, "#initialize" do
 
     it "should save the contact to disk" do
       @disk.should_receive(:save_contact).with(@contact)
+      @git.stub(:add)
+      @git.stub(:commit)
       @git.save_contact(@contact)
     end
 
     it "should commit the changes" do
       @disk.should_receive(:save_contact)
+      @git.stub(:add) do |file|
+        file.should eq "test.vcf"
+      end
       @git.stub(:commit) do |message|
         message.should eq "save_contact(test)"
       end
