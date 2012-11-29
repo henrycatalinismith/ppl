@@ -29,6 +29,11 @@ class Ppl::Application::Bootstrap
     return suite
   end
 
+  def configuration
+    config = Ppl::Application::Configuration.new
+    return config
+  end
+
   def input
     input = Ppl::Application::Input.new(ARGV.dup)
     return input
