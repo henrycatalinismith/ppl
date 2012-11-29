@@ -9,12 +9,19 @@ class Ppl::Command::ContactRename < Ppl::Application::Command
   def execute(input, output)
     old_id  = input.arguments.shift
     new_id  = input.arguments.shift
-    contact = @storage.require_contact(old_id)
 
-    @storage.delete_contact(contact)
+    old_contact = @storage.require_contact(old_id)
+    new_contact = @storage.require_contact(new_id)
 
-    contact.id = new_id
-    @storage.save_contact(contact)
+    if !new_contact.nil?
+      output.error("There is already a contact with ID '#{new_id}'")
+      return false
+    end
+
+    @storage.delete_contact(old_contact)
+
+    old_contact.id = new_id
+    @storage.save_contact(old_contact)
 
     return true
   end
