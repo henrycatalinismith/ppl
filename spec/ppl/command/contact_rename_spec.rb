@@ -20,9 +20,19 @@ describe Ppl::Command::ContactRename do
 
   describe "#execute" do
 
+    it "should raise an error if no contact is specified" do
+      @input.arguments = []
+      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
+    end
+
+    it "should raise an error if no new ID is specified" do
+      @input.arguments = ["test", nil]
+      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
+    end
+
     it "should return false if the new id is taken" do
       @storage.should_receive(:require_contact).with("old").and_return(@contact)
-      @storage.should_receive(:require_contact).with("new").and_return(@contact)
+      @storage.should_receive(:load_contact).with("new").and_return(@contact)
       @output.should_receive(:error)
       @input.arguments = ["old", "new"]
 
@@ -31,7 +41,7 @@ describe Ppl::Command::ContactRename do
 
     it "should rename the given contact" do
       @storage.should_receive(:require_contact).with("old").and_return(@contact)
-      @storage.should_receive(:require_contact).with("new").and_return(nil)
+      @storage.should_receive(:load_contact).with("new").and_return(nil)
 
       @storage.should_receive(:delete_contact).with(@contact) do |contact|
         contact.id.should eq "old"
