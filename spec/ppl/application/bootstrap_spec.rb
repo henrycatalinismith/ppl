@@ -57,6 +57,12 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
+  describe "#configuration" do
+    it "should return a Ppl::Application::Configuration" do
+      @bootstrap.configuration.should be_a(Ppl::Application::Configuration)
+    end
+  end
+
   describe "#input" do
     it "should return a Ppl::Application::Input" do
       @bootstrap.input.should be_a(Ppl::Application::Input)
