@@ -45,6 +45,10 @@ class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
     end
   end
 
+  def delete_contact(contact)
+    File.unlink filename_for_contact(contact)
+  end
+
   def filename_for_contact(contact)
     filename_for_contact_id(contact.id)
   end
