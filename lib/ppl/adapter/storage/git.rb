@@ -30,9 +30,12 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
     filename = id + ".vcf"
     target   = @repository.head.target
     vcard    = @repository.file_at(target, filename)
-    contact  = @vcard_adapter.decode(vcard)
+    contact  = nil
 
-    contact.id = id
+    if !vcard.nil?
+      contact    = @vcard_adapter.decode(vcard)
+      contact.id = id
+    end
 
     return contact
   end
