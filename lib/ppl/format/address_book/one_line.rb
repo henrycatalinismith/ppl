@@ -24,7 +24,7 @@ class Ppl::Format::AddressBook::OneLine < Ppl::Format::AddressBook
 
     address_book.each do |contact|
       if !contact.id.nil? && contact.id.length > widths[:id]
-        widths[:id] = contact.id.length + 1
+        widths[:id] = contact.id.length
       end
       if !contact.name.nil? && contact.name.length > widths[:name]
         widths[:name] = contact.name.length
@@ -57,7 +57,7 @@ class Ppl::Format::AddressBook::OneLine < Ppl::Format::AddressBook
     end
 
     line = [
-      sprintf("%-#{column_widths[:id]}s", id),
+      sprintf("%-#{column_widths[:id] + 1}s", id),
       sprintf("%-#{column_widths[:name]}s", name),
       sprintf("%-#{column_widths[:email]}s", email),
     ].join(" ")
