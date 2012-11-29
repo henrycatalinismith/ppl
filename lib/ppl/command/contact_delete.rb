@@ -10,6 +10,7 @@ class Ppl::Command::ContactDelete < Ppl::Application::Command
     contact_id = input.arguments.first
     contact    = @storage.require_contact(contact_id)
     @storage.delete_contact(contact)
+    return true
   end
 
 end

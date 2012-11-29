@@ -44,6 +44,13 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
     commit("save_contact(#{contact.id})")
   end
 
+  def delete_contact(contact)
+    @repository.index.remove("#{contact.id}.vcf")
+    @repository.index.write
+    commit("remove_contact(#{contact.id})")
+    @disk.delete_contact(contact)
+  end
+
   private
 
   def add(file)
