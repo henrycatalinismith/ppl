@@ -95,6 +95,15 @@ describe Ppl::Adapter::Storage::Disk do
 
   end
 
+  describe "#delete_contact" do
+    it "should remove the the contact from the disk" do
+      FileUtils.touch "/contacts/test.vcf"
+      @contact.id = "test"
+      @storage.delete_contact(@contact)
+      File.exists?("/contacts/test.vcf").should eq false
+    end
+  end
+
   describe "#filename_for_contact" do
     it "should base the filename on the contact's id" do
       @contact.id = "test"
