@@ -6,9 +6,21 @@ class Ppl::Command::ContactRename < Ppl::Application::Command
     @description = "Rename a contact"
   end
 
+  def options(parser, options)
+    parser.banner = "usage: ppl mv <contact> <new ID>"
+  end
+
   def execute(input, output)
     old_id  = input.arguments.shift
     new_id  = input.arguments.shift
+
+    if old_id.nil?
+      raise Ppl::Error::IncorrectUsage, "No contact specified"
+    end
+
+    if new_id.nil?
+      raise Ppl::Error::IncorrectUsage, "No new ID specified"
+    end
 
     old_contact = @storage.require_contact(old_id)
     new_contact = @storage.load_contact(new_id)
