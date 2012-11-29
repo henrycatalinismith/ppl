@@ -1,5 +1,6 @@
 
 require "rugged"
+require "socket"
 
 class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
 
@@ -38,12 +39,42 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
 
   def save_contact(contact)
     @disk.save_contact(contact)
+
+    add("#{contact.id}.vcf")
     commit("save_contact(#{contact.id})")
   end
 
   private
 
+  def add(file)
+    @repository.index.add(file)
+    @repository.index.write
+  end
+
   def commit(message)
+    hash    = @repository.index.write_tree
+    tree    = @repository.lookup hash
+    parents = [ @repository.lookup( @repository.head.target ).oid ]
+
+    name = ENV['USER']
+    host = Socket.gethostname
+
+    author = {
+      :email => name + "@" + host,
+      :time  => Time.now,
+      :name  => name,
+    }
+
+    data = {
+      :author     => author,
+      :message    => message,
+      :committer  => author,
+      :tree       => tree,
+      :parents    => parents,
+      :update_ref => "HEAD",
+    }
+
+    Rugged::Commit.create(@repository, data)
   end
 
 end

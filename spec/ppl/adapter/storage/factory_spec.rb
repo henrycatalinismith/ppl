@@ -5,7 +5,7 @@ describe Ppl::Adapter::Storage::Factory do
     FakeFS.activate!
     Dir.mkdir "/contacts"
 
-    @factory   = Ppl::Adapter::Storage::Factory.new
+    @factory   = Ppl::Adapter::Storage::Factory.new(nil)
     @directory = Dir.new("/contacts")
     @repo      = double(Rugged::Repository)
 
