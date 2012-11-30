@@ -41,20 +41,33 @@ describe Ppl::Adapter::Storage::Git, "#initialize" do
     before(:each) do
       @head = double(Rugged::Reference)
 
+      @files = [{:name => "test.vcf"}]
+
       @commit.should_receive(:target)
       @repo.should_receive(:lookup).and_return(@head)
       @repo.should_receive(:head).and_return(@commit)
-      @head.should_receive(:tree).and_return([])
 
       @git.stub(:load_contact) do |id|
         contact    = Ppl::Entity::Contact.new
         contact.id = id
         contact
       end
+
     end
 
     it "should return an address book" do
+      @head.should_receive(:tree).and_return(@files)
       @git.load_address_book.should be_a(Ppl::Entity::AddressBook)
+    end
+
+    it "should not put anything except contacts in the address book" do
+      @files = [{:name => "poop.vcf"}, {:name => ".ppl"}]
+      @head.should_receive(:tree).and_return(@files)
+
+      address_book = @git.load_address_book
+      address_book.each do |contact|
+        contact.should be_a(Ppl::Entity::Contact)
+      end
     end
 
   end
