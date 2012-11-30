@@ -2,7 +2,7 @@
 Gem::Specification.new do |spec|
 
   spec.name        = "ppl"
-  spec.version     = "0.4.0"
+  spec.version     = "0.5.0"
   spec.date        = "2012-11-23"
 
   spec.summary     = "CLI Address Book"
