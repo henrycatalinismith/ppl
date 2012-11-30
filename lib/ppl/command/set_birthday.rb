@@ -2,7 +2,7 @@
 class Ppl::Command::SetBirthday < Ppl::Application::Command
 
   def initialize
-    @name        = "birthday"
+    @name        = "bday"
     @description = "Change a contact's birthday"
   end
 

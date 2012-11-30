@@ -13,8 +13,8 @@ describe Ppl::Command::SetBirthday do
   end
 
   describe "#name" do
-    it "should be 'birthday'" do
-      @command.name.should eq "birthday"
+    it "should be 'bday'" do
+      @command.name.should eq "bday"
     end
   end
 
