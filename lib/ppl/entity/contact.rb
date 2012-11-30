@@ -6,6 +6,7 @@ class Ppl::Entity::Contact
   attr_accessor :email_address
   attr_accessor :birthday
   attr_accessor :phone_number
+  attr_accessor :organization
 
 end
 
