@@ -18,6 +18,10 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
 
     head = @repository.lookup(@repository.head.target)
     head.tree.each do |file|
+      extension = file[:name].slice(-4..-1)
+      if extension != ".vcf"
+        next
+      end
       contact_id = file[:name].slice(0..-5)
       contact    = load_contact(contact_id)
       address_book.add_contact(contact)
