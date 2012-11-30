@@ -57,7 +57,9 @@ class Ppl::Application::Bootstrap
   end
 
   def storage_adapter
-    directory = Dir.new(Dir.pwd)
+    config = configuration
+
+    directory = Dir.new(config.address_book_path)
     factory   = Ppl::Adapter::Storage::Factory.new(vcard_adapter)
     storage   = factory.load_adapter(directory)
 
