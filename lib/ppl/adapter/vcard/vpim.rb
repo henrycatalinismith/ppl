@@ -23,6 +23,10 @@ class Ppl::Adapter::Vcard::Vpim
         maker.add_tel(contact.phone_number)
       end
 
+      if !contact.organization.nil?
+        maker.org=(contact.organization)
+      end
+
     end
 
     return vcard.to_s
@@ -42,6 +46,10 @@ class Ppl::Adapter::Vcard::Vpim
 
     if !vcard.telephones.empty?
       contact.phone_number = vcard.telephones.first
+    end
+
+    if !vcard.org.nil?
+      contact.organization = vcard.org.first
     end
 
     name = nil
