@@ -41,6 +41,9 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
     if !contact.phone_number.nil?
       vitals.push(format_vital("Telephone", contact.phone_number))
     end
+    if !contact.organization.nil?
+      vitals.push(format_vital("Organization", contact.organization))
+    end
     return vitals.join("\n")
   end
 
