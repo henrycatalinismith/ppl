@@ -20,7 +20,7 @@ class Ppl::Command::SetOrganization < Ppl::Application::Command
     end
 
     if organization.nil?
-      raise Ppl::Error::IncorrectUsage, "No date specified"
+      raise Ppl::Error::IncorrectUsage, "No organization specified"
     end
 
     contact = @storage.require_contact(contact_id)
