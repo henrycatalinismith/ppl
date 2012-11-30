@@ -12,6 +12,7 @@ class Ppl::Application::Bootstrap
       Ppl::Command::SetBirthday.new,
       Ppl::Command::SetEmail.new,
       Ppl::Command::SetName.new,
+      Ppl::Command::SetOrganization.new,
       Ppl::Command::SetPhoneNumber.new,
     ]
     commands.each do |command|
