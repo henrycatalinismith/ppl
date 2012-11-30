@@ -10,7 +10,7 @@ class Ppl::Application::Configuration
 
     path = default_config["address book"]["path"]
     if !user_config["address book"].nil? && !user_config["address book"]["path"].nil?
-      path = user_config["address book"]["path"]
+      path = File.expand_path(user_config["address book"]["path"])
     end
 
     return path
@@ -27,7 +27,8 @@ class Ppl::Application::Configuration
   end
 
   def user_configuration
-    {}
+    filename = File.expand_path(USER_CONFIG)
+    config   = File.read(filename)
   end
 
   def repository_configuration

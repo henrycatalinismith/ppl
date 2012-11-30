@@ -6,6 +6,9 @@ describe Ppl::Application::Bootstrap do
   end
 
   describe "#commands" do
+    before(:each) do
+      @bootstrap.stub(:storage_adapter).and_return(Ppl::Adapter::Storage.new)
+    end
     it "should return an array" do
       @bootstrap.commands.should be_an(Array)
     end
@@ -22,6 +25,11 @@ describe Ppl::Application::Bootstrap do
   end
 
   describe "#command_suite" do
+
+    before(:each) do
+      @bootstrap.stub(:storage_adapter)
+    end
+
     it "should return a Ppl::Application::CommandSuite" do
       @bootstrap.command_suite.should be_a(Ppl::Application::CommandSuite)
     end
@@ -76,6 +84,9 @@ describe Ppl::Application::Bootstrap do
   end
 
   describe "#router" do
+    before(:each) do
+      @bootstrap.stub(:storage_adapter)
+    end
     it "should return a Ppl::Application::Router" do
       @bootstrap.router.should be_a(Ppl::Application::Router)
     end
@@ -85,12 +96,24 @@ describe Ppl::Application::Bootstrap do
   end
 
   describe "#shell" do
+    before(:each) do
+      @bootstrap.stub(:storage_adapter)
+    end
     it "should return a Ppl::Application::Shell" do
       @bootstrap.shell.should be_a(Ppl::Application::Shell)
     end
   end
 
   describe "#storage_adapter" do
+    before(:each) do
+      @config  = double(Ppl::Application::Configuration)
+      @factory = double(Ppl::Adapter::Storage::Factory)
+      @bootstrap.stub(:configuration).and_return(@config)
+      Ppl::Adapter::Storage::Factory.stub(:new).and_return(@factory)
+
+      @config.should_receive(:address_book_path).and_return("/tmp")
+      @factory.should_receive(:load_adapter).and_return(Ppl::Adapter::Storage::Disk.new(nil))
+    end
     it "should return a Ppl::Adapter::Storage" do
       @bootstrap.storage_adapter.should be_a(Ppl::Adapter::Storage)
     end
