@@ -2,10 +2,12 @@
 describe Ppl::Application::Configuration do
 
   before(:each) do
+    FakeFS.activate!
     @config = Ppl::Application::Configuration.new
   end
 
   after(:each) do
+    FakeFS.deactivate!
   end
 
   describe "#address_book_path" do
