@@ -1,4 +1,6 @@
 
+require "inifile"
+
 class Ppl::Application::Configuration
 
   USER_CONFIG = "~/.pplconfig"
@@ -28,7 +30,11 @@ class Ppl::Application::Configuration
 
   def user_configuration
     filename = File.expand_path(USER_CONFIG)
-    config   = File.read(filename)
+    config   = {}
+    if File.exists?(filename)
+      config = IniFile::load(filename).to_h
+    end
+    return config
   end
 
   def repository_configuration

@@ -10,6 +10,7 @@ describe Ppl::Adapter::Storage::Git, "#initialize" do
     @disk    = double(Ppl::Adapter::Storage::Disk)
     @contact = double(Ppl::Entity::Contact)
     @repo    = double(Rugged::Repository)
+    @commit  = double(Rugged::Commit)
     @vcard   = double(Ppl::Adapter::Vcard)
 
     Rugged::Repository.stub(:new).and_return(@repo)
@@ -33,6 +34,29 @@ describe Ppl::Adapter::Storage::Git, "#initialize" do
     it "should instantiate rugged" do
       @git.repository.should be @repo
     end
+  end
+
+  describe "#load_address_book" do
+
+    before(:each) do
+      @head = double(Rugged::Reference)
+
+      @commit.should_receive(:target)
+      @repo.should_receive(:lookup).and_return(@head)
+      @repo.should_receive(:head).and_return(@commit)
+      @head.should_receive(:tree).and_return([])
+
+      @git.stub(:load_contact) do |id|
+        contact    = Ppl::Entity::Contact.new
+        contact.id = id
+        contact
+      end
+    end
+
+    it "should return an address book" do
+      @git.load_address_book.should be_a(Ppl::Entity::AddressBook)
+    end
+
   end
 
   describe "#load_contact" do
