@@ -6,6 +6,10 @@ class Ppl::Command::SetPhoneNumber < Ppl::Application::Command
     @description = "Change a contact's phone number"
   end
 
+  def options(parser, options)
+    parser.banner = "usage: ppl phone <contact> <number>"
+  end
+
   def execute(input, output)
 
     contact_id   = input.arguments.shift
