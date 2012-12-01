@@ -8,6 +8,7 @@ describe Ppl::Command::ContactDelete do
     @command = Ppl::Command::ContactDelete.new
     @storage = double(Ppl::Adapter::Storage)
 
+    @input.arguments = ["test"]
     @command.storage = @storage
   end
 
@@ -18,6 +19,11 @@ describe Ppl::Command::ContactDelete do
   end
 
   describe "#execute" do
+
+    it "should raise an error if the contact isn't specified" do
+      @input.arguments = [nil]
+      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
+    end
 
     it "should delete the given contact" do
       @storage.should_receive(:require_contact).and_return(@contact)
