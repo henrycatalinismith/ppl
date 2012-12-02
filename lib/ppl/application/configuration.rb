@@ -18,6 +18,11 @@ class Ppl::Application::Configuration
     return path
   end
 
+  def aliases
+    aliases = {}
+    return aliases
+  end
+
   private
 
   def default_configuration

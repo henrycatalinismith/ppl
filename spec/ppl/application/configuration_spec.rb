@@ -22,5 +22,11 @@ describe Ppl::Application::Configuration do
     end
   end
 
+  describe "#aliases" do
+    it "should return a hash" do
+      @config.aliases.should be_a(Hash)
+    end
+  end
+
 end
 
