@@ -6,6 +6,10 @@ class Ppl::Command::AddressBookInit < Ppl::Application::Command
     @description = "Create an empty address book"
   end
 
+  def options(parser, options)
+    parser.banner = "usage: ppl init [directory]"
+  end
+
   def execute(input, output)
 
     path = input.arguments.shift
