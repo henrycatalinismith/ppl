@@ -15,6 +15,11 @@ describe Ppl::Adapter::Storage::Disk, "#create_address_book" do
       Dir.exists?("/contacts").should eq true
       FileUtils.rm_rf("/contacts")
     end
+    it "should return a Ppl::Adapter::Storage::Disk" do
+      disk = Ppl::Adapter::Storage::Disk.create_address_book("/contacts")
+      FileUtils.rm_rf("/contacts")
+      disk.should be_a(Ppl::Adapter::Storage::Disk)
+    end
   end
 
 end
