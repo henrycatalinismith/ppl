@@ -13,6 +13,11 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
     @repository = Rugged::Repository.new(@disk.directory.path)
   end
 
+  def self.create_address_book(path)
+    disk = Ppl::Adapter::Storage::Disk.create_address_book(path)
+    repo = Rugged::Repository.init_at(path, false)
+  end
+
   def load_address_book
     address_book = Ppl::Entity::AddressBook.new
 
