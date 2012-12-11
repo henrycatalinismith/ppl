@@ -9,6 +9,11 @@ class Ppl::Command::AddressBookInit < Ppl::Application::Command
   def execute(input, output)
 
     path = input.arguments.shift
+    if path.nil?
+      path = Dir.pwd
+    end
+
+    storage = Ppl::Adapter::Storage::Git.create_address_book(path)
 
     return true
   end
