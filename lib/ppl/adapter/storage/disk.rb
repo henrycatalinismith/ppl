@@ -10,6 +10,7 @@ class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
     if !Dir.exists? path
       FileUtils.mkdir_p(path)
     end
+    storage = self.new(path)
   end
 
   def initialize(directory)
