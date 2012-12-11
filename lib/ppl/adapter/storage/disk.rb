@@ -1,8 +1,16 @@
 
+require "fileutils"
+
 class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
 
   attr_accessor :directory
   attr_accessor :vcard_adapter
+
+  def self.create_address_book(path)
+    if !Dir.exists? path
+      FileUtils.mkdir_p(path)
+    end
+  end
 
   def initialize(directory)
     @directory = directory

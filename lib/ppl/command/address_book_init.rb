@@ -7,6 +7,9 @@ class Ppl::Command::AddressBookInit < Ppl::Application::Command
   end
 
   def execute(input, output)
+
+    path = input.arguments.shift
+
     return true
   end
 
