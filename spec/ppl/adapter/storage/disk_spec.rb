@@ -1,4 +1,24 @@
 
+describe Ppl::Adapter::Storage::Disk, "#create_address_book" do
+
+  before(:each) do
+    FakeFS.activate!
+  end
+
+  after(:each) do
+    FakeFS.deactivate!
+  end
+
+  describe "#create_address_book" do
+    it "should create the directory if it doesn't exist yet" do
+      Ppl::Adapter::Storage::Disk.create_address_book("/contacts")
+      Dir.exists?("/contacts").should eq true
+      FileUtils.rm_rf("/contacts")
+    end
+  end
+
+end
+
 describe Ppl::Adapter::Storage::Disk, "#initialize" do
 
   it "should accept a Dir object" do
