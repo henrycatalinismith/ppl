@@ -11,5 +11,12 @@ describe Ppl::Command::CommandList do
     end
   end
 
+  describe "#execute" do
+
+    it "should " do
+    end
+
+  end
+
 end
 

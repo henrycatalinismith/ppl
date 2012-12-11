@@ -1,6 +1,10 @@
 
 class Ppl::Adapter::Storage
 
+  def self.create_address_book(path)
+    raise NotImplementedError
+  end
+
   def delete_contact(contact)
     raise NotImplementedError
   end
