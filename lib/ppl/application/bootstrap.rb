@@ -3,6 +3,7 @@ class Ppl::Application::Bootstrap
 
   def commands
     commands = [
+      Ppl::Command::AddressBookInit.new,
       Ppl::Command::CommandList.new,
       Ppl::Command::ContactAdd.new,
       Ppl::Command::ContactDelete.new,

@@ -40,6 +40,7 @@ require "ppl/application/output"
 require "ppl/application/router"
 require "ppl/application/shell"
 
+require "ppl/command/address_book_init"
 require "ppl/command/command_list"
 require "ppl/command/contact_add"
 require "ppl/command/contact_delete"
