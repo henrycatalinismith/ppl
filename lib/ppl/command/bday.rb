@@ -5,12 +5,12 @@ class Ppl::Command::Bday < Ppl::Application::Command
 
   def initialize
     @name        = "bday"
-    @description = "Change a contact's birthday"
+    @description = "Show or change a contact's birthday"
     @format      = Ppl::Format::Contact::Birthday.new
   end
 
   def options(parser, options)
-    parser.banner = "usage: ppl birthday <contact> <date>"
+    parser.banner = "usage: ppl birthday <contact> [<date>]"
   end
 
   def execute(input, output)
