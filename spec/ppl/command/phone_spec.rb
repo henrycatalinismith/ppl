@@ -7,10 +7,13 @@ describe Ppl::Command::Phone do
     @output  = Ppl::Application::Output.new(nil, nil)
     @contact = Ppl::Entity::Contact.new
     @storage = double(Ppl::Adapter::Storage)
-    @format  = double(Ppl::Format::Contact)
 
-    @command.storage = @storage
-    @command.format  = @format
+    @show_format = double(Ppl::Format::Contact)
+    @list_format = double(Ppl::Format::Contact)
+
+    @command.storage     = @storage
+    @command.show_format = @show_format
+    @command.list_format = @list_format
   end
 
   describe "#name" do
@@ -21,14 +24,17 @@ describe Ppl::Command::Phone do
 
   describe "#execute" do
 
-    it "should raise an error if no contact ID is given" do
-      @input.arguments = [nil, "01234567890"]
-      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
+    it "should list all phone numbers if no contact ID is given" do
+      @storage.should_receive(:load_address_book).and_return(@address_book)
+      @list_format.should_receive(:process).and_return("all the numbers")
+      @output.should_receive(:line).with("all the numbers")
+      @input.arguments = []
+      @command.execute(@input, @output)
     end
 
     it "should show the contact's phone number if no new number is given" do
       @storage.should_receive(:require_contact).and_return(@contact)
-      @format.should_receive(:process).and_return("0123456789")
+      @show_format.should_receive(:process).and_return("0123456789")
       @output.should_receive(:line).with("0123456789")
       @input.arguments = ["jim"]
       @command.execute(@input, @output)

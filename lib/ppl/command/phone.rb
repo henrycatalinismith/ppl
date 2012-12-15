@@ -1,12 +1,14 @@
 
 class Ppl::Command::Phone < Ppl::Application::Command
 
-  attr_writer :format
+  attr_writer :show_format
+  attr_writer :list_format
 
   def initialize
     @name        = "phone"
-    @description = "Show or change a contact's phone number"
-    @format      = Ppl::Format::Contact::PhoneNumber.new
+    @description = "List, show or change phone numbers"
+    @show_format = Ppl::Format::Contact::PhoneNumber.new
+    @list_format = Ppl::Format::AddressBook::PhoneNumbers.new
   end
 
   def options(parser, options)
@@ -14,33 +16,38 @@ class Ppl::Command::Phone < Ppl::Application::Command
   end
 
   def execute(input, output)
-
-    contact_id   = input.arguments.shift
-    phone_number = input.arguments.shift
-
-    if contact_id.nil?
-      raise Ppl::Error::IncorrectUsage, "No contact specified"
-    end
-
-    contact = @storage.require_contact(contact_id)
-
-    if phone_number.nil?
-      show_phone_number(contact, output)
-    else
-      set_phone_number(contact, phone_number)
-    end
-
-    return true
+    action = determine_action(input)
+    send(action, input, output)
   end
+
 
   private
 
-  def show_phone_number(contact, output)
-    output.line(@format.process(contact))
+  def determine_action(input)
+    if input.arguments[0].nil?
+      :list_phone_numbers
+    elsif input.arguments[1].nil?
+      :show_phone_number
+    else
+      :set_phone_number
+    end
   end
 
-  def set_phone_number(contact, phone_number)
-    contact.phone_number = phone_number
+  def list_phone_numbers(input, output)
+    address_book = @storage.load_address_book
+    number_list  = @list_format.process(address_book)
+    output.line(number_list)
+  end
+
+  def show_phone_number(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    number  = @show_format.process(contact)
+    output.line(number)
+  end
+
+  def set_phone_number(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    contact.phone_number = input.arguments[1]
     @storage.save_contact(contact)
   end
 
