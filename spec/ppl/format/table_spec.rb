@@ -41,13 +41,29 @@ describe Ppl::Format::Table do
       @table.to_s.should eq ""
     end
 
-    it "should do some stuff" do
+    it "should return a string represenation of its rows" do
       @table.add_row({
         :id    => 12345,
         :name  => "John Doe",
         :email => "jdoe@example.org",
       })
       @table.to_s.should eq "12345  John Doe  jdoe@example.org"
+    end
+
+    it "should align multiple rows into neat columns" do
+      @table.add_row({
+        :id    => 12345,
+        :name  => "John Doe",
+        :email => "jdoe@example.org",
+      })
+      @table.add_row({
+        :id    => 123,
+        :name  => "Luis Ignacio Lula da Silva",
+        :email => "lula@planalto.biz",
+      })
+
+      @table.to_s.should include "12345  John Doe                    jdoe@example.org"
+      @table.to_s.should include "123    Luis Ignacio Lula da Silva  lula@planalto.biz"
     end
 
   end
