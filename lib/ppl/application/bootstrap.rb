@@ -10,9 +10,9 @@ class Ppl::Application::Bootstrap
       Ppl::Command::ContactList.new,
       Ppl::Command::ContactRename.new,
       Ppl::Command::ContactShow.new,
+      Ppl::Command::Name.new,
       Ppl::Command::SetBirthday.new,
       Ppl::Command::SetEmail.new,
-      Ppl::Command::SetName.new,
       Ppl::Command::SetOrganization.new,
       Ppl::Command::SetPhoneNumber.new,
     ]
