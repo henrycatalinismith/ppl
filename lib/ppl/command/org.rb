@@ -6,7 +6,7 @@ class Ppl::Command::Org < Ppl::Application::Command
 
   def initialize
     @name        = "org"
-    @description = "Show or change a contact's organization"
+    @description = "List, show or change contacts' organizations"
     @show_format = Ppl::Format::Contact::Organization.new
     @list_format = Ppl::Format::AddressBook::Organizations.new
   end
