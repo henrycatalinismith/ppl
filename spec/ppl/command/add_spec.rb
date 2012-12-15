@@ -1,8 +1,8 @@
 
-describe Ppl::Command::ContactAdd do
+describe Ppl::Command::Add do
 
   before(:each) do
-    @command = Ppl::Command::ContactAdd.new
+    @command = Ppl::Command::Add.new
     @input   = Ppl::Application::Input.new
     @storage = double(Ppl::Adapter::Storage)
 

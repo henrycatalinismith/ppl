@@ -1,5 +1,5 @@
 
-class Ppl::Command::SetEmail < Ppl::Application::Command
+class Ppl::Command::Email < Ppl::Application::Command
 
   def initialize
     @name        = "email"

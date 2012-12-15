@@ -1,5 +1,5 @@
 
-class Ppl::Command::SetPhoneNumber < Ppl::Application::Command
+class Ppl::Command::Phone < Ppl::Application::Command
 
   def initialize
     @name        = "phone"

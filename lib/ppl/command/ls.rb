@@ -1,5 +1,5 @@
 
-class Ppl::Command::ContactList < Ppl::Application::Command
+class Ppl::Command::Ls < Ppl::Application::Command
 
   attr_writer :format
 

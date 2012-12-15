@@ -1,5 +1,5 @@
 
-class Ppl::Command::ContactDelete < Ppl::Application::Command
+class Ppl::Command::Rm < Ppl::Application::Command
 
   def initialize
     @name        = "rm"

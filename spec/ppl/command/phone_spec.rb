@@ -1,8 +1,8 @@
 
-describe Ppl::Command::SetPhoneNumber do
+describe Ppl::Command::Phone do
 
   before(:each) do
-    @command = Ppl::Command::SetPhoneNumber.new
+    @command = Ppl::Command::Phone.new
     @input   = Ppl::Application::Input.new
     @output  = Ppl::Application::Output.new(nil, nil)
     @contact = Ppl::Entity::Contact.new
