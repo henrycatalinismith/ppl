@@ -10,6 +10,7 @@ describe Ppl::Command::Phone do
     @format  = double(Ppl::Format::Contact)
 
     @command.storage = @storage
+    @command.format  = @format
   end
 
   describe "#name" do
@@ -25,12 +26,15 @@ describe Ppl::Command::Phone do
       expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
     end
 
-    it "should raise an error if no phone number is given" do
+    it "should show the contact's phone number if no new number is given" do
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @format.should_receive(:process).and_return("0123456789")
+      @output.should_receive(:line).with("0123456789")
       @input.arguments = ["jim"]
-      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
+      @command.execute(@input, @output)
     end
 
-    it "should change the contact's phone number" do
+    it "should change the contact's phone number if a number is given" do
       @storage.should_receive(:require_contact).and_return(@contact)
       @storage.should_receive(:save_contact) do |contact|
         contact.phone_number.should eq "01234567890"
