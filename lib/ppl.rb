@@ -68,6 +68,7 @@ require "ppl/format/contact/full"
 require "ppl/format/contact/name"
 require "ppl/format/contact/organization"
 require "ppl/format/contact/phone_number"
+require "ppl/format/table"
 
 class String
   alias_method :each, :each_line
