@@ -4,6 +4,7 @@ class Ppl::Application::Bootstrap
   def commands
     commands = [
       Ppl::Command::AddressBookInit.new,
+      Ppl::Command::Bday.new,
       Ppl::Command::CommandList.new,
       Ppl::Command::ContactAdd.new,
       Ppl::Command::ContactDelete.new,
@@ -11,7 +12,6 @@ class Ppl::Application::Bootstrap
       Ppl::Command::ContactRename.new,
       Ppl::Command::ContactShow.new,
       Ppl::Command::Name.new,
-      Ppl::Command::SetBirthday.new,
       Ppl::Command::SetEmail.new,
       Ppl::Command::SetOrganization.new,
       Ppl::Command::SetPhoneNumber.new,
