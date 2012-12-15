@@ -7,6 +7,7 @@ describe Ppl::Command::SetOrganization do
     @contact = Ppl::Entity::Contact.new
     @command = Ppl::Command::SetOrganization.new
     @storage = double(Ppl::Adapter::Storage)
+    @format  = double(Ppl::Format::Contact)
 
     @command.storage = @storage
     @contact.id = "tim"

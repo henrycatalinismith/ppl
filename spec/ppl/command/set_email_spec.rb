@@ -7,6 +7,7 @@ describe Ppl::Command::SetEmail do
     @contact = Ppl::Entity::Contact.new
     @command = Ppl::Command::SetEmail.new
     @storage = double(Ppl::Adapter::Storage)
+    @format  = double(Ppl::Format::Contact)
 
     @command.storage = @storage
     @contact.id = "jim"
