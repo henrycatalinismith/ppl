@@ -94,6 +94,7 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
     }
 
     Rugged::Commit.create(@repository, data)
+    true
   end
 
 end

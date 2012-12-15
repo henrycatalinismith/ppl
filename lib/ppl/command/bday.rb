@@ -1,12 +1,14 @@
 
 class Ppl::Command::Bday < Ppl::Application::Command
 
-  attr_writer :format
+  attr_writer :list_format
+  attr_writer :show_format
 
   def initialize
     @name        = "bday"
-    @description = "Show or change a contact's birthday"
-    @format      = Ppl::Format::Contact::Birthday.new
+    @description = "List, show or change contacts' birthdays"
+    @list_format = Ppl::Format::AddressBook::Birthdays.new
+    @show_format = Ppl::Format::Contact::Birthday.new
   end
 
   def options(parser, options)
@@ -14,31 +16,49 @@ class Ppl::Command::Bday < Ppl::Application::Command
   end
 
   def execute(input, output)
+    action = determine_action(input)
+    send(action, input, output)
+  end
 
+
+  private
+
+  def determine_action(input)
+    if input.arguments[0].nil?
+      "list_birthdays"
+    elsif input.arguments[1].nil?
+      "show_birthday"
+    else
+      "set_birthday"
+    end
+  end
+
+  def list_birthdays(input, output)
+    address_book  = @storage.load_address_book
+    birthday_list = @list_format.process(address_book)
+    output.line(birthday_list)
+  end
+
+  def show_birthday(input, output)
+    contact_id = input.arguments.shift
+    if contact_id.nil?
+      raise Ppl::Error::IncorrectUsage, "No contact specified"
+    end
+    contact = @storage.require_contact(contact_id)
+
+    line = @show_format.process(contact)
+    output.line(line)
+  end
+
+  def set_birthday(input, output)
     contact_id = input.arguments.shift
     birthday   = input.arguments.shift
 
     if contact_id.nil?
       raise Ppl::Error::IncorrectUsage, "No contact specified"
     end
-
     contact = @storage.require_contact(contact_id)
 
-    if birthday.nil?
-      show_birthday(contact, output)
-    else
-      set_birthday(contact, birthday)
-    end
-
-    return true
-  end
-
-  def show_birthday(contact, output)
-    line = @format.process(contact)
-    output.line(line)
-  end
-
-  def set_birthday(contact, birthday)
     begin
       date = Date.parse birthday
     rescue ArgumentError

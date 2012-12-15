@@ -15,6 +15,7 @@ class Ppl::Application::Output
 
   def line(string)
     @stdout.puts string
+    true
   end
 
 end
