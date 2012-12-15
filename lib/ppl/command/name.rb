@@ -2,11 +2,13 @@
 class Ppl::Command::Name < Ppl::Application::Command
 
   attr_writer :show_format
+  attr_writer :list_format
 
   def initialize
     @name        = "name"
     @description = "Show or change a contact's name"
     @show_format = Ppl::Format::Contact::Name.new
+    @list_format = Ppl::Format::AddressBook::Names.new
   end
 
   def options(parser, options)
@@ -14,33 +16,37 @@ class Ppl::Command::Name < Ppl::Application::Command
   end
 
   def execute(input, output)
-
-    contact_id = input.arguments.shift
-    name       = input.arguments.shift
-
-    if contact_id.nil?
-      raise Ppl::Error::IncorrectUsage, "No contact specified"
-    end
-
-    contact = @storage.require_contact(contact_id)
-
-    if name.nil?
-      show_name(contact, output)
-    else
-      set_name(contact, name.dup)
-    end
-
-    return true
+    action = determine_action(input)
+    send(action, input, output)
   end
 
   private
 
-  def show_name(contact, output)
-    output.line(@show_format.process(contact))
+  def determine_action(input)
+    if input.arguments[0].nil?
+      :list_names
+    elsif input.arguments[1].nil?
+      :show_name
+    else
+      :set_name
+    end
   end
 
-  def set_name(contact, name)
-    contact.name = name
+  def list_names(input, output)
+    address_book = @storage.load_address_book
+    name_list    = @list_format.process(address_book)
+    output.line(name_list)
+  end
+
+  def show_name(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    name    = @show_format.process(contact)
+    output.line(name)
+  end
+
+  def set_name(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    contact.name = input.arguments[1].dup
     @storage.save_contact(contact)
   end
 
