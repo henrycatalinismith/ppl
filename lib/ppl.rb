@@ -62,8 +62,12 @@ require "ppl/error/incorrect_usage"
 require "ppl/format/address_book"
 require "ppl/format/address_book/one_line"
 require "ppl/format/contact"
+require "ppl/format/contact/birthday"
+require "ppl/format/contact/email_address"
 require "ppl/format/contact/full"
 require "ppl/format/contact/name"
+require "ppl/format/contact/organization"
+require "ppl/format/contact/phone_number"
 
 class String
   alias_method :each, :each_line
