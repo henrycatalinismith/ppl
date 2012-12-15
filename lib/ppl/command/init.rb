@@ -1,5 +1,5 @@
 
-class Ppl::Command::AddressBookInit < Ppl::Application::Command
+class Ppl::Command::Init < Ppl::Application::Command
 
   def initialize
     @name        = "init"

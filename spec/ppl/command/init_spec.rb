@@ -1,8 +1,8 @@
 
-describe Ppl::Command::CommandList do
+describe Ppl::Command::Init do
 
   before(:each) do
-    @command = Ppl::Command::AddressBookInit.new
+    @command = Ppl::Command::Init.new
     @input   = Ppl::Application::Input.new
     @output  = Ppl::Application::Output.new(nil, nil)
   end

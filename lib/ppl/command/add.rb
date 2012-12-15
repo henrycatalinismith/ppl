@@ -1,5 +1,5 @@
 
-class Ppl::Command::ContactAdd < Ppl::Application::Command
+class Ppl::Command::Add < Ppl::Application::Command
 
   def initialize
     @name        = "add"

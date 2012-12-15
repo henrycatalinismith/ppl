@@ -1,8 +1,8 @@
 
-describe Ppl::Command::ContactShow do
+describe Ppl::Command::Show do
 
   before(:each) do
-    @command = Ppl::Command::ContactShow.new
+    @command = Ppl::Command::Show.new
     @input   = Ppl::Application::Input.new
     @output  = double(Ppl::Application::Output)
     @contact = Ppl::Entity::Contact.new

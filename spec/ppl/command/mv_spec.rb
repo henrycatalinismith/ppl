@@ -1,11 +1,11 @@
 
-describe Ppl::Command::ContactRename do
+describe Ppl::Command::Mv do
 
   before(:each) do
+    @command = Ppl::Command::Mv.new
     @input   = Ppl::Application::Input.new
     @output  = double(Ppl::Application::Output)
     @contact = Ppl::Entity::Contact.new
-    @command = Ppl::Command::ContactRename.new
     @storage = double(Ppl::Adapter::Storage)
 
     @command.storage = @storage
