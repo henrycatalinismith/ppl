@@ -1,13 +1,16 @@
 
 class Ppl::Command::Org < Ppl::Application::Command
 
+  attr_writer :format
+
   def initialize
     @name        = "org"
-    @description = "Change a contact's organization"
+    @description = "Show or change a contact's organization"
+    @format      = Ppl::Format::Contact::Organization.new
   end
 
   def options(parser, options)
-    parser.banner = "usage: ppl org <contact> <organization>"
+    parser.banner = "usage: ppl org <contact> [<organization>]"
   end
 
   def execute(input, output)
@@ -19,16 +22,26 @@ class Ppl::Command::Org < Ppl::Application::Command
       raise Ppl::Error::IncorrectUsage, "No contact specified"
     end
 
+    contact = @storage.require_contact(contact_id)
+
     if organization.nil?
-      raise Ppl::Error::IncorrectUsage, "No organization specified"
+      show_organization(contact, output)
+    else
+      set_organization(contact, organization)
     end
 
-    contact = @storage.require_contact(contact_id)
-    contact.organization = organization
-
-    storage.save_contact(contact)
-
     return true
+  end
+
+  private
+  
+  def show_organization(contact, output)
+    output.line(@format.process(contact))
+  end
+
+  def set_organization(contact, organization)
+    contact.organization = organization
+    @storage.save_contact(contact)
   end
 
 end
