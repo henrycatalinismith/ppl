@@ -63,6 +63,7 @@ require "ppl/format/address_book"
 require "ppl/format/address_book/one_line"
 require "ppl/format/contact"
 require "ppl/format/contact/full"
+require "ppl/format/contact/name"
 
 class String
   alias_method :each, :each_line
