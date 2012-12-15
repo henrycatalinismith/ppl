@@ -60,6 +60,7 @@ require "ppl/error/contact_not_found"
 require "ppl/error/incorrect_usage"
 
 require "ppl/format/address_book"
+require "ppl/format/address_book/birthdays"
 require "ppl/format/address_book/one_line"
 require "ppl/format/contact"
 require "ppl/format/contact/birthday"

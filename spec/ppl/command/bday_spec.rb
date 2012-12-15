@@ -7,10 +7,10 @@ describe Ppl::Command::Bday do
     @contact = Ppl::Entity::Contact.new
     @command = Ppl::Command::Bday.new
     @storage = double(Ppl::Adapter::Storage)
-    @format  = double(Ppl::Format::Contact)
+    @show_format  = double(Ppl::Format::Contact)
 
     @command.storage = @storage
-    @command.format  = @format
+    @command.show_format  = @show_format
     @contact.id = "jim"
   end
 
@@ -22,9 +22,9 @@ describe Ppl::Command::Bday do
 
   describe "#execute" do
 
-    it "should raise an error if no contact ID is given" do
-      @input.arguments = [nil, "1980-01-01"]
-      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
+    it "should list all birthdays if no contact is specified" do
+      #@input.arguments = []
+      #@command.execute(@input, @output)
     end
 
     it "should raise an error if the date given isn't a valid date" do
@@ -35,7 +35,7 @@ describe Ppl::Command::Bday do
 
     it "should show the contact's birthday if no date is given" do
       @storage.should_receive(:require_contact).and_return(@contact)
-      @format.should_receive(:process).and_return("1970-01-01")
+      @show_format.should_receive(:process).and_return("1970-01-01")
       @output.should_receive(:line).with("1970-01-01")
       @input.arguments = ["jim"]
       @command.execute(@input, @output)
