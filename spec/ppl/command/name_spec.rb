@@ -1,14 +1,16 @@
 
-describe Ppl::Command::SetName do
+describe Ppl::Command::Name do
 
   before(:each) do
     @input   = Ppl::Application::Input.new
     @output  = Ppl::Application::Output.new(nil, nil)
     @contact = Ppl::Entity::Contact.new
-    @command = Ppl::Command::SetName.new
+    @command = Ppl::Command::Name.new
     @storage = double(Ppl::Adapter::Storage)
+    @format  = double(Ppl::Format::Contact)
 
     @command.storage = @storage
+    @command.format  = @format
     @contact.id = "jim"
   end
 
@@ -26,8 +28,11 @@ describe Ppl::Command::SetName do
     end
 
     it "should show the contact's name if no name is given" do
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @format.should_receive(:process).and_return("John Doe")
+      @output.should_receive(:line).with("John Doe")
       @input.arguments = ["jim"]
-      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
+      @command.execute(@input, @output)
     end
 
     it "should change the contact's name if a name is given" do
