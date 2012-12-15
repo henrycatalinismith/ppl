@@ -7,6 +7,7 @@ describe Ppl::Command::SetPhoneNumber do
     @output  = Ppl::Application::Output.new(nil, nil)
     @contact = Ppl::Entity::Contact.new
     @storage = double(Ppl::Adapter::Storage)
+    @format  = double(Ppl::Format::Contact)
 
     @command.storage = @storage
   end
