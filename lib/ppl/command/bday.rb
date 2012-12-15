@@ -6,7 +6,7 @@ class Ppl::Command::Bday < Ppl::Application::Command
 
   def initialize
     @name        = "bday"
-    @description = "List, show or change contacts' birthdays"
+    @description = "List, show or change birthdays"
     @list_format = Ppl::Format::AddressBook::Birthdays.new
     @show_format = Ppl::Format::Contact::Birthday.new
   end

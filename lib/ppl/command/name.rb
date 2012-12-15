@@ -6,7 +6,7 @@ class Ppl::Command::Name < Ppl::Application::Command
 
   def initialize
     @name        = "name"
-    @description = "List, show or change contacts' names"
+    @description = "List, show or change names"
     @show_format = Ppl::Format::Contact::Name.new
     @list_format = Ppl::Format::AddressBook::Names.new
   end
