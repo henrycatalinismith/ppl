@@ -7,10 +7,13 @@ describe Ppl::Command::Email do
     @contact = Ppl::Entity::Contact.new
     @command = Ppl::Command::Email.new
     @storage = double(Ppl::Adapter::Storage)
-    @format  = double(Ppl::Format::Contact)
 
-    @command.storage = @storage
-    @command.format  = @format
+    @list_format = double(Ppl::Format::Contact)
+    @show_format = double(Ppl::Format::Contact)
+
+    @command.storage     = @storage
+    @command.show_format = @show_format
+    @command.list_format = @list_format
     @contact.id = "jim"
   end
 
@@ -22,14 +25,17 @@ describe Ppl::Command::Email do
 
   describe "#execute" do
 
-    it "should raise an error if no contact ID is given" do
-      @input.arguments = [nil, "test@example.org"]
-      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
+    it "should list all email addresses if no contact ID is given" do
+      @storage.should_receive(:load_address_book).and_return(@address_book)
+      @list_format.should_receive(:process).and_return("all the email addresses")
+      @output.should_receive(:line).with("all the email addresses")
+      @input.arguments = []
+      @command.execute(@input, @output)
     end
 
     it "should show the current address if no new address is given" do
       @storage.should_receive(:require_contact).and_return(@contact)
-      @format.should_receive(:process).and_return("jdoe@example.org")
+      @show_format.should_receive(:process).and_return("jdoe@example.org")
       @output.should_receive(:line).with("jdoe@example.org")
       @input.arguments = ["jim"]
       @command.execute(@input, @output)
