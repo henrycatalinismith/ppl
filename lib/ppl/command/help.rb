@@ -1,5 +1,5 @@
 
-class Ppl::Command::CommandList < Ppl::Application::Command
+class Ppl::Command::Help < Ppl::Application::Command
 
   attr_accessor :command_suite
 

@@ -1,5 +1,5 @@
 
-class Ppl::Command::SetOrganization < Ppl::Application::Command
+class Ppl::Command::Org < Ppl::Application::Command
 
   def initialize
     @name        = "org"

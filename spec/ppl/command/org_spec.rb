@@ -1,11 +1,11 @@
 
-describe Ppl::Command::SetOrganization do
+describe Ppl::Command::Org do
 
   before(:each) do
+    @command = Ppl::Command::Org.new
     @input   = Ppl::Application::Input.new
     @output  = Ppl::Application::Output.new(nil, nil)
     @contact = Ppl::Entity::Contact.new
-    @command = Ppl::Command::SetOrganization.new
     @storage = double(Ppl::Adapter::Storage)
     @format  = double(Ppl::Format::Contact)
 

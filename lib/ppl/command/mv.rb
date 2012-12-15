@@ -1,5 +1,5 @@
 
-class Ppl::Command::ContactRename < Ppl::Application::Command
+class Ppl::Command::Mv < Ppl::Application::Command
 
   def initialize
     @name        = "mv"

@@ -3,18 +3,18 @@ class Ppl::Application::Bootstrap
 
   def commands
     commands = [
-      Ppl::Command::AddressBookInit.new,
+      Ppl::Command::Init.new,
       Ppl::Command::Bday.new,
-      Ppl::Command::CommandList.new,
-      Ppl::Command::ContactAdd.new,
-      Ppl::Command::ContactDelete.new,
-      Ppl::Command::ContactList.new,
-      Ppl::Command::ContactRename.new,
-      Ppl::Command::ContactShow.new,
+      Ppl::Command::Help.new,
+      Ppl::Command::Add.new,
+      Ppl::Command::Rm.new,
+      Ppl::Command::Ls.new,
+      Ppl::Command::Mv.new,
+      Ppl::Command::Show.new,
       Ppl::Command::Name.new,
-      Ppl::Command::SetEmail.new,
-      Ppl::Command::SetOrganization.new,
-      Ppl::Command::SetPhoneNumber.new,
+      Ppl::Command::Email.new,
+      Ppl::Command::Org.new,
+      Ppl::Command::Phone.new,
     ]
     commands.each do |command|
       command.storage = storage_adapter

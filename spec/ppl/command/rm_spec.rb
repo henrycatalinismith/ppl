@@ -1,11 +1,11 @@
 
-describe Ppl::Command::ContactDelete do
+describe Ppl::Command::Rm do
 
   before(:each) do
+    @command = Ppl::Command::Rm.new
     @input   = Ppl::Application::Input.new
     @output  = Ppl::Application::Output.new(nil, nil)
     @contact = Ppl::Entity::Contact.new
-    @command = Ppl::Command::ContactDelete.new
     @storage = double(Ppl::Adapter::Storage)
 
     @input.arguments = ["test"]

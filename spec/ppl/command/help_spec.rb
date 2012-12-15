@@ -1,8 +1,8 @@
 
-describe Ppl::Command::CommandList do
+describe Ppl::Command::Help do
 
   before(:each) do
-    @command = Ppl::Command::CommandList.new
+    @command = Ppl::Command::Help.new
     @output  = double(Ppl::Application::Output)
 
     @command.command_suite = Ppl::Application::CommandSuite.new

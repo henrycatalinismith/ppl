@@ -1,5 +1,5 @@
 
-class Ppl::Command::ContactShow < Ppl::Application::Command
+class Ppl::Command::Show < Ppl::Application::Command
 
   attr_writer :format
 

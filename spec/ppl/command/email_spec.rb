@@ -1,11 +1,11 @@
 
-describe Ppl::Command::SetEmail do
+describe Ppl::Command::Email do
 
   before(:each) do
     @input   = Ppl::Application::Input.new
     @output  = Ppl::Application::Output.new(nil, nil)
     @contact = Ppl::Entity::Contact.new
-    @command = Ppl::Command::SetEmail.new
+    @command = Ppl::Command::Email.new
     @storage = double(Ppl::Adapter::Storage)
     @format  = double(Ppl::Format::Contact)
 
