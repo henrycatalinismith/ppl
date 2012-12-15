@@ -1,9 +1,16 @@
 
 class Ppl::Command::Email < Ppl::Application::Command
 
+  attr_writer :format
+
   def initialize
     @name        = "email"
-    @description = "Change a contact's email address"
+    @description = "Show or change a contact's email address"
+    @format      = Ppl::Format::Contact::EmailAddress.new
+  end
+
+  def options(parser, options)
+    parser.banner = "usage: ppl email <contact> [<email-address>]"
   end
 
   def execute(input, output)
@@ -15,16 +22,26 @@ class Ppl::Command::Email < Ppl::Application::Command
       raise Ppl::Error::IncorrectUsage, "No contact specified"
     end
 
+    contact = @storage.require_contact(contact_id)
+
     if email_address.nil?
-      raise Ppl::Error::IncorrectUsage, "No email address specified"
+      show_email_address(contact, output)
+    else
+      set_email_address(contact, email_address)
     end
 
-    contact = @storage.require_contact(contact_id)
-    contact.email_address = email_address
-
-    storage.save_contact(contact)
-
     return true
+  end
+
+  private
+
+  def show_email_address(contact, output)
+    output.line(@format.process(contact))
+  end
+
+  def set_email_address(contact, address)
+    contact.email_address = address
+    @storage.save_contact(contact)
   end
 
 end
