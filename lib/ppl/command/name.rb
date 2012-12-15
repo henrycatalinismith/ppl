@@ -1,12 +1,12 @@
 
 class Ppl::Command::Name < Ppl::Application::Command
 
-  attr_writer :format
+  attr_writer :show_format
 
   def initialize
     @name        = "name"
     @description = "Show or change a contact's name"
-    @format      = Ppl::Format::Contact::Name.new
+    @show_format = Ppl::Format::Contact::Name.new
   end
 
   def options(parser, options)
@@ -36,8 +36,7 @@ class Ppl::Command::Name < Ppl::Application::Command
   private
 
   def show_name(contact, output)
-    line = @format.process(contact)
-    output.line(line)
+    output.line(@show_format.process(contact))
   end
 
   def set_name(contact, name)

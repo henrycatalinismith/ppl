@@ -6,11 +6,13 @@ describe Ppl::Command::Name do
     @output  = Ppl::Application::Output.new(nil, nil)
     @contact = Ppl::Entity::Contact.new
     @command = Ppl::Command::Name.new
-    @storage = double(Ppl::Adapter::Storage)
-    @format  = double(Ppl::Format::Contact)
 
-    @command.storage = @storage
-    @command.format  = @format
+    @storage      = double(Ppl::Adapter::Storage)
+    @show_format  = double(Ppl::Format::Contact)
+
+    @command.storage      = @storage
+    @command.show_format  = @show_format
+
     @contact.id = "jim"
   end
 
@@ -29,7 +31,7 @@ describe Ppl::Command::Name do
 
     it "should show the contact's name if no name is given" do
       @storage.should_receive(:require_contact).and_return(@contact)
-      @format.should_receive(:process).and_return("John Doe")
+      @show_format.should_receive(:process).and_return("John Doe")
       @output.should_receive(:line).with("John Doe")
       @input.arguments = ["jim"]
       @command.execute(@input, @output)
