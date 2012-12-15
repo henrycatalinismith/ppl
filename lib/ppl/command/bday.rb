@@ -25,11 +25,11 @@ class Ppl::Command::Bday < Ppl::Application::Command
 
   def determine_action(input)
     if input.arguments[0].nil?
-      "list_birthdays"
+      :list_birthdays
     elsif input.arguments[1].nil?
-      "show_birthday"
+      :show_birthday
     else
-      "set_birthday"
+      :set_birthday
     end
   end
 
