@@ -20,23 +20,23 @@ describe Ppl::Command::SetName do
 
   describe "#execute" do
 
-    it "should change the contact's name" do
+    it "should raise an error if no contact ID is given" do
+      @input.arguments = [nil, "Jim Jamieson"]
+      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
+    end
+
+    it "should show the contact's name if no name is given" do
+      @input.arguments = ["jim"]
+      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
+    end
+
+    it "should change the contact's name if a name is given" do
       @storage.should_receive(:require_contact).and_return(@contact)
       @storage.should_receive(:save_contact) do |contact|
         contact.name.should eq "Jim Jamieson"
       end
       @input.arguments = ["jim", "Jim Jamieson"]
       @command.execute(@input, @output)
-    end
-
-    it "should raise an error if no contact ID is given" do
-      @input.arguments = [nil, "Jim Jamieson"]
-      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
-    end
-
-    it "should raise an error if no name is given" do
-      @input.arguments = ["jim"]
-      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
     end
 
   end
