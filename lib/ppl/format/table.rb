@@ -7,16 +7,26 @@ class Ppl::Format::Table
   def initialize(columns=[])
     @columns = columns
     @rows    = []
+
+    @column_widths = {}
+    @columns.each { |c| @column_widths[c] = 0 }
   end
 
   def add_row(row={})
-    @rows.push row
+    row.each do |column, value|
+      width     = sprintf("%s", value).length
+      max_width = @column_widths[column]
+      if width > max_width
+        @column_widths[column] = width
+      end
+    end
+    @rows.push(row)
   end
 
   def to_s
     string = ""
-    @rows.each { |row| string += format_row(row).strip }
-    return string
+    @rows.each { |row| string += format_row(row).strip + "\n" }
+    string.strip
   end
 
 
@@ -29,7 +39,8 @@ class Ppl::Format::Table
   end
 
   def format_cell(row, column)
-    string = sprintf("%s  ", row[column])
+    width  = @column_widths[column]
+    string = sprintf("%-#{width}s  ", row[column])
     return string
   end
 
