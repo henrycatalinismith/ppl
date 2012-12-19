@@ -42,7 +42,12 @@ class Ppl::Command::Phone < Ppl::Application::Command
   def show_phone_number(input, output)
     contact = @storage.require_contact(input.arguments[0])
     number  = @show_format.process(contact)
-    output.line(number)
+    if number != ""
+      output.line(number)
+      true
+    else
+      false
+    end
   end
 
   def set_phone_number(input, output)
