@@ -41,7 +41,14 @@ describe Ppl::Command::Name do
       @show_format.should_receive(:process).and_return("John Doe")
       @output.should_receive(:line).with("John Doe")
       @input.arguments = ["jim"]
-      @command.execute(@input, @output)
+      @command.execute(@input, @output).should eq true
+    end
+
+    it "should not output anything if there's nothing to show" do
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @show_format.should_receive(:process).and_return("")
+      @input.arguments = ["jim"]
+      @command.execute(@input, @output).should eq false
     end
 
     it "should change the contact's name if a name is given" do

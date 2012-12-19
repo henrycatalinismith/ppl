@@ -42,7 +42,12 @@ class Ppl::Command::Email < Ppl::Application::Command
   def show_email_address(input, output)
     contact       = @storage.require_contact(input.arguments[0])
     email_address = @show_format.process(contact)
-    output.line(email_address)
+    if email_address != ""
+      output.line(email_address)
+      true
+    else
+      false
+    end
   end
 
   def set_email_address(input, output)

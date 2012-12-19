@@ -22,23 +22,19 @@ describe Ppl::Command::Bday do
 
   describe "#execute" do
 
-    it "should list all birthdays if no contact is specified" do
-      #@input.arguments = []
-      #@command.execute(@input, @output)
-    end
-
-    it "should raise an error if the date given isn't a valid date" do
-      @storage.should_receive(:require_contact).and_return(@contact)
-      @input.arguments = ["jim", "poiuytrewq"]
-      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
-    end
-
     it "should show the contact's birthday if no date is given" do
       @storage.should_receive(:require_contact).and_return(@contact)
       @show_format.should_receive(:process).and_return("1970-01-01")
       @output.should_receive(:line).with("1970-01-01")
       @input.arguments = ["jim"]
-      @command.execute(@input, @output)
+      @command.execute(@input, @output).should eq true
+    end
+
+    it "should not output anything if there's no birthday to show" do
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @show_format.should_receive(:process).and_return("")
+      @input.arguments = ["jim"]
+      @command.execute(@input, @output).should eq false
     end
 
     it "should change the contact's birthday if a date is given" do
