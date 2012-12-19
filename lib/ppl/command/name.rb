@@ -41,7 +41,12 @@ class Ppl::Command::Name < Ppl::Application::Command
   def show_name(input, output)
     contact = @storage.require_contact(input.arguments[0])
     name    = @show_format.process(contact)
-    output.line(name)
+    if name != ""
+      output.line(name)
+      true
+    else
+      false
+    end
   end
 
   def set_name(input, output)

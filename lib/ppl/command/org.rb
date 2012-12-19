@@ -42,7 +42,12 @@ class Ppl::Command::Org < Ppl::Application::Command
   def show_organization(input, output)
     contact      = @storage.require_contact(input.arguments[0])
     organization = @show_format.process(contact)
-    output.line(organization)
+    if organization != ""
+      output.line(organization)
+      true
+    else
+      false
+    end
   end
 
   def set_organization(input, output)

@@ -46,8 +46,13 @@ class Ppl::Command::Bday < Ppl::Application::Command
     end
     contact = @storage.require_contact(contact_id)
 
-    line = @show_format.process(contact)
-    output.line(line)
+    birthday = @show_format.process(contact)
+    if birthday != ""
+      output.line(birthday)
+      true
+    else
+      false
+    end
   end
 
   def set_birthday(input, output)

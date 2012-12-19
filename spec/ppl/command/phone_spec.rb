@@ -37,7 +37,14 @@ describe Ppl::Command::Phone do
       @show_format.should_receive(:process).and_return("0123456789")
       @output.should_receive(:line).with("0123456789")
       @input.arguments = ["jim"]
-      @command.execute(@input, @output)
+      @command.execute(@input, @output).should eq true
+    end
+
+    it "should not output anything if there's nothing to show" do
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @show_format.should_receive(:process).and_return("")
+      @input.arguments = ["jim"]
+      @command.execute(@input, @output).should eq false
     end
 
     it "should change the contact's phone number if a number is given" do
