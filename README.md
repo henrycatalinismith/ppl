@@ -4,8 +4,9 @@
     |__|   |__|   |_____|
 
 
-ppl aims to be address book software for command-line users. It's pronounced
-like "people". You might be interested in ppl if:
+[ppl](http://ppladdressbook.org) aims to be address book software for
+command-line users. It's pronounced like "people". You might be interested in
+ppl if:
 
 * You like using the command-line
 * You want ownership of your address book data back from the cloud
@@ -69,56 +70,8 @@ $ ppl email dave david@example.org
 
 ### Change a contact's birthday
 ```bash
-$ ppl birthday john 1980-01-01
+$ ppl bday john 1980-01-01
 ```
-
-Roadmap
--------
-
-One of the core ideas of ppl is for it to turn your address book into a Git
-repository. In an earlier version, this was achieved using
-[Rugged](https://github.com/libgit2/rugged). This functionality will be added
-back in so that contact information can be easily synced between computers. In
-the meantime, ppl simply writes to disk.
-
-Other data about contacts will also be supported, such as:
-* Postal addresses
-* Phone numbers
-* The name of the organization to which the contact belongs
-* The position of the contact within their organization
-
-The email address handling is currently very rudimentary. The eventual plan is
-to support storage of several addresses per contact. Addresses will be able to
-be organized according to location, such as "home" or "work", and it will be
-possible to mark a particular address as "preferred" for each location.
-
-Here's a quick mockup of the sort of output `ppl show` should produce a little
-further down the road once some of these goals have been reached:
-
-    Fred Smith <fred.smith@example.org>
-
-    -- Email Addresses -------------------------------------------------------------
-
-       Home
-     * fred.smith@example.org
-       fsmith@aol.com
-
-       Work
-     * fred.smith@megacorp.com
-       fred.s.123@initrode.net
-
-    -- Postal Addresses ------------------------------------------------------------
-
-       Home
-       1 Testing Road, TestVille, Testing, CA, 12345
-
-       Work
-       30 Business Road, TestVille, Testing, CA, 23454
-
-    -- Telephone Numbers -----------------------------------------------------------
-
-       01234567891
-       09876541233
 
 Contributing
 ------------
