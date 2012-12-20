@@ -9,11 +9,10 @@ class Ppl::Entity::Contact
   attr_accessor :organization
   attr_accessor :postal_address
 
-  def initialize
-    @postal_address = Ppl::Entity::PostalAddress.new
-  end
-
   def set_postal_address
+    if @postal_address.nil?
+      @postal_address = Ppl::Entity::PostalAddress.new
+    end
     yield @postal_address
   end
 

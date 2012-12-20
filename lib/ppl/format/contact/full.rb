@@ -1,6 +1,12 @@
 
 class Ppl::Format::Contact::Full < Ppl::Format::Contact
 
+  attr_writer :postal_address_format
+
+  def initialize
+    @postal_address_format = Ppl::Format::Contact::PostalAddress.new
+  end
+
   def process(contact)
     lines = []
 
@@ -15,6 +21,11 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
       lines.push(vitals)
       lines.push("")
       lines.push("")
+    end
+
+    if !contact.postal_address.nil?
+      lines.push("Postal Address:")
+      lines.push(@postal_address_format.process(contact))
     end
 
     return lines.join("\n")
