@@ -48,13 +48,59 @@ describe Ppl::Command::Post do
       @command.execute(@input, @output).should eq false
     end
 
-    it "should change the contact's street address if it's given" do
-      @input.arguments = ["jim"]
-      @input.options = {:street => "1 Test Road"}
+  end
 
+  describe "#execute" do
+    
+    before(:each) do
+      @input.arguments = ["jim"]
       @storage.should_receive(:require_contact).and_return(@contact)
+    end
+
+    it "should change the contact's street address if it's given" do
+      @input.options = {:street => "1 Test Road"}
       @storage.should_receive(:save_contact) do |contact|
         contact.postal_address.street.should eq "1 Test Road"
+      end
+      @command.execute(@input, @output)
+    end
+
+    it "should change the contact's postal code if it's given" do
+      @input.options = {:postal_code => "L7 8AA"}
+      @storage.should_receive(:save_contact) do |contact|
+        contact.postal_address.postal_code.should eq "L7 8AA"
+      end
+      @command.execute(@input, @output)
+    end
+
+    it "should change the contact's po box if it's given" do
+      @input.options = {:po_box => "124578"}
+      @storage.should_receive(:save_contact) do |contact|
+        contact.postal_address.po_box.should eq "124578"
+      end
+      @command.execute(@input, @output)
+    end
+
+    it "should change the contact's country if it's given" do
+      @input.options = {:country => "UK"}
+      @storage.should_receive(:save_contact) do |contact|
+        contact.postal_address.country.should eq "UK"
+      end
+      @command.execute(@input, @output)
+    end
+
+    it "should change the contact's locality if it's given" do
+      @input.options = {:locality => "Liverpool"}
+      @storage.should_receive(:save_contact) do |contact|
+        contact.postal_address.locality.should eq "Liverpool"
+      end
+      @command.execute(@input, @output)
+    end
+
+    it "should change the contact's region if it's given" do
+      @input.options = {:region => "North West"}
+      @storage.should_receive(:save_contact) do |contact|
+        contact.postal_address.region.should eq "North West"
       end
       @command.execute(@input, @output)
     end
