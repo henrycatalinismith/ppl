@@ -32,6 +32,12 @@ describe Ppl::Adapter::Vcard::Vpim, "#encode" do
     @adapter.encode(@contact).should include("ORG:Example Ltd")
   end
 
+  it "should encode the contact's street address" do
+    @contact.postal_address = Ppl::Entity::PostalAddress.new
+    @contact.postal_address.street = "1 Testing Road"
+    @adapter.encode(@contact).should include("ADR:;;1 Testing Road;;;;")
+  end
+
 end
 
 
@@ -110,6 +116,18 @@ describe Ppl::Adapter::Vcard::Vpim, "#decode" do
     ].join("\n")
     contact = @adapter.decode(vcard)
     contact.organization.should eq "Example Ltd"
+  end
+
+  it "should decode the contact's street address" do
+    vcard = [
+      "BEGIN:VCARD",
+      "N:,test",
+      "VERSION:3.0",
+      "ADR:;;1 Testing Road;;;;",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+    contact.postal_address.street.should eq "1 Testing Road"
   end
 
 end

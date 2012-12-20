@@ -27,6 +27,12 @@ class Ppl::Adapter::Vcard::Vpim
         maker.org=(contact.organization)
       end
 
+      if !contact.postal_address.nil?
+        maker.add_addr do |address|
+          address.street = contact.postal_address.street
+        end
+      end
+
     end
 
     return vcard.to_s
@@ -46,6 +52,11 @@ class Ppl::Adapter::Vcard::Vpim
 
     if !vcard.telephones.empty?
       contact.phone_number = vcard.telephones.first
+    end
+
+    if !vcard.address.nil?
+      contact.postal_address = Ppl::Entity::PostalAddress.new
+      contact.postal_address.street = vcard.address.street
     end
 
     if !vcard.org.nil?
