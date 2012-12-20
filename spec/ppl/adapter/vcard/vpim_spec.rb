@@ -160,5 +160,65 @@ describe Ppl::Adapter::Vcard::Vpim, "#decode" do
     contact.postal_address.street.should eq "1 Testing Road"
   end
 
+  it "should decode the contact's postal code" do
+    vcard = [
+      "BEGIN:VCARD",
+      "N:,test",
+      "VERSION:3.0",
+      "ADR:;;;;;L7 8AA;",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+    contact.postal_address.postal_code.should eq "L7 8AA"
+  end
+
+  it "should decode the contact's po box" do
+    vcard = [
+      "BEGIN:VCARD",
+      "N:,test",
+      "VERSION:3.0",
+      "ADR:123456;;;;;;",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+    contact.postal_address.po_box.should eq "123456"
+  end
+
+  it "should decode the contact's locality" do
+    vcard = [
+      "BEGIN:VCARD",
+      "N:,test",
+      "VERSION:3.0",
+      "ADR:;;;Liverpool;;;",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+    contact.postal_address.locality.should eq "Liverpool"
+  end
+
+  it "should decode the contact's region" do
+    vcard = [
+      "BEGIN:VCARD",
+      "N:,test",
+      "VERSION:3.0",
+      "ADR:;;;;South West;;",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+    contact.postal_address.region.should eq "South West"
+  end
+
+  it "should decode the contact's country" do
+    vcard = [
+      "BEGIN:VCARD",
+      "N:,test",
+      "VERSION:3.0",
+      "ADR:;;;;;;UK",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+    contact.postal_address.country.should eq "UK"
+  end
+
 end
 
