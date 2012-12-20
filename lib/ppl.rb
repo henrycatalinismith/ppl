@@ -57,6 +57,7 @@ require "ppl/command/post"
 
 require "ppl/entity/address_book"
 require "ppl/entity/contact"
+require "ppl/entity/postal_address"
 
 require "ppl/error/contact_not_found"
 require "ppl/error/incorrect_usage"
