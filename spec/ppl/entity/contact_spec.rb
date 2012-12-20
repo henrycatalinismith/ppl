@@ -32,7 +32,7 @@ describe Ppl::Entity::Contact do
 
   describe "#postal_address" do
     it "should return a value" do
-      @contact.postal_address.should eq nil
+      @contact.postal_address.should be_a(Ppl::Entity::PostalAddress)
     end
   end
 
