@@ -16,6 +16,7 @@ class Ppl::Application::Bootstrap
       Ppl::Command::Email.new,
       Ppl::Command::Org.new,
       Ppl::Command::Phone.new,
+      Ppl::Command::Post.new,
     ]
     commands.each do |command|
       command.storage = storage_adapter
