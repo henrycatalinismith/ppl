@@ -48,6 +48,9 @@ describe Ppl::Application::Bootstrap do
     it "should contain the 'ls' command" do
       @bootstrap.command_suite.find_command("ls").should_not be nil
     end
+    it "should contain the 'mutt' command" do
+      @bootstrap.command_suite.find_command("mutt").should_not be nil
+    end
     it "should contain the 'mv' command" do
       @bootstrap.command_suite.find_command("mv").should_not be nil
     end

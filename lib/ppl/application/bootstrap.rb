@@ -9,6 +9,7 @@ class Ppl::Application::Bootstrap
       Ppl::Command::Add.new,
       Ppl::Command::Rm.new,
       Ppl::Command::Ls.new,
+      Ppl::Command::Mutt.new,
       Ppl::Command::Mv.new,
       Ppl::Command::Show.new,
       Ppl::Command::Name.new,
