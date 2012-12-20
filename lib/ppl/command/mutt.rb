@@ -7,7 +7,7 @@ class Ppl::Command::Mutt < Ppl::Application::Command
     @name        = "mutt"
     @description = "Integration with mutt's query_command"
 
-    @format = Ppl::Format::AddressBook::OneLine.new
+    @format = Ppl::Format::AddressBook::MuttQuery.new
   end
 
   def options(parser, options)
@@ -16,26 +16,52 @@ class Ppl::Command::Mutt < Ppl::Application::Command
 
   def execute(input, output)
     query = input.arguments.shift
+    if query.nil?
+      raise Ppl::Error::IncorrectUsage, "You must provide a query"
+    end
+
     address_book = @storage.load_address_book
 
-    matches = mutt_search(address_book)
+    matches = mutt_search(address_book, query)
 
-    line = sprintf(
-      "Searching database... %d entries... %d matching:",
-      address_book.count,
-      matches.length
-    )
+    if matches.count > 0
 
-    output.line(line)
+      line = sprintf(
+        "Searching database... %d entries... %d matching:",
+        address_book.count,
+        matches.count
+      )
 
-    true
+      results = @format.process(matches)
+
+      output.line(line)
+      output.line(results) unless results == ""
+      true
+
+    else
+      output.line("No matches")
+      false
+    end
+
   end
 
 
   private
 
-  def mutt_search(address_book)
-    []
+  def mutt_search(address_book, query)
+    matches = Ppl::Entity::AddressBook.new
+
+    address_book.each do |contact|
+      next if contact.email_address.nil?
+
+      if contact.email_address.include?(query)
+        matches.add_contact(contact)
+      elsif !contact.name.nil? && contact.name.include?(query)
+        matches.add_contact(contact)
+      end
+    end
+
+    matches
   end
 
 end

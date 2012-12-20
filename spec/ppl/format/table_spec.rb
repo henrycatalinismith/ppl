@@ -50,6 +50,16 @@ describe Ppl::Format::Table do
       @table.to_s.should eq "12345  John Doe  jdoe@example.org"
     end
 
+    it "should use tabs if requested" do
+      @table.add_row({
+        :id    => 12345,
+        :name  => "John Doe",
+        :email => "jdoe@example.org",
+      })
+      @table.separator = Ppl::Format::Table::SEPARATOR_TABS
+      @table.to_s.should eq "12345\tJohn Doe\tjdoe@example.org"
+    end
+
     it "should align multiple rows into neat columns" do
       @table.add_row({
         :id    => 12345,
