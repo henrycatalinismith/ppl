@@ -4,6 +4,10 @@ describe Ppl::Format::Contact::Full do
   before(:each) do
     @format  = Ppl::Format::Contact::Full.new
     @contact = Ppl::Entity::Contact.new
+    @address = Ppl::Entity::PostalAddress.new
+
+    @postal_address_format = double(Ppl::Format::Contact)
+    @format.postal_address_format = @postal_address_format
   end
 
   describe "#process" do
@@ -36,6 +40,12 @@ describe Ppl::Format::Contact::Full do
     it "should show their organization if available" do
       @contact.organization = "Example Ltd"
       @format.process(@contact).should include "Example Ltd"
+    end
+
+    it "should show their postal address if available" do
+      @contact.postal_address = @address
+      @postal_address_format.should_receive(:process).with(@contact)
+      @format.process(@contact)
     end
 
   end
