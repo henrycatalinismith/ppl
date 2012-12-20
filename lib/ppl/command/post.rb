@@ -12,11 +12,27 @@ class Ppl::Command::Post < Ppl::Application::Command
   end
 
   def options(parser, options)
-    parser.banner = "usage: ppl post <contact> [<postal-address>]"
+    parser.banner = "usage: ppl post <contact> [address]"
 
     parser.on("-s", "--street <street-address>") do |street|
       options[:street] = street
     end
+    parser.on("-z", "--postal-code <postal-code>") do |postal_code|
+      options[:postal_code] = postal_code
+    end
+    parser.on("-p", "--po-box <po-box>") do |po_box|
+      options[:po_box] = po_box
+    end
+    parser.on("-l", "--locality <locality>") do |locality|
+      options[:locality] = locality
+    end
+    parser.on("-r", "--region <region>") do |region|
+      options[:region] = region
+    end
+    parser.on("-c", "--country <country>") do |country|
+      options[:country] = country
+    end
+
   end
 
   def execute(input, output)
@@ -57,7 +73,12 @@ class Ppl::Command::Post < Ppl::Application::Command
   def set_postal_address(input, output)
     contact = @storage.require_contact(input.arguments[0])
     contact.set_postal_address do |address|
-      address.street = input.options[:street] unless input.options[:street].nil?
+      address.country     = input.options[:country]     unless input.options[:country].nil?
+      address.locality    = input.options[:locality]   unless input.options[:locality].nil?
+      address.region      = input.options[:region]      unless input.options[:region].nil?
+      address.po_box      = input.options[:po_box]      unless input.options[:po_box].nil?
+      address.postal_code = input.options[:postal_code] unless input.options[:postal_code].nil?
+      address.street      = input.options[:street]      unless input.options[:street].nil?
     end
     @storage.save_contact(contact)
   end
