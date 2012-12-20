@@ -32,6 +32,21 @@ class Ppl::Adapter::Vcard::Vpim
           if !contact.postal_address.street.nil?
             address.street = contact.postal_address.street
           end
+          if !contact.postal_address.postal_code.nil?
+            address.postalcode = contact.postal_address.postal_code
+          end
+          if !contact.postal_address.po_box.nil?
+            address.pobox = contact.postal_address.po_box
+          end
+          if !contact.postal_address.country.nil?
+            address.country = contact.postal_address.country
+          end
+          if !contact.postal_address.region.nil?
+            address.region = contact.postal_address.region
+          end
+          if !contact.postal_address.locality.nil?
+            address.locality = contact.postal_address.locality
+          end
         end
       end
 
