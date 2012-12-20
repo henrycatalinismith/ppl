@@ -2,12 +2,16 @@
 Gem::Specification.new do |spec|
 
   spec.name        = "ppl"
-  spec.version     = "1.0.1"
+  spec.version     = "1.0.3"
   spec.date        = "2012-12-20"
 
   spec.summary     = "CLI Address Book"
   spec.description = "CLI Address Book"
   spec.license     = "GPL-2"
+
+  spec.add_dependency("inifile", "2.0.2")
+  spec.add_dependency("rugged", "0.17.0.b6")
+  spec.add_dependency("vpim", "0.695")
 
   spec.authors     = ["Henry Smith"]
   spec.email       = "henry@henrysmith.org"
