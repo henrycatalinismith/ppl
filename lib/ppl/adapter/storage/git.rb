@@ -14,8 +14,12 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
   end
 
   def self.create_address_book(path)
-    disk = Ppl::Adapter::Storage::Disk.create_address_book(path)
     repo = Rugged::Repository.init_at(path, false)
+    disk = Ppl::Adapter::Storage::Disk.create_address_book(path)
+
+    git = self.new(disk)
+    git.add(".ppl/config")
+    git.commit("first commit")
   end
 
   def load_address_book
@@ -63,7 +67,6 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
     @disk.delete_contact(contact)
   end
 
-  private
 
   def add(file)
     @repository.index.add(file)
@@ -71,9 +74,22 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
   end
 
   def commit(message)
-    hash    = @repository.index.write_tree
-    tree    = @repository.lookup hash
-    parents = [ @repository.lookup( @repository.head.target ).oid ]
+    hash = @repository.index.write_tree
+    tree = @repository.lookup hash
+    head = nil
+
+    begin
+      head = @repository.head
+    rescue
+    end
+
+    if !head.nil?
+      parents    = [ @repository.lookup( @repository.head.target ).oid ]
+      update_ref = "HEAD"
+    else
+      parents    = []
+      update_ref = "HEAD"
+    end
 
     name = ENV['USER']
     host = Socket.gethostname
@@ -90,7 +106,7 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
       :committer  => author,
       :tree       => tree,
       :parents    => parents,
-      :update_ref => "HEAD",
+      :update_ref => update_ref,
     }
 
     Rugged::Commit.create(@repository, data)
