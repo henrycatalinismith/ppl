@@ -2,7 +2,7 @@
 Gem::Specification.new do |spec|
 
   spec.name        = "ppl"
-  spec.version     = "1.1.0"
+  spec.version     = "1.2.0"
   spec.date        = "2012-12-20"
 
   spec.required_ruby_version = ">= 1.9.3"
@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.files        = `git ls-files`.split("\n")
   spec.require_path = "lib"
-  spec.homepage     = "https://github.com/h2s/ppl"
+  spec.homepage     = "http://ppladdressbook.org"
 
 end
 
