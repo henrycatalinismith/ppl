@@ -5,6 +5,7 @@ class Ppl::Format::AddressBook::MuttQuery < Ppl::Format::AddressBook
 
   def initialize
     @table = Ppl::Format::Table.new([:email, :name])
+    @table.separator = Ppl::Format::Table::SEPARATOR_TABS
   end
 
   def process(address_book)
