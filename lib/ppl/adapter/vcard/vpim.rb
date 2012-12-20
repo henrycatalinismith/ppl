@@ -72,8 +72,13 @@ class Ppl::Adapter::Vcard::Vpim
     end
 
     if !vcard.address.nil?
-      contact.postal_address = Ppl::Entity::PostalAddress.new
-      contact.postal_address.street = vcard.address.street
+      contact.postal_address             = Ppl::Entity::PostalAddress.new
+      contact.postal_address.street      = vcard.address.street
+      contact.postal_address.postal_code = vcard.address.postalcode
+      contact.postal_address.po_box      = vcard.address.pobox
+      contact.postal_address.locality    = vcard.address.locality
+      contact.postal_address.region      = vcard.address.region
+      contact.postal_address.country     = vcard.address.country
     end
 
     if !vcard.org.nil?

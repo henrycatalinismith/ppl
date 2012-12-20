@@ -4,7 +4,7 @@ class Ppl::Format::AddressBook::PostalAddresses < Ppl::Format::AddressBook
   attr_writer :table
 
   def initialize
-    @table = Ppl::Format::Table.new([:id, :email_address])
+    @table = Ppl::Format::Table.new([:id, :postal_address])
   end
 
   def process(address_book)
@@ -20,7 +20,15 @@ class Ppl::Format::AddressBook::PostalAddresses < Ppl::Format::AddressBook
     postal_address = nil
 
     if !contact.postal_address.nil?
-      postal_address = contact.postal_address
+      pieces = [
+        contact.postal_address.street,
+        contact.postal_address.locality,
+        contact.postal_address.region,
+        contact.postal_address.country,
+        contact.postal_address.postal_code,
+        contact.postal_address.po_box,
+      ].select { |property| property != "" && !property.nil? }
+      postal_address = pieces.join(", ")
     end
 
     @table.add_row({
