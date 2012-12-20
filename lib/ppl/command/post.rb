@@ -6,7 +6,7 @@ class Ppl::Command::Post < Ppl::Application::Command
 
   def initialize
     @name        = "post"
-    @description = "Show or change a contact's postal address"
+    @description = "List, show or change postal addresses"
     @show_format = Ppl::Format::Contact::PostalAddress.new
     @list_format = Ppl::Format::AddressBook::PostalAddresses.new
   end
