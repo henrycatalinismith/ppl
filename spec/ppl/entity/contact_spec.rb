@@ -30,5 +30,11 @@ describe Ppl::Entity::Contact do
     end
   end
 
+  describe "#postal_address" do
+    it "should return a value" do
+      @contact.postal_address.should eq nil
+    end
+  end
+
 end
 
