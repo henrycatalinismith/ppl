@@ -48,12 +48,14 @@ describe Ppl::Command::Post do
       @command.execute(@input, @output).should eq false
     end
 
-    it "should change the contact's postal address if an address is given" do
+    it "should change the contact's street address if it's given" do
+      @input.arguments = ["jim"]
+      @input.options = {:street => "1 Test Road"}
+
       @storage.should_receive(:require_contact).and_return(@contact)
       @storage.should_receive(:save_contact) do |contact|
-        contact.postal_address.should eq "1 Test Road"
+        contact.postal_address.street.should eq "1 Test Road"
       end
-      @input.arguments = ["jim", "1 Test Road"]
       @command.execute(@input, @output)
     end
 

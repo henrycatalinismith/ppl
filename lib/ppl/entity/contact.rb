@@ -9,5 +9,10 @@ class Ppl::Entity::Contact
   attr_accessor :organization
   attr_accessor :postal_address
 
+  def set_postal_address
+    @postal_address = Ppl::Entity::PostalAddress.new
+    yield @postal_address
+  end
+
 end
 

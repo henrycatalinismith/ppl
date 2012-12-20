@@ -29,7 +29,9 @@ class Ppl::Adapter::Vcard::Vpim
 
       if !contact.postal_address.nil?
         maker.add_addr do |address|
-          address.street = contact.postal_address.street
+          if !contact.postal_address.street.nil?
+            address.street = contact.postal_address.street
+          end
         end
       end
 
