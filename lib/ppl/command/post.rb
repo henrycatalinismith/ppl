@@ -13,6 +13,10 @@ class Ppl::Command::Post < Ppl::Application::Command
 
   def options(parser, options)
     parser.banner = "usage: ppl post <contact> [<postal-address>]"
+
+    parser.on("-s", "--street <street-address>") do |street|
+      options[:street] = street
+    end
   end
 
   def execute(input, output)
@@ -26,7 +30,7 @@ class Ppl::Command::Post < Ppl::Application::Command
   def determine_action(input)
     if input.arguments[0].nil?
       :list_postal_addresses
-    elsif input.arguments[1].nil?
+    elsif input.options.empty?
       :show_postal_address
     else
       :set_postal_address
@@ -52,7 +56,9 @@ class Ppl::Command::Post < Ppl::Application::Command
 
   def set_postal_address(input, output)
     contact = @storage.require_contact(input.arguments[0])
-    contact.postal_address = input.arguments[1].dup
+    contact.set_postal_address do |address|
+      address.street = input.options[:street] unless input.options[:street].nil?
+    end
     @storage.save_contact(contact)
   end
 
