@@ -52,6 +52,7 @@ require "ppl/command/name"
 require "ppl/command/email"
 require "ppl/command/org"
 require "ppl/command/phone"
+require "ppl/command/mutt"
 
 require "ppl/entity/address_book"
 require "ppl/entity/contact"
