@@ -38,12 +38,25 @@ class Ppl::Application::Configuration
     config   = {}
     if File.exists?(filename)
       config = IniFile::load(filename).to_h
+    elsif File.exists?(xdg_path)
+      config = IniFile::load(xdg_path).to_h
     end
     return config
   end
 
   def repository_configuration
     {}
+  end
+
+  def xdg_path
+    default = "~/.config"
+    custom  = ENV["XDG_CONFIG_HOME"]
+    if custom.nil?
+      path = File.expand_path(default)
+    else
+      path = File.expand_path(custom)
+    end
+    File.join(path, "ppl", "config")
   end
 
 end
