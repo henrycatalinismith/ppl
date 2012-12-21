@@ -12,9 +12,6 @@ ppl if:
 * You want ownership of your address book data back from the cloud
 * You prefer to keep your data stored in an open format
 
-ppl is in an incomplete state right now, and is in active development. Stay
-tuned.
-
 [![Build Status](https://secure.travis-ci.org/h2s/ppl.png)](http://travis-ci.org/h2s/ppl)
 
 Installation
