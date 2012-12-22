@@ -7,8 +7,8 @@ describe Ppl::Format::AddressBook::MuttQuery do
     @contact      = Ppl::Entity::Contact.new
     @table        = double(Ppl::Format::Table)
 
-    @contact.email_address = "test@example.org"
-    @contact.name          = "Test Contact"
+    @contact.email_addresses.push "test@example.org"
+    @contact.name = "Test Contact"
 
     @format.table = @table
     @address_book.add_contact(@contact)
