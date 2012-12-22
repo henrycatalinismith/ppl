@@ -48,13 +48,20 @@ describe Ppl::Command::Email do
       @command.execute(@input, @output).should eq false
     end
 
-    it "should change the contact's email address if an address is given" do
+    it "should add the given address to the contact if it's new" do
       @storage.should_receive(:require_contact).and_return(@contact)
       @storage.should_receive(:save_contact) do |contact|
-        contact.email_address.should eq "jim@example.org"
+        contact.email_addresses.first.should eq "jim@example.org"
       end
       @input.arguments = ["jim", "jim@example.org"]
       @command.execute(@input, @output)
+    end
+
+    it "should raise an error if the user is adding a duplicate address" do
+      @contact.email_addresses.push "jim@example.org"
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @input.arguments = ["jim", "jim@example.org"]
+      expect{@command.execute(@input, nil)}.to raise_error(Ppl::Error::IncorrectUsage)
     end
 
   end
