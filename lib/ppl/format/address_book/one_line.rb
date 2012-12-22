@@ -19,8 +19,8 @@ class Ppl::Format::AddressBook::OneLine < Ppl::Format::AddressBook
     name  = contact.name
     email = nil
 
-    if !contact.email_address.nil?
-      email = sprintf("<%s>", contact.email_address)
+    if !contact.email_addresses.empty?
+      email = sprintf("<%s>", contact.email_addresses.first)
     end
 
     @table.add_row({
