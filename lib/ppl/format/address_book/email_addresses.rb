@@ -16,16 +16,16 @@ class Ppl::Format::AddressBook::EmailAddresses < Ppl::Format::AddressBook
   private
 
   def add_row(contact)
-    id            = sprintf("%s:", contact.id)
-    email_address = nil
+    id = sprintf("%s:", contact.id)
+    email_addresses = nil
 
-    if !contact.email_address.nil?
-      email_address = contact.email_address
+    if !contact.email_addresses.empty?
+      email_addresses = contact.email_addresses.join(", ")
     end
 
     @table.add_row({
       :id            => id,
-      :email_address => email_address,
+      :email_addresses => email_addresses,
     })
   end
 
