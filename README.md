@@ -13,6 +13,7 @@ ppl if:
 * You prefer to keep your data stored in an open format
 
 [![Build Status](https://secure.travis-ci.org/h2s/ppl.png)](http://travis-ci.org/h2s/ppl)
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/ryanb/cancan)
 
 Installation
 ------------
