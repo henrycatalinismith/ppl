@@ -7,7 +7,7 @@ class Ppl::Command::Email < Ppl::Application::Command
   def initialize
     @name        = "email"
     @description = "Show or change a contact's email address"
-    @show_format = Ppl::Format::Contact::EmailAddress.new
+    @show_format = Ppl::Format::Contact::EmailAddresses.new
     @list_format = Ppl::Format::AddressBook::EmailAddresses.new
   end
 
