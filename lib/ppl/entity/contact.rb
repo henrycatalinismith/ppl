@@ -20,7 +20,7 @@ class Ppl::Entity::Contact
     yield @postal_address
   end
 
-  def has_email_address(email_address)
+  def has_email_address?(email_address)
     @email_addresses.include? email_address
   end
 
