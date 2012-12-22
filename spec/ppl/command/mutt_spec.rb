@@ -36,7 +36,7 @@ describe Ppl::Command::Mutt do
     it "should return email address matches" do
 
       @contact.name = "Test User"
-      @contact.email_address = "test@example.org"
+      @contact.email_addresses.push "test@example.org"
       @address_book.add_contact(@contact)
 
       @input.arguments.push "example"
@@ -50,7 +50,7 @@ describe Ppl::Command::Mutt do
     it "should return name matches" do
 
       @contact.name = "Test User"
-      @contact.email_address = "test@example.org"
+      @contact.email_addresses.push "test@example.org"
       @address_book.add_contact(@contact)
 
       @input.arguments.push "User"
