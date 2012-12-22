@@ -1,8 +1,8 @@
 
-describe Ppl::Format::Contact::EmailAddress do
+describe Ppl::Format::Contact::EmailAddresses do
 
   before(:each) do
-    @format  = Ppl::Format::Contact::EmailAddress.new
+    @format  = Ppl::Format::Contact::EmailAddresses.new
     @contact = Ppl::Entity::Contact.new
   end
 
@@ -13,7 +13,7 @@ describe Ppl::Format::Contact::EmailAddress do
     end
 
     it "should return the contact's email address if it is set" do
-      @contact.email_address = "jdoe@example.org"
+      @contact.email_addresses.push "jdoe@example.org"
       @format.process(@contact).should eq "jdoe@example.org"
     end
 
