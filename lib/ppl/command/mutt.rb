@@ -52,9 +52,13 @@ class Ppl::Command::Mutt < Ppl::Application::Command
     matches = Ppl::Entity::AddressBook.new
 
     address_book.each do |contact|
-      next if contact.email_address.nil?
+      next if contact.email_addresses.empty?
 
-      if contact.email_address.include?(query)
+      matching_emails = contact.email_addresses.select do |email_address|
+        email_address.include? query
+      end
+
+      if matching_emails.length > 0
         matches.add_contact(contact)
       elsif !contact.name.nil? && contact.name.include?(query)
         matches.add_contact(contact)
