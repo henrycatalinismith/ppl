@@ -4,7 +4,7 @@ class Ppl::Format::AddressBook::EmailAddresses < Ppl::Format::AddressBook
   attr_writer :table
 
   def initialize
-    @table = Ppl::Format::Table.new([:id, :email_address])
+    @table = Ppl::Format::Table.new([:id, :email_addresses])
   end
 
   def process(address_book)
