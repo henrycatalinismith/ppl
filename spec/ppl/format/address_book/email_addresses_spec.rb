@@ -17,17 +17,17 @@ describe Ppl::Format::AddressBook::EmailAddresses do
 
     it "should at least show the contact's id" do
       @table.should_receive(:add_row).with({
-        :id            => "test:",
-        :email_address => nil,
+        :id              => "test:",
+        :email_addresses => nil,
       })
       @format.process(@address_book)
     end
 
-    it "should show the email address if it's available" do
-      @contact.email_address = "jdoe@example.org"
+    it "should show an email address if it's available" do
+      @contact.email_addresses.push "jdoe@example.org"
       @table.should_receive(:add_row).with({
-        :id            => "test:",
-        :email_address => "jdoe@example.org",
+        :id              => "test:",
+        :email_addresses => "jdoe@example.org",
       })
       @format.process(@address_book)
     end
