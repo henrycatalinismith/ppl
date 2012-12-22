@@ -16,27 +16,27 @@ class Ppl::Format::AddressBook::PostalAddresses < Ppl::Format::AddressBook
   private
 
   def add_row(contact)
-    id             = sprintf("%s:", contact.id)
     postal_address = nil
-
     if !contact.postal_address.nil?
-      pieces = [
-        contact.postal_address.street,
-        contact.postal_address.locality,
-        contact.postal_address.region,
-        contact.postal_address.country,
-        contact.postal_address.postal_code,
-        contact.postal_address.po_box,
-      ].select { |property| property != "" && !property.nil? }
-      postal_address = pieces.join(", ")
+      postal_address = format_postal_address(contact.postal_address)
     end
-
     @table.add_row({
-      :id             => id,
+      :id             => sprintf("%s:", contact.id),
       :postal_address => postal_address,
     })
   end
 
+  def format_postal_address(postal_address)
+    pieces = [
+      postal_address.street,
+      postal_address.locality,
+      postal_address.region,
+      postal_address.country,
+      postal_address.postal_code,
+      postal_address.po_box,
+    ].select { |property| property != "" && !property.nil? }
+    pieces.join(", ")
+  end
 
 end
 
