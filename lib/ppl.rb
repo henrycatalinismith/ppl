@@ -1,7 +1,7 @@
 
 module Ppl
 
-  Version = "1.4.1"
+  Version = "1.5.0"
 
   module Adapter
   end
@@ -54,6 +54,7 @@ require "ppl/command/org"
 require "ppl/command/phone"
 require "ppl/command/mutt"
 require "ppl/command/post"
+require "ppl/command/shell"
 
 require "ppl/entity/address_book"
 require "ppl/entity/contact"
