@@ -18,9 +18,9 @@ describe Ppl::Entity::Contact do
     end
   end
 
-  describe "#email_address" do
-    it "should return a value" do
-      @contact.email_address.should eq nil
+  describe "#email_addresses" do
+    it "should return an array" do
+      @contact.email_addresses.should be_a(Array)
     end
   end
 
