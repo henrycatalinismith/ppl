@@ -15,8 +15,8 @@ class Ppl::Adapter::Vcard::Vpim
         name.fullname = contact.name unless contact.name.nil?
       end
 
-      if !contact.email_address.nil?
-        maker.add_email(contact.email_address)
+      contact.email_addresses.each do |email_address|
+        maker.add_email(email_address)
       end
 
       if !contact.phone_number.nil?
@@ -64,7 +64,7 @@ class Ppl::Adapter::Vcard::Vpim
     end
 
     vcard.emails.each do |email|
-      contact.email_address = email.to_s
+      contact.email_addresses.push(email.to_s)
     end
 
     if !vcard.telephones.empty?
