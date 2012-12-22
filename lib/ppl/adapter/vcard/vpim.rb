@@ -5,72 +5,111 @@ class Ppl::Adapter::Vcard::Vpim
 
   def encode(contact)
     vcard = Vpim::Vcard::Maker.make2 do |maker|
-
-      if !contact.birthday.nil?
-        maker.birthday = contact.birthday
-      end
-
-      maker.add_name do |name|
-        name.given    = contact.id   unless contact.id.nil?
-        name.fullname = contact.name unless contact.name.nil?
-      end
-
-      contact.email_addresses.each do |email_address|
-        maker.add_email(email_address)
-      end
-
-      if !contact.phone_number.nil?
-        maker.add_tel(contact.phone_number)
-      end
-
-      if !contact.organization.nil?
-        maker.org=(contact.organization)
-      end
-
-      if !contact.postal_address.nil?
-        maker.add_addr do |address|
-          if !contact.postal_address.street.nil?
-            address.street = contact.postal_address.street
-          end
-          if !contact.postal_address.postal_code.nil?
-            address.postalcode = contact.postal_address.postal_code
-          end
-          if !contact.postal_address.po_box.nil?
-            address.pobox = contact.postal_address.po_box
-          end
-          if !contact.postal_address.country.nil?
-            address.country = contact.postal_address.country
-          end
-          if !contact.postal_address.region.nil?
-            address.region = contact.postal_address.region
-          end
-          if !contact.postal_address.locality.nil?
-            address.locality = contact.postal_address.locality
-          end
-        end
-      end
-
+      encode_birthday(contact, maker)
+      encode_name(contact, maker)
+      encode_email_addresses(contact, maker)
+      encode_phone_number(contact, maker)
+      encode_organization(contact, maker)
+      encode_postal_address(contact, maker)
+      encode_email_addresses(contact, maker)
     end
-
-    return vcard.to_s
+    vcard.to_s
   end
 
   def decode(string)
     vcard   = Vpim::Vcard.decode(string).first
     contact = Ppl::Entity::Contact.new
+    decode_birthday(vcard, contact)
+    decode_email_addresses(vcard, contact)
+    decode_phone_number(vcard, contact)
+    decode_postal_address(vcard, contact)
+    decode_organization(vcard, contact)
+    decode_name(vcard, contact)
+    return contact
+  end
 
-    if !vcard.birthday.nil?
-      contact.birthday = vcard.birthday
+
+  private
+
+  def encode_birthday(contact, vcard_maker)
+    if !contact.birthday.nil?
+      vcard_maker.birthday = contact.birthday
     end
+  end
 
+  def encode_name(contact, vcard_maker)
+    vcard_maker.add_name do |name|
+      name.given    = contact.id   unless contact.id.nil?
+      name.fullname = contact.name unless contact.name.nil?
+    end
+  end
+
+  def encode_email_addresses(contact, vcard_maker)
+    contact.email_addresses.each do |email_address|
+      vcard_maker.add_email(email_address)
+    end
+  end
+
+  def encode_phone_number(contact, vcard_maker)
+    if !contact.phone_number.nil?
+      vcard_maker.add_tel(contact.phone_number)
+    end
+  end
+
+  def encode_organization(contact, vcard_maker)
+    if !contact.organization.nil?
+      vcard_maker.org=(contact.organization)
+    end
+  end
+
+  def encode_postal_address(contact, vcard_maker)
+    if !contact.postal_address.nil?
+      vcard_maker.add_addr do |address|
+        if !contact.postal_address.street.nil?
+          address.street = contact.postal_address.street
+        end
+        if !contact.postal_address.postal_code.nil?
+          address.postalcode = contact.postal_address.postal_code
+        end
+        if !contact.postal_address.po_box.nil?
+          address.pobox = contact.postal_address.po_box
+        end
+        if !contact.postal_address.country.nil?
+          address.country = contact.postal_address.country
+        end
+        if !contact.postal_address.region.nil?
+          address.region = contact.postal_address.region
+        end
+        if !contact.postal_address.locality.nil?
+          address.locality = contact.postal_address.locality
+        end
+      end
+    end
+  end
+
+  def decode_birthday(vcard, contact)
+    contact.birthday = vcard.birthday unless vcard.birthday.nil?
+  end
+
+  def decode_name(vcard, contact)
+    if !vcard.name.nil?
+      contact.name = vcard.name.fullname
+    end
+  end
+
+  def decode_organization(vcard, contact)
+    if !vcard.org.nil?
+      contact.organization = vcard.org.first
+    end
+  end
+
+  def decode_email_addresses(vcard, contact)
     vcard.emails.each do |email|
       contact.email_addresses.push(email.to_s)
     end
+  end
 
-    if !vcard.telephones.empty?
-      contact.phone_number = vcard.telephones.first
-    end
-
+  def decode_postal_address(vcard, contact)
     if !vcard.address.nil?
       contact.postal_address             = Ppl::Entity::PostalAddress.new
       contact.postal_address.street      = vcard.address.street
@@ -80,19 +119,12 @@ class Ppl::Adapter::Vcard::Vpim
       contact.postal_address.region      = vcard.address.region
       contact.postal_address.country     = vcard.address.country
     end
+  end
 
-    if !vcard.org.nil?
-      contact.organization = vcard.org.first
+  def decode_phone_number(vcard, contact)
+    if !vcard.telephones.empty?
+      contact.phone_number = vcard.telephones.first
     end
-
-    name = nil
-    name = vcard.name
-
-    if !name.nil?
-      contact.name = name.fullname
-    end
-
-    return contact
   end
 
 end
