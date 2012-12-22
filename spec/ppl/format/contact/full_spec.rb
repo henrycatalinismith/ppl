@@ -22,8 +22,8 @@ describe Ppl::Format::Contact::Full do
     end
 
     it "should include their email address in brackets" do
-      @contact.name          = "John Doe"
-      @contact.email_address = "john@example.org"
+      @contact.name = "John Doe"
+      @contact.email_addresses.push "john@example.org"
       @format.process(@contact).should eq "John Doe <john@example.org>"
     end
 

@@ -38,8 +38,8 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
     if !contact.name.nil?
       line += contact.name
     end
-    if !contact.email_address.nil?
-      line += " <#{contact.email_address}>"
+    if !contact.email_addresses.empty?
+      line += " <#{contact.email_addresses.first}>"
     end
     return line
   end
