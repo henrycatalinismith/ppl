@@ -3,11 +3,15 @@ class Ppl::Entity::Contact
 
   attr_accessor :id
   attr_accessor :name
-  attr_accessor :email_address
+  attr_accessor :email_addresses
   attr_accessor :birthday
   attr_accessor :phone_number
   attr_accessor :organization
   attr_accessor :postal_address
+
+  def initialize
+    @email_addresses = []
+  end
 
   def set_postal_address
     if @postal_address.nil?
