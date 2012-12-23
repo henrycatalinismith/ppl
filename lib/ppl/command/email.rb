@@ -1,12 +1,13 @@
 
 class Ppl::Command::Email < Ppl::Application::Command
 
+  name        "email"
+  description "Show or change a contact's email address"
+
   attr_writer :show_format
   attr_writer :list_format
 
   def initialize
-    @name        = "email"
-    @description = "Show or change a contact's email address"
     @show_format = Ppl::Format::Contact::EmailAddresses.new
     @list_format = Ppl::Format::AddressBook::EmailAddresses.new
   end

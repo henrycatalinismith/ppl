@@ -1,10 +1,8 @@
 
 class Ppl::Command::Init < Ppl::Application::Command
 
-  def initialize
-    @name        = "init"
-    @description = "Create an empty address book"
-  end
+  name        "init"
+  description "Create an empty address book"
 
   def options(parser, options)
     parser.banner = "usage: ppl init [directory]"

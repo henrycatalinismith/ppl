@@ -1,12 +1,12 @@
 
 class Ppl::Command::Ls < Ppl::Application::Command
 
+  name        "ls"
+  description "List all contacts"
+
   attr_writer :format
 
   def initialize
-    @name        = "ls"
-    @description = "List all contacts"
-
     @format = Ppl::Format::AddressBook::OneLine.new
   end
 

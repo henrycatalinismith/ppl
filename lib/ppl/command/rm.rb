@@ -1,10 +1,8 @@
 
 class Ppl::Command::Rm < Ppl::Application::Command
 
-  def initialize
-    @name        = "rm"
-    @description = "Delete a contact"
-  end
+  name        "rm"
+  description "Delete a contact"
 
   def options(parser, options)
     parser.banner = "usage: ppl rm <contact>"
