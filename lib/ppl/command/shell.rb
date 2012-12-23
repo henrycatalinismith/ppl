@@ -27,12 +27,19 @@ class Ppl::Command::Shell < Ppl::Application::Command
   private
 
   def shell(input, output)
+    welcome_user(input, output)
     while line = read_line(input)
       break if ["exit", false].include?(line)
       process_line(line)
     end
     terminate_gracefully(input, output)
     true
+  end
+
+  def welcome_user(input, output)
+    if input.stdin.tty?
+      output.line("ppl #{Ppl::Version} (type \"exit\" to leave)")
+    end
   end
 
   def read_line(input)
