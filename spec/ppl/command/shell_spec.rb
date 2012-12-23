@@ -28,6 +28,20 @@ describe Ppl::Command::Shell do
       @output.should_receive(:line)
     end
 
+    it "should not show a prompt if stdin isn't a tty" do
+      @input.stdin = double(IO)
+      @input.stdin.stub(:tty?) { false }
+      Readline.should_receive(:readline).with("", true)
+      @command.execute(@input, @output)
+    end
+
+    it "should show a prompt if stdin is a tty" do
+      @input.stdin = double(IO)
+      @input.stdin.stub(:tty?) { true }
+      Readline.should_receive(:readline).with("ppl> ", true)
+      @command.execute(@input, @output)
+    end
+
     it "should make a system call with the input from stdin" do
       Readline.should_receive(:readline).and_return("email fred")
       Readline.should_receive(:readline).and_return(false)
