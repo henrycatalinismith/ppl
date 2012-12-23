@@ -15,8 +15,9 @@ class Ppl::Command::Shell < Ppl::Application::Command
   end
 
   def execute(input, output)
+    prompt = determine_prompt(input)
     begin
-      while line = Readline.readline("ppl> ", true)
+      while line = Readline.readline(prompt, true)
         break if line == "exit"
         break if line == false
         Kernel.system "#{$0} #{line}"
@@ -30,6 +31,17 @@ class Ppl::Command::Shell < Ppl::Application::Command
       output.line("")
     end
     return true
+  end
+
+
+  private
+
+  def determine_prompt(input)
+    if input.stdin.tty?
+      "ppl> "
+    else
+      ""
+    end
   end
 
 end
