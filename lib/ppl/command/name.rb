@@ -1,12 +1,13 @@
 
 class Ppl::Command::Name < Ppl::Application::Command
 
+  name        "name"
+  description "List, show or change names"
+
   attr_writer :show_format
   attr_writer :list_format
 
   def initialize
-    @name        = "name"
-    @description = "List, show or change names"
     @show_format = Ppl::Format::Contact::Name.new
     @list_format = Ppl::Format::AddressBook::Names.new
   end

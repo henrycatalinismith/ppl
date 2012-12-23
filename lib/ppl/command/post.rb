@@ -1,12 +1,13 @@
 
 class Ppl::Command::Post < Ppl::Application::Command
 
+  name        "post"
+  description "List, show or change postal addresses"
+
   attr_writer :show_format
   attr_writer :list_format
 
   def initialize
-    @name        = "post"
-    @description = "List, show or change postal addresses"
     @show_format = Ppl::Format::Contact::PostalAddress.new
     @list_format = Ppl::Format::AddressBook::PostalAddresses.new
   end

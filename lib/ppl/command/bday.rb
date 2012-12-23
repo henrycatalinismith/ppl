@@ -1,12 +1,13 @@
 
 class Ppl::Command::Bday < Ppl::Application::Command
 
+  name        "bday"
+  description "List, show or change birthdays"
+
   attr_writer :list_format
   attr_writer :show_format
 
   def initialize
-    @name        = "bday"
-    @description = "List, show or change birthdays"
     @list_format = Ppl::Format::AddressBook::Birthdays.new
     @show_format = Ppl::Format::Contact::Birthday.new
   end

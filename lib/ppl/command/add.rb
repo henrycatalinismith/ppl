@@ -1,10 +1,8 @@
 
 class Ppl::Command::Add < Ppl::Application::Command
 
-  def initialize
-    @name        = "add"
-    @description = "Add a new contact"
-  end
+  name        "add"
+  description "Add a new contact"
 
   def options(parser, options)
     parser.banner = "usage: ppl add <contact> <name>"

@@ -1,12 +1,12 @@
 
 class Ppl::Command::Show < Ppl::Application::Command
 
+  name        "show"
+  description "Display the full details of a contact"
+
   attr_writer :format
 
   def initialize
-    @name        = "show"
-    @description = "Display the full details of a contact"
-
     @format = Ppl::Format::Contact::Full.new
   end
 

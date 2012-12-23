@@ -3,12 +3,10 @@ require "readline"
 
 class Ppl::Command::Shell < Ppl::Application::Command
 
-  attr_writer :format
+  name        "shell"
+  description "Interactive mode"
 
-  def initialize
-    @name        = "shell"
-    @description = "Interactive mode"
-  end
+  attr_writer :format
 
   def options(parser, options)
     parser.banner = "usage: ppl shell"

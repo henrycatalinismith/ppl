@@ -1,12 +1,12 @@
 
 class Ppl::Command::Mutt < Ppl::Application::Command
 
+  name        "mutt"
+  description "Integration with mutt's query_command"
+
   attr_writer :format
 
   def initialize
-    @name        = "mutt"
-    @description = "Integration with mutt's query_command"
-
     @format = Ppl::Format::AddressBook::MuttQuery.new
   end
 
