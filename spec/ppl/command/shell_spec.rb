@@ -16,6 +16,7 @@ describe Ppl::Command::Shell do
   describe "#execute" do
     it "should read a line of input from stdin" do
       Readline.should_receive(:readline)
+      @command.stub(:welcome_user)
       @command.stub(:terminate_gracefully)
       @command.execute(@input, @output).should eq true
     end
@@ -31,12 +32,14 @@ describe Ppl::Command::Shell do
     it "should not show a prompt if stdin isn't a tty" do
       @input.stdin.stub(:tty?) { false }
       Readline.should_receive(:readline).with("", true)
+      @command.stub(:welcome_user)
       @command.execute(@input, @output)
     end
 
     it "should show a prompt if stdin is a tty" do
       @input.stdin.stub(:tty?) { true }
       Readline.should_receive(:readline).with("ppl> ", true)
+      @command.stub(:welcome_user)
       @command.stub(:terminate_gracefully)
       @command.execute(@input, @output)
     end
@@ -47,12 +50,14 @@ describe Ppl::Command::Shell do
       Kernel.should_receive(:system) do |command|
         command.should include "email fred"
       end
+      @command.stub(:welcome_user)
       @command.stub(:terminate_gracefully)
       @command.execute(@input, @output).should eq true
     end
 
     it "should exit on ctrl+c" do
       Readline.should_receive(:readline).and_raise(Interrupt)
+      @command.stub(:welcome_user)
       @command.stub(:terminate_gracefully)
       @command.execute(@input, @output).should eq false
     end
@@ -61,6 +66,7 @@ describe Ppl::Command::Shell do
       @input.stdin.stub(:tty?) { true }
       @output.should_receive(:line).with("")
       Readline.should_receive(:readline).and_return(false)
+      @command.stub(:welcome_user)
       @command.execute(@input, @output)
     end
 
@@ -75,6 +81,18 @@ describe Ppl::Command::Shell do
       @input.stdin.stub(:tty?) { false }
       @output.should_not_receive(:line).with("")
       Readline.should_receive(:readline).and_return(false)
+      @command.stub(:welcome_user)
+      @command.execute(@input, @output)
+    end
+
+    it "should print a welcome message on the tty" do
+      @input.stdin.stub(:tty?) { true }
+      @output.should_receive(:line) do |line|
+        line.should include "ppl"
+        line.should include Ppl::Version
+      end
+      Readline.should_receive(:readline).and_return(false)
+      @command.stub(:terminate_gracefully)
       @command.execute(@input, @output)
     end
 
