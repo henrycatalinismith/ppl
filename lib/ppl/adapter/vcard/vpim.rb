@@ -3,6 +3,15 @@ require "vpim/vcard"
 
 class Ppl::Adapter::Vcard::Vpim
 
+  @@postal_address_property_map = {
+    :street     => :street,
+    :postalcode => :postal_code,
+    :pobox      => :po_box,
+    :country    => :country,
+    :region     => :region,
+    :locality   => :locality,
+  }
+
   def encode(contact)
     vcard = Vpim::Vcard::Maker.make2 do |maker|
       encode_birthday(contact, maker)
@@ -65,23 +74,11 @@ class Ppl::Adapter::Vcard::Vpim
   def encode_postal_address(contact, vcard_maker)
     if !contact.postal_address.nil?
       vcard_maker.add_addr do |address|
-        if !contact.postal_address.street.nil?
-          address.street = contact.postal_address.street
-        end
-        if !contact.postal_address.postal_code.nil?
-          address.postalcode = contact.postal_address.postal_code
-        end
-        if !contact.postal_address.po_box.nil?
-          address.pobox = contact.postal_address.po_box
-        end
-        if !contact.postal_address.country.nil?
-          address.country = contact.postal_address.country
-        end
-        if !contact.postal_address.region.nil?
-          address.region = contact.postal_address.region
-        end
-        if !contact.postal_address.locality.nil?
-          address.locality = contact.postal_address.locality
+        @@postal_address_property_map.each_pair do |vpim_name, ppl_name|
+          value = contact.postal_address.send(ppl_name)
+          if !value.nil?
+            address.send("#{vpim_name.to_s}=", value)
+          end
         end
       end
     end
@@ -112,12 +109,11 @@ class Ppl::Adapter::Vcard::Vpim
   def decode_postal_address(vcard, contact)
     if !vcard.address.nil?
       contact.postal_address             = Ppl::Entity::PostalAddress.new
-      contact.postal_address.street      = vcard.address.street
-      contact.postal_address.postal_code = vcard.address.postalcode
-      contact.postal_address.po_box      = vcard.address.pobox
-      contact.postal_address.locality    = vcard.address.locality
-      contact.postal_address.region      = vcard.address.region
-      contact.postal_address.country     = vcard.address.country
+      @@postal_address_property_map.each_pair do |vpim_name, ppl_name|
+        value  = vcard.address.send(vpim_name)
+        method = "#{ppl_name.to_s}="
+        contact.postal_address.send(method, value)
+      end
     end
   end
 
