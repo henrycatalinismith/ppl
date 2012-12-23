@@ -1,12 +1,10 @@
 
 class Ppl::Command::Help < Ppl::Application::Command
 
-  attr_accessor :command_suite
+  name        "help"
+  description "Show a list of commands"
 
-  def initialize
-    @name        = "help"
-    @description = "Show a list of commands"
-  end
+  attr_accessor :command_suite
 
   def execute(input, output)
     @command_suite.sort_by_name
@@ -26,7 +24,7 @@ class Ppl::Command::Help < Ppl::Application::Command
       name        = command.name
       description = command.description
 
-      if @name == name
+      if self.name == name
         next
       end
 

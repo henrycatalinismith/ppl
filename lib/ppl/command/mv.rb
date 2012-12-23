@@ -1,10 +1,8 @@
 
 class Ppl::Command::Mv < Ppl::Application::Command
 
-  def initialize
-    @name        = "mv"
-    @description = "Rename a contact"
-  end
+  name        "mv"
+  description "Rename a contact"
 
   def options(parser, options)
     parser.banner = "usage: ppl mv <contact> <new ID>"

@@ -1,12 +1,13 @@
 
 class Ppl::Command::Org < Ppl::Application::Command
 
+  name        "org"
+  description "List, show or change organizations"
+
   attr_writer :show_format
   attr_writer :list_format
 
   def initialize
-    @name        = "org"
-    @description = "List, show or change organizations"
     @show_format = Ppl::Format::Contact::Organization.new
     @list_format = Ppl::Format::AddressBook::Organizations.new
   end

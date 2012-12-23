@@ -1,12 +1,13 @@
 
 class Ppl::Command::Phone < Ppl::Application::Command
 
+  name        "phone"
+  description "List, show or change phone numbers"
+
   attr_writer :show_format
   attr_writer :list_format
 
   def initialize
-    @name        = "phone"
-    @description = "List, show or change phone numbers"
     @show_format = Ppl::Format::Contact::PhoneNumber.new
     @list_format = Ppl::Format::AddressBook::PhoneNumbers.new
   end
