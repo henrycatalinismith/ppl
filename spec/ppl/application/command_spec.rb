@@ -15,5 +15,31 @@ describe Ppl::Application::Command, "#execute" do
     @command.storage.should be storage
   end
 
+  it "should allow the name to be set as an instance variable" do
+    @command.name = "testing"
+    @command.name.should eq "testing"
+  end
+
+  it "should allow the description to be set as an instance variable" do
+    @command.description = "testing"
+    @command.description.should eq "testing"
+  end
+
+  it "should allow the name to be set as a class variable" do
+    class TestCommand123 < Ppl::Application::Command
+      name "new_for_test"
+    end
+    command = TestCommand123.new
+    command.name.should eq "new_for_test"
+  end
+
+  it "should allow the description to be set as a class variable" do
+    class TestCommand123 < Ppl::Application::Command
+      description "desc_for_test"
+    end
+    command = TestCommand123.new
+    command.description.should eq "desc_for_test"
+  end
+
 end
 
