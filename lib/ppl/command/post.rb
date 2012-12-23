@@ -72,14 +72,14 @@ class Ppl::Command::Post < Ppl::Application::Command
 
   def set_postal_address(input, output)
     contact = @storage.require_contact(input.arguments[0])
-    contact.set_postal_address do |address|
-      address.country     = input.options[:country]     unless input.options[:country].nil?
-      address.locality    = input.options[:locality]   unless input.options[:locality].nil?
-      address.region      = input.options[:region]      unless input.options[:region].nil?
-      address.po_box      = input.options[:po_box]      unless input.options[:po_box].nil?
-      address.postal_code = input.options[:postal_code] unless input.options[:postal_code].nil?
-      address.street      = input.options[:street]      unless input.options[:street].nil?
+
+    [:country, :locality, :region, :po_box, :postal_code, :street].each do |property|
+      next if input.options[property].nil?
+      contact.set_postal_address do |address|
+        address.send("#{property.to_s}=", input.options[property])
+      end
     end
+
     @storage.save_contact(contact)
   end
 
