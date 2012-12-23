@@ -15,43 +15,27 @@ class Ppl::Command::Mutt < Ppl::Application::Command
   end
 
   def execute(input, output)
-    query = input.arguments.shift
-    if query.nil?
-      raise Ppl::Error::IncorrectUsage, "You must provide a query"
-    end
-
-    address_book = @storage.load_address_book
-
-    matches = mutt_search(address_book, query)
-
-    if matches.count > 0
-
-      line = sprintf(
-        "Searching database... %d entries... %d matching:",
-        address_book.count,
-        matches.count
-      )
-
-      results = @format.process(matches)
-
-      output.line(line)
-      output.line(results) unless results == ""
-      true
-
-    else
-      output.line("No matches")
-      false
-    end
-
+    query = require_query(input)
+    matches = mutt_search(query)
+    output.line(describe_result(matches))
+    matches.count > 0
   end
 
 
   private
 
-  def mutt_search(address_book, query)
+  def require_query(input)
+    if input.arguments.first.nil?
+      raise Ppl::Error::IncorrectUsage, "You must provide a query"
+    end
+    input.arguments.first
+  end
+
+  def mutt_search(query)
+    @address_book = @storage.load_address_book
     matches = Ppl::Entity::AddressBook.new
 
-    address_book.each do |contact|
+    @address_book.each do |contact|
       next if contact.email_addresses.empty?
 
       matching_emails = contact.email_addresses.select do |email_address|
@@ -66,6 +50,24 @@ class Ppl::Command::Mutt < Ppl::Application::Command
     end
 
     matches
+  end
+
+  def describe_result(matches)
+    if matches.count > 0
+      describe_matches(matches)
+    else
+      "No matches"
+    end
+  end
+
+  def describe_matches(matches)
+    summary = sprintf(
+      "Searching address book... %d entries... %d matching:",
+      @address_book.count,
+      matches.count
+    )
+    results = @format.process(matches)
+    [summary, results].join("\n").strip
   end
 
 end

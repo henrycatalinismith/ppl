@@ -26,9 +26,8 @@ describe Ppl::Command::Mutt do
     end
 
     it "should search the address book for the query" do
-      @storage.should_receive(:load_address_book).and_return(@address_book)
       @input.arguments.push "query"
-      @command.stub(:mutt_search) { |ab| [] }
+      @command.should_receive(:mutt_search).and_return([])
       @output.should_receive(:line).with("No matches")
       @command.execute(@input, @output).should eq false
     end
@@ -42,8 +41,10 @@ describe Ppl::Command::Mutt do
       @input.arguments.push "example"
 
       @storage.should_receive(:load_address_book).and_return(@address_book)
-      @output.should_receive(:line).with("Searching database... 1 entries... 1 matching:")
-      @output.should_receive(:line).with("test@example.org\tTest User")
+      @output.should_receive(:line) do |line|
+        line.should include "Searching address book... 1 entries... 1 matching:"
+        line.should include "test@example.org\tTest User"
+      end
       @command.execute(@input, @output).should eq true
     end
 
@@ -56,8 +57,10 @@ describe Ppl::Command::Mutt do
       @input.arguments.push "User"
 
       @storage.should_receive(:load_address_book).and_return(@address_book)
-      @output.should_receive(:line).with("Searching database... 1 entries... 1 matching:")
-      @output.should_receive(:line).with("test@example.org\tTest User")
+      @output.should_receive(:line) do |line|
+        line.should include "Searching address book... 1 entries... 1 matching:"
+        line.should include "test@example.org\tTest User"
+      end
       @command.execute(@input, @output).should eq true
     end
 
