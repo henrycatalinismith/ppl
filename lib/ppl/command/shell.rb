@@ -15,32 +15,47 @@ class Ppl::Command::Shell < Ppl::Application::Command
   end
 
   def execute(input, output)
-    prompt = determine_prompt(input)
     begin
-      while line = Readline.readline(prompt, true)
-        break if line == "exit"
-        break if line == false
-        Kernel.system "#{$0} #{line}"
-      end
+      shell(input, output)
     rescue SystemExit, Interrupt
-      output.line("")
-      return false
+      terminate_gracefully(input, output)
+      false
     end
-
-    if $stdin.tty?
-      output.line("")
-    end
-    return true
   end
 
 
   private
 
-  def determine_prompt(input)
-    if input.stdin.tty?
+  def shell(input, output)
+    while line = read_line(input)
+      break if ["exit", false].include?(line)
+      process_line(line)
+    end
+    terminate_gracefully(input, output)
+    true
+  end
+
+  def read_line(input)
+    prompt = determine_prompt(input.stdin)
+    line   = Readline.readline(prompt, true)
+  end
+
+  def process_line(line)
+    command = "#{$0} #{line}"
+    Kernel.system(command)
+  end
+
+  def determine_prompt(io)
+    if io.tty?
       "ppl> "
     else
       ""
+    end
+  end
+
+  def terminate_gracefully(input, output)
+    if input.stdin.tty?
+      output.line("")
     end
   end
 
