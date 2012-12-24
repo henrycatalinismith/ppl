@@ -11,40 +11,36 @@ class Ppl::Application::Command
   def options(parser, options)
   end
 
-  @@names = {}
-  @@descriptions = {}
+  @@property_names  = []
+  @@property_values = {}
 
-  def self.name(name = nil)
-    @@names[self] = name || @@names[self]
-  end
+  def self.add_property(name)
+    @@property_names = []
+    @@property_values[name] = {}
 
-  def self.description(description = nil)
-    @@descriptions[self] = description || @@descriptions[self]
-  end
-
-  def name=(name)
-    @name = name
-  end
-
-  def name
-    if @@names[self.class].nil?
-      @name
-    else
-      @@names[self.class]
+    define_singleton_method(name) do |value = nil|
+      if value.nil?
+        @@property_values[name][self]
+      else
+        @@property_values[name][self] = value
+      end
+    end
+    define_method(name) do
+      instance_variable = instance_variable_get("@#{name}")
+      class_variable    = @@property_values[name][self.class]
+      if !instance_variable.nil?
+        instance_variable
+      elsif !class_variable.nil?
+        class_variable
+      end
+    end
+    define_method("#{name}=") do |value|
+      instance_variable_set("@#{name}", value)
     end
   end
 
-  def description=(description)
-    @description = description
-  end
-
-  def description
-    if @@descriptions[self.class].nil?
-      @description
-    else
-      @@descriptions[self.class]
-    end
-  end
+  add_property :name
+  add_property :description
 
 end
 

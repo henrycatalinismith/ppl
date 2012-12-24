@@ -15,6 +15,39 @@ describe Ppl::Application::Command, "#execute" do
     @command.storage.should be storage
   end
 
+  it "should allow new properties to be defined" do
+    class TestCommand123 < Ppl::Application::Command
+      add_property :some_property
+    end
+  end
+
+  it "should allow properties to have values assigned to them" do
+    class TestCommand456 < Ppl::Application::Command
+      add_property :some_property
+      some_property "a value"
+    end
+    TestCommand456.some_property.should eq "a value"
+  end
+
+  it "should expose properties as instance variables too" do
+    class TestCommand789 < Ppl::Application::Command
+      add_property :some_property
+      some_property "a value"
+    end
+    instance = TestCommand789.new
+    instance.some_property.should eq "a value"
+  end
+
+  it "should allow properties to be overwritten by instance variables" do
+    class TestCommand901 < Ppl::Application::Command
+      add_property :some_property
+      some_property "a value"
+    end
+    instance = TestCommand901.new
+    instance.some_property = "different"
+    instance.some_property.should eq "different"
+  end
+
   it "should allow the name to be set as an instance variable" do
     @command.name = "testing"
     @command.name.should eq "testing"
