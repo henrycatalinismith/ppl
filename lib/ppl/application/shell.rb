@@ -11,6 +11,8 @@ class Ppl::Application::Shell
       command = select_command(input)
       prepare_command(command, input)
       outcome = execute_command(command, input, output)
+    rescue Ppl::Error::ContactNotFound
+      output.error("ppl: Contact '#{$!}' not found")
     rescue OptionParser::InvalidOption, OptionParser::MissingArgument, Ppl::Error::IncorrectUsage
       output.error($!)
       output.error(@optparse.to_s)
