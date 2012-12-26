@@ -71,9 +71,15 @@ describe Ppl::Application::Shell do
       @command.should_receive(:options)
       @command.should_receive(:execute) { raise "Pool's Closed" }
       @router.should_receive(:route).and_return(@command)
-
       @output.should_receive(:error).with("ppl: Pool's Closed")
+      @shell.run(@input, @output)
+    end
 
+    it "should handle ContactNotFound errors nicely" do
+      @command.stub(:options)
+      @command.should_receive(:execute) { raise Ppl::Error::ContactNotFound, "example" }
+      @router.should_receive(:route).and_return(@command)
+      @output.should_receive(:error).with("ppl: Contact 'example' not found")
       @shell.run(@input, @output)
     end
 
