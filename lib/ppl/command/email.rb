@@ -14,6 +14,10 @@ class Ppl::Command::Email < Ppl::Application::Command
 
   def options(parser, options)
     parser.banner = "usage: ppl email <contact> [<email-address>]"
+
+    parser.on("-d", "--delete", "delete email address") do
+      options[:delete] = true
+    end
   end
 
   def execute(input, output)
@@ -29,6 +33,8 @@ class Ppl::Command::Email < Ppl::Application::Command
       :list_email_addresses
     elsif input.arguments[1].nil?
       :show_email_addresses
+    elsif input.options[:delete]
+      :delete_email_address
     else
       :set_email_address
     end
@@ -51,10 +57,19 @@ class Ppl::Command::Email < Ppl::Application::Command
     end
   end
 
+  def delete_email_address(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    email_address = input.arguments[1].dup
+    contact.email_addresses.delete(email_address) do
+      message = sprintf("%s has no such email address %s", contact.id, email_address)
+      raise Ppl::Error::IncorrectUsage, message
+    end
+    @storage.save_contact(contact)
+  end
+
   def set_email_address(input, output)
     contact = @storage.require_contact(input.arguments[0])
     email_address = input.arguments[1].dup
-
     if contact.has_email_address?(email_address)
       message = sprintf("%s already has email address %s", contact.id, email_address)
       raise Ppl::Error::IncorrectUsage, message
