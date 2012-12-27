@@ -48,6 +48,27 @@ describe Ppl::Command::Email do
       @command.execute(@input, @output).should eq false
     end
 
+    it "should delete the given address to the contact if requested" do
+      @contact.email_addresses.push("jim@example.org")
+      @contact.email_addresses.push("jim@example.com")
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @storage.should_receive(:save_contact) do |contact|
+        contact.email_addresses.should eq ["jim@example.com"]
+      end
+      @input.arguments = ["jim", "jim@example.org"]
+      @input.options   = { :delete => true }
+      @command.execute(@input, @output)
+    end
+
+    it "should raise an error when deleting a non-existent email address" do
+      @contact.email_addresses.push("jim@example.org")
+      @contact.email_addresses.push("jim@example.com")
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @input.arguments = ["jim", "jim@example.net"]
+      @input.options   = { :delete => true }
+      expect{@command.execute(@input, nil)}.to raise_error(Ppl::Error::IncorrectUsage)
+    end
+
     it "should add the given address to the contact if it's new" do
       @storage.should_receive(:require_contact).and_return(@contact)
       @storage.should_receive(:save_contact) do |contact|
