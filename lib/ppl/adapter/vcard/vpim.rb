@@ -20,7 +20,6 @@ class Ppl::Adapter::Vcard::Vpim
       encode_phone_number(contact, maker)
       encode_organization(contact, maker)
       encode_postal_address(contact, maker)
-      encode_email_addresses(contact, maker)
     end
     vcard.to_s
   end
