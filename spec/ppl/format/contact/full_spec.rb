@@ -24,7 +24,16 @@ describe Ppl::Format::Contact::Full do
     it "should include their email address in brackets" do
       @contact.name = "John Doe"
       @contact.email_addresses.push "john@example.org"
-      @format.process(@contact).should eq "John Doe <john@example.org>"
+      @format.process(@contact).should include "John Doe <john@example.org>"
+    end
+
+    it "should show all their email addresses" do
+      @contact.email_addresses.push "john@example.org"
+      @contact.email_addresses.push "john@example.com"
+      @contact.email_addresses.push "john@example.net"
+      @format.process(@contact).should include "john@example.org"
+      @format.process(@contact).should include "john@example.com"
+      @format.process(@contact).should include "john@example.net"
     end
 
     it "should show their birthday if available" do
@@ -44,7 +53,7 @@ describe Ppl::Format::Contact::Full do
 
     it "should show their postal address if available" do
       @contact.postal_address = @address
-      @postal_address_format.should_receive(:process).with(@contact)
+      @postal_address_format.should_receive(:process).and_return("")
       @format.process(@contact)
     end
 
