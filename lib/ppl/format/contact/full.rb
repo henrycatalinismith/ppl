@@ -4,31 +4,28 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
   attr_writer :postal_address_format
 
   def initialize
-    @postal_address_format = Ppl::Format::Contact::PostalAddress.new
+    @postal_address_format = Ppl::Format::PostalAddress::OneLine.new
   end
 
   def process(contact)
-    lines = []
+    @lines = []
 
     first_line = first_line(contact)
     if first_line != ""
-      lines.push(first_line)
+      @lines.push(first_line)
     end
 
     vitals = vitals(contact)
     if vitals != ""
-      lines.push("")
-      lines.push(vitals)
-      lines.push("")
-      lines.push("")
+      @lines.push("")
+      @lines.push(vitals)
     end
 
-    if !contact.postal_address.nil?
-      lines.push("Postal Address:")
-      lines.push(@postal_address_format.process(contact))
-    end
+    format_email_addresses(contact)
+    format_phone_numbers(contact)
+    format_postal_addresses(contact)
 
-    return lines.join("\n")
+    return @lines.join("\n")
   end
 
   private
@@ -49,9 +46,6 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
     if !contact.birthday.nil?
       vitals.push(format_vital("Birthday", contact.birthday.strftime("%Y-%m-%d")))
     end
-    if !contact.phone_number.nil?
-      vitals.push(format_vital("Telephone", contact.phone_number))
-    end
     if !contact.organization.nil?
       vitals.push(format_vital("Organization", contact.organization))
     end
@@ -60,6 +54,30 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
 
   def format_vital(name, value)
     return sprintf("  %-12s %s", name, value)
+  end
+
+  def format_email_addresses(contact)
+    if !contact.email_addresses.empty?
+      @lines.push("")
+      @lines.push("Email Addresses:")
+      contact.email_addresses.each { |email_address| @lines.push("  " + email_address) }
+    end
+  end
+
+  def format_phone_numbers(contact)
+    if !contact.phone_number.nil?
+      @lines.push("")
+      @lines.push("Phone Numbers:")
+      @lines.push("  #{contact.phone_number}")
+    end
+  end
+
+  def format_postal_addresses(contact)
+    if !contact.postal_address.nil?
+      @lines.push("")
+      @lines.push("Postal Address:")
+      @lines.push("  " + @postal_address_format.process(contact.postal_address))
+    end
   end
 
 end

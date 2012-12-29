@@ -1,7 +1,7 @@
 
 module Ppl
 
-  Version = "1.6.0"
+  Version = "1.7.0"
 
   module Adapter
   end
@@ -80,6 +80,8 @@ require "ppl/format/contact/name"
 require "ppl/format/contact/organization"
 require "ppl/format/contact/phone_number"
 require "ppl/format/contact/postal_address"
+require "ppl/format/postal_address"
+require "ppl/format/postal_address/one_line"
 require "ppl/format/table"
 
 class String
