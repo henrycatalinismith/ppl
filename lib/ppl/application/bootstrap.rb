@@ -19,6 +19,7 @@ class Ppl::Application::Bootstrap
       Ppl::Command::Post.new,
       Ppl::Command::Shell.new,
       Ppl::Command::Url.new,
+      Ppl::Command::Version.new,
     ]
     commands.each do |command|
       command.storage = storage_adapter
