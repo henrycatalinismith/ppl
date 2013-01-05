@@ -78,6 +78,9 @@ describe Ppl::Application::Bootstrap do
     it "should contain the 'shell' command" do
       @bootstrap.command_suite.find_command("shell").should_not be nil
     end
+    it "should contain the 'url' command" do
+      @bootstrap.command_suite.find_command("url").should_not be nil
+    end
   end
 
   describe "#configuration" do

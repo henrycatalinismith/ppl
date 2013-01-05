@@ -46,5 +46,11 @@ describe Ppl::Entity::Contact do
     end
   end
 
+  describe "#urls" do
+    it "should return an array" do
+      @contact.urls.should be_a(Array)
+    end
+  end
+
 end
 

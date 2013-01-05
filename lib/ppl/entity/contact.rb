@@ -8,9 +8,11 @@ class Ppl::Entity::Contact
   attr_accessor :phone_number
   attr_accessor :organization
   attr_accessor :postal_address
+  attr_accessor :urls
 
   def initialize
     @email_addresses = []
+    @urls = []
   end
 
   def set_postal_address
