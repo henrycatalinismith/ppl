@@ -8,7 +8,7 @@ class Ppl::Format::AddressBook::Birthdays < Ppl::Format::AddressBook
   end
 
   def process(address_book)
-    address_book.each { |contact| add_row(contact) }
+    address_book.contacts.each { |contact| add_row(contact) }
     @table.to_s
   end
 

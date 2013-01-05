@@ -33,7 +33,7 @@ class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
     filenames.each do |filename|
       contact_id = File.basename(filename).slice(0..-5)
       contact    = load_contact(contact_id)
-      address_book.add_contact(contact)
+      address_book.contacts.push(contact)
     end
 
     return address_book

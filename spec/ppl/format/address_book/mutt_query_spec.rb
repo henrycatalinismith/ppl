@@ -11,7 +11,7 @@ describe Ppl::Format::AddressBook::MuttQuery do
     @contact.name = "Test Contact"
 
     @format.table = @table
-    @address_book.add_contact(@contact)
+    @address_book.contacts.push(@contact)
   end
 
   describe "#process" do

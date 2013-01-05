@@ -12,7 +12,7 @@ describe Ppl::Format::AddressBook::PostalAddresses do
     @contact.postal_address = @address
     @format.table = @table
 
-    @address_book.add_contact(@contact)
+    @address_book.contacts.push(@contact)
   end
 
   describe "#process" do
