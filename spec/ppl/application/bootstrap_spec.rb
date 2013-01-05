@@ -111,6 +111,9 @@ describe Ppl::Application::Bootstrap do
     it "should set the 'help' command as the default" do
       @bootstrap.router.default.should eq "help"
     end
+    it "should inject the user's aliases" do
+      @bootstrap.router.aliases.should be_a(Hash)
+    end
   end
 
   describe "#shell" do
