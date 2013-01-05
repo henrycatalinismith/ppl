@@ -24,6 +24,7 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
     format_email_addresses(contact)
     format_phone_numbers(contact)
     format_postal_addresses(contact)
+    format_urls(contact)
 
     return @lines.join("\n")
   end
@@ -77,6 +78,14 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
       @lines.push("")
       @lines.push("Postal Address:")
       @lines.push("  " + @postal_address_format.process(contact.postal_address))
+    end
+  end
+
+  def format_urls(contact)
+    if !contact.urls.empty?
+      @lines.push("")
+      @lines.push("URLs:")
+      contact.urls.each { |url| @lines.push("  " + url) }
     end
   end
 

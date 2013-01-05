@@ -57,6 +57,11 @@ describe Ppl::Format::Contact::Full do
       @format.process(@contact)
     end
 
+    it "should show all their URLs" do
+      @contact.urls.push "http://example.org"
+      @format.process(@contact).should include "http://example.org"
+    end
+
   end
 
 end
