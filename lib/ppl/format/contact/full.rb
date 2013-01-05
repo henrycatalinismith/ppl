@@ -58,34 +58,36 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
   end
 
   def format_email_addresses(contact)
-    if !contact.email_addresses.empty?
-      @lines.push("")
-      @lines.push("Email Addresses:")
-      contact.email_addresses.each { |email_address| @lines.push("  " + email_address) }
-    end
+    push_list("Email Addresses", contact.email_addresses)
   end
 
   def format_phone_numbers(contact)
     if !contact.phone_number.nil?
-      @lines.push("")
-      @lines.push("Phone Numbers:")
-      @lines.push("  #{contact.phone_number}")
+      push_list("Phone Numbers", contact.phone_number)
     end
   end
 
   def format_postal_addresses(contact)
     if !contact.postal_address.nil?
-      @lines.push("")
-      @lines.push("Postal Address:")
-      @lines.push("  " + @postal_address_format.process(contact.postal_address))
+      push_list(
+        "Postal Address",
+        @postal_address_format.process(contact.postal_address)
+      )
     end
   end
 
   def format_urls(contact)
-    if !contact.urls.empty?
-      @lines.push("")
-      @lines.push("URLs:")
-      contact.urls.each { |url| @lines.push("  " + url) }
+    push_list("URLs", contact.urls)
+  end
+
+  def push_list(label, list)
+    return if list.empty?
+    @lines.push("")
+    @lines.push("#{label}:")
+    if list.kind_of?(Array)
+      list.each { |item| @lines.push("  #{item}") }
+    else
+      @lines.push("  #{list}")
     end
   end
 
