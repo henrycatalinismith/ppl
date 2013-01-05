@@ -10,7 +10,7 @@ describe Ppl::Format::AddressBook::OneLine do
     @contact.id = "test"
     @format.table = @table
 
-    @address_book.add_contact(@contact)
+    @address_book.contacts.push(@contact)
   end
 
   describe "#process" do

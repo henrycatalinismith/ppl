@@ -1,7 +1,7 @@
 
 require "ostruct"
 
-describe Ppl::Adapter::Storage::Git, "#initialize" do
+describe Ppl::Adapter::Storage::Git do
 
   before(:each) do
     FakeFS.activate!
@@ -65,7 +65,7 @@ describe Ppl::Adapter::Storage::Git, "#initialize" do
       @head.should_receive(:tree).and_return(@files)
 
       address_book = @git.load_address_book
-      address_book.each do |contact|
+      address_book.contacts.each do |contact|
         contact.should be_a(Ppl::Entity::Contact)
       end
     end
