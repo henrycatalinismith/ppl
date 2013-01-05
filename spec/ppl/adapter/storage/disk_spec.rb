@@ -82,7 +82,7 @@ describe Ppl::Adapter::Storage::Disk do
       @adapter.should_receive(:decode).twice
 
       address_book = @storage.load_address_book
-      address_book.count.should eq 2
+      address_book.contacts.count.should eq 2
     end
 
   end

@@ -27,7 +27,7 @@ describe Ppl::Command::Mutt do
 
     it "should search the address book for the query" do
       @input.arguments.push "query"
-      @command.should_receive(:mutt_search).and_return([])
+      @command.should_receive(:mutt_search).and_return(Ppl::Entity::AddressBook.new)
       @output.should_receive(:line).with("No matches")
       @command.execute(@input, @output).should eq false
     end
@@ -36,7 +36,7 @@ describe Ppl::Command::Mutt do
 
       @contact.name = "Test User"
       @contact.email_addresses.push "test@example.org"
-      @address_book.add_contact(@contact)
+      @address_book.contacts.push(@contact)
 
       @input.arguments.push "example"
 
@@ -52,7 +52,7 @@ describe Ppl::Command::Mutt do
 
       @contact.name = "Test User"
       @contact.email_addresses.push "test@example.org"
-      @address_book.add_contact(@contact)
+      @address_book.contacts.push(@contact)
 
       @input.arguments.push "User"
 
