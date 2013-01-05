@@ -19,14 +19,14 @@ class Ppl::Application::Configuration
   end
 
   def aliases
-    aliases = {}
-    return aliases
+    user_configuration["aliases"]
   end
 
   private
 
   def default_configuration
     {
+      "aliases" => {},
       "address book" => {
         "path" => Dir.pwd
       },
