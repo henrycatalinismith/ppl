@@ -68,6 +68,11 @@ describe Ppl::Adapter::Vcard::Vpim, "#encode" do
     @adapter.encode(@contact).should include("ADR:;;;;South West;;")
   end
 
+  it "should encode the contact's URL" do
+    @contact.urls.push "http://google.com"
+    @adapter.encode(@contact).should include("URL:http://google.com")
+  end
+
 end
 
 
@@ -218,6 +223,18 @@ describe Ppl::Adapter::Vcard::Vpim, "#decode" do
     ].join("\n")
     contact = @adapter.decode(vcard)
     contact.postal_address.country.should eq "UK"
+  end
+
+  it "should decode the contact's URL" do
+    vcard = [
+      "BEGIN:VCARD",
+      "N:,test",
+      "VERSION:3.0",
+      "URL:http://google.com",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+    contact.urls.first.should eq "http://google.com"
   end
 
 end
