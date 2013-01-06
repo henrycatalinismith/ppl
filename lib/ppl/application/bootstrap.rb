@@ -52,6 +52,7 @@ class Ppl::Application::Bootstrap
 
   def router
     router = Ppl::Application::Router.new(command_suite)
+    router.aliases = configuration.aliases
     router.default = "help"
     return router
   end
