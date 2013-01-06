@@ -19,7 +19,13 @@ class Ppl::Application::Configuration
   end
 
   def aliases
-    user_configuration["aliases"]
+    user_aliases = user_configuration["aliases"]
+    default_aliases = default_configuration["aliases"]
+    if user_aliases.nil?
+      default_aliases
+    else
+      user_aliases
+    end
   end
 
   private
