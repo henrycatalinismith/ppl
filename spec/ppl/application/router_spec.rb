@@ -37,6 +37,11 @@ describe Ppl::Application::Router do
       @router.route("three").should be @cmd_one
     end
 
+    it "should apply the aliases if the argument doesn't match a command" do
+      @router.aliases = {"t" => "two"}
+      @router.route("t").should be @cmd_two
+    end
+
   end
 
 end
