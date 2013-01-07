@@ -1,6 +1,7 @@
 
 class Ppl::Command::Attribute < Ppl::Application::Command
 
+  attr_writer :attribute
   attr_writer :list_format
   attr_writer :show_format
 
@@ -17,6 +18,8 @@ class Ppl::Command::Attribute < Ppl::Application::Command
       :list_attribute
     elsif input.arguments[1].nil?
       :show_attribute
+    else
+      :add_attribute
     end
   end
 
@@ -33,6 +36,11 @@ class Ppl::Command::Attribute < Ppl::Application::Command
   end
 
   def add_attribute(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    values = contact.send(@attribute)
+    values.push(input.arguments[1].dup)
+    @storage.save_contact(contact)
+    true
   end
 
   def remove_attribute(input, output)
