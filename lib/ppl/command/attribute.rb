@@ -13,7 +13,11 @@ class Ppl::Command::Attribute < Ppl::Application::Command
   private
 
   def determine_action(input)
-    :none
+    if input.arguments[0].nil?
+      :list_attribute
+    elsif input.arguments[1].nil?
+      :show_attribute
+    end
   end
 
   def list_attribute(input, output)
