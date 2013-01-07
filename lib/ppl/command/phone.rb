@@ -14,14 +14,5 @@ class Ppl::Command::Phone < Ppl::Command::Attribute
     parser.banner = "usage: ppl phone <contact> [<number>]"
   end
 
-
-  private
-
-  def set_phone_number(input, output)
-    contact = @storage.require_contact(input.arguments[0])
-    contact.phone_number = input.arguments[1]
-    @storage.save_contact(contact)
-  end
-
 end
 
