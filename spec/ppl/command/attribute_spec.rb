@@ -16,11 +16,8 @@ describe Ppl::Command::Attribute do
     @command.storage = @storage
   end
 
-  describe "#list_attribute" do
 
-    before(:each) do
-      @command.stub(:determine_action) { :list_attribute }
-    end
+  describe "#list_attribute" do
 
     it "should list all the contacts and the value of the attribute for each" do
       @storage.should_receive(:load_address_book).and_return(@address_book)
@@ -32,10 +29,6 @@ describe Ppl::Command::Attribute do
   end
 
   describe "#show_attribute" do
-
-    before(:each) do
-      @command.stub(:determine_action) { :show_attribute }
-    end
 
     it "should show the full list of attributes for the given contact" do
       @input.arguments.push("jdoe")
