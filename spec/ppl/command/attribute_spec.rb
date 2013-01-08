@@ -44,6 +44,15 @@ describe Ppl::Command::Attribute do
       @command.execute(@input, @output).should eq true
     end
 
+    it "should delete the given value from the contact's attributes" do
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @contact.should_receive(:phone_numbers).and_return(["somevalue"])
+      @storage.should_receive(:save_contact).and_return(true)
+      @input.arguments = ["jdoe", "somevalue"]
+      @input.options   = { :delete => true }
+      @command.execute(@input, @output).should eq true
+    end
+
   end
 
 end
