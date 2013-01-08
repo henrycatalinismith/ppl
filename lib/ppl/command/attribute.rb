@@ -18,6 +18,8 @@ class Ppl::Command::Attribute < Ppl::Application::Command
       :list_attribute
     elsif input.arguments[1].nil?
       :show_attribute
+    elsif input.options[:delete]
+      :remove_attribute
     else
       :add_attribute
     end
@@ -44,6 +46,9 @@ class Ppl::Command::Attribute < Ppl::Application::Command
   end
 
   def remove_attribute(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    values = contact.send(@attribute)
+    @storage.save_contact(contact)
   end
 
 end
