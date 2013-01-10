@@ -52,5 +52,17 @@ describe Ppl::Entity::Contact do
     end
   end
 
+  describe "#organizations" do
+    it "should return an array" do
+      @contact.organizations.should be_a(Array)
+    end
+  end
+
+  describe "#phone_numbers" do
+    it "should return an array" do
+      @contact.phone_numbers.should be_a(Array)
+    end
+  end
+
 end
 

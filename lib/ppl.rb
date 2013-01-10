@@ -40,6 +40,7 @@ require "ppl/application/output"
 require "ppl/application/router"
 require "ppl/application/shell"
 
+require "ppl/command/attribute"
 require "ppl/command/init"
 require "ppl/command/bday"
 require "ppl/command/ls"

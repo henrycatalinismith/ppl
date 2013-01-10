@@ -42,12 +42,12 @@ describe Ppl::Format::Contact::Full do
     end
 
     it "should show their phone number if available" do
-      @contact.phone_number = "01234567890"
+      @contact.phone_numbers.push("01234567890")
       @format.process(@contact).should include "01234567890"
     end
 
-    it "should show their organization if available" do
-      @contact.organization = "Example Ltd"
+    it "should show all their organizations" do
+      @contact.organizations.push("Example Ltd")
       @format.process(@contact).should include "Example Ltd"
     end
 
