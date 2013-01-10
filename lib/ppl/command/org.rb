@@ -12,6 +12,9 @@ class Ppl::Command::Org < Ppl::Command::Attribute
 
   def options(parser, options)
     parser.banner = "usage: ppl org <contact> [<organization>]"
+    parser.on("-d", "--delete", "delete organization") do
+      options[:delete] = true
+    end
   end
 
 end

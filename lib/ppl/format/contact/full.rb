@@ -64,9 +64,7 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
   end
 
   def format_phone_numbers(contact)
-    if !contact.phone_number.nil?
-      push_list("Phone Numbers", contact.phone_number)
-    end
+    push_list("Phone Numbers", contact.phone_numbers)
   end
 
   def format_postal_addresses(contact)
