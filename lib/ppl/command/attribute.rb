@@ -48,6 +48,7 @@ class Ppl::Command::Attribute < Ppl::Application::Command
   def remove_attribute(input, output)
     contact = @storage.require_contact(input.arguments[0])
     values = contact.send(@attribute)
+    values.delete(input.arguments[1])
     @storage.save_contact(contact)
   end
 
