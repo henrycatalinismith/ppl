@@ -12,6 +12,9 @@ class Ppl::Command::Phone < Ppl::Command::Attribute
 
   def options(parser, options)
     parser.banner = "usage: ppl phone <contact> [<number>]"
+    parser.on("-d", "--delete", "delete phone number") do
+      options[:delete] = true
+    end
   end
 
 end
