@@ -6,12 +6,13 @@ class Ppl::Entity::Contact
   attr_accessor :email_addresses
   attr_accessor :birthday
   attr_accessor :phone_number
-  attr_accessor :organization
+  attr_accessor :organizations
   attr_accessor :postal_address
   attr_accessor :urls
 
   def initialize
     @email_addresses = []
+    @organizations = []
     @urls = []
   end
 
