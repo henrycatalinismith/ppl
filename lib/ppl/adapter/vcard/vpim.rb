@@ -17,7 +17,7 @@ class Ppl::Adapter::Vcard::Vpim
       encode_birthday(contact, maker)
       encode_name(contact, maker)
       encode_email_addresses(contact, maker)
-      encode_phone_number(contact, maker)
+      encode_phone_numbers(contact, maker)
       encode_organizations(contact, maker)
       encode_postal_address(contact, maker)
       encode_urls(contact, maker)
@@ -30,7 +30,7 @@ class Ppl::Adapter::Vcard::Vpim
     contact = Ppl::Entity::Contact.new
     decode_birthday(vcard, contact)
     decode_email_addresses(vcard, contact)
-    decode_phone_number(vcard, contact)
+    decode_phone_numbers(vcard, contact)
     decode_postal_address(vcard, contact)
     decode_organizations(vcard, contact)
     decode_name(vcard, contact)
@@ -60,9 +60,9 @@ class Ppl::Adapter::Vcard::Vpim
     end
   end
 
-  def encode_phone_number(contact, vcard_maker)
-    if !contact.phone_number.nil?
-      vcard_maker.add_tel(contact.phone_number)
+  def encode_phone_numbers(contact, vcard_maker)
+    contact.phone_numbers.each do |phone_number|
+      vcard_maker.add_tel(phone_number)
     end
   end
 
@@ -124,10 +124,8 @@ class Ppl::Adapter::Vcard::Vpim
     end
   end
 
-  def decode_phone_number(vcard, contact)
-    if !vcard.telephones.empty?
-      contact.phone_number = vcard.telephones.first
-    end
+  def decode_phone_numbers(vcard, contact)
+    vcard.telephones.each { |number| contact.phone_numbers.push(number) }
   end
 
   def decode_urls(vcard, contact)
