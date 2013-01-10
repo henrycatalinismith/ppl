@@ -23,12 +23,12 @@ describe Ppl::Adapter::Vcard::Vpim, "#encode" do
   end
 
   it "should encode the contact's phone number" do
-    @contact.phone_number = "01234567890"
+    @contact.phone_numbers.push("01234567890")
     @adapter.encode(@contact).should include("TEL:01234567890")
   end
 
   it "should encode the contact's organization" do
-    @contact.organization = "Example Ltd"
+    @contact.organizations.push("Example Ltd")
     @adapter.encode(@contact).should include("ORG:Example Ltd")
   end
 
@@ -138,7 +138,7 @@ describe Ppl::Adapter::Vcard::Vpim, "#decode" do
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
-    contact.phone_number.should eq "01234567890"
+    contact.phone_numbers.first.should eq "01234567890"
   end
 
   it "should decode the contact's organization" do
@@ -150,7 +150,7 @@ describe Ppl::Adapter::Vcard::Vpim, "#decode" do
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
-    contact.organization.should eq "Example Ltd"
+    contact.organizations.first.should eq "Example Ltd"
   end
 
   it "should decode the contact's street address" do

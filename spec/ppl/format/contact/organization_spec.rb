@@ -13,7 +13,7 @@ describe Ppl::Format::Contact::Organization do
     end
 
     it "should return the contact's organization if it is set" do
-      @contact.organization = "Example Ltd"
+      @contact.organizations.push("Example Ltd")
       @format.process(@contact).should eq "Example Ltd"
     end
 
