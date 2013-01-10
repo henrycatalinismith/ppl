@@ -21,6 +21,7 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
       @lines.push(vitals)
     end
 
+    format_organizations(contact)
     format_email_addresses(contact)
     format_phone_numbers(contact)
     format_postal_addresses(contact)
@@ -47,14 +48,15 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
     if !contact.birthday.nil?
       vitals.push(format_vital("Birthday", contact.birthday.strftime("%Y-%m-%d")))
     end
-    if !contact.organization.nil?
-      vitals.push(format_vital("Organization", contact.organization))
-    end
     return vitals.join("\n")
   end
 
   def format_vital(name, value)
     return sprintf("  %-12s %s", name, value)
+  end
+
+  def format_organizations(contact)
+    push_list("Organizations", contact.organizations)
   end
 
   def format_email_addresses(contact)

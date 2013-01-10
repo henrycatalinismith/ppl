@@ -46,8 +46,8 @@ describe Ppl::Format::Contact::Full do
       @format.process(@contact).should include "01234567890"
     end
 
-    it "should show their organization if available" do
-      @contact.organization = "Example Ltd"
+    it "should show all their organizations" do
+      @contact.organizations.push("Example Ltd")
       @format.process(@contact).should include "Example Ltd"
     end
 
