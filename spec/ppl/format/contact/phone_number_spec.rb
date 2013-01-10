@@ -13,7 +13,7 @@ describe Ppl::Format::Contact::PhoneNumber do
     end
 
     it "should return the contact's phone number if it is set" do
-      @contact.phone_number = "0123456789"
+      @contact.phone_numbers.push("0123456789")
       @format.process(@contact).should eq "0123456789"
     end
 
