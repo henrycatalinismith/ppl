@@ -28,7 +28,7 @@ describe Ppl::Adapter::Vcard::Vpim, "#encode" do
   end
 
   it "should encode the contact's organization" do
-    @contact.organization = "Example Ltd"
+    @contact.organizations.push("Example Ltd")
     @adapter.encode(@contact).should include("ORG:Example Ltd")
   end
 
@@ -150,7 +150,7 @@ describe Ppl::Adapter::Vcard::Vpim, "#decode" do
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
-    contact.organization.should eq "Example Ltd"
+    contact.organizations.first.should eq "Example Ltd"
   end
 
   it "should decode the contact's street address" do

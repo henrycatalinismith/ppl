@@ -18,7 +18,7 @@ class Ppl::Adapter::Vcard::Vpim
       encode_name(contact, maker)
       encode_email_addresses(contact, maker)
       encode_phone_number(contact, maker)
-      encode_organization(contact, maker)
+      encode_organizations(contact, maker)
       encode_postal_address(contact, maker)
       encode_urls(contact, maker)
     end
@@ -32,7 +32,7 @@ class Ppl::Adapter::Vcard::Vpim
     decode_email_addresses(vcard, contact)
     decode_phone_number(vcard, contact)
     decode_postal_address(vcard, contact)
-    decode_organization(vcard, contact)
+    decode_organizations(vcard, contact)
     decode_name(vcard, contact)
     decode_urls(vcard, contact)
     return contact
@@ -66,9 +66,9 @@ class Ppl::Adapter::Vcard::Vpim
     end
   end
 
-  def encode_organization(contact, vcard_maker)
-    if !contact.organization.nil?
-      vcard_maker.org=(contact.organization)
+  def encode_organizations(contact, vcard_maker)
+    if !contact.organizations.empty?
+      vcard_maker.org = contact.organizations
     end
   end
 
@@ -99,9 +99,11 @@ class Ppl::Adapter::Vcard::Vpim
     end
   end
 
-  def decode_organization(vcard, contact)
-    if !vcard.org.nil?
-      contact.organization = vcard.org.first
+  def decode_organizations(vcard, contact)
+    if vcard.org.is_a?(Array)
+      contact.organizations = vcard.org
+    elsif !vcard.org.nil?
+      contact.organizations.push(vcard.org)
     end
   end
 
