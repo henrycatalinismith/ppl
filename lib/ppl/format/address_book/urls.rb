@@ -16,16 +16,9 @@ class Ppl::Format::AddressBook::Urls < Ppl::Format::AddressBook
   private
 
   def add_row(contact)
-    id   = sprintf("%s:", contact.id)
-    urls = nil
-
-    if !contact.urls.empty?
-      urls = contact.urls.join(", ")
-    end
-
     @table.add_row({
-      :id   => id,
-      :urls => urls,
+      :id   => sprintf("%s:", contact.id),
+      :urls => contact.urls.join(", "),
     })
   end
 

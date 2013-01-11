@@ -18,7 +18,7 @@ describe Ppl::Format::AddressBook::Urls do
     it "should at least show the contact's id" do
       @table.should_receive(:add_row).with({
         :id   => "test:",
-        :urls => nil,
+        :urls => "",
       })
       @format.process(@address_book)
     end
