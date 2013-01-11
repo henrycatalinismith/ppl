@@ -16,15 +16,12 @@ class Ppl::Format::AddressBook::Birthdays < Ppl::Format::AddressBook
   private
 
   def add_row(contact)
-    id       = sprintf("%s:", contact.id)
     birthday = nil
-
     if !contact.birthday.nil?
       birthday = contact.birthday.strftime("%Y-%m-%d")
     end
-
     @table.add_row({
-      :id       => id,
+      :id       => sprintf("%s:", contact.id),
       :birthday => birthday,
     })
   end
