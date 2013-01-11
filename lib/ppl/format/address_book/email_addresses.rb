@@ -4,7 +4,7 @@ class Ppl::Format::AddressBook::EmailAddresses < Ppl::Format::AddressBook
   attr_writer :table
 
   def initialize
-    @table = Ppl::Format::Table.new([:id, :email_addresses])
+    @table = Ppl::Format::Table.new([:contact_id, :email_addresses])
   end
 
   def process(address_book)
@@ -16,16 +16,9 @@ class Ppl::Format::AddressBook::EmailAddresses < Ppl::Format::AddressBook
   private
 
   def add_row(contact)
-    id = sprintf("%s:", contact.id)
-    email_addresses = nil
-
-    if !contact.email_addresses.empty?
-      email_addresses = contact.email_addresses.join(", ")
-    end
-
     @table.add_row({
-      :id            => id,
-      :email_addresses => email_addresses,
+      :contact_id      => sprintf("%s:", contact.id),
+      :email_addresses => contact.email_addresses.join(", "),
     })
   end
 
