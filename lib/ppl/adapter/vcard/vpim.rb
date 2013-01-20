@@ -139,7 +139,13 @@ class Ppl::Adapter::Vcard::Vpim
   end
 
   def decode_nicknames(vcard, contact)
-    vcard.nicknames.each { |nickname| contact.nicknames.push(nickname) }
+    # There appears to be a minor vpim bug here: vpim allows us to save an array
+    # of nicknames but sees it as one big single nickname when decoding. This
+    # code is here to work around that issue by "finishing the job".
+    nicknames = vcard.nicknames.first
+    if !nicknames.nil?
+      nicknames.split(";").each{ |nickname| contact.nicknames.push(nickname) }
+    end
   end
 
 end

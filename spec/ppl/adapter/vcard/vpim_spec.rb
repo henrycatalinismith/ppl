@@ -247,7 +247,7 @@ describe Ppl::Adapter::Vcard::Vpim, "#decode" do
       "BEGIN:VCARD",
       "N:,test",
       "VERSION:3.0",
-      "NICKNAME:Happy",
+      "NICKNAME:Happy;Cheerful",
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
