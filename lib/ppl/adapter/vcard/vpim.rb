@@ -18,6 +18,7 @@ class Ppl::Adapter::Vcard::Vpim
       encode_name(contact, maker)
       encode_email_addresses(contact, maker)
       encode_phone_numbers(contact, maker)
+      encode_nicknames(contact, maker)
       encode_organizations(contact, maker)
       encode_postal_address(contact, maker)
       encode_urls(contact, maker)
@@ -32,6 +33,7 @@ class Ppl::Adapter::Vcard::Vpim
     decode_email_addresses(vcard, contact)
     decode_phone_numbers(vcard, contact)
     decode_postal_address(vcard, contact)
+    decode_nicknames(vcard, contact)
     decode_organizations(vcard, contact)
     decode_name(vcard, contact)
     decode_urls(vcard, contact)
@@ -89,6 +91,10 @@ class Ppl::Adapter::Vcard::Vpim
     contact.urls.each { |url| vcard_maker.add_url(url) }
   end
 
+  def encode_nicknames(contact, vcard_maker)
+    vcard_maker.nickname = contact.nicknames
+  end
+
   def decode_birthday(vcard, contact)
     contact.birthday = vcard.birthday unless vcard.birthday.nil?
   end
@@ -130,6 +136,10 @@ class Ppl::Adapter::Vcard::Vpim
 
   def decode_urls(vcard, contact)
     vcard.urls.each { |url| contact.urls.push(url.uri) }
+  end
+
+  def decode_nicknames(vcard, contact)
+    vcard.nicknames.each { |nickname| contact.nicknames.push(nickname) }
   end
 
 end
