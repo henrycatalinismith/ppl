@@ -6,7 +6,7 @@ class Ppl::Command::Nick < Ppl::Command::Attribute
 
   def initialize
     @attribute   = :nicknames
-    @show_format = Ppl::Format::Contact::Urls.new
+    @show_format = Ppl::Format::Contact::Nicknames.new
     @list_format = Ppl::Format::AddressBook::Nicknames.new
   end
 
