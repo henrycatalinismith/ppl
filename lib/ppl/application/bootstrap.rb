@@ -13,6 +13,7 @@ class Ppl::Application::Bootstrap
       Ppl::Command::Mv.new,
       Ppl::Command::Show.new,
       Ppl::Command::Name.new,
+      Ppl::Command::Nick.new,
       Ppl::Command::Email.new,
       Ppl::Command::Org.new,
       Ppl::Command::Phone.new,

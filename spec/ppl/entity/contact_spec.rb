@@ -52,6 +52,12 @@ describe Ppl::Entity::Contact do
     end
   end
 
+  describe "#nicknames" do
+    it "should return an array" do
+      @contact.nicknames.should be_a(Array)
+    end
+  end
+
   describe "#organizations" do
     it "should return an array" do
       @contact.organizations.should be_a(Array)
