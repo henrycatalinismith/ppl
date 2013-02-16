@@ -30,5 +30,14 @@ class Ppl::Entity::Contact
     @email_addresses.include? email_address
   end
 
+  def age(on_date)
+    if @birthday.nil?
+      nil
+    else
+      # From http://stackoverflow.com/a/2357790
+      on_date.year - @birthday.year - ((on_date.month > @birthday.month || (on_date.month == @birthday.month && on_date.day >= @birthday.day)) ? 0 : 1)
+    end
+  end
+
 end
 
