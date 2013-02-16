@@ -70,5 +70,15 @@ describe Ppl::Entity::Contact do
     end
   end
 
+  describe "#age" do
+    it "should return nil if the date of birth is unknown" do
+      @contact.age(Date.today).should eq nil
+    end
+    it "should return the contact's age" do
+      @contact.birthday = Date.parse("1970-01-01")
+      @contact.age(Date.parse("1980-01-02")).should eq 10
+    end
+  end
+
 end
 

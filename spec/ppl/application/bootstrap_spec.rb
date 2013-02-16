@@ -36,6 +36,9 @@ describe Ppl::Application::Bootstrap do
     it "should contain the 'add' command" do
       @bootstrap.command_suite.find_command("add").should_not be nil
     end
+    it "should contain the 'age' command" do
+      @bootstrap.command_suite.find_command("age").should_not be nil
+    end
     it "should contain the 'bday' command" do
       @bootstrap.command_suite.find_command("bday").should_not be nil
     end
