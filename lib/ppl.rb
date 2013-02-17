@@ -1,7 +1,7 @@
 
 module Ppl
 
-  Version = "1.13.0"
+  Version = "1.14.0"
 
   module Adapter
   end
