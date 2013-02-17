@@ -1,6 +1,8 @@
 
 class Ppl::Command::Execute < Ppl::Application::Command
 
+  attr_accessor :command
+
   def initialize(name, command, description)
     @name = name
     @command = command

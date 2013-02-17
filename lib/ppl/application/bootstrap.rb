@@ -44,6 +44,12 @@ class Ppl::Application::Bootstrap
     return config
   end
 
+  def execute_command
+    command = Ppl::Command::Execute.new(nil, nil, nil)
+    command.storage = storage_adapter
+    command
+  end
+
   def git_commands
     [
       Ppl::Command::Execute.new("pull", "git pull", "Execute 'git pull' in the address book directory"),
@@ -66,6 +72,7 @@ class Ppl::Application::Bootstrap
     router = Ppl::Application::Router.new(command_suite)
     router.aliases = configuration.aliases
     router.default = "help"
+    router.execute_command = execute_command
     return router
   end
 
