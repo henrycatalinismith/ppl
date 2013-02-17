@@ -113,5 +113,9 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
     true
   end
 
+  def path
+    @disk.path
+  end
+
 end
 
