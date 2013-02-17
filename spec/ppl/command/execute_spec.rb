@@ -2,7 +2,7 @@
 describe Ppl::Command::Execute do
 
   before(:each) do
-    @command = Ppl::Command::Execute.new("remote", "git remote")
+    @command = Ppl::Command::Execute.new("remote", "git remote", "Execute 'git remote' in the address book directory")
     @input   = Ppl::Application::Input.new
     @output  = double(Ppl::Application::Output)
     @storage = double(Ppl::Adapter::Storage)
