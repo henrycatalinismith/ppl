@@ -46,9 +46,9 @@ class Ppl::Application::Bootstrap
 
   def git_commands
     [
-      Ppl::Command::Execute.new("pull", "git pull"),
-      Ppl::Command::Execute.new("push", "git push"),
-      Ppl::Command::Execute.new("remote", "git remote"),
+      Ppl::Command::Execute.new("pull", "git pull", "Execute 'git pull' in the address book directory"),
+      Ppl::Command::Execute.new("push", "git push", "Execute 'git push' in the address book directory"),
+      Ppl::Command::Execute.new("remote", "git remote", "Execute 'git remote' in the address book directory"),
     ]
   end
 

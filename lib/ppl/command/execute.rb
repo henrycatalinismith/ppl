@@ -1,9 +1,10 @@
 
 class Ppl::Command::Execute < Ppl::Application::Command
 
-  def initialize(name, command)
+  def initialize(name, command, description)
     @name = name
     @command = command
+    @description = description
   end
 
   def execute(input, output)
