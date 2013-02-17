@@ -73,5 +73,9 @@ class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
     File.join(@directory.path, id + ".vcf")
   end
 
+  def path
+    @directory.path
+  end
+
 end
 

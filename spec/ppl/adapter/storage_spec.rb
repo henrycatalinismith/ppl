@@ -48,5 +48,11 @@ describe Ppl::Adapter::Storage do
     end
   end
 
+  describe "#path" do
+    it "should raise not implemented error" do
+      expect{@storage.path}.to raise_error(NotImplementedError)
+    end
+  end
+
 end
 
