@@ -31,7 +31,7 @@ class Ppl::Application::Shell
   end
 
   def prepare_command(command, input)
-    if !command.nil?
+    if !command.nil? && !command.is_a?(Ppl::Command::Execute)
       @optparse = OptionParser.new do |parser|
         command.options(parser, input.options)
       end
