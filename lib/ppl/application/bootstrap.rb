@@ -23,6 +23,7 @@ class Ppl::Application::Bootstrap
       Ppl::Command::Url.new,
       Ppl::Command::Version.new,
     ]
+    commands += git_commands
     commands.each do |command|
       command.storage = storage_adapter
     end
@@ -41,6 +42,14 @@ class Ppl::Application::Bootstrap
   def configuration
     config = Ppl::Application::Configuration.new
     return config
+  end
+
+  def git_commands
+    [
+      Ppl::Command::Execute.new("pull", "git pull"),
+      Ppl::Command::Execute.new("push", "git push"),
+      Ppl::Command::Execute.new("remote", "git remote"),
+    ]
   end
 
   def input

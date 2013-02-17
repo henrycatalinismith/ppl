@@ -2,7 +2,7 @@
 describe Ppl::Command::Execute do
 
   before(:each) do
-    @command = Ppl::Command::Execute.new
+    @command = Ppl::Command::Execute.new("remote", "git remote")
     @input   = Ppl::Application::Input.new
     @output  = double(Ppl::Application::Output)
     @storage = double(Ppl::Adapter::Storage)
@@ -19,12 +19,19 @@ describe Ppl::Command::Execute do
       @command.execute(@input, @output)
     end
 
-    it "shoud run the specified command" do
-      @command.command = "ls"
+    it "should run the specified command" do
       Dir.stub(:chdir)
-      Kernel.should_receive(:exec).with("ls")
+      Kernel.should_receive(:exec).with("git remote")
       @command.execute(@input, @output)
     end
+
+    it "should pass arguments through to the command" do
+      @input.arguments = ["--help"]
+      Dir.stub(:chdir)
+      Kernel.should_receive(:exec).with("git remote --help")
+      @command.execute(@input, @output)
+    end
+
   end
 
 end
