@@ -69,6 +69,12 @@ describe Ppl::Adapter::Storage::Disk do
     FakeFS.deactivate!
   end
 
+  describe "#path" do
+    it "should return the path of the directory" do
+      @storage.path.should eq "/contacts"
+    end
+  end
+
   describe "#load_address_book" do
 
     it "should return a Ppl::Entity::AddressBook" do

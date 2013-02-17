@@ -16,6 +16,7 @@ describe Ppl::Adapter::Storage::Git do
     Rugged::Repository.stub(:new).and_return(@repo)
 
     @disk.stub(:directory).and_return(Dir.new("/contacts"))
+    @disk.stub(:path).and_return("/contacts")
     @contact.stub(:id).and_return("test")
 
     @git = Ppl::Adapter::Storage::Git.new(@disk)
@@ -25,6 +26,12 @@ describe Ppl::Adapter::Storage::Git do
   after(:each) do
     FileUtils.rm_rf "/contacts"
     FakeFS.deactivate!
+  end
+
+  describe "#path" do
+    it "should return the path of the repository" do
+      @git.path.should eq "/contacts"
+    end
   end
 
   describe "#initialize" do
