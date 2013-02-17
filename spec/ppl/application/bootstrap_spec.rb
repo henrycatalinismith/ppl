@@ -92,6 +92,18 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
+  describe "#git_commands" do
+    it "should contain the 'pull' command" do
+      @bootstrap.git_commands[0].name.should eq "pull"
+    end
+    it "should contain the 'push' command" do
+      @bootstrap.git_commands[1].name.should eq "push"
+    end
+    it "should contain the 'remote' command" do
+      @bootstrap.git_commands[2].name.should eq "remote"
+    end
+  end
+
   describe "#configuration" do
     it "should return a Ppl::Application::Configuration" do
       @bootstrap.configuration.should be_a(Ppl::Application::Configuration)
