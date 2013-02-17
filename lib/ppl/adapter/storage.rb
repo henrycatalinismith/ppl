@@ -29,5 +29,9 @@ class Ppl::Adapter::Storage
     raise NotImplementedError
   end
 
+  def path
+    raise NotImplementedError
+  end
+
 end
 
