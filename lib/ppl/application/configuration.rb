@@ -19,8 +19,8 @@ class Ppl::Application::Configuration
   end
 
   def aliases
-    user_aliases = user_configuration["aliases"]
-    default_aliases = default_configuration["aliases"]
+    user_aliases = user_configuration["alias"]
+    default_aliases = default_configuration["alias"]
     if user_aliases.nil?
       default_aliases
     else
@@ -32,7 +32,7 @@ class Ppl::Application::Configuration
 
   def default_configuration
     {
-      "aliases" => {},
+      "alias" => {},
       "address book" => {
         "path" => Dir.pwd
       },
