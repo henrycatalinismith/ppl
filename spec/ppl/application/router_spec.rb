@@ -5,6 +5,9 @@ describe Ppl::Application::Router do
     @suite  = Ppl::Application::CommandSuite.new
     @router = Ppl::Application::Router.new(@suite)
 
+    @execute = double(Ppl::Command::Execute)
+    @router.execute_command = @execute
+
     @cmd_one = Ppl::Application::Command.new
     @cmd_one.name = "one"
 
@@ -40,6 +43,13 @@ describe Ppl::Application::Router do
     it "should apply the aliases if the argument doesn't match a command" do
       @router.aliases = {"t" => "two"}
       @router.route("t").should be @cmd_two
+    end
+
+    it "should return a Ppl::Command::Execute if the input matches a bang alias" do
+      @execute.should_receive(:name=).with("t")
+      @execute.should_receive(:command=).with("two")
+      @router.aliases = {"t" => "!two"}
+      @router.route("t").should be @execute
     end
 
   end
