@@ -3,26 +3,27 @@ class Ppl::Application::Bootstrap
 
   def commands
     commands = [
-      Ppl::Command::Init.new,
-      Ppl::Command::Bday.new,
-      Ppl::Command::Help.new,
       Ppl::Command::Add.new,
-      Ppl::Command::Rm.new,
+      Ppl::Command::Age.new,
+      Ppl::Command::Bday.new,
+      Ppl::Command::Email.new,
+      Ppl::Command::Help.new,
+      Ppl::Command::Init.new,
       Ppl::Command::Ls.new,
       Ppl::Command::Mutt.new,
       Ppl::Command::Mv.new,
-      Ppl::Command::Show.new,
       Ppl::Command::Name.new,
       Ppl::Command::Nick.new,
-      Ppl::Command::Email.new,
       Ppl::Command::Org.new,
       Ppl::Command::Phone.new,
       Ppl::Command::Post.new,
+      Ppl::Command::Rm.new,
       Ppl::Command::Shell.new,
+      Ppl::Command::Show.new,
       Ppl::Command::Url.new,
       Ppl::Command::Version.new,
-      Ppl::Command::Age.new,
     ]
+    commands += git_commands
     commands.each do |command|
       command.storage = storage_adapter
     end
@@ -41,6 +42,14 @@ class Ppl::Application::Bootstrap
   def configuration
     config = Ppl::Application::Configuration.new
     return config
+  end
+
+  def git_commands
+    [
+      Ppl::Command::Execute.new("pull", "git pull", "Execute 'git pull' in the address book directory"),
+      Ppl::Command::Execute.new("push", "git push", "Execute 'git push' in the address book directory"),
+      Ppl::Command::Execute.new("remote", "git remote", "Execute 'git remote' in the address book directory"),
+    ]
   end
 
   def input
