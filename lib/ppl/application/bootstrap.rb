@@ -1,7 +1,11 @@
 
+require "morphine"
+
 class Ppl::Application::Bootstrap
 
-  def commands
+  include Morphine
+
+  register :commands do
     commands = [
       Ppl::Command::Add.new,
       Ppl::Command::Age.new,
@@ -27,30 +31,29 @@ class Ppl::Application::Bootstrap
     commands.each do |command|
       command.storage = storage_adapter
     end
-    return commands
+    commands
   end
 
-  def command_suite
-    suite = Ppl::Application::CommandSuite.new
+  register :command_suite do
+    command_suite = Ppl::Application::CommandSuite.new
     commands.each do |command|
-      suite.add_command(command)
+      command_suite.add_command(command)
     end
-    suite.find_command("help").command_suite = suite
-    return suite
+    command_suite.find_command("help").command_suite = command_suite
+    command_suite
   end
 
-  def configuration
-    config = Ppl::Application::Configuration.new
-    return config
+  register :configuration do
+    Ppl::Application::Configuration.new
   end
 
-  def execute_command
+  register :execute_command do
     command = Ppl::Command::Execute.new(nil, nil, nil)
     command.storage = storage_adapter
     command
   end
 
-  def git_commands
+  register :git_commands do
     [
       Ppl::Command::Execute.new("pull", "git pull", "Execute 'git pull' in the address book directory"),
       Ppl::Command::Execute.new("push", "git push", "Execute 'git push' in the address book directory"),
@@ -58,44 +61,39 @@ class Ppl::Application::Bootstrap
     ]
   end
 
-  def input
-    input = Ppl::Application::Input.new(ARGV.dup)
-    return input
+  register :input do
+    Ppl::Application::Input.new(ARGV.dup)
   end
 
-  def output
-    output = Ppl::Application::Output.new($stdout, $stderr)
-    return output
+  register :output do
+    Ppl::Application::Output.new($stdout, $stderr)
   end
 
-  def router
+  register :router do
     router = Ppl::Application::Router.new(command_suite)
     router.aliases = configuration.aliases
     router.default = "help"
     router.execute_command = execute_command
-    return router
+    router
   end
 
-  def shell
+  register :shell do
     shell = Ppl::Application::Shell.new
     shell.router = router
-    return shell
+    shell
   end
 
-  def storage_adapter
+  register :storage_adapter do
     config = configuration
-
     directory = Dir.new(config.address_book_path)
     factory   = Ppl::Adapter::Storage::Factory.new(vcard_adapter)
     storage   = factory.load_adapter(directory)
-
     storage.vcard_adapter = vcard_adapter
-    return storage
+    storage
   end
 
-  def vcard_adapter
-    vcard = Ppl::Adapter::Vcard::Vpim.new
-    return vcard
+  register :vcard_adapter do
+    Ppl::Adapter::Vcard::Vpim.new
   end
 
 end
