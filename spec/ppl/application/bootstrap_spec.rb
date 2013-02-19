@@ -5,22 +5,147 @@ describe Ppl::Application::Bootstrap do
     @bootstrap = Ppl::Application::Bootstrap.new
   end
 
-  describe "#commands" do
-    before(:each) do
-      @bootstrap.stub(:storage_adapter).and_return(Ppl::Adapter::Storage.new)
+  describe "#command_add" do
+    it "should return a Ppl::Command::Add" do
+      @bootstrap.command_add.should be_a(Ppl::Command::Add)
     end
-    it "should return an array" do
-      @bootstrap.commands.should be_an(Array)
+  end
+
+  describe "#command_age" do
+    it "should return a Ppl::Command::Age" do
+      @bootstrap.command_age.should be_a(Ppl::Command::Age)
     end
-    it "should return commands" do
-      @bootstrap.commands.each do |command|
-        command.should be_a(Ppl::Application::Command)
-      end
+  end
+
+  describe "#command_bday" do
+    it "should return a Ppl::Command::Bday" do
+      @bootstrap.command_bday.should be_a(Ppl::Command::Bday)
     end
-    it "should inject a storage adapter into each command" do
-      @bootstrap.commands.each do |command|
-        command.storage.should be_a(Ppl::Adapter::Storage)
-      end
+  end
+
+  describe "#command_email" do
+    it "should return a Ppl::Command::Email" do
+      @bootstrap.command_email.should be_a(Ppl::Command::Email)
+    end
+  end
+
+  describe "#command_help" do
+    it "should return a Ppl::Command::Help" do
+      @bootstrap.command_help.should be_a(Ppl::Command::Help)
+    end
+  end
+
+  describe "#command_init" do
+    it "should return a Ppl::Command::Init" do
+      @bootstrap.command_init.should be_a(Ppl::Command::Init)
+    end
+  end
+
+  describe "#command_ls" do
+    it "should return a Ppl::Command::Ls" do
+      @bootstrap.command_ls.should be_a(Ppl::Command::Ls)
+    end
+  end
+
+  describe "#command_mutt" do
+    it "should return a Ppl::Command::Mutt" do
+      @bootstrap.command_mutt.should be_a(Ppl::Command::Mutt)
+    end
+  end
+
+  describe "#command_mv" do
+    it "should return a Ppl::Command::Mv" do
+      @bootstrap.command_mv.should be_a(Ppl::Command::Mv)
+    end
+  end
+
+  describe "#command_name" do
+    it "should return a Ppl::Command::Name" do
+      @bootstrap.command_name.should be_a(Ppl::Command::Name)
+    end
+  end
+
+  describe "#command_nick" do
+    it "should return a Ppl::Command::Nick" do
+      @bootstrap.command_nick.should be_a(Ppl::Command::Nick)
+    end
+  end
+
+  describe "#command_org" do
+    it "should return a Ppl::Command::Org" do
+      @bootstrap.command_org.should be_a(Ppl::Command::Org)
+    end
+  end
+
+  describe "#command_phone" do
+    it "should return a Ppl::Command::Phone" do
+      @bootstrap.command_phone.should be_a(Ppl::Command::Phone)
+    end
+  end
+
+  describe "#command_post" do
+    it "should return a Ppl::Command::Post" do
+      @bootstrap.command_post.should be_a(Ppl::Command::Post)
+    end
+  end
+
+  describe "#command_pull" do
+    it "should return a command" do
+      @bootstrap.command_pull.should be_a(Ppl::Application::Command)
+    end
+  end
+
+  describe "#command_push" do
+    it "should return a command" do
+      @bootstrap.command_push.should be_a(Ppl::Application::Command)
+    end
+  end
+
+  describe "#command_remote" do
+    it "should return a command" do
+      @bootstrap.command_remote.should be_a(Ppl::Application::Command)
+    end
+  end
+
+  describe "#command_rm" do
+    it "should return a Ppl::Command::Rm" do
+      @bootstrap.command_rm.should be_a(Ppl::Command::Rm)
+    end
+  end
+
+  describe "#command_shell" do
+    it "should return a Ppl::Command::Shell" do
+      @bootstrap.command_shell.should be_a(Ppl::Command::Shell)
+    end
+  end
+
+  describe "#command_show" do
+    it "should return a Ppl::Command::Show" do
+      @bootstrap.command_show.should be_a(Ppl::Command::Show)
+    end
+  end
+
+  describe "#command_url" do
+    it "should return a Ppl::Command::Url" do
+      @bootstrap.command_url.should be_a(Ppl::Command::Url)
+    end
+  end
+
+  describe "#command_version" do
+    it "should return a Ppl::Command::Version" do
+      @bootstrap.command_version.should be_a(Ppl::Command::Version)
+    end
+  end
+
+  describe "#format_address_book_birthdays" do
+    it "should return a Ppl::Format::AddressBook::Birthdays" do
+      @bootstrap.format_address_book_birthdays.should be_a(Ppl::Format::AddressBook::Birthdays)
+    end
+  end
+
+  describe "#format_contact_birthday" do
+    it "should return a Ppl::Format::Contact::Birthday" do
+      @bootstrap.format_contact_birthday.should be_a(Ppl::Format::Contact::Birthday)
     end
   end
 
@@ -72,6 +197,15 @@ describe Ppl::Application::Bootstrap do
     it "should contain the 'post' command" do
       @bootstrap.command_suite.find_command("post").should_not be nil
     end
+    it "should contain the 'pull' command" do
+      @bootstrap.command_suite.find_command("pull").should_not be nil
+    end
+    it "should contain the 'push' command" do
+      @bootstrap.command_suite.find_command("push").should_not be nil
+    end
+    it "should contain the 'remote' command" do
+      @bootstrap.command_suite.find_command("remote").should_not be nil
+    end
     it "should contain the 'rm' command" do
       @bootstrap.command_suite.find_command("rm").should_not be nil
     end
@@ -89,18 +223,6 @@ describe Ppl::Application::Bootstrap do
     end
     it "should contain the 'version' command" do
       @bootstrap.command_suite.find_command("version").should_not be nil
-    end
-  end
-
-  describe "#git_commands" do
-    it "should contain the 'pull' command" do
-      @bootstrap.git_commands[0].name.should eq "pull"
-    end
-    it "should contain the 'push' command" do
-      @bootstrap.git_commands[1].name.should eq "push"
-    end
-    it "should contain the 'remote' command" do
-      @bootstrap.git_commands[2].name.should eq "remote"
     end
   end
 
