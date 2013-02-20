@@ -7,11 +7,6 @@ class Ppl::Command::Name < Ppl::Application::Command
   attr_writer :show_format
   attr_writer :list_format
 
-  def initialize
-    @show_format = Ppl::Format::Contact::Name.new
-    @list_format = Ppl::Format::AddressBook::Names.new
-  end
-
   def options(parser, options)
     parser.banner = "usage: ppl name <contact> [<name>]"
   end

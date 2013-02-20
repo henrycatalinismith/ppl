@@ -161,6 +161,12 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
+  describe "#format_address_book_names" do
+    it "should return a Ppl::Format::AddressBook::Names" do
+      @bootstrap.format_address_book_names.should be_a(Ppl::Format::AddressBook::Names)
+    end
+  end
+
   describe "#format_address_book_one_line" do
     it "should return a Ppl::Format::AddressBook::OneLine" do
       @bootstrap.format_address_book_one_line.should be_a(Ppl::Format::AddressBook::OneLine)
@@ -182,6 +188,12 @@ describe Ppl::Application::Bootstrap do
   describe "#format_contact_email_addresses" do
     it "should return a Ppl::Format::Contact::EmailAddresses" do
       @bootstrap.format_contact_email_addresses.should be_a(Ppl::Format::Contact::EmailAddresses)
+    end
+  end
+
+  describe "#format_contact_name" do
+    it "should return a Ppl::Format::Contact::Name" do
+      @bootstrap.format_contact_name.should be_a(Ppl::Format::Contact::Name)
     end
   end
 

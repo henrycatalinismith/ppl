@@ -70,6 +70,8 @@ class Ppl::Application::Bootstrap
   register :command_name do
     name = Ppl::Command::Name.new
     name.storage = storage_adapter
+    name.list_format = format_address_book_names
+    name.show_format = format_contact_name
     name
   end
 
@@ -199,6 +201,10 @@ class Ppl::Application::Bootstrap
     Ppl::Format::AddressBook::MuttQuery.new
   end
 
+  register :format_address_book_names do
+    Ppl::Format::AddressBook::Names.new
+  end
+
   register :format_address_book_one_line do
     Ppl::Format::AddressBook::OneLine.new
   end
@@ -213,6 +219,10 @@ class Ppl::Application::Bootstrap
 
   register :format_contact_email_addresses do
     Ppl::Format::Contact::EmailAddresses.new
+  end
+
+  register :format_contact_name do
+    Ppl::Format::Contact::Name.new
   end
 
   register :input do
