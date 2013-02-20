@@ -215,6 +215,10 @@ class Ppl::Application::Bootstrap
     Ppl::Format::AddressBook::OneLine.new
   end
 
+  register :format_address_book_organizations do
+    Ppl::Format::AddressBook::Organizations.new
+  end
+
   register :format_contact_age do
     Ppl::Format::Contact::Age.new
   end
@@ -233,6 +237,10 @@ class Ppl::Application::Bootstrap
 
   register :format_contact_nicknames do
     Ppl::Format::Contact::Nicknames.new
+  end
+
+  register :format_contact_organizations do
+    Ppl::Format::Contact::Organization.new
   end
 
   register :input do
