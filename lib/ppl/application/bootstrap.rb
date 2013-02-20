@@ -30,6 +30,8 @@ class Ppl::Application::Bootstrap
   register :command_email do
     email = Ppl::Command::Email.new
     email.storage = storage_adapter
+    email.list_format = format_address_book_email_addresses
+    email.show_format = format_contact_email_addresses
     email
   end
 
@@ -187,12 +189,20 @@ class Ppl::Application::Bootstrap
     Ppl::Format::AddressBook::Birthdays.new
   end
 
+  register :format_address_book_email_addresses do
+    Ppl::Format::AddressBook::EmailAddresses.new
+  end
+
   register :format_contact_age do
     Ppl::Format::Contact::Age.new
   end
 
   register :format_contact_birthday do
     Ppl::Format::Contact::Birthday.new
+  end
+
+  register :format_contact_email_addresses do
+    Ppl::Format::Contact::EmailAddresses.new
   end
 
   register :input do
