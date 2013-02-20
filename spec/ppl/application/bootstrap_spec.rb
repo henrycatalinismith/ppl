@@ -155,6 +155,12 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
+  describe "#format_address_book_mutt_query" do
+    it "should return a Ppl::Format::AddressBook::MuttQuery" do
+      @bootstrap.format_address_book_mutt_query.should be_a(Ppl::Format::AddressBook::MuttQuery)
+    end
+  end
+
   describe "#format_address_book_one_line" do
     it "should return a Ppl::Format::AddressBook::OneLine" do
       @bootstrap.format_address_book_one_line.should be_a(Ppl::Format::AddressBook::OneLine)

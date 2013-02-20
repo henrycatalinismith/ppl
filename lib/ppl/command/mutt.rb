@@ -6,10 +6,6 @@ class Ppl::Command::Mutt < Ppl::Application::Command
 
   attr_writer :format
 
-  def initialize
-    @format = Ppl::Format::AddressBook::MuttQuery.new
-  end
-
   def options(parser, options)
     parser.banner = "usage: ppl mutt <query>"
   end
