@@ -137,9 +137,21 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
+  describe "#format_address_book_ages" do
+    it "should return a Ppl::Format::AddressBook::Ages" do
+      @bootstrap.format_address_book_ages.should be_a(Ppl::Format::AddressBook::Ages)
+    end
+  end
+
   describe "#format_address_book_birthdays" do
     it "should return a Ppl::Format::AddressBook::Birthdays" do
       @bootstrap.format_address_book_birthdays.should be_a(Ppl::Format::AddressBook::Birthdays)
+    end
+  end
+
+  describe "#format_contact_age" do
+    it "should return a Ppl::Format::Contact::Age" do
+      @bootstrap.format_contact_age.should be_a(Ppl::Format::Contact::Age)
     end
   end
 
