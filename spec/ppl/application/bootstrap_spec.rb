@@ -185,6 +185,24 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
+  describe "#format_address_book_phone_numbers" do
+    it "should return a Ppl::Format::Address_book::PhoneNumbers" do
+      @bootstrap.format_address_book_phone_numbers.should be_a(Ppl::Format::AddressBook::PhoneNumbers)
+    end
+  end
+
+  describe "#format_address_book_postal_addresses" do
+    it "should return a Ppl::Format::AddressBook::PostalAddresses" do
+      @bootstrap.format_address_book_postal_addresses.should be_a(Ppl::Format::AddressBook::PostalAddresses)
+    end
+  end
+
+  describe "#format_address_book_urls" do
+    it "should return a Ppl::Format::AddressBook::Urls" do
+      @bootstrap.format_address_book_urls.should be_a(Ppl::Format::AddressBook::Urls)
+    end
+  end
+
   describe "#format_contact_age" do
     it "should return a Ppl::Format::Contact::Age" do
       @bootstrap.format_contact_age.should be_a(Ppl::Format::Contact::Age)
@@ -218,6 +236,24 @@ describe Ppl::Application::Bootstrap do
   describe "#format_contact_organizations" do
     it "should return a Ppl::Format::Contact::Organizations" do
       @bootstrap.format_contact_organizations.should be_a(Ppl::Format::Contact::Organization)
+    end
+  end
+
+  describe "#format_contact_phone_numbers" do
+    it "should return a Ppl::Format::Contact::PhoneNumber" do
+      @bootstrap.format_contact_phone_numbers.should be_a(Ppl::Format::Contact::PhoneNumber)
+    end
+  end
+
+  describe "#format_contact_postal_addresses" do
+    it "should return a Ppl::Format::Contact::PostalAddress" do
+      @bootstrap.format_contact_postal_addresses.should be_a(Ppl::Format::Contact::PostalAddress)
+    end
+  end
+
+  describe "#format_contact_urls" do
+    it "should return a Ppl::Format::Contact::Urls" do
+      @bootstrap.format_contact_urls.should be_a(Ppl::Format::Contact::Urls)
     end
   end
 

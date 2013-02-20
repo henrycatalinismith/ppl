@@ -92,12 +92,16 @@ class Ppl::Application::Bootstrap
   register :command_phone do
     phone = Ppl::Command::Phone.new
     phone.storage = storage_adapter
+    phone.list_format = format_address_book_phone_numbers
+    phone.show_format = format_contact_phone_numbers
     phone
   end
 
   register :command_post do
     post = Ppl::Command::Post.new
     post.storage = storage_adapter
+    post.list_format = format_address_book_postal_addresses
+    post.show_format = format_contact_postal_addresses
     post
   end
 
@@ -140,6 +144,8 @@ class Ppl::Application::Bootstrap
   register :command_url do
     url = Ppl::Command::Url.new
     url.storage = storage_adapter
+    url.list_format = format_address_book_urls
+    url.show_format = format_contact_urls
     url
   end
 
@@ -219,6 +225,18 @@ class Ppl::Application::Bootstrap
     Ppl::Format::AddressBook::Organizations.new
   end
 
+  register :format_address_book_phone_numbers do
+    Ppl::Format::AddressBook::PhoneNumbers.new
+  end
+
+  register :format_address_book_postal_addresses do
+    Ppl::Format::AddressBook::PostalAddresses.new
+  end
+
+  register :format_address_book_urls do
+    Ppl::Format::AddressBook::Urls.new
+  end
+
   register :format_contact_age do
     Ppl::Format::Contact::Age.new
   end
@@ -241,6 +259,18 @@ class Ppl::Application::Bootstrap
 
   register :format_contact_organizations do
     Ppl::Format::Contact::Organization.new
+  end
+
+  register :format_contact_phone_numbers do
+    Ppl::Format::Contact::PhoneNumber.new
+  end
+
+  register :format_contact_postal_addresses do
+    Ppl::Format::Contact::PostalAddress.new
+  end
+
+  register :format_contact_urls do
+    Ppl::Format::Contact::Urls.new
   end
 
   register :input do

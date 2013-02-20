@@ -5,9 +5,7 @@ class Ppl::Command::Url < Ppl::Command::Attribute
   description "List, show or change URLs"
 
   def initialize
-    @attribute   = :urls
-    @show_format = Ppl::Format::Contact::Urls.new
-    @list_format = Ppl::Format::AddressBook::Urls.new
+    @attribute = :urls
   end
 
   def options(parser, options)
