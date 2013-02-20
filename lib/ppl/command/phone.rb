@@ -5,9 +5,7 @@ class Ppl::Command::Phone < Ppl::Command::Attribute
   description "List, show or change phone numbers"
 
   def initialize
-    @attribute   = :phone_numbers
-    @show_format = Ppl::Format::Contact::PhoneNumber.new
-    @list_format = Ppl::Format::AddressBook::PhoneNumbers.new
+    @attribute = :phone_numbers
   end
 
   def options(parser, options)
