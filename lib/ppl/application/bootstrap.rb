@@ -57,6 +57,7 @@ class Ppl::Application::Bootstrap
   register :command_mutt do
     mutt = Ppl::Command::Mutt.new
     mutt.storage = storage_adapter
+    mutt.format = format_address_book_mutt_query
     mutt
   end
 
@@ -192,6 +193,10 @@ class Ppl::Application::Bootstrap
 
   register :format_address_book_email_addresses do
     Ppl::Format::AddressBook::EmailAddresses.new
+  end
+
+  register :format_address_book_mutt_query do
+    Ppl::Format::AddressBook::MuttQuery.new
   end
 
   register :format_address_book_one_line do
