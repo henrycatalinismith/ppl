@@ -78,6 +78,8 @@ class Ppl::Application::Bootstrap
   register :command_nick do
     nick = Ppl::Command::Nick.new
     nick.storage = storage_adapter
+    nick.list_format = format_address_book_nicknames
+    nick.show_format = format_contact_nicknames
     nick
   end
 
@@ -205,6 +207,10 @@ class Ppl::Application::Bootstrap
     Ppl::Format::AddressBook::Names.new
   end
 
+  register :format_address_book_nicknames do
+    Ppl::Format::AddressBook::Nicknames.new
+  end
+
   register :format_address_book_one_line do
     Ppl::Format::AddressBook::OneLine.new
   end
@@ -223,6 +229,10 @@ class Ppl::Application::Bootstrap
 
   register :format_contact_name do
     Ppl::Format::Contact::Name.new
+  end
+
+  register :format_contact_nicknames do
+    Ppl::Format::Contact::Nicknames.new
   end
 
   register :input do
