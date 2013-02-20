@@ -50,6 +50,7 @@ class Ppl::Application::Bootstrap
   register :command_ls do
     ls = Ppl::Command::Ls.new
     ls.storage = storage_adapter
+    ls.format = format_address_book_one_line
     ls
   end
 
@@ -191,6 +192,10 @@ class Ppl::Application::Bootstrap
 
   register :format_address_book_email_addresses do
     Ppl::Format::AddressBook::EmailAddresses.new
+  end
+
+  register :format_address_book_one_line do
+    Ppl::Format::AddressBook::OneLine.new
   end
 
   register :format_contact_age do

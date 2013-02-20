@@ -155,6 +155,12 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
+  describe "#format_address_book_one_line" do
+    it "should return a Ppl::Format::AddressBook::OneLine" do
+      @bootstrap.format_address_book_one_line.should be_a(Ppl::Format::AddressBook::OneLine)
+    end
+  end
+
   describe "#format_contact_age" do
     it "should return a Ppl::Format::Contact::Age" do
       @bootstrap.format_contact_age.should be_a(Ppl::Format::Contact::Age)
