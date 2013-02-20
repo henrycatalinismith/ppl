@@ -5,9 +5,7 @@ class Ppl::Command::Org < Ppl::Command::Attribute
   description "List, show or change organizations"
 
   def initialize
-    @attribute   = :organizations
-    @show_format = Ppl::Format::Contact::Organization.new
-    @list_format = Ppl::Format::AddressBook::Organizations.new
+    @attribute = :organizations
   end
 
   def options(parser, options)
