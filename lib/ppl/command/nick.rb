@@ -5,9 +5,7 @@ class Ppl::Command::Nick < Ppl::Command::Attribute
   description "List, show or change nicknames"
 
   def initialize
-    @attribute   = :nicknames
-    @show_format = Ppl::Format::Contact::Nicknames.new
-    @list_format = Ppl::Format::AddressBook::Nicknames.new
+    @attribute = :nicknames
   end
 
   def options(parser, options)
