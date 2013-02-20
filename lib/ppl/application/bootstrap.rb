@@ -14,6 +14,8 @@ class Ppl::Application::Bootstrap
   register :command_age do
     age = Ppl::Command::Age.new
     age.storage = storage_adapter
+    age.list_format = format_address_book_ages
+    age.show_format = format_contact_age
     age
   end
 
@@ -177,8 +179,16 @@ class Ppl::Application::Bootstrap
     command
   end
 
+  register :format_address_book_ages do
+    Ppl::Format::AddressBook::Ages.new
+  end
+
   register :format_address_book_birthdays do
     Ppl::Format::AddressBook::Birthdays.new
+  end
+
+  register :format_contact_age do
+    Ppl::Format::Contact::Age.new
   end
 
   register :format_contact_birthday do
