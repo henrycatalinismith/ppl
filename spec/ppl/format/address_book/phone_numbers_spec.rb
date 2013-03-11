@@ -1,5 +1,15 @@
 
 describe Ppl::Format::AddressBook::PhoneNumbers do
+  describe "#initialize" do
+    it "should pass the colors through to the table" do
+      colors = {"id" => "blue"}
+      Ppl::Format::Table.should_receive(:new).with([:id, :phone_numbers], colors)
+      format = Ppl::Format::AddressBook::PhoneNumbers.new(colors)
+    end
+  end
+end
+
+describe Ppl::Format::AddressBook::PhoneNumbers do
 
   before(:each) do
     @format       = Ppl::Format::AddressBook::PhoneNumbers.new
