@@ -7,12 +7,13 @@ class Ppl::Format::Table
   attr_accessor :columns
   attr_accessor :rows
   attr_accessor :separator
+  attr_accessor :colors
 
   def initialize(columns=[])
     @columns   = columns
     @rows      = []
     @separator = SEPARATOR_SPACES
-
+    @colors    = {}
     @column_widths = {}
     @columns.each { |c| @column_widths[c] = 0 }
   end
