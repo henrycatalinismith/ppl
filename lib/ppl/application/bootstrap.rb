@@ -194,7 +194,9 @@ class Ppl::Application::Bootstrap
   end
 
   register :format_address_book_ages do
-    Ppl::Format::AddressBook::Ages.new
+    config = configuration
+    colors = config.color_enabled("age") ? config.command_colors("age") : {}
+    Ppl::Format::AddressBook::Ages.new(colors)
   end
 
   register :format_address_book_birthdays do
