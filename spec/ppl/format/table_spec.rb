@@ -24,6 +24,12 @@ describe Ppl::Format::Table do
     ])
   end
 
+  describe "#colors" do
+    it "should be a hash" do
+      @table.colors.should be_a(Hash)
+    end
+  end
+
   describe "#add_row" do
     it "should accept a hash" do
       @table.add_row({
