@@ -59,7 +59,7 @@ class Ppl::Format::Table
   end
 
   def colorize_string(string, column)
-    @color_adapter.colorize(string, @colors[column])
+    @color_adapter.colorize(string, @colors[column.to_s])
   end
 
 end
