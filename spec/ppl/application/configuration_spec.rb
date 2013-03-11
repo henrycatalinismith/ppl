@@ -54,5 +54,25 @@ describe Ppl::Application::Configuration do
 
   end
 
+  describe "#command_colors" do
+
+    it "should return the colors configured for the given command" do
+      @config.stub(:user_configuration).and_return({
+        "color \"ls\"" => {
+          "id" => "blue",
+        },
+      })
+      @config.command_colors("ls").should eq({
+        "id" => "blue",
+      })
+    end
+
+    it "should return nil if no colors are configured for the given command" do
+      @config.stub(:user_configuration).and_return({})
+      @config.command_colors("ls").should eq(nil)
+    end
+
+  end
+
 end
 
