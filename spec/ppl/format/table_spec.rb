@@ -66,11 +66,11 @@ describe Ppl::Format::Table do
       @table.to_s.should eq "12345\tJohn Doe\tjdoe@example.org"
     end
 
-    it "should colorise columns if requested" do
+    it "should colorize columns if requested" do
       @table.colors = {
-        :id => "red",
-        :name => "yellow",
-        :email => "blue",
+        "id" => "red",
+        "name" => "yellow",
+        "email" => "blue",
       }
       @table.add_row({
         :id    => 12345,
