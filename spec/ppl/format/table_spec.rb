@@ -77,7 +77,7 @@ describe Ppl::Format::Table do
         :name  => "John Doe",
         :email => "jdoe@example.org",
       })
-      @table.to_s.should eq "\e[31m12345\e[0m  \e[33mJohn Doe\e[0m  \e[34mjdoe@example.org\e[0m"
+      @table.to_s.should eq "\e[31m12345  \e[0m\e[33mJohn Doe  \e[0m\e[34mjdoe@example.org  \e[0m"
     end
 
     it "should align multiple rows into neat columns" do
