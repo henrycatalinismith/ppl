@@ -138,9 +138,20 @@ describe Ppl::Application::Bootstrap do
   end
 
   describe "#format_address_book_ages" do
+
     it "should return a Ppl::Format::AddressBook::Ages" do
       @bootstrap.format_address_book_ages.should be_a(Ppl::Format::AddressBook::Ages)
     end
+
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("age").and_return(true)
+      @config.should_receive(:command_colors).with("age").and_return(@colors)
+      @bootstrap.format_address_book_ages
+    end
+
   end
 
   describe "#format_address_book_birthdays" do
