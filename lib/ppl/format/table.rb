@@ -11,7 +11,7 @@ class Ppl::Format::Table
   attr_accessor :separator
   attr_accessor :colors
 
-  def initialize(columns=[])
+  def initialize(columns=[], colors={})
     @columns   = columns
     @rows      = []
     @separator = SEPARATOR_SPACES
