@@ -1,4 +1,6 @@
 
+require "colored"
+
 class Ppl::Format::Table
 
   SEPARATOR_SPACES = 0
@@ -45,13 +47,22 @@ class Ppl::Format::Table
   end
 
   def format_cell(row, column)
-    width  = @column_widths[column]
+    width = @column_widths[column]
+    value = colorise_string(row[column].to_s, column)
     if @separator == SEPARATOR_SPACES
-      string = sprintf("%-#{width}s  ", row[column])
+      string = sprintf("%-#{width}s  ", value)
     else
-      string = sprintf("%s\t", row[column])
+      string = sprintf("%s\t", value)
     end
     return string
+  end
+
+  def colorise_string(string, column)
+    if !@colors[column].nil?
+      string.send(@colors[column])
+    else
+      string
+    end
   end
 
 end
