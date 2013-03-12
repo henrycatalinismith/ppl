@@ -158,11 +158,28 @@ describe Ppl::Application::Bootstrap do
     it "should return a Ppl::Format::AddressBook::Birthdays" do
       @bootstrap.format_address_book_birthdays.should be_a(Ppl::Format::AddressBook::Birthdays)
     end
+
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("bday").and_return(true)
+      @config.should_receive(:command_colors).with("bday").and_return(@colors)
+      @bootstrap.format_address_book_birthdays
+    end
   end
 
   describe "#format_address_book_email_addresses" do
     it "should return a Ppl::Format::AddressBook::EmailAddresses" do
       @bootstrap.format_address_book_email_addresses.should be_a(Ppl::Format::AddressBook::EmailAddresses)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("email").and_return(true)
+      @config.should_receive(:command_colors).with("email").and_return(@colors)
+      @bootstrap.format_address_book_email_addresses
     end
   end
 
@@ -176,11 +193,27 @@ describe Ppl::Application::Bootstrap do
     it "should return a Ppl::Format::AddressBook::Organizations" do
       @bootstrap.format_address_book_organizations.should be_a(Ppl::Format::AddressBook::Organizations)
     end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("org").and_return(true)
+      @config.should_receive(:command_colors).with("org").and_return(@colors)
+      @bootstrap.format_address_book_organizations
+    end
   end
 
   describe "#format_address_book_names" do
     it "should return a Ppl::Format::AddressBook::Names" do
       @bootstrap.format_address_book_names.should be_a(Ppl::Format::AddressBook::Names)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("name").and_return(true)
+      @config.should_receive(:command_colors).with("name").and_return(@colors)
+      @bootstrap.format_address_book_names
     end
   end
 
@@ -188,11 +221,27 @@ describe Ppl::Application::Bootstrap do
     it "should return a Ppl::Format::AddressBook::Nicknames" do
       @bootstrap.format_address_book_nicknames.should be_a(Ppl::Format::AddressBook::Nicknames)
     end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("nick").and_return(true)
+      @config.should_receive(:command_colors).with("nick").and_return(@colors)
+      @bootstrap.format_address_book_nicknames
+    end
   end
 
   describe "#format_address_book_one_line" do
     it "should return a Ppl::Format::AddressBook::OneLine" do
       @bootstrap.format_address_book_one_line.should be_a(Ppl::Format::AddressBook::OneLine)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("ls").and_return(true)
+      @config.should_receive(:command_colors).with("ls").and_return(@colors)
+      @bootstrap.format_address_book_one_line
     end
   end
 
@@ -200,17 +249,41 @@ describe Ppl::Application::Bootstrap do
     it "should return a Ppl::Format::Address_book::PhoneNumbers" do
       @bootstrap.format_address_book_phone_numbers.should be_a(Ppl::Format::AddressBook::PhoneNumbers)
     end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("phone").and_return(true)
+      @config.should_receive(:command_colors).with("phone").and_return(@colors)
+      @bootstrap.format_address_book_phone_numbers
+    end
   end
 
   describe "#format_address_book_postal_addresses" do
     it "should return a Ppl::Format::AddressBook::PostalAddresses" do
       @bootstrap.format_address_book_postal_addresses.should be_a(Ppl::Format::AddressBook::PostalAddresses)
     end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("post").and_return(true)
+      @config.should_receive(:command_colors).with("post").and_return(@colors)
+      @bootstrap.format_address_book_postal_addresses
+    end
   end
 
   describe "#format_address_book_urls" do
     it "should return a Ppl::Format::AddressBook::Urls" do
       @bootstrap.format_address_book_urls.should be_a(Ppl::Format::AddressBook::Urls)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("url").and_return(true)
+      @config.should_receive(:command_colors).with("url").and_return(@colors)
+      @bootstrap.format_address_book_urls
     end
   end
 
