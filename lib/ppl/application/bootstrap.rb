@@ -85,6 +85,8 @@ class Ppl::Application::Bootstrap
 
   register :command_org do
     org = Ppl::Command::Org.new
+    org.list_format = format_address_book_organizations
+    org.show_format = format_contact_organizations
     org.storage = storage_adapter
     org
   end
@@ -200,11 +202,15 @@ class Ppl::Application::Bootstrap
   end
 
   register :format_address_book_birthdays do
-    Ppl::Format::AddressBook::Birthdays.new
+    config = configuration
+    colors = config.color_enabled("bday") ? config.command_colors("bday") : {}
+    Ppl::Format::AddressBook::Birthdays.new(colors)
   end
 
   register :format_address_book_email_addresses do
-    Ppl::Format::AddressBook::EmailAddresses.new
+    config = configuration
+    colors = config.color_enabled("email") ? config.command_colors("email") : {}
+    Ppl::Format::AddressBook::EmailAddresses.new(colors)
   end
 
   register :format_address_book_mutt_query do
@@ -212,31 +218,45 @@ class Ppl::Application::Bootstrap
   end
 
   register :format_address_book_names do
-    Ppl::Format::AddressBook::Names.new
+    config = configuration
+    colors = config.color_enabled("name") ? config.command_colors("name") : {}
+    Ppl::Format::AddressBook::Names.new(colors)
   end
 
   register :format_address_book_nicknames do
-    Ppl::Format::AddressBook::Nicknames.new
+    config = configuration
+    colors = config.color_enabled("nick") ? config.command_colors("nick") : {}
+    Ppl::Format::AddressBook::Nicknames.new(colors)
   end
 
   register :format_address_book_one_line do
-    Ppl::Format::AddressBook::OneLine.new
+    config = configuration
+    colors = config.color_enabled("ls") ? config.command_colors("ls") : {}
+    Ppl::Format::AddressBook::OneLine.new(colors)
   end
 
   register :format_address_book_organizations do
-    Ppl::Format::AddressBook::Organizations.new
+    config = configuration
+    colors = config.color_enabled("org") ? config.command_colors("org") : {}
+    Ppl::Format::AddressBook::Organizations.new(colors)
   end
 
   register :format_address_book_phone_numbers do
-    Ppl::Format::AddressBook::PhoneNumbers.new
+    config = configuration
+    colors = config.color_enabled("phone") ? config.command_colors("phone") : {}
+    Ppl::Format::AddressBook::PhoneNumbers.new(colors)
   end
 
   register :format_address_book_postal_addresses do
-    Ppl::Format::AddressBook::PostalAddresses.new
+    config = configuration
+    colors = config.color_enabled("post") ? config.command_colors("post") : {}
+    Ppl::Format::AddressBook::PostalAddresses.new(colors)
   end
 
   register :format_address_book_urls do
-    Ppl::Format::AddressBook::Urls.new
+    config = configuration
+    colors = config.color_enabled("url") ? config.command_colors("url") : {}
+    Ppl::Format::AddressBook::Urls.new(colors)
   end
 
   register :format_contact_age do
