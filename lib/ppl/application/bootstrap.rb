@@ -266,27 +266,39 @@ class Ppl::Application::Bootstrap
   end
 
   register :format_contact_birthday do
-    Ppl::Format::Contact::Birthday.new
+    config = configuration
+    colors = config.color_enabled("bday") ? config.command_colors("bday") : {}
+    Ppl::Format::Contact::Birthday.new(colors)
   end
 
   register :format_contact_email_addresses do
-    Ppl::Format::Contact::EmailAddresses.new
+    config = configuration
+    colors = config.color_enabled("email") ? config.command_colors("email") : {}
+    Ppl::Format::Contact::EmailAddresses.new(colors)
   end
 
   register :format_contact_name do
-    Ppl::Format::Contact::Name.new
+    config = configuration
+    colors = config.color_enabled("name") ? config.command_colors("name") : {}
+    Ppl::Format::Contact::Name.new(colors)
   end
 
   register :format_contact_nicknames do
-    Ppl::Format::Contact::Nicknames.new
+    config = configuration
+    colors = config.color_enabled("nick") ? config.command_colors("nick") : {}
+    Ppl::Format::Contact::Nicknames.new(colors)
   end
 
   register :format_contact_organizations do
-    Ppl::Format::Contact::Organization.new
+    config = configuration
+    colors = config.color_enabled("org") ? config.command_colors("org") : {}
+    Ppl::Format::Contact::Organization.new(colors)
   end
 
   register :format_contact_phone_numbers do
-    Ppl::Format::Contact::PhoneNumber.new
+    config = configuration
+    colors = config.color_enabled("phone") ? config.command_colors("phone") : {}
+    Ppl::Format::Contact::PhoneNumber.new(colors)
   end
 
   register :format_contact_postal_addresses do
@@ -294,7 +306,9 @@ class Ppl::Application::Bootstrap
   end
 
   register :format_contact_urls do
-    Ppl::Format::Contact::Urls.new
+    config = configuration
+    colors = config.color_enabled("urls") ? config.command_colors("urls") : {}
+    Ppl::Format::Contact::Urls.new(colors)
   end
 
   register :input do

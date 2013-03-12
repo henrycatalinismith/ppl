@@ -305,11 +305,27 @@ describe Ppl::Application::Bootstrap do
     it "should return a Ppl::Format::Contact::Birthday" do
       @bootstrap.format_contact_birthday.should be_a(Ppl::Format::Contact::Birthday)
     end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("bday").and_return(true)
+      @config.should_receive(:command_colors).with("bday").and_return(@colors)
+      @bootstrap.format_contact_birthday
+    end
   end
 
   describe "#format_contact_email_addresses" do
     it "should return a Ppl::Format::Contact::EmailAddresses" do
       @bootstrap.format_contact_email_addresses.should be_a(Ppl::Format::Contact::EmailAddresses)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("email").and_return(true)
+      @config.should_receive(:command_colors).with("email").and_return(@colors)
+      @bootstrap.format_contact_email_addresses
     end
   end
 
@@ -317,11 +333,27 @@ describe Ppl::Application::Bootstrap do
     it "should return a Ppl::Format::Contact::Name" do
       @bootstrap.format_contact_name.should be_a(Ppl::Format::Contact::Name)
     end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("name").and_return(true)
+      @config.should_receive(:command_colors).with("name").and_return(@colors)
+      @bootstrap.format_contact_name
+    end
   end
 
   describe "#format_contact_nicknames" do
     it "should return a Ppl::Format::Contact::Nicknames" do
       @bootstrap.format_contact_nicknames.should be_a(Ppl::Format::Contact::Nicknames)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("nick").and_return(true)
+      @config.should_receive(:command_colors).with("nick").and_return(@colors)
+      @bootstrap.format_contact_nicknames
     end
   end
 
@@ -329,11 +361,27 @@ describe Ppl::Application::Bootstrap do
     it "should return a Ppl::Format::Contact::Organizations" do
       @bootstrap.format_contact_organizations.should be_a(Ppl::Format::Contact::Organization)
     end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("org").and_return(true)
+      @config.should_receive(:command_colors).with("org").and_return(@colors)
+      @bootstrap.format_contact_organizations
+    end
   end
 
   describe "#format_contact_phone_numbers" do
     it "should return a Ppl::Format::Contact::PhoneNumber" do
       @bootstrap.format_contact_phone_numbers.should be_a(Ppl::Format::Contact::PhoneNumber)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("phone").and_return(true)
+      @config.should_receive(:command_colors).with("phone").and_return(@colors)
+      @bootstrap.format_contact_phone_numbers
     end
   end
 
@@ -346,6 +394,14 @@ describe Ppl::Application::Bootstrap do
   describe "#format_contact_urls" do
     it "should return a Ppl::Format::Contact::Urls" do
       @bootstrap.format_contact_urls.should be_a(Ppl::Format::Contact::Urls)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("urls").and_return(true)
+      @config.should_receive(:command_colors).with("urls").and_return(@colors)
+      @bootstrap.format_contact_urls
     end
   end
 
