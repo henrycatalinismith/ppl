@@ -5,7 +5,7 @@ GIT
     vpim (12.1.12)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     diff-lcs (1.1.3)
     fakefs (0.4.1)
