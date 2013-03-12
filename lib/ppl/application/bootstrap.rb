@@ -260,7 +260,9 @@ class Ppl::Application::Bootstrap
   end
 
   register :format_contact_age do
-    Ppl::Format::Contact::Age.new
+    config = configuration
+    colors = config.color_enabled("age") ? config.command_colors("age") : {}
+    Ppl::Format::Contact::Age.new(colors)
   end
 
   register :format_contact_birthday do

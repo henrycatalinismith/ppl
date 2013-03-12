@@ -291,6 +291,14 @@ describe Ppl::Application::Bootstrap do
     it "should return a Ppl::Format::Contact::Age" do
       @bootstrap.format_contact_age.should be_a(Ppl::Format::Contact::Age)
     end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("age").and_return(true)
+      @config.should_receive(:command_colors).with("age").and_return(@colors)
+      @bootstrap.format_contact_age
+    end
   end
 
   describe "#format_contact_birthday" do
