@@ -1,5 +1,5 @@
 
-source :rubygems
+source "https://rubygems.org"
 
 gem "inifile", "2.0.2"
 gem "rugged", "0.17.0.b6"
