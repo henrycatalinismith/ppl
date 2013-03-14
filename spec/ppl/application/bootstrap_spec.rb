@@ -399,8 +399,8 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("urls").and_return(true)
-      @config.should_receive(:command_colors).with("urls").and_return(@colors)
+      @config.should_receive(:color_enabled).with("url").and_return(true)
+      @config.should_receive(:command_colors).with("url").and_return(@colors)
       @bootstrap.format_contact_urls
     end
   end

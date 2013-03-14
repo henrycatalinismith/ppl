@@ -307,7 +307,7 @@ class Ppl::Application::Bootstrap
 
   register :format_contact_urls do
     config = configuration
-    colors = config.color_enabled("urls") ? config.command_colors("urls") : {}
+    colors = config.color_enabled("url") ? config.command_colors("url") : {}
     Ppl::Format::Contact::Urls.new(colors)
   end
 
