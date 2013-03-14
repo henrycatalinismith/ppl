@@ -15,6 +15,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency("rugged", "0.17.0.b6")
   spec.add_dependency("vpim", "0.695")
 
+  spec.add_development_dependency("rspec")
+  spec.add_development_dependency("rake")
+  spec.add_development_dependency("fakefs")
+
   spec.authors     = ["Henry Smith"]
   spec.email       = "henry@henrysmith.org"
 
