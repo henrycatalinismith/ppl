@@ -28,6 +28,21 @@ class Ppl::Application::Configuration
     end
   end
 
+  def color_enabled(command_name)
+    config = user_configuration
+    if !config["color"].nil? && config["color"][command_name] == "true"
+      true
+    else
+      false
+    end
+  end
+
+  def command_colors(command_name)
+    config = user_configuration
+    search = "color \"#{command_name}\""
+    result = config[search]
+  end
+
   private
 
   def default_configuration

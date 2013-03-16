@@ -5,22 +5,403 @@ describe Ppl::Application::Bootstrap do
     @bootstrap = Ppl::Application::Bootstrap.new
   end
 
-  describe "#commands" do
-    before(:each) do
-      @bootstrap.stub(:storage_adapter).and_return(Ppl::Adapter::Storage.new)
+  describe "#command_add" do
+    it "should return a Ppl::Command::Add" do
+      @bootstrap.command_add.should be_a(Ppl::Command::Add)
     end
-    it "should return an array" do
-      @bootstrap.commands.should be_an(Array)
+  end
+
+  describe "#command_age" do
+    it "should return a Ppl::Command::Age" do
+      @bootstrap.command_age.should be_a(Ppl::Command::Age)
     end
-    it "should return commands" do
-      @bootstrap.commands.each do |command|
-        command.should be_a(Ppl::Application::Command)
-      end
+  end
+
+  describe "#command_bday" do
+    it "should return a Ppl::Command::Bday" do
+      @bootstrap.command_bday.should be_a(Ppl::Command::Bday)
     end
-    it "should inject a storage adapter into each command" do
-      @bootstrap.commands.each do |command|
-        command.storage.should be_a(Ppl::Adapter::Storage)
-      end
+  end
+
+  describe "#command_email" do
+    it "should return a Ppl::Command::Email" do
+      @bootstrap.command_email.should be_a(Ppl::Command::Email)
+    end
+  end
+
+  describe "#command_help" do
+    it "should return a Ppl::Command::Help" do
+      @bootstrap.command_help.should be_a(Ppl::Command::Help)
+    end
+  end
+
+  describe "#command_init" do
+    it "should return a Ppl::Command::Init" do
+      @bootstrap.command_init.should be_a(Ppl::Command::Init)
+    end
+  end
+
+  describe "#command_ls" do
+    it "should return a Ppl::Command::Ls" do
+      @bootstrap.command_ls.should be_a(Ppl::Command::Ls)
+    end
+  end
+
+  describe "#command_mutt" do
+    it "should return a Ppl::Command::Mutt" do
+      @bootstrap.command_mutt.should be_a(Ppl::Command::Mutt)
+    end
+  end
+
+  describe "#command_mv" do
+    it "should return a Ppl::Command::Mv" do
+      @bootstrap.command_mv.should be_a(Ppl::Command::Mv)
+    end
+  end
+
+  describe "#command_name" do
+    it "should return a Ppl::Command::Name" do
+      @bootstrap.command_name.should be_a(Ppl::Command::Name)
+    end
+  end
+
+  describe "#command_nick" do
+    it "should return a Ppl::Command::Nick" do
+      @bootstrap.command_nick.should be_a(Ppl::Command::Nick)
+    end
+  end
+
+  describe "#command_org" do
+    it "should return a Ppl::Command::Org" do
+      @bootstrap.command_org.should be_a(Ppl::Command::Org)
+    end
+  end
+
+  describe "#command_phone" do
+    it "should return a Ppl::Command::Phone" do
+      @bootstrap.command_phone.should be_a(Ppl::Command::Phone)
+    end
+  end
+
+  describe "#command_post" do
+    it "should return a Ppl::Command::Post" do
+      @bootstrap.command_post.should be_a(Ppl::Command::Post)
+    end
+  end
+
+  describe "#command_pull" do
+    it "should return a command" do
+      @bootstrap.command_pull.should be_a(Ppl::Application::Command)
+    end
+  end
+
+  describe "#command_push" do
+    it "should return a command" do
+      @bootstrap.command_push.should be_a(Ppl::Application::Command)
+    end
+  end
+
+  describe "#command_remote" do
+    it "should return a command" do
+      @bootstrap.command_remote.should be_a(Ppl::Application::Command)
+    end
+  end
+
+  describe "#command_rm" do
+    it "should return a Ppl::Command::Rm" do
+      @bootstrap.command_rm.should be_a(Ppl::Command::Rm)
+    end
+  end
+
+  describe "#command_shell" do
+    it "should return a Ppl::Command::Shell" do
+      @bootstrap.command_shell.should be_a(Ppl::Command::Shell)
+    end
+  end
+
+  describe "#command_show" do
+    it "should return a Ppl::Command::Show" do
+      @bootstrap.command_show.should be_a(Ppl::Command::Show)
+    end
+  end
+
+  describe "#command_url" do
+    it "should return a Ppl::Command::Url" do
+      @bootstrap.command_url.should be_a(Ppl::Command::Url)
+    end
+  end
+
+  describe "#command_version" do
+    it "should return a Ppl::Command::Version" do
+      @bootstrap.command_version.should be_a(Ppl::Command::Version)
+    end
+  end
+
+  describe "#format_address_book_ages" do
+
+    it "should return a Ppl::Format::AddressBook::Ages" do
+      @bootstrap.format_address_book_ages.should be_a(Ppl::Format::AddressBook::Ages)
+    end
+
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("age").and_return(true)
+      @config.should_receive(:command_colors).with("age").and_return(@colors)
+      @bootstrap.format_address_book_ages
+    end
+
+  end
+
+  describe "#format_address_book_birthdays" do
+    it "should return a Ppl::Format::AddressBook::Birthdays" do
+      @bootstrap.format_address_book_birthdays.should be_a(Ppl::Format::AddressBook::Birthdays)
+    end
+
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("bday").and_return(true)
+      @config.should_receive(:command_colors).with("bday").and_return(@colors)
+      @bootstrap.format_address_book_birthdays
+    end
+  end
+
+  describe "#format_address_book_email_addresses" do
+    it "should return a Ppl::Format::AddressBook::EmailAddresses" do
+      @bootstrap.format_address_book_email_addresses.should be_a(Ppl::Format::AddressBook::EmailAddresses)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("email").and_return(true)
+      @config.should_receive(:command_colors).with("email").and_return(@colors)
+      @bootstrap.format_address_book_email_addresses
+    end
+  end
+
+  describe "#format_address_book_mutt_query" do
+    it "should return a Ppl::Format::AddressBook::MuttQuery" do
+      @bootstrap.format_address_book_mutt_query.should be_a(Ppl::Format::AddressBook::MuttQuery)
+    end
+  end
+
+  describe "#format_address_book_organizations" do
+    it "should return a Ppl::Format::AddressBook::Organizations" do
+      @bootstrap.format_address_book_organizations.should be_a(Ppl::Format::AddressBook::Organizations)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("org").and_return(true)
+      @config.should_receive(:command_colors).with("org").and_return(@colors)
+      @bootstrap.format_address_book_organizations
+    end
+  end
+
+  describe "#format_address_book_names" do
+    it "should return a Ppl::Format::AddressBook::Names" do
+      @bootstrap.format_address_book_names.should be_a(Ppl::Format::AddressBook::Names)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("name").and_return(true)
+      @config.should_receive(:command_colors).with("name").and_return(@colors)
+      @bootstrap.format_address_book_names
+    end
+  end
+
+  describe "#format_address_book_nicknames" do
+    it "should return a Ppl::Format::AddressBook::Nicknames" do
+      @bootstrap.format_address_book_nicknames.should be_a(Ppl::Format::AddressBook::Nicknames)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("nick").and_return(true)
+      @config.should_receive(:command_colors).with("nick").and_return(@colors)
+      @bootstrap.format_address_book_nicknames
+    end
+  end
+
+  describe "#format_address_book_one_line" do
+    it "should return a Ppl::Format::AddressBook::OneLine" do
+      @bootstrap.format_address_book_one_line.should be_a(Ppl::Format::AddressBook::OneLine)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("ls").and_return(true)
+      @config.should_receive(:command_colors).with("ls").and_return(@colors)
+      @bootstrap.format_address_book_one_line
+    end
+  end
+
+  describe "#format_address_book_phone_numbers" do
+    it "should return a Ppl::Format::Address_book::PhoneNumbers" do
+      @bootstrap.format_address_book_phone_numbers.should be_a(Ppl::Format::AddressBook::PhoneNumbers)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("phone").and_return(true)
+      @config.should_receive(:command_colors).with("phone").and_return(@colors)
+      @bootstrap.format_address_book_phone_numbers
+    end
+  end
+
+  describe "#format_address_book_postal_addresses" do
+    it "should return a Ppl::Format::AddressBook::PostalAddresses" do
+      @bootstrap.format_address_book_postal_addresses.should be_a(Ppl::Format::AddressBook::PostalAddresses)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("post").and_return(true)
+      @config.should_receive(:command_colors).with("post").and_return(@colors)
+      @bootstrap.format_address_book_postal_addresses
+    end
+  end
+
+  describe "#format_address_book_urls" do
+    it "should return a Ppl::Format::AddressBook::Urls" do
+      @bootstrap.format_address_book_urls.should be_a(Ppl::Format::AddressBook::Urls)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("url").and_return(true)
+      @config.should_receive(:command_colors).with("url").and_return(@colors)
+      @bootstrap.format_address_book_urls
+    end
+  end
+
+  describe "#format_contact_age" do
+    it "should return a Ppl::Format::Contact::Age" do
+      @bootstrap.format_contact_age.should be_a(Ppl::Format::Contact::Age)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("age").and_return(true)
+      @config.should_receive(:command_colors).with("age").and_return(@colors)
+      @bootstrap.format_contact_age
+    end
+  end
+
+  describe "#format_contact_birthday" do
+    it "should return a Ppl::Format::Contact::Birthday" do
+      @bootstrap.format_contact_birthday.should be_a(Ppl::Format::Contact::Birthday)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("bday").and_return(true)
+      @config.should_receive(:command_colors).with("bday").and_return(@colors)
+      @bootstrap.format_contact_birthday
+    end
+  end
+
+  describe "#format_contact_email_addresses" do
+    it "should return a Ppl::Format::Contact::EmailAddresses" do
+      @bootstrap.format_contact_email_addresses.should be_a(Ppl::Format::Contact::EmailAddresses)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("email").and_return(true)
+      @config.should_receive(:command_colors).with("email").and_return(@colors)
+      @bootstrap.format_contact_email_addresses
+    end
+  end
+
+  describe "#format_contact_name" do
+    it "should return a Ppl::Format::Contact::Name" do
+      @bootstrap.format_contact_name.should be_a(Ppl::Format::Contact::Name)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("name").and_return(true)
+      @config.should_receive(:command_colors).with("name").and_return(@colors)
+      @bootstrap.format_contact_name
+    end
+  end
+
+  describe "#format_contact_nicknames" do
+    it "should return a Ppl::Format::Contact::Nicknames" do
+      @bootstrap.format_contact_nicknames.should be_a(Ppl::Format::Contact::Nicknames)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("nick").and_return(true)
+      @config.should_receive(:command_colors).with("nick").and_return(@colors)
+      @bootstrap.format_contact_nicknames
+    end
+  end
+
+  describe "#format_contact_organizations" do
+    it "should return a Ppl::Format::Contact::Organizations" do
+      @bootstrap.format_contact_organizations.should be_a(Ppl::Format::Contact::Organization)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("org").and_return(true)
+      @config.should_receive(:command_colors).with("org").and_return(@colors)
+      @bootstrap.format_contact_organizations
+    end
+  end
+
+  describe "#format_contact_phone_numbers" do
+    it "should return a Ppl::Format::Contact::PhoneNumber" do
+      @bootstrap.format_contact_phone_numbers.should be_a(Ppl::Format::Contact::PhoneNumber)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("phone").and_return(true)
+      @config.should_receive(:command_colors).with("phone").and_return(@colors)
+      @bootstrap.format_contact_phone_numbers
+    end
+  end
+
+  describe "#format_contact_postal_addresses" do
+    it "should return a Ppl::Format::Contact::PostalAddress" do
+      @bootstrap.format_contact_postal_addresses.should be_a(Ppl::Format::Contact::PostalAddress)
+    end
+  end
+
+  describe "#format_contact_urls" do
+    it "should return a Ppl::Format::Contact::Urls" do
+      @bootstrap.format_contact_urls.should be_a(Ppl::Format::Contact::Urls)
+    end
+    it "should set up colored output if configured to do so" do
+      @colors = {}
+      @config = double(Ppl::Application::Configuration)
+      @bootstrap.stub(:configuration).and_return(@config)
+      @config.should_receive(:color_enabled).with("url").and_return(true)
+      @config.should_receive(:command_colors).with("url").and_return(@colors)
+      @bootstrap.format_contact_urls
     end
   end
 
@@ -72,6 +453,15 @@ describe Ppl::Application::Bootstrap do
     it "should contain the 'post' command" do
       @bootstrap.command_suite.find_command("post").should_not be nil
     end
+    it "should contain the 'pull' command" do
+      @bootstrap.command_suite.find_command("pull").should_not be nil
+    end
+    it "should contain the 'push' command" do
+      @bootstrap.command_suite.find_command("push").should_not be nil
+    end
+    it "should contain the 'remote' command" do
+      @bootstrap.command_suite.find_command("remote").should_not be nil
+    end
     it "should contain the 'rm' command" do
       @bootstrap.command_suite.find_command("rm").should_not be nil
     end
@@ -89,18 +479,6 @@ describe Ppl::Application::Bootstrap do
     end
     it "should contain the 'version' command" do
       @bootstrap.command_suite.find_command("version").should_not be nil
-    end
-  end
-
-  describe "#git_commands" do
-    it "should contain the 'pull' command" do
-      @bootstrap.git_commands[0].name.should eq "pull"
-    end
-    it "should contain the 'push' command" do
-      @bootstrap.git_commands[1].name.should eq "push"
-    end
-    it "should contain the 'remote' command" do
-      @bootstrap.git_commands[2].name.should eq "remote"
     end
   end
 

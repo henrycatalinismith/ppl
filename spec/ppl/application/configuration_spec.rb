@@ -28,5 +28,51 @@ describe Ppl::Application::Configuration do
     end
   end
 
+  describe "#color_enabled" do
+
+    it "should return true if color is explicitly enabled" do
+      @config.stub(:user_configuration).and_return({
+        "color" => {
+          "cmd" => "true",
+        },
+      })
+      @config.color_enabled("cmd").should eq true
+    end
+
+    it "should return false if color is not explicitly enabled" do
+      @config.color_enabled("cmd").should eq false
+    end
+
+    it "should return false if color is explicitly disabled" do
+      @config.stub(:user_configuration).and_return({
+        "color" => {
+          "cmd" => "false",
+        },
+      })
+      @config.color_enabled("cmd").should eq false
+    end
+
+  end
+
+  describe "#command_colors" do
+
+    it "should return the colors configured for the given command" do
+      @config.stub(:user_configuration).and_return({
+        "color \"ls\"" => {
+          "id" => "blue",
+        },
+      })
+      @config.command_colors("ls").should eq({
+        "id" => "blue",
+      })
+    end
+
+    it "should return nil if no colors are configured for the given command" do
+      @config.stub(:user_configuration).and_return({})
+      @config.command_colors("ls").should eq(nil)
+    end
+
+  end
+
 end
 

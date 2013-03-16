@@ -24,6 +24,12 @@ describe Ppl::Format::Table do
     ])
   end
 
+  describe "#colors" do
+    it "should be a hash" do
+      @table.colors.should be_a(Hash)
+    end
+  end
+
   describe "#add_row" do
     it "should accept a hash" do
       @table.add_row({
@@ -58,6 +64,20 @@ describe Ppl::Format::Table do
       })
       @table.separator = Ppl::Format::Table::SEPARATOR_TABS
       @table.to_s.should eq "12345\tJohn Doe\tjdoe@example.org"
+    end
+
+    it "should colorize columns if requested" do
+      @table.colors = {
+        "id" => "red",
+        "name" => "yellow",
+        "email" => "blue",
+      }
+      @table.add_row({
+        :id    => 12345,
+        :name  => "John Doe",
+        :email => "jdoe@example.org",
+      })
+      @table.to_s.should eq "\e[31m12345  \e[0m\e[33mJohn Doe  \e[0m\e[34mjdoe@example.org  \e[0m"
     end
 
     it "should align multiple rows into neat columns" do

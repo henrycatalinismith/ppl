@@ -1,4 +1,6 @@
 
+require "colored"
+
 class Ppl::Format::Table
 
   SEPARATOR_SPACES = 0
@@ -7,12 +9,14 @@ class Ppl::Format::Table
   attr_accessor :columns
   attr_accessor :rows
   attr_accessor :separator
+  attr_accessor :colors
 
-  def initialize(columns=[])
+  def initialize(columns=[], colors={})
     @columns   = columns
     @rows      = []
     @separator = SEPARATOR_SPACES
-
+    @colors    = colors
+    @color_adapter = Ppl::Adapter::Color::Colored.new
     @column_widths = {}
     @columns.each { |c| @column_widths[c] = 0 }
   end
@@ -44,13 +48,18 @@ class Ppl::Format::Table
   end
 
   def format_cell(row, column)
-    width  = @column_widths[column]
+    width = @column_widths[column]
+    string = row[column].to_s
     if @separator == SEPARATOR_SPACES
-      string = sprintf("%-#{width}s  ", row[column])
+      string = sprintf("%-#{width}s  ", string)
     else
-      string = sprintf("%s\t", row[column])
+      string = sprintf("%s\t", string)
     end
-    return string
+    colorize_string(string, column)
+  end
+
+  def colorize_string(string, column)
+    @color_adapter.colorize(string, @colors[column.to_s])
   end
 
 end
