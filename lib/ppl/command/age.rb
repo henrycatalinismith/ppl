@@ -7,11 +7,6 @@ class Ppl::Command::Age < Ppl::Application::Command
   attr_writer :list_format
   attr_writer :show_format
 
-  def initialize
-    @list_format = Ppl::Format::AddressBook::Ages.new
-    @show_format = Ppl::Format::Contact::Age.new
-  end
-
   def options(parser, options)
     parser.banner = "usage: ppl age"
   end

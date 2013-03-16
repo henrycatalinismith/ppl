@@ -7,11 +7,6 @@ class Ppl::Command::Post < Ppl::Application::Command
   attr_writer :show_format
   attr_writer :list_format
 
-  def initialize
-    @show_format = Ppl::Format::Contact::PostalAddress.new
-    @list_format = Ppl::Format::AddressBook::PostalAddresses.new
-  end
-
   def options(parser, options)
     parser.banner = "usage: ppl post <contact> [address]"
 

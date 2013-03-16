@@ -6,11 +6,13 @@ describe Ppl::Command::Mutt do
     @input   = Ppl::Application::Input.new
     @output  = double(Ppl::Application::Output)
     @storage = double(Ppl::Adapter::Storage)
+    @format  = double(Ppl::Format::AddressBook)
 
     @address_book = Ppl::Entity::AddressBook.new
     @contact      = Ppl::Entity::Contact.new
 
     @command.storage = @storage
+    @command.format = @format
   end
 
   describe "#name" do
@@ -41,6 +43,7 @@ describe Ppl::Command::Mutt do
       @input.arguments.push "example"
 
       @storage.should_receive(:load_address_book).and_return(@address_book)
+      @format.should_receive(:process).and_return("test@example.org\tTest User")
       @output.should_receive(:line) do |line|
         line.should include "Searching address book... 1 entries... 1 matching:"
         line.should include "test@example.org\tTest User"
@@ -57,6 +60,7 @@ describe Ppl::Command::Mutt do
       @input.arguments.push "User"
 
       @storage.should_receive(:load_address_book).and_return(@address_book)
+      @format.should_receive(:process).and_return("test@example.org\tTest User")
       @output.should_receive(:line) do |line|
         line.should include "Searching address book... 1 entries... 1 matching:"
         line.should include "test@example.org\tTest User"

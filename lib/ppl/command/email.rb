@@ -5,9 +5,7 @@ class Ppl::Command::Email < Ppl::Command::Attribute
   description "Show or change a contact's email address"
 
   def initialize
-    @attribute   = :email_addresses
-    @show_format = Ppl::Format::Contact::EmailAddresses.new
-    @list_format = Ppl::Format::AddressBook::EmailAddresses.new
+    @attribute = :email_addresses
   end
 
   def options(parser, options)
