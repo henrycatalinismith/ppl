@@ -7,11 +7,6 @@ class Ppl::Command::Bday < Ppl::Application::Command
   attr_writer :list_format
   attr_writer :show_format
 
-  def initialize
-    @list_format = Ppl::Format::AddressBook::Birthdays.new
-    @show_format = Ppl::Format::Contact::Birthday.new
-  end
-
   def options(parser, options)
     parser.banner = "usage: ppl birthday <contact> [<date>]"
   end

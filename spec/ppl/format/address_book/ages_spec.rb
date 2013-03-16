@@ -1,5 +1,15 @@
 
 describe Ppl::Format::AddressBook::Ages do
+  describe "#initialize" do
+    it "should pass the colors through to the table" do
+      colors = {"id" => "blue"}
+      Ppl::Format::Table.should_receive(:new).with([:id, :age], colors)
+      format = Ppl::Format::AddressBook::Ages.new(colors)
+    end
+  end
+end
+
+describe Ppl::Format::AddressBook::Ages do
 
   before(:each) do
     @format       = Ppl::Format::AddressBook::Ages.new

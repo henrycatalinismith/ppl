@@ -1,7 +1,7 @@
 
 module Ppl
 
-  Version = "1.14.1"
+  Version = "1.15.0"
 
   module Adapter
   end
@@ -24,6 +24,8 @@ module Ppl
 end
 
 
+require "ppl/adapter/color"
+require "ppl/adapter/color/colored"
 require "ppl/adapter/storage"
 require "ppl/adapter/storage/disk"
 require "ppl/adapter/storage/factory"

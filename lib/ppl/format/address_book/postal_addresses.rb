@@ -3,8 +3,8 @@ class Ppl::Format::AddressBook::PostalAddresses < Ppl::Format::AddressBook
 
   attr_writer :table
 
-  def initialize
-    @table = Ppl::Format::Table.new([:id, :postal_address])
+  def initialize(colors={})
+    @table = Ppl::Format::Table.new([:id, :postal_address], colors)
   end
 
   def process(address_book)
