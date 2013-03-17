@@ -147,7 +147,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("age").and_return(true)
       @config.should_receive(:command_colors).with("age").and_return(@colors)
       @bootstrap.format_address_book_ages
     end
@@ -163,7 +162,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("bday").and_return(true)
       @config.should_receive(:command_colors).with("bday").and_return(@colors)
       @bootstrap.format_address_book_birthdays
     end
@@ -177,7 +175,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("email").and_return(true)
       @config.should_receive(:command_colors).with("email").and_return(@colors)
       @bootstrap.format_address_book_email_addresses
     end
@@ -197,7 +194,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("org").and_return(true)
       @config.should_receive(:command_colors).with("org").and_return(@colors)
       @bootstrap.format_address_book_organizations
     end
@@ -211,7 +207,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("name").and_return(true)
       @config.should_receive(:command_colors).with("name").and_return(@colors)
       @bootstrap.format_address_book_names
     end
@@ -225,7 +220,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("nick").and_return(true)
       @config.should_receive(:command_colors).with("nick").and_return(@colors)
       @bootstrap.format_address_book_nicknames
     end
@@ -239,7 +233,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("ls").and_return(true)
       @config.should_receive(:command_colors).with("ls").and_return(@colors)
       @bootstrap.format_address_book_one_line
     end
@@ -253,7 +246,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("phone").and_return(true)
       @config.should_receive(:command_colors).with("phone").and_return(@colors)
       @bootstrap.format_address_book_phone_numbers
     end
@@ -267,7 +259,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("post").and_return(true)
       @config.should_receive(:command_colors).with("post").and_return(@colors)
       @bootstrap.format_address_book_postal_addresses
     end
@@ -281,7 +272,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("url").and_return(true)
       @config.should_receive(:command_colors).with("url").and_return(@colors)
       @bootstrap.format_address_book_urls
     end
@@ -295,7 +285,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("age").and_return(true)
       @config.should_receive(:command_colors).with("age").and_return(@colors)
       @bootstrap.format_contact_age
     end
@@ -309,7 +298,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("bday").and_return(true)
       @config.should_receive(:command_colors).with("bday").and_return(@colors)
       @bootstrap.format_contact_birthday
     end
@@ -323,7 +311,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("email").and_return(true)
       @config.should_receive(:command_colors).with("email").and_return(@colors)
       @bootstrap.format_contact_email_addresses
     end
@@ -337,7 +324,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("name").and_return(true)
       @config.should_receive(:command_colors).with("name").and_return(@colors)
       @bootstrap.format_contact_name
     end
@@ -351,7 +337,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("nick").and_return(true)
       @config.should_receive(:command_colors).with("nick").and_return(@colors)
       @bootstrap.format_contact_nicknames
     end
@@ -365,7 +350,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("org").and_return(true)
       @config.should_receive(:command_colors).with("org").and_return(@colors)
       @bootstrap.format_contact_organizations
     end
@@ -379,7 +363,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("phone").and_return(true)
       @config.should_receive(:command_colors).with("phone").and_return(@colors)
       @bootstrap.format_contact_phone_numbers
     end
@@ -399,7 +382,6 @@ describe Ppl::Application::Bootstrap do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
-      @config.should_receive(:color_enabled).with("url").and_return(true)
       @config.should_receive(:command_colors).with("url").and_return(@colors)
       @bootstrap.format_contact_urls
     end
