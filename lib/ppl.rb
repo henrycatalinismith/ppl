@@ -62,7 +62,7 @@ require "ppl/command/post"
 require "ppl/command/shell"
 require "ppl/command/url"
 require "ppl/command/version"
-require "ppl/command/execute"
+require "ppl/command/external"
 
 require "ppl/entity/address_book"
 require "ppl/entity/contact"

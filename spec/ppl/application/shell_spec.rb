@@ -67,11 +67,11 @@ describe Ppl::Application::Shell do
       @shell.run(@input, @output)
     end
 
-    it "should not do any option parsing for Ppl::Command::Execute instances" do
-      execute = Ppl::Command::Execute.new("ls", "ls", "List directory contents")
-      execute.stub(:execute).and_return(true)
-      @shell.should_receive(:select_command).and_return(execute)
-      execute.should_not_receive(:options)
+    it "should not do any option parsing for Ppl::Command::External instances" do
+      external = Ppl::Command::External.new("ls", "ls", "List directory contents")
+      external.stub(:execute).and_return(true)
+      @shell.should_receive(:select_command).and_return(external)
+      external.should_not_receive(:options)
       @shell.run(@input, @output)
     end
 
