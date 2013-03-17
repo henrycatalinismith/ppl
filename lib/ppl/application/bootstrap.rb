@@ -108,19 +108,19 @@ class Ppl::Application::Bootstrap
   end
 
   register :command_pull do
-    pull = Ppl::Command::Execute.new("pull", "git pull", "Execute 'git pull' in the address book directory")
+    pull = Ppl::Command::External.new("pull", "git pull", "Execute 'git pull' in the address book directory")
     pull.storage = storage_adapter
     pull
   end
 
   register :command_push do
-    push = Ppl::Command::Execute.new("push", "git push", "Execute 'git push' in the address book directory")
+    push = Ppl::Command::External.new("push", "git push", "Execute 'git push' in the address book directory")
     push.storage = storage_adapter
     push
   end
 
   register :command_remote do
-    remote = Ppl::Command::Execute.new("remote", "git remote", "Execute 'git remote' in the address book directory")
+    remote = Ppl::Command::External.new("remote", "git remote", "Execute 'git remote' in the address book directory")
     remote.storage = storage_adapter
     remote
   end
@@ -189,8 +189,8 @@ class Ppl::Application::Bootstrap
     Ppl::Application::Configuration.new
   end
 
-  register :execute_command do
-    command = Ppl::Command::Execute.new(nil, nil, nil)
+  register :external_command do
+    command = Ppl::Command::External.new(nil, nil, nil)
     command.storage = storage_adapter
     command
   end
@@ -305,7 +305,7 @@ class Ppl::Application::Bootstrap
     router = Ppl::Application::Router.new(command_suite)
     router.aliases = configuration.aliases
     router.default = "help"
-    router.execute_command = execute_command
+    router.external_command = external_command
     router
   end
 

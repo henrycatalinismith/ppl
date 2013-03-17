@@ -5,8 +5,8 @@ describe Ppl::Application::Router do
     @suite  = Ppl::Application::CommandSuite.new
     @router = Ppl::Application::Router.new(@suite)
 
-    @execute = double(Ppl::Command::Execute)
-    @router.execute_command = @execute
+    @external = double(Ppl::Command::External)
+    @router.external_command = @external
 
     @cmd_one = Ppl::Application::Command.new
     @cmd_one.name = "one"
@@ -45,11 +45,11 @@ describe Ppl::Application::Router do
       @router.route("t").should be @cmd_two
     end
 
-    it "should return a Ppl::Command::Execute if the input matches a bang alias" do
-      @execute.should_receive(:name=).with("t")
-      @execute.should_receive(:command=).with("two")
+    it "should return a Ppl::Command::External if the input matches a bang alias" do
+      @external.should_receive(:name=).with("t")
+      @external.should_receive(:command=).with("two")
       @router.aliases = {"t" => "!two"}
-      @router.route("t").should be @execute
+      @router.route("t").should be @external
     end
 
   end
