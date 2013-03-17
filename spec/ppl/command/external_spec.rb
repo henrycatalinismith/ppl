@@ -1,8 +1,8 @@
 
-describe Ppl::Command::Execute do
+describe Ppl::Command::External do
 
   before(:each) do
-    @command = Ppl::Command::Execute.new("remote", "git remote", "Execute 'git remote' in the address book directory")
+    @command = Ppl::Command::External.new("remote", "git remote", "Execute 'git remote' in the address book directory")
     @input   = Ppl::Application::Input.new
     @output  = double(Ppl::Application::Output)
     @storage = double(Ppl::Adapter::Storage)

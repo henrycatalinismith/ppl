@@ -3,7 +3,7 @@ class Ppl::Application::Router
 
   attr_accessor :aliases
   attr_accessor :default
-  attr_accessor :execute_command
+  attr_accessor :external_command
 
   def initialize(command_suite)
     @command_suite = command_suite
@@ -14,7 +14,7 @@ class Ppl::Application::Router
     command = @command_suite.find_command(argument)
     if command.nil? && @aliases.has_key?(argument)
       if is_bang_alias?(argument)
-        command = create_execute_command(argument)
+        command = create_external_command(argument)
       else
         command = @command_suite.find_command(@aliases[argument])
       end
@@ -32,10 +32,10 @@ class Ppl::Application::Router
     @aliases[key].match(/^!/)
   end
 
-  def create_execute_command(key)
-    @execute_command.name = key
-    @execute_command.command = @aliases[key][1..-1]
-    @execute_command
+  def create_external_command(key)
+    @external_command.name = key
+    @external_command.command = @aliases[key][1..-1]
+    @external_command
   end
 
 end

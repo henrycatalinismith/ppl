@@ -1,5 +1,5 @@
 
-class Ppl::Command::Execute < Ppl::Application::Command
+class Ppl::Command::External < Ppl::Application::Command
 
   attr_accessor :command
 
