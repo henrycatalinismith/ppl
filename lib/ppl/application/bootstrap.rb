@@ -196,20 +196,17 @@ class Ppl::Application::Bootstrap
   end
 
   register :format_address_book_ages do
-    config = configuration
-    colors = config.color_enabled("age") ? config.command_colors("age") : {}
+    colors = configuration.command_colors("age")
     Ppl::Format::AddressBook::Ages.new(colors)
   end
 
   register :format_address_book_birthdays do
-    config = configuration
-    colors = config.color_enabled("bday") ? config.command_colors("bday") : {}
+    colors = configuration.command_colors("bday")
     Ppl::Format::AddressBook::Birthdays.new(colors)
   end
 
   register :format_address_book_email_addresses do
-    config = configuration
-    colors = config.color_enabled("email") ? config.command_colors("email") : {}
+    colors = configuration.command_colors("email")
     Ppl::Format::AddressBook::EmailAddresses.new(colors)
   end
 
@@ -218,86 +215,72 @@ class Ppl::Application::Bootstrap
   end
 
   register :format_address_book_names do
-    config = configuration
-    colors = config.color_enabled("name") ? config.command_colors("name") : {}
+    colors = configuration.command_colors("name")
     Ppl::Format::AddressBook::Names.new(colors)
   end
 
   register :format_address_book_nicknames do
-    config = configuration
-    colors = config.color_enabled("nick") ? config.command_colors("nick") : {}
+    colors = configuration.command_colors("nick")
     Ppl::Format::AddressBook::Nicknames.new(colors)
   end
 
   register :format_address_book_one_line do
-    config = configuration
-    colors = config.color_enabled("ls") ? config.command_colors("ls") : {}
+    colors = configuration.command_colors("ls")
     Ppl::Format::AddressBook::OneLine.new(colors)
   end
 
   register :format_address_book_organizations do
-    config = configuration
-    colors = config.color_enabled("org") ? config.command_colors("org") : {}
+    colors = configuration.command_colors("org")
     Ppl::Format::AddressBook::Organizations.new(colors)
   end
 
   register :format_address_book_phone_numbers do
-    config = configuration
-    colors = config.color_enabled("phone") ? config.command_colors("phone") : {}
+    colors = configuration.command_colors("phone")
     Ppl::Format::AddressBook::PhoneNumbers.new(colors)
   end
 
   register :format_address_book_postal_addresses do
-    config = configuration
-    colors = config.color_enabled("post") ? config.command_colors("post") : {}
+    colors = configuration.command_colors("post")
     Ppl::Format::AddressBook::PostalAddresses.new(colors)
   end
 
   register :format_address_book_urls do
-    config = configuration
-    colors = config.color_enabled("url") ? config.command_colors("url") : {}
+    colors = configuration.command_colors("url")
     Ppl::Format::AddressBook::Urls.new(colors)
   end
 
   register :format_contact_age do
-    config = configuration
-    colors = config.color_enabled("age") ? config.command_colors("age") : {}
+    colors = configuration.command_colors("age")
     Ppl::Format::Contact::Age.new(colors)
   end
 
   register :format_contact_birthday do
-    config = configuration
-    colors = config.color_enabled("bday") ? config.command_colors("bday") : {}
+    colors = configuration.command_colors("bday")
     Ppl::Format::Contact::Birthday.new(colors)
   end
 
   register :format_contact_email_addresses do
-    config = configuration
-    colors = config.color_enabled("email") ? config.command_colors("email") : {}
+    colors = configuration.command_colors("email")
     Ppl::Format::Contact::EmailAddresses.new(colors)
   end
 
   register :format_contact_name do
-    config = configuration
-    colors = config.color_enabled("name") ? config.command_colors("name") : {}
+    colors = configuration.command_colors("name")
     Ppl::Format::Contact::Name.new(colors)
   end
 
   register :format_contact_nicknames do
-    config = configuration
-    colors = config.color_enabled("nick") ? config.command_colors("nick") : {}
+    colors = configuration.command_colors("nick")
     Ppl::Format::Contact::Nicknames.new(colors)
   end
 
   register :format_contact_organizations do
-    config = configuration
-    colors = config.color_enabled("org") ? config.command_colors("org") : {}
+    colors = configuration.command_colors("org")
     Ppl::Format::Contact::Organization.new(colors)
   end
 
   register :format_contact_phone_numbers do
-    config = configuration
-    colors = config.color_enabled("phone") ? config.command_colors("phone") : {}
+    colors = configuration.command_colors("phone")
     Ppl::Format::Contact::PhoneNumber.new(colors)
   end
 
@@ -306,8 +289,7 @@ class Ppl::Application::Bootstrap
   end
 
   register :format_contact_urls do
-    config = configuration
-    colors = config.color_enabled("url") ? config.command_colors("url") : {}
+    colors = configuration.command_colors("url")
     Ppl::Format::Contact::Urls.new(colors)
   end
 

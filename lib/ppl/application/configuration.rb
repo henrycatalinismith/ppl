@@ -38,6 +38,7 @@ class Ppl::Application::Configuration
   end
 
   def command_colors(command_name)
+    return {} unless color_enabled(command_name)
     config = user_configuration
     search = "color \"#{command_name}\""
     result = config[search]
