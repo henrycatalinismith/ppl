@@ -522,8 +522,8 @@ describe Ppl::Application::Bootstrap do
   end
 
   describe "#vcard_adapter" do
-    it "should return a Ppl::Adapter::Vcard::Vpim" do
-      @bootstrap.vcard_adapter.should be_a(Ppl::Adapter::Vcard::Vpim)
+    it "should return a Ppl::Adapter::Vcard::GreenCard" do
+      @bootstrap.vcard_adapter.should be_a(Ppl::Adapter::Vcard::GreenCard)
     end
   end
 
