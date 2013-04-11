@@ -325,7 +325,7 @@ class Ppl::Application::Bootstrap
   end
 
   register :vcard_adapter do
-    Ppl::Adapter::Vcard::Vpim.new
+    Ppl::Adapter::Vcard::GreenCard.new
   end
 
 end
