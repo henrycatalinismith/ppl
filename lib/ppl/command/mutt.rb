@@ -39,6 +39,7 @@ class Ppl::Command::Mutt < Ppl::Application::Command
       end
 
       if matching_emails.length > 0
+        contact.email_addresses = matching_emails
         matches.contacts.push(contact)
       elsif !contact.name.nil? && contact.name.include?(query)
         matches.contacts.push(contact)
