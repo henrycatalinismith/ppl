@@ -1,7 +1,7 @@
 
 module Ppl
 
-  Version = "1.15.0"
+  Version = "1.15.1"
 
   module Adapter
   end
@@ -31,7 +31,7 @@ require "ppl/adapter/storage/disk"
 require "ppl/adapter/storage/factory"
 require "ppl/adapter/storage/git"
 require "ppl/adapter/vcard"
-require "ppl/adapter/vcard/vpim"
+require "ppl/adapter/vcard/greencard"
 
 require "ppl/application/bootstrap"
 require "ppl/application/command"
