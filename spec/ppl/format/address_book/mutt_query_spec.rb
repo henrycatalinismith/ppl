@@ -24,6 +24,19 @@ describe Ppl::Format::AddressBook::MuttQuery do
       @format.process(@address_book)
     end
 
+    it "should list all of each contact's email addresses" do
+      @contact.email_addresses.push "test2@example.com"
+      @table.should_receive(:add_row).with({
+        :email => "test@example.org",
+        :name  => "Test Contact",
+      })
+      @table.should_receive(:add_row).with({
+        :email => "test2@example.com",
+        :name  => "Test Contact",
+      })
+      @format.process(@address_book)
+    end
+
   end
 
 end
