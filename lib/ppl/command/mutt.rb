@@ -8,9 +8,13 @@ class Ppl::Command::Mutt < Ppl::Application::Command
 
   def options(parser, options)
     parser.banner = "usage: ppl mutt <query>"
+    parser.on("-i", "--ignore-case", "Turn off case sensitivity") do |i|
+      options[:ignore_case] = i
+    end
   end
 
   def execute(input, output)
+    @options = input.options
     query = require_query(input)
     matches = mutt_search(query)
     output.line(describe_result(matches))
@@ -29,24 +33,43 @@ class Ppl::Command::Mutt < Ppl::Application::Command
 
   def mutt_search(query)
     @address_book = @storage.load_address_book
+    select_matching_contacts(@address_book, query)
+  end
+
+  def select_matching_contacts(address_book, query)
     matches = Ppl::Entity::AddressBook.new
-
-    @address_book.contacts.each do |contact|
-      next if contact.email_addresses.empty?
-
-      matching_emails = contact.email_addresses.select do |email_address|
-        email_address.include? query
-      end
-
-      if matching_emails.length > 0
-        contact.email_addresses = matching_emails
-        matches.contacts.push(contact)
-      elsif !contact.name.nil? && contact.name.include?(query)
-        matches.contacts.push(contact)
+    address_book.contacts.each do |contact|
+      if contact.email_addresses.empty?
+        next
+      elsif match_by_name(contact, query)
+        matches.contacts << contact
+      elsif match_by_email_address(contact, query)
+        matches.contacts << contact
       end
     end
-
     matches
+  end
+
+  def match_by_name(contact, query)
+    if @options[:ignore_case]
+      contact.name.downcase.include? query.downcase
+    else
+      contact.name.include? query
+    end
+  end
+
+  def match_by_email_address(contact, query)
+    matches = contact.email_addresses.select do |email_address|
+      if @options[:ignore_case]
+        email_address.downcase.include? query.downcase
+      else
+        email_address.include? query
+      end
+    end
+    if matches.length > 0
+      contact.email_addresses = matches
+      true
+    end
   end
 
   def describe_result(matches)
