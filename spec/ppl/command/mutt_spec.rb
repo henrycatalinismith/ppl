@@ -84,6 +84,36 @@ describe Ppl::Command::Mutt do
       @command.execute(@input, @output).should eq true
     end
 
+  end
+
+  describe "#execute (case-insensitive)" do
+
+    before(:each) do
+      @input.options[:ignore_case] = true
+      @contact.name = "Joe Schmoe"
+      @contact.email_addresses.push "joe@somewhere.com"
+      @contact.email_addresses.push "LOUD@SHOUTING.COM"
+      @address_book.contacts << @contact
+      @storage.stub(:load_address_book).and_return(@address_book)
+      @output.stub(:line)
+    end
+
+    it "should ignore case when matching names" do
+      @input.arguments.push "joe schmoe"
+      @format.should_receive(:process) do |address_book|
+        address_book.contacts[0].email_addresses.length.should eq 2
+      end
+      @command.execute(@input, @output)
+    end
+
+    it "should ignore case when matching email addresses" do
+      @input.arguments.push "loud"
+      @format.should_receive(:process) do |address_book|
+        address_book.contacts[0].email_addresses.length.should eq 1
+        address_book.contacts[0].email_addresses[0].should eq "LOUD@SHOUTING.COM"
+      end
+      @command.execute(@input, @output)
+    end
 
   end
 
