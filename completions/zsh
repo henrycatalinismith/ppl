@@ -1,0 +1,53 @@
+#compdef ppl
+#autoload
+
+_ppl_contacts() {
+  contacts=(`ppl nick | cut -d ':' -f 1`)
+}
+
+local -a _1st_arguments
+_1st_arguments=(
+  "add:Add a new contact"
+  "age:List or show contacts's ages"
+  "bday:List, show or change birthdays"
+  "email:Show or change a contact's email address"
+  "init:Create an empty address book"
+  "ls:List all contacts"
+  "mutt:Integration with mutt's query_command"
+  "mv:Rename a contact"
+  "name:List, show or change names"
+  "nick:List, show or change nicknames"
+  "org:List, show or change organizations"
+  "phone:List, show or change phone numbers"
+  "post:List, show or change postal addresses"
+  "pull:Execute 'git pull' in the address book directory"
+  "push:Execute 'git push' in the address book directory"
+  "remote:Execute 'git remote' in the address book directory"
+  "rm:Delete a contact"
+  "shell:Interactive mode"
+  "show:Display the full details of a contact"
+  "url:List, show or change URLs"
+  "version:Display ppl version information"
+)
+
+local expl
+local -a contacts
+
+_arguments \
+  '*:: :->subcmds' && return 0
+
+if (( CURRENT == 1 )); then
+  _describe -t commands "ppl command" _1st_arguments
+  return
+fi
+
+# Commands which take nicknames
+local -a nick_cmds
+nick_cmds=(age bday email mv name nick org phone post rm show url)
+
+# Complete nick names if appropriate
+if (( CURRENT == 2 )) && [[ -n ${(M)nick_cmds:#${words[1]}} ]] ; then
+  _ppl_contacts
+  _wanted contacts expl 'current contacts' compadd -a contacts
+fi
+

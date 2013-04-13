@@ -1,0 +1,25 @@
+_ppl()
+{
+  local cur prev opts nick_cmds base
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+  # Complete options
+  opts="add age bday email init ls mutt mv name nick org phone post pull push remote rm shell show url version"
+  if [[ ${prev} == "ppl" ]]; then
+    COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+    return 0
+  fi
+
+  # Complete nicknames
+  nick_cmds=([age]="" [bday]="" [email]="" [mv]="" [name]="" [nick]="" [org]="" [phone]="" [post]="" [rm]="" [show]="" [url]="")
+  if [[ $nick_cmds[${prev}] ]]; then
+    local nicknames=$(for x in `ppl nick | cut -d ':' -f 1`; do echo ${x} ; done )
+    COMPREPLY=( $(compgen -W "${nicknames}" -- ${cur}) )
+    return 0
+  fi
+}
+
+complete -F _ppl ppl
+
