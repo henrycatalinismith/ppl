@@ -45,7 +45,7 @@ describe Ppl::Command::Mutt do
       @storage.should_receive(:load_address_book).and_return(@address_book)
       @format.should_receive(:process).and_return("test@example.org\tTest User")
       @output.should_receive(:line) do |line|
-        line.should include "Searching address book... 1 entries... 1 matching:"
+        line.should include "Searching address book... 1 email addresses... 1 matching:"
         line.should include "test@example.org\tTest User"
       end
       @command.execute(@input, @output).should eq true
@@ -78,10 +78,28 @@ describe Ppl::Command::Mutt do
       @storage.should_receive(:load_address_book).and_return(@address_book)
       @format.should_receive(:process).and_return("test@example.org\tTest User")
       @output.should_receive(:line) do |line|
-        line.should include "Searching address book... 1 entries... 1 matching:"
+        line.should include "Searching address book... 1 email addresses... 1 matching:"
         line.should include "test@example.org\tTest User"
       end
       @command.execute(@input, @output).should eq true
+    end
+
+
+    it "should count up email addresses in the status line" do
+      @input.arguments.push "org"
+
+      @contact.name = "Test User"
+      @contact.email_addresses.push "test@test.org"
+      @contact.email_addresses.push "prova@prova.org"
+      @address_book.contacts << @contact
+
+      @storage.stub(:load_address_book).and_return(@address_book)
+      @format.stub(:process)
+      @output.stub(:line)
+      @output.should_receive(:line) do |line|
+        line.should include "Searching address book... 2 email addresses... 2 matching:"
+      end
+      @command.execute(@input, @output)
     end
 
   end
