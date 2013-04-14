@@ -10,12 +10,18 @@ class Ppl::Application::Output
   end
 
   def error(string)
-    @stderr.puts string
+    @stderr.puts sanitise(string)
   end
 
   def line(string)
-    @stdout.puts string
+    @stdout.puts sanitise(string)
     true
+  end
+
+  private
+
+  def sanitise(string)
+    string.delete "\r"
   end
 
 end

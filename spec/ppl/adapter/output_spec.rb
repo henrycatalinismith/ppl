@@ -37,6 +37,18 @@ describe Ppl::Application::Output do
       @stdout.should_receive(:puts).with(string)
       @output.line(string)
     end
+
+    it "should not send carriage returns to stdout" do
+      string = "The quick brown fox"
+      @stdout.should_receive(:puts).with("The quick brown fox")
+      @output.line(string)
+    end
+
+    it "should not send carriage returns to stderr" do
+      string = "The quick brown fox"
+      @stderr.should_receive(:puts).with("The quick brown fox")
+      @output.error(string)
+    end
   end
 
 end
