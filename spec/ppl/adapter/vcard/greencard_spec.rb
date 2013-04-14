@@ -1,3 +1,4 @@
+# encoding: utf-8
 
 describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
 
@@ -252,6 +253,18 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
     ].join("\n")
     contact = @adapter.decode(vcard)
     contact.nicknames.first.should eq "Happy"
+  end
+
+  it "should not choke on utf8" do
+    vcard = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "N:;Straße;;;",
+      "FN:Straße",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+    contact.name.should eq "Straße"
   end
 
 end
