@@ -39,6 +39,7 @@ class Ppl::Command::Mutt < Ppl::Application::Command
   def select_matching_contacts(address_book, query)
     matches = Ppl::Entity::AddressBook.new
     address_book.contacts.each do |contact|
+      contact = contact.dup
       if contact.email_addresses.empty?
         next
       elsif match_by_name(contact, query)
@@ -82,9 +83,9 @@ class Ppl::Command::Mutt < Ppl::Application::Command
 
   def describe_matches(matches)
     summary = sprintf(
-      "Searching address book... %d entries... %d matching:",
-      @address_book.contacts.length,
-      matches.contacts.length
+      "Searching address book... %d email addresses... %d matching:",
+      @address_book.contacts.inject(0) { |total, c| total += c.email_addresses.length },
+      matches.contacts.inject(0) { |total, c| total += c.email_addresses.length }
     )
     results = @format.process(matches)
     [summary, results].join("\n").strip
