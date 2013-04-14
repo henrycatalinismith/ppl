@@ -21,7 +21,9 @@ class Ppl::Application::Output
   private
 
   def sanitise(string)
-    string.delete "\r"
+    unless string.nil?
+      string.to_s.delete "\r"
+    end
   end
 
 end

@@ -49,6 +49,12 @@ describe Ppl::Application::Output do
       @stderr.should_receive(:puts).with("The quick brown fox")
       @output.error(string)
     end
+
+    it "should not sanitise output if nil" do
+      string = nil
+      @stdout.should_receive(:puts).with(nil)
+      @output.line(string)
+    end
   end
 
 end
