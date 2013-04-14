@@ -63,6 +63,7 @@ require "ppl/command/shell"
 require "ppl/command/url"
 require "ppl/command/version"
 require "ppl/command/external"
+require "ppl/command/completion"
 
 require "ppl/entity/address_book"
 require "ppl/entity/contact"
