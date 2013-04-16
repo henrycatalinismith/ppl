@@ -15,6 +15,11 @@ describe Ppl::Command::Completion do
 
   describe "#execute" do
 
+    it "should raise an error if no shell is specified" do
+      @input.arguments = []
+      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
+    end
+
   end
 
 end
