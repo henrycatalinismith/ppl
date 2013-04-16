@@ -23,6 +23,12 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
+  describe "#command_completion" do
+    it "should return a Ppl::Command::Completion" do
+      @bootstrap.command_completion.should be_a(Ppl::Command::Completion)
+    end
+  end
+
   describe "#command_email" do
     it "should return a Ppl::Command::Email" do
       @bootstrap.command_email.should be_a(Ppl::Command::Email)

@@ -27,6 +27,11 @@ class Ppl::Application::Bootstrap
     bday
   end
 
+  register :command_completion do
+    completion = Ppl::Command::Completion.new
+    completion
+  end
+
   register :command_email do
     email = Ppl::Command::Email.new
     email.storage = storage_adapter
