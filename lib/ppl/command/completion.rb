@@ -9,6 +9,10 @@ class Ppl::Command::Completion < Ppl::Application::Command
   end
 
   def execute(input, output)
+    shell = input.arguments.shift
+    if shell.nil?
+      raise Ppl::Error::IncorrectUsage, "No contact specified"
+    end
     return true
   end
 
