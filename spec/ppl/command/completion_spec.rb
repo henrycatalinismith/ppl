@@ -5,6 +5,8 @@ describe Ppl::Command::Completion do
     @command = Ppl::Command::Completion.new
     @input   = Ppl::Application::Input.new
     @output  = double(Ppl::Application::Output)
+    @directory = double(Dir)
+    @command.completions_directory = @directory
   end
 
   describe "#name" do
@@ -15,9 +17,19 @@ describe Ppl::Command::Completion do
 
   describe "#execute" do
 
+    before(:each) do
+      @directory.stub(:exists?)
+    end
+
     it "should raise an error if no shell is specified" do
       @input.arguments = []
       expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::IncorrectUsage)
+    end
+
+    it "should raise an error if the shell is not recognised" do
+      @input.arguments = ["invalidshell"]
+      @directory.should_receive(:exists?).with("invalidshell").and_return(false)
+      expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::CompletionNotFound)
     end
 
   end
