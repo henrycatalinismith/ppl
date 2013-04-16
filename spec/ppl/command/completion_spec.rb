@@ -4,6 +4,7 @@ describe Ppl::Command::Completion do
   before(:each) do
     @command = Ppl::Command::Completion.new
     @input   = Ppl::Application::Input.new
+    @output  = double(Ppl::Application::Output)
   end
 
   describe "#name" do
