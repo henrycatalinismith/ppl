@@ -27,6 +27,14 @@ class Ppl::Application::Bootstrap
     bday
   end
 
+  register :command_completion do
+    completion = Ppl::Command::Completion.new
+    directory = File.dirname(File.dirname(File.dirname(File.dirname(__FILE__))))
+    directory = File.join(directory, "completions")
+    completion.completions_directory = Dir.new(directory)
+    completion
+  end
+
   register :command_email do
     email = Ppl::Command::Email.new
     email.storage = storage_adapter
@@ -162,6 +170,7 @@ class Ppl::Application::Bootstrap
     suite.add_command command_add
     suite.add_command command_age
     suite.add_command command_bday
+    suite.add_command command_completion
     suite.add_command command_email
     suite.add_command command_help
     suite.add_command command_init
