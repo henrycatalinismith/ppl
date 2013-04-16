@@ -27,6 +27,14 @@ describe Ppl::Application::Bootstrap do
     it "should return a Ppl::Command::Completion" do
       @bootstrap.command_completion.should be_a(Ppl::Command::Completion)
     end
+    it "should inject a completions directory" do
+      Ppl::Command::Completion.stub(:new) do
+        completion = double(Ppl::Command::Completion)
+        completion.should_receive(:completions_directory=)
+        completion
+      end
+      @bootstrap.command_completion
+    end
   end
 
   describe "#command_email" do
