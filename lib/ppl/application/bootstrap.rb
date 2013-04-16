@@ -29,6 +29,9 @@ class Ppl::Application::Bootstrap
 
   register :command_completion do
     completion = Ppl::Command::Completion.new
+    directory = File.dirname(File.dirname(File.dirname(File.dirname(__FILE__))))
+    directory = File.join(directory, "completions")
+    completion.completions_directory = Dir.new(directory)
     completion
   end
 
