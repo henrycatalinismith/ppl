@@ -16,10 +16,12 @@ class Ppl::Command::Completion < Ppl::Application::Command
       raise Ppl::Error::IncorrectUsage, "No contact specified"
     end
 
-    if !@completions_directory.exists? shell
+    path = File.join(@completions_directory.path, shell)
+    if !File.exists? path
       raise Ppl::Error::CompletionNotFound, shell
     end
-    return true
+
+    output.line(File.read(path))
   end
 
 end
