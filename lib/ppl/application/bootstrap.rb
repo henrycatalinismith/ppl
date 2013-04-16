@@ -167,6 +167,7 @@ class Ppl::Application::Bootstrap
     suite.add_command command_add
     suite.add_command command_age
     suite.add_command command_bday
+    suite.add_command command_completion
     suite.add_command command_email
     suite.add_command command_help
     suite.add_command command_init

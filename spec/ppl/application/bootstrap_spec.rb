@@ -411,6 +411,9 @@ describe Ppl::Application::Bootstrap do
     it "should contain the 'bday' command" do
       @bootstrap.command_suite.find_command("bday").should_not be nil
     end
+    it "should contain the 'completion' command" do
+      @bootstrap.command_suite.find_command("completion").should_not be nil
+    end
     it "should contain the 'email' command" do
       @bootstrap.command_suite.find_command("email").should_not be nil
     end
