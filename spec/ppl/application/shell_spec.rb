@@ -91,6 +91,14 @@ describe Ppl::Application::Shell do
       @shell.run(@input, @output)
     end
 
+    it "should handle CompletionNotFound errors nicely" do
+      @command.stub(:options)
+      @command.should_receive(:execute) { raise Ppl::Error::CompletionNotFound, "example" }
+      @router.should_receive(:route).and_return(@command)
+      @output.should_receive(:error).with("ppl: No completion function available for 'example'")
+      @shell.run(@input, @output)
+    end
+
   end
 
 end
