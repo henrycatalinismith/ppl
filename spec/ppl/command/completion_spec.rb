@@ -18,7 +18,9 @@ describe Ppl::Command::Completion do
   describe "#execute" do
 
     before(:each) do
-      @directory.stub(:exists?)
+      @directory.stub(:path).and_return("")
+      File.stub(:exists?).and_return(true)
+      File.stub(:read)
     end
 
     it "should raise an error if no shell is specified" do
@@ -28,8 +30,15 @@ describe Ppl::Command::Completion do
 
     it "should raise an error if the shell is not recognised" do
       @input.arguments = ["invalidshell"]
-      @directory.should_receive(:exists?).with("invalidshell").and_return(false)
+      File.should_receive(:exists?).with("/invalidshell").and_return(false)
       expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::CompletionNotFound)
+    end
+
+    it "should read the function from disk and print it to stdout" do
+      @input.arguments = ["zsh"]
+      File.should_receive(:read).and_return("completion function")
+      @output.should_receive(:line).with("completion function")
+      @command.execute(@input, @output)
     end
 
   end
