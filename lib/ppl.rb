@@ -63,11 +63,13 @@ require "ppl/command/shell"
 require "ppl/command/url"
 require "ppl/command/version"
 require "ppl/command/external"
+require "ppl/command/completion"
 
 require "ppl/entity/address_book"
 require "ppl/entity/contact"
 require "ppl/entity/postal_address"
 
+require "ppl/error/completion_not_found"
 require "ppl/error/contact_not_found"
 require "ppl/error/incorrect_usage"
 
