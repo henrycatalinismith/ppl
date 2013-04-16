@@ -23,6 +23,20 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
+  describe "#command_completion" do
+    it "should return a Ppl::Command::Completion" do
+      @bootstrap.command_completion.should be_a(Ppl::Command::Completion)
+    end
+    it "should inject a completions directory" do
+      Ppl::Command::Completion.stub(:new) do
+        completion = double(Ppl::Command::Completion)
+        completion.should_receive(:completions_directory=)
+        completion
+      end
+      @bootstrap.command_completion
+    end
+  end
+
   describe "#command_email" do
     it "should return a Ppl::Command::Email" do
       @bootstrap.command_email.should be_a(Ppl::Command::Email)
@@ -404,6 +418,9 @@ describe Ppl::Application::Bootstrap do
     end
     it "should contain the 'bday' command" do
       @bootstrap.command_suite.find_command("bday").should_not be nil
+    end
+    it "should contain the 'completion' command" do
+      @bootstrap.command_suite.find_command("completion").should_not be nil
     end
     it "should contain the 'email' command" do
       @bootstrap.command_suite.find_command("email").should_not be nil
