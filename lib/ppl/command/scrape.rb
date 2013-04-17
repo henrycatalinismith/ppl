@@ -1,4 +1,6 @@
 
+require "mail"
+
 class Ppl::Command::Scrape < Ppl::Application::Command
 
   name        "scrape"
@@ -11,6 +13,11 @@ class Ppl::Command::Scrape < Ppl::Application::Command
   end
 
   def execute(input, output)
+    email = Mail.new(input.stdin)
+    contact = Ppl::Entity::Contact.new
+    contact.name = email[:from].tree.addresses.first.display_name
+    contact.email_addresses << email[:from].tree.addresses.first.address
+    @storage.save_contact(contact)
     return true
   end
 
