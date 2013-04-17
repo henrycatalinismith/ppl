@@ -23,7 +23,14 @@ class Ppl::Adapter::EmailScraper::Mail
       sender = Ppl::Entity::Contact.new
       sender.name = from.tree.addresses.first.display_name
       sender.email_addresses << from.tree.addresses.first.address
+      sender.id = generate_contact_id(sender)
       sender
+    end
+  end
+
+  def generate_contact_id(contact)
+    if !contact.name.nil?
+      contact.name.downcase.tr(" ", "_")
     end
   end
 
