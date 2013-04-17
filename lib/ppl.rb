@@ -64,6 +64,7 @@ require "ppl/command/url"
 require "ppl/command/version"
 require "ppl/command/external"
 require "ppl/command/completion"
+require "ppl/command/scrape"
 
 require "ppl/entity/address_book"
 require "ppl/entity/contact"
