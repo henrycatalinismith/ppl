@@ -13,6 +13,7 @@ class Ppl::Command::Scrape < Ppl::Application::Command
   end
 
   def execute(input, output)
+    ARGV.shift
     contacts = @email_scraper.scrape_contacts(input.argf.read)
     return true
   end
