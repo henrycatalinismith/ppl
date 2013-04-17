@@ -31,6 +31,8 @@ class Ppl::Adapter::EmailScraper::Mail
   def generate_contact_id(contact)
     if !contact.name.nil?
       contact.name.downcase.tr(" ", "_")
+    elsif !contact.email_addresses.empty?
+      contact.email_addresses.first
     end
   end
 
