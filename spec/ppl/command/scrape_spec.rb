@@ -20,8 +20,18 @@ describe Ppl::Command::Scrape do
 
   describe "#execute" do
 
+    before(:each) do
+      @input.argf.stub(:read)
+      @email_scraper.stub(:scrape_contacts)
+    end
+
     it "should read input from ARGF" do
       @input.argf.should_receive(:read)
+      @command.execute(@input, @output)
+    end
+
+    it "should pass input to the email scraper" do
+      @email_scraper.should_receive(:scrape_contacts)
       @command.execute(@input, @output)
     end
 
