@@ -192,6 +192,7 @@ class Ppl::Application::Bootstrap
     suite.add_command command_push
     suite.add_command command_remote
     suite.add_command command_rm
+    suite.add_command command_scrape
     suite.add_command command_shell
     suite.add_command command_show
     suite.add_command command_url
