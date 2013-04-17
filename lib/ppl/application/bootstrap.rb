@@ -139,6 +139,12 @@ class Ppl::Application::Bootstrap
     rm
   end
 
+  register :command_scrape do
+    scrape = Ppl::Command::Scrape.new
+    scrape.storage = storage_adapter
+    scrape
+  end
+
   register :command_shell do
     shell = Ppl::Command::Shell.new
     shell.storage = storage_adapter
