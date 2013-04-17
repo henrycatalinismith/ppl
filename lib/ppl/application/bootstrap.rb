@@ -142,6 +142,7 @@ class Ppl::Application::Bootstrap
   register :command_scrape do
     scrape = Ppl::Command::Scrape.new
     scrape.storage = storage_adapter
+    scrape.email_scraper = email_scraper
     scrape
   end
 
@@ -342,6 +343,10 @@ class Ppl::Application::Bootstrap
 
   register :vcard_adapter do
     Ppl::Adapter::Vcard::GreenCard.new
+  end
+
+  register :email_scraper do
+    Ppl::Adapter::EmailScraper::Mail.new
   end
 
 end
