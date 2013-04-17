@@ -27,6 +27,7 @@ end
 require "ppl/adapter/color"
 require "ppl/adapter/color/colored"
 require "ppl/adapter/email_scraper"
+require "ppl/adapter/email_scraper/mail"
 require "ppl/adapter/storage"
 require "ppl/adapter/storage/disk"
 require "ppl/adapter/storage/factory"
