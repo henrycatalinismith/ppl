@@ -6,18 +6,14 @@ class Ppl::Command::Scrape < Ppl::Application::Command
   name        "scrape"
   description "Scrape contact details from stdin"
 
-  attr_writer :format
+  attr_writer :email_scraper
 
   def options(parser, options)
     parser.banner = "usage: ppl scrape [<options>]"
   end
 
   def execute(input, output)
-    email = Mail.new(input.stdin)
-    contact = Ppl::Entity::Contact.new
-    contact.name = email[:from].tree.addresses.first.display_name
-    contact.email_addresses << email[:from].tree.addresses.first.address
-    @storage.save_contact(contact)
+    input.argf.read
     return true
   end
 
