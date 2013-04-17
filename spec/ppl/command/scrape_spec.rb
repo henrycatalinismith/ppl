@@ -22,7 +22,7 @@ describe Ppl::Command::Scrape do
 
     before(:each) do
       @input.argf.stub(:read)
-      @email_scraper.stub(:scrape_contacts)
+      @email_scraper.stub(:scrape_contacts).and_return([])
     end
 
     it "should read input from ARGF" do
@@ -32,6 +32,12 @@ describe Ppl::Command::Scrape do
 
     it "should pass input to the email scraper" do
       @email_scraper.should_receive(:scrape_contacts)
+      @command.execute(@input, @output)
+    end
+
+    it "should save all contacts returned by the scraper" do
+      @email_scraper.stub(:scrape_contacts).and_return([1, 2, 3])
+      @storage.should_receive(:save_contact).exactly(3).times
       @command.execute(@input, @output)
     end
 

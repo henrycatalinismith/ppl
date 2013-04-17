@@ -15,6 +15,9 @@ class Ppl::Command::Scrape < Ppl::Application::Command
   def execute(input, output)
     ARGV.shift
     contacts = @email_scraper.scrape_contacts(input.argf.read)
+    contacts.each do |contact|
+      @storage.save_contact(contact)
+    end
     return true
   end
 
