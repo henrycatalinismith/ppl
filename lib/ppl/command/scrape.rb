@@ -15,12 +15,7 @@ class Ppl::Command::Scrape < Ppl::Application::Command
   def execute(input, output)
     contacts = scrape_email(input)
     contacts.each do |contact|
-      if input.options[:quiet]
-        decision = "y"
-      else
-        decision = Readline.readline("test: ")
-      end
-      if decision == "y"
+      if store_contact?(contact, input)
         @storage.save_contact(contact)
       end
     end
@@ -41,6 +36,14 @@ class Ppl::Command::Scrape < Ppl::Application::Command
 
   def scrape_sender(email)
     @email_scraper.scrape_contacts(email)
+  end
+
+  def store_contact?(contact, input)
+    if input.options[:quiet]
+      true
+    else
+      Readline.readline("test: ") == "y"
+    end
   end
 
 end
