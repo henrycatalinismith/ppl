@@ -10,6 +10,9 @@ class Ppl::Command::Scrape < Ppl::Application::Command
 
   def options(parser, options)
     parser.banner = "usage: ppl scrape [<options>]"
+    parser.on("-s", "--sender", "Scrape the sender's contact details") do |i|
+      options[:sender] = i
+    end
   end
 
   def execute(input, output)
@@ -26,7 +29,7 @@ class Ppl::Command::Scrape < Ppl::Application::Command
 
   def scrape_email(input)
     ARGV.shift
-    email = input.argf.read
+    email = input.stdin.read
     contacts = []
     if input.options[:sender]
       contacts |= scrape_sender(email)
@@ -39,10 +42,15 @@ class Ppl::Command::Scrape < Ppl::Application::Command
   end
 
   def store_contact?(contact, input)
+    input.stdin.reopen("/dev/tty", "r")
     if input.options[:quiet]
       true
     else
-      Readline.readline("test: ") == "y"
+      message = sprintf('Add "%s <%s>" to your address book [Y/n]?',
+        contact.name,
+        contact.email_addresses.first
+      )
+      Readline.readline(message) == "y"
     end
   end
 
