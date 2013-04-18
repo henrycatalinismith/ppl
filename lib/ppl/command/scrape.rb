@@ -1,5 +1,5 @@
 
-require "mail"
+require "readline"
 
 class Ppl::Command::Scrape < Ppl::Application::Command
 
@@ -15,7 +15,9 @@ class Ppl::Command::Scrape < Ppl::Application::Command
   def execute(input, output)
     ARGV.shift
     contacts = @email_scraper.scrape_contacts(input.argf.read)
+    input.stdin.reopen("/dev/tty", "r")
     contacts.each do |contact|
+      Readline.readline("test: ")
       @storage.save_contact(contact)
     end
     return true
