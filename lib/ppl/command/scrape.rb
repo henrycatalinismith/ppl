@@ -10,6 +10,9 @@ class Ppl::Command::Scrape < Ppl::Application::Command
 
   def options(parser, options)
     parser.banner = "usage: ppl scrape [<options>]"
+    parser.on("-q", "--quiet", "Add contacts to the address book without prompting") do |i|
+      options[:quiet] = i
+    end
     parser.on("-s", "--sender", "Scrape the sender's contact details") do |i|
       options[:sender] = i
     end
