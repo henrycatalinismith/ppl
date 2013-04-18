@@ -25,6 +25,7 @@ describe Ppl::Command::Scrape do
     before(:each) do
       @input.stdin.stub(:read)
       @input.stdin.stub(:reopen)
+      @input.stdin.stub(:closed?)
       @email_scraper.stub(:scrape_contacts).and_return([])
       Readline.stub(:readline)
       @storage.stub(:save_contact)
@@ -53,6 +54,14 @@ describe Ppl::Command::Scrape do
       @email_scraper.stub(:scrape_contacts).and_return([@contact])
       Readline.should_not_receive(:readline)
       @storage.should_receive(:save_contact)
+      @command.execute(@input, @output)
+    end
+
+    it "should reopen stdin to prompt the user" do
+      @input.options[:sender] = true
+      @input.stdin.should_receive(:closed?).and_return(true)
+      @input.stdin.should_receive(:reopen)
+      @email_scraper.stub(:scrape_contacts).and_return([@contact])
       @command.execute(@input, @output)
     end
 
