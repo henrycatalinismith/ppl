@@ -42,16 +42,19 @@ class Ppl::Command::Scrape < Ppl::Application::Command
   end
 
   def store_contact?(contact, input)
-    input.stdin.reopen("/dev/tty", "r")
     if input.options[:quiet]
       true
     else
-      message = sprintf('Add "%s <%s>" to your address book [Y/n]?',
-        contact.name,
-        contact.email_addresses.first
-      )
+      message = generate_prompt_string(contact)
       Readline.readline(message) == "y"
     end
+  end
+
+  def generate_prompt_string(contact)
+    sprintf('Add "%s <%s>" to your address book [Y/n]?',
+      contact.name,
+      contact.email_addresses.first
+    )
   end
 
 end
