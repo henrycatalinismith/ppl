@@ -47,7 +47,7 @@ class Ppl::Command::Scrape < Ppl::Application::Command
     else
       input.stdin.reopen("/dev/tty", "r") if input.stdin.eof?
       message = generate_prompt_string(contact)
-      Readline.readline(message) == "y"
+      Readline.readline(message).downcase != "n"
     end
   end
 
