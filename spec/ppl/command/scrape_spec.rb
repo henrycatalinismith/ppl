@@ -87,7 +87,7 @@ describe Ppl::Command::Scrape do
       contact.name = "Test Person"
       contact.email_addresses << "test@example.org"
       @email_scraper.stub(:scrape_contacts).and_return([contact])
-      Readline.should_receive(:readline).with("Add \"Test Person <test@example.org>\" to your address book [Y/n]?")
+      Readline.should_receive(:readline).with("Add \"Test Person <test@example.org>\" to your address book [Y/n]? ")
       @command.execute(@input, @output)
     end
 

@@ -52,7 +52,7 @@ class Ppl::Command::Scrape < Ppl::Application::Command
   end
 
   def generate_prompt_string(contact)
-    sprintf('Add "%s <%s>" to your address book [Y/n]?',
+    sprintf('Add "%s <%s>" to your address book [Y/n]? ',
       contact.name,
       contact.email_addresses.first
     )
