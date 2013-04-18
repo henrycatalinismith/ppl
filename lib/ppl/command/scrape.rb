@@ -13,8 +13,7 @@ class Ppl::Command::Scrape < Ppl::Application::Command
   end
 
   def execute(input, output)
-    ARGV.shift
-    contacts = scrape_sender(input)
+    contacts = scrape_email(input)
     contacts.each do |contact|
       if input.options[:quiet]
         decision = "y"
@@ -30,8 +29,18 @@ class Ppl::Command::Scrape < Ppl::Application::Command
 
   private
 
-  def scrape_sender(input)
-    @email_scraper.scrape_contacts(input.argf.read)
+  def scrape_email(input)
+    ARGV.shift
+    email = input.argf.read
+    contacts = []
+    if input.options[:sender]
+      contacts |= scrape_sender(email)
+    end
+    contacts
+  end
+
+  def scrape_sender(email)
+    @email_scraper.scrape_contacts(email)
   end
 
 end
