@@ -45,6 +45,7 @@ class Ppl::Command::Scrape < Ppl::Application::Command
     if input.options[:quiet]
       true
     else
+      input.stdin.reopen("/dev/tty", "r") if input.stdin.closed?
       message = generate_prompt_string(contact)
       Readline.readline(message) == "y"
     end
