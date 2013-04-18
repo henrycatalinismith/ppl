@@ -15,10 +15,15 @@ class Ppl::Command::Scrape < Ppl::Application::Command
   def execute(input, output)
     ARGV.shift
     contacts = @email_scraper.scrape_contacts(input.argf.read)
-    input.stdin.reopen("/dev/tty", "r")
     contacts.each do |contact|
-      Readline.readline("test: ")
-      @storage.save_contact(contact)
+      if input.options[:quiet]
+        decision = "y"
+      else
+        decision = Readline.readline("test: ")
+      end
+      if decision == "y"
+        @storage.save_contact(contact)
+      end
     end
     return true
   end
