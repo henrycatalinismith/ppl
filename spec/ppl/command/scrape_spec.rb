@@ -28,16 +28,24 @@ describe Ppl::Command::Scrape do
     end
 
     it "should read input from ARGF" do
+      @input.options[:sender] = true
       @input.argf.should_receive(:read)
       @command.execute(@input, @output)
     end
 
     it "should pass input to the email scraper" do
+      @input.options[:sender] = true
       @email_scraper.should_receive(:scrape_contacts)
       @command.execute(@input, @output)
     end
 
+    it "shouldn't do any scraping unless told which fields to scrape" do
+      @email_scraper.should_not_receive(:scrape_contacts)
+      @command.execute(@input, @output)
+    end
+
     it "should always save contacts if in quiet mode" do
+      @input.options[:sender] = true
       @input.options[:quiet] = true
       @email_scraper.stub(:scrape_contacts).and_return([1, 2, 3])
       Readline.should_not_receive(:readline)
@@ -46,6 +54,7 @@ describe Ppl::Command::Scrape do
     end
 
     it "should save the contact if the user approves" do
+      @input.options[:sender] = true
       @email_scraper.stub(:scrape_contacts).and_return([1, 2, 3])
       Readline.should_receive(:readline).exactly(3).times.and_return("y")
       @storage.should_receive(:save_contact).exactly(3).times
@@ -53,6 +62,7 @@ describe Ppl::Command::Scrape do
     end
 
     it "should not save the contact if the user disapproves" do
+      @input.options[:sender] = true
       @email_scraper.stub(:scrape_contacts).and_return([1, 2, 3])
       Readline.should_receive(:readline).exactly(3).times.and_return("n")
       @storage.should_not_receive(:save_contact)
