@@ -98,5 +98,22 @@ describe Ppl::Format::Table do
 
   end
 
+  describe "#disable_colors!" do
+    it "should disable colors" do
+      @table.colors = {
+        "id" => "red",
+        "name" => "yellow",
+        "email" => "blue",
+      }
+      @table.add_row({
+        :id    => 12345,
+        :name  => "John Doe",
+        :email => "jdoe@example.org",
+      })
+      @table.disable_colors!
+      @table.to_s.should eq "12345  John Doe  jdoe@example.org"
+    end
+  end
+
 end
 

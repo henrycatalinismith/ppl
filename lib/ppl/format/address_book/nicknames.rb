@@ -12,6 +12,9 @@ class Ppl::Format::AddressBook::Nicknames < Ppl::Format::AddressBook
     @table.to_s
   end
 
+  def disable_colors!
+    @table.disable_colors!
+  end
 
   private
 
