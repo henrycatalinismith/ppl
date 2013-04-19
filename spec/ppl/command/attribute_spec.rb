@@ -28,6 +28,15 @@ describe Ppl::Command::Attribute do
       @command.execute(@input, @output).should eq true
     end
 
+    it "should disable color output if :no_color is set" do
+      @input.options[:no_color] = true
+      @storage.stub(:load_address_book).and_return(@address_book)
+      @list_format.should_receive(:disable_colors!)
+      @list_format.stub(:process)
+      @output.should_receive(:line)
+      @command.execute(@input, @output).should eq true
+    end
+
     it "should show the full list of attributes for the given contact" do
       @input.arguments.push("jdoe")
       @storage.should_receive(:require_contact).and_return(@contact)
