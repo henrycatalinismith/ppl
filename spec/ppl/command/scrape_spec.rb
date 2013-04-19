@@ -27,7 +27,7 @@ describe Ppl::Command::Scrape do
       @input.stdin.stub(:reopen)
       @input.stdin.stub(:eof?)
       @email_scraper.stub(:scrape_contacts).and_return([])
-      Readline.stub(:readline)
+      Readline.stub(:readline).and_return("")
       @storage.stub(:save_contact)
     end
 
