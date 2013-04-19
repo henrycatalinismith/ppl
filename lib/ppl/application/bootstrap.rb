@@ -139,6 +139,13 @@ class Ppl::Application::Bootstrap
     rm
   end
 
+  register :command_scrape do
+    scrape = Ppl::Command::Scrape.new
+    scrape.storage = storage_adapter
+    scrape.email_scraper = email_scraper
+    scrape
+  end
+
   register :command_shell do
     shell = Ppl::Command::Shell.new
     shell.storage = storage_adapter
@@ -186,6 +193,7 @@ class Ppl::Application::Bootstrap
     suite.add_command command_push
     suite.add_command command_remote
     suite.add_command command_rm
+    suite.add_command command_scrape
     suite.add_command command_shell
     suite.add_command command_show
     suite.add_command command_url
@@ -335,6 +343,10 @@ class Ppl::Application::Bootstrap
 
   register :vcard_adapter do
     Ppl::Adapter::Vcard::GreenCard.new
+  end
+
+  register :email_scraper do
+    Ppl::Adapter::EmailScraper::Mail.new
   end
 
 end

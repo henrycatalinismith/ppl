@@ -26,6 +26,8 @@ end
 
 require "ppl/adapter/color"
 require "ppl/adapter/color/colored"
+require "ppl/adapter/email_scraper"
+require "ppl/adapter/email_scraper/mail"
 require "ppl/adapter/storage"
 require "ppl/adapter/storage/disk"
 require "ppl/adapter/storage/factory"
@@ -64,6 +66,7 @@ require "ppl/command/url"
 require "ppl/command/version"
 require "ppl/command/external"
 require "ppl/command/completion"
+require "ppl/command/scrape"
 
 require "ppl/entity/address_book"
 require "ppl/entity/contact"
