@@ -44,5 +44,12 @@ describe Ppl::Format::AddressBook::Nicknames do
 
   end
 
+  describe "#disable_colors!" do
+    it "should turn off the table's colors" do
+      @table.should_receive(:disable_colors!)
+      @format.disable_colors!
+    end
+  end
+
 end
 

@@ -110,8 +110,8 @@ describe Ppl::Format::Table do
         :name  => "John Doe",
         :email => "jdoe@example.org",
       })
-      @table.disable_color!
-      ktable.to_s.should eq "12345  John Doe  jdoe@example.org"
+      @table.disable_colors!
+      @table.to_s.should eq "12345  John Doe  jdoe@example.org"
     end
   end
 
