@@ -38,6 +38,9 @@ class Ppl::Format::Table
     string.strip
   end
 
+  def disable_colors!
+    @colors = {}
+  end
 
   private
 
