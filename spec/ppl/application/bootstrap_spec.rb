@@ -127,6 +127,12 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
+  describe "#command_scrape" do
+    it "should return a Ppl::Command::Scrape" do
+      @bootstrap.command_scrape.should be_a(Ppl::Command::Scrape)
+    end
+  end
+
   describe "#command_shell" do
     it "should return a Ppl::Command::Shell" do
       @bootstrap.command_shell.should be_a(Ppl::Command::Shell)
@@ -463,6 +469,9 @@ describe Ppl::Application::Bootstrap do
     end
     it "should contain the 'rm' command" do
       @bootstrap.command_suite.find_command("rm").should_not be nil
+    end
+    it "should contain the 'scrape' command" do
+      @bootstrap.command_suite.find_command("scrape").should_not be nil
     end
     it "should contain the 'show' command" do
       @bootstrap.command_suite.find_command("show").should_not be nil
