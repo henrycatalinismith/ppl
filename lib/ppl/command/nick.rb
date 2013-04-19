@@ -13,6 +13,9 @@ class Ppl::Command::Nick < Ppl::Command::Attribute
     parser.on("-d", "--delete", "delete nickname") do
       options[:delete] = true
     end
+    parser.on("--no-color", "turn off colored output") do
+      options[:no_color] = true
+    end
   end
 
 end
