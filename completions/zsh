@@ -2,7 +2,7 @@
 #autoload
 
 _ppl_contacts() {
-  contacts=(`ppl nick | cut -d ':' -f 1 | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"`)
+  contacts=(`ppl nick --no-color | cut -d ':' -f 1`)
 }
 
 local -a _1st_arguments
