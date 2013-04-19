@@ -27,6 +27,9 @@ class Ppl::Command::Attribute < Ppl::Application::Command
 
   def list_attribute(input, output)
     address_book = @storage.load_address_book
+    if input.options[:no_color]
+      @list_format.disable_colors!
+    end
     output.line(@list_format.process(address_book))
     true
   end
