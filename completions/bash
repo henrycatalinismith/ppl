@@ -6,7 +6,7 @@ _ppl()
   prev="${COMP_WORDS[COMP_CWORD-1]}"
 
   # Complete options
-  opts="add age bday email init ls mutt mv name nick org phone post pull push remote rm shell show url version"
+  opts="add age bday completion email init ls mutt mv name nick org phone post pull push remote rm scrape shell show url version"
   if [[ ${prev} == "ppl" ]]; then
     COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
     return 0
