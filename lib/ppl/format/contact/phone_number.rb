@@ -4,7 +4,7 @@ class Ppl::Format::Contact::PhoneNumber < Ppl::Format::Contact
   attr_writer :table
 
   def initialize(colors={})
-    @table = Ppl::Format::Table.new([:number, :type], colors)
+    @table = Ppl::Format::Table.new([:phone_numbers, :type], colors)
   end
 
   def process(contact)
@@ -16,8 +16,8 @@ class Ppl::Format::Contact::PhoneNumber < Ppl::Format::Contact
 
   def add_row(phone_number)
     @table.add_row({
-      :number => phone_number.number,
-      :type   => format_type(phone_number.type),
+      :phone_numbers => phone_number.number,
+      :type          => format_type(phone_number.type),
     })
   end
 

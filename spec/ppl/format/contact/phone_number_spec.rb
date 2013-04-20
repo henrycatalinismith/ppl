@@ -4,7 +4,7 @@ describe Ppl::Format::Contact::PhoneNumber do
   describe "#initialize" do
     it "should pass the colors through to the table" do
       colors = {"number" => "blue"}
-      Ppl::Format::Table.should_receive(:new).with([:number, :type], colors)
+      Ppl::Format::Table.should_receive(:new).with([:phone_numbers, :type], colors)
       format = Ppl::Format::Contact::PhoneNumber.new(colors)
     end
   end
@@ -22,8 +22,8 @@ describe Ppl::Format::Contact::PhoneNumber do
 
     it "should always include the phone number" do
       @table.should_receive(:add_row).with({
-        :number => "01234567890",
-        :type   => nil,
+        :phone_numbers => "01234567890",
+        :type          => nil,
       })
       @format.process(@contact)
     end
@@ -31,8 +31,8 @@ describe Ppl::Format::Contact::PhoneNumber do
     it "should put the type in parentheses" do
       @number.type = "work"
       @table.should_receive(:add_row).with({
-        :number => "01234567890",
-        :type   => "(work)",
+        :phone_numbers => "01234567890",
+        :type          => "(work)",
       })
       @format.process(@contact)
     end
