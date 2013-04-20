@@ -17,5 +17,12 @@ describe Ppl::Entity::PhoneNumber do
     end
   end
 
+  describe "#initialize" do
+    it "should accept a number" do
+      phone = Ppl::Entity::PhoneNumber.new(12345)
+      phone.number.should eq 12345
+    end
+  end
+
 end
 
