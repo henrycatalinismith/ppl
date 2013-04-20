@@ -56,14 +56,17 @@ class Ppl::Application::Configuration
   end
 
   def user_configuration
-    filename = File.expand_path(USER_CONFIG)
-    config   = {}
-    if File.exists?(filename)
-      config = IniFile::load(filename).to_h
-    elsif File.exists?(xdg_path)
-      config = IniFile::load(xdg_path).to_h
+    unless @user_config.nil?
+      return @user_config
     end
-    return config
+    filename     = File.expand_path(USER_CONFIG)
+    @user_config = {}
+    if File.exists?(filename)
+      @user_config = IniFile::load(filename).to_h
+    elsif File.exists?(xdg_path)
+      @user_config = IniFile::load(xdg_path).to_h
+    end
+    return @user_config
   end
 
   def repository_configuration
