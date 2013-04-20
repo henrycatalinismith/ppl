@@ -20,12 +20,35 @@ class Ppl::Command::Phone < Ppl::Command::Attribute
 
   def add_attribute(input, output)
     contact = @storage.require_contact(input.arguments.shift)
-    phone_number = Ppl::Entity::PhoneNumber.new
-    phone_number.number = input.arguments.shift
-    phone_number.type = input.options[:type]
-    contact.phone_numbers.push(phone_number)
+    if new_number?(contact, input.arguments[0])
+      add_new_number(contact, input)
+    else
+      update_existing_number(contact, input)
+    end
     @storage.save_contact(contact)
     true
+  end
+
+  def new_number?(contact, input_number)
+    matching_numbers = contact.phone_numbers.select do |pn|
+      pn.number == input_number
+    end
+    matching_numbers.length < 1
+  end
+
+  def add_new_number(contact, input)
+    phone_number = Ppl::Entity::PhoneNumber.new
+    phone_number.number = input.arguments[0]
+    phone_number.type = input.options[:type]
+    contact.phone_numbers << phone_number
+  end
+
+  def update_existing_number(contact, input)
+    contact.phone_numbers.each do |pn|
+      if pn.number == input.arguments[0]
+        pn.type = input.options[:type]
+      end
+    end
   end
 
 end
