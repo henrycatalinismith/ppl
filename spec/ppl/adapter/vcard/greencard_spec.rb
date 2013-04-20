@@ -24,7 +24,7 @@ describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
   end
 
   it "should encode the contact's phone number" do
-    @contact.phone_numbers.push("01234567890")
+    @contact.phone_numbers << Ppl::Entity::PhoneNumber.new("01234567890")
     @adapter.encode(@contact).should include("TEL:01234567890")
   end
 
