@@ -136,7 +136,7 @@ class Ppl::Adapter::Vcard::GreenCard
     vcard.telephones.each do |tel|
       phone_number = Ppl::Entity::PhoneNumber.new
       phone_number.number = tel.to_s
-      phone_number.type = tel.location.join
+      phone_number.type = (tel.location | tel.nonstandard).join
       contact.phone_numbers << phone_number
     end
   end
