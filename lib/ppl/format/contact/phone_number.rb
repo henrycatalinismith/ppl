@@ -1,39 +1,29 @@
 
 class Ppl::Format::Contact::PhoneNumber < Ppl::Format::Contact
 
-  attr_writer :color_adapter
-  attr_writer :colors
+  attr_writer :table
 
   def initialize(colors={})
-    @colors = colors
-    @color_adapter = Ppl::Adapter::Color::Colored.new
+    @table = Ppl::Format::Table.new([:number, :type], colors)
   end
 
   def process(contact)
-    list = stringify_phone_numbers(contact.phone_numbers)
-    list = colorize_output(list)
-    list
+    contact.phone_numbers.each { |pn| add_row(pn) }
+    @table.to_s
   end
 
   private
 
-  def stringify_phone_numbers(phone_numbers)
-    phone_numbers.map(&method(:stringify_phone_number)).join("\n")
+  def add_row(phone_number)
+    @table.add_row({
+      :number => phone_number.number,
+      :type   => format_type(phone_number.type),
+    })
   end
 
-  def stringify_phone_number(phone_number)
-    line = [phone_number.number]
-    unless phone_number.type.nil? || phone_number.type == ""
-      line << "(#{phone_number.type})"
-    end
-    line.join " "
-  end
-
-  def colorize_output(string)
-    if @colors["phone_numbers"]
-      @color_adapter.colorize(string, @colors["phone_numbers"])
-    else
-      string
+  def format_type(type)
+    unless type.nil? || type == ""
+      "(#{type})"
     end
   end
 
