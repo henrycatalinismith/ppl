@@ -10,10 +10,24 @@ class Ppl::Format::Contact::PhoneNumber < Ppl::Format::Contact
   end
 
   def process(contact)
-    colorize_output(contact.phone_numbers.join("\n"))
+    list = stringify_phone_numbers(contact.phone_numbers)
+    list = colorize_output(list)
+    list
   end
 
   private
+
+  def stringify_phone_numbers(phone_numbers)
+    phone_numbers.map(&method(:stringify_phone_number)).join("\n")
+  end
+
+  def stringify_phone_number(phone_number)
+    line = [phone_number.number]
+    unless phone_number.type.nil? || phone_number.type == ""
+      line << "(#{phone_number.type})"
+    end
+    line.join " "
+  end
 
   def colorize_output(string)
     if @colors["phone_numbers"]
