@@ -64,7 +64,9 @@ class Ppl::Adapter::Vcard::GreenCard
 
   def encode_phone_numbers(contact, vcard_maker)
     contact.phone_numbers.each do |phone_number|
-      vcard_maker.add_tel(phone_number.number)
+      vcard_maker.add_tel(phone_number.number) do |tel|
+        tel.location = phone_number.type
+      end
     end
   end
 

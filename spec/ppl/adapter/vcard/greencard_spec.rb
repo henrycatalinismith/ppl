@@ -28,6 +28,11 @@ describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
     @adapter.encode(@contact).should include("TEL:01234567890")
   end
 
+  it "should encode the contact's phone number's type" do
+    @contact.phone_numbers << Ppl::Entity::PhoneNumber.new("01234567890", "cell")
+    @adapter.encode(@contact).should include("TEL;TYPE=cell:01234567890")
+  end
+
   it "should encode the contact's organization" do
     @contact.organizations.push("Example Ltd")
     @adapter.encode(@contact).should include("ORG:Example Ltd")
