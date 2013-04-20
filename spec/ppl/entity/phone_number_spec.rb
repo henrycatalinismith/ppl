@@ -22,6 +22,10 @@ describe Ppl::Entity::PhoneNumber do
       phone = Ppl::Entity::PhoneNumber.new(12345)
       phone.number.should eq 12345
     end
+    it "should accept a type" do
+      phone = Ppl::Entity::PhoneNumber.new(nil, "cell")
+      phone.type.should eq "cell"
+    end
   end
 
 end
