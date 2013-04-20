@@ -64,7 +64,9 @@ class Ppl::Adapter::Vcard::GreenCard
 
   def encode_phone_numbers(contact, vcard_maker)
     contact.phone_numbers.each do |phone_number|
-      vcard_maker.add_tel(phone_number)
+      vcard_maker.add_tel(phone_number.number) do |tel|
+        tel.location = phone_number.type
+      end
     end
   end
 
@@ -131,7 +133,12 @@ class Ppl::Adapter::Vcard::GreenCard
   end
 
   def decode_phone_numbers(vcard, contact)
-    vcard.telephones.each { |number| contact.phone_numbers.push(number) }
+    vcard.telephones.each do |tel|
+      phone_number = Ppl::Entity::PhoneNumber.new
+      phone_number.number = tel.to_s
+      phone_number.type = (tel.location | tel.nonstandard).join
+      contact.phone_numbers << phone_number
+    end
   end
 
   def decode_urls(vcard, contact)

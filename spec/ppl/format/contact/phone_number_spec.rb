@@ -1,31 +1,44 @@
 
 describe Ppl::Format::Contact::PhoneNumber do
 
-  before(:each) do
-    @format  = Ppl::Format::Contact::PhoneNumber.new
-    @contact = Ppl::Entity::Contact.new
-    @color   = double(Ppl::Adapter::Color)
-    @format.color_adapter = @color
+  describe "#initialize" do
+    it "should pass the colors through to the table" do
+      colors = {"number" => "blue"}
+      Ppl::Format::Table.should_receive(:new).with([:phone_numbers, :type], colors)
+      format = Ppl::Format::Contact::PhoneNumber.new(colors)
+    end
   end
 
   describe "#process" do
 
-    it "should return an empty string if the contact lacks a phone number" do
-      @format.process(Ppl::Entity::Contact.new).should eq ""
+    before(:each) do
+      @contact = Ppl::Entity::Contact.new
+      @number  = Ppl::Entity::PhoneNumber.new("01234567890")
+      @format  = Ppl::Format::Contact::PhoneNumber.new
+      @table   = double(Ppl::Format::Table)
+      @format.table = @table
+      @contact.phone_numbers << @number
     end
 
-    it "should return the contact's phone number if it is set" do
-      @contact.phone_numbers.push("0123456789")
-      @format.process(@contact).should eq "0123456789"
+    it "should always include the phone number" do
+      @table.should_receive(:add_row).with({
+        :phone_numbers => "01234567890",
+        :type          => nil,
+      })
+      @format.process(@contact)
     end
 
-    it "should colorize the string if configured to do so" do
-      @format.colors = { "phone_numbers" => "blue" }
-      @color.should_receive(:colorize).and_return("phone numbers in blue")
-      @format.process(@contact).should eq "phone numbers in blue"
+    it "should put the type in parentheses" do
+      @number.type = "work"
+      @table.should_receive(:add_row).with({
+        :phone_numbers => "01234567890",
+        :type          => "(work)",
+      })
+      @format.process(@contact)
     end
 
   end
 
 end
+
 

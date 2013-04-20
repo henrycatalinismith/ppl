@@ -24,8 +24,13 @@ describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
   end
 
   it "should encode the contact's phone number" do
-    @contact.phone_numbers.push("01234567890")
+    @contact.phone_numbers << Ppl::Entity::PhoneNumber.new("01234567890")
     @adapter.encode(@contact).should include("TEL:01234567890")
+  end
+
+  it "should encode the contact's phone number's type" do
+    @contact.phone_numbers << Ppl::Entity::PhoneNumber.new("01234567890", "cell")
+    @adapter.encode(@contact).should include("TEL;TYPE=cell:01234567890")
   end
 
   it "should encode the contact's organization" do
@@ -144,7 +149,34 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
-    contact.phone_numbers.first.should eq "01234567890"
+    phone_number = contact.phone_numbers.first
+    phone_number.number.should eq "01234567890"
+  end
+
+  it "should decode the contact's phone number's type" do
+    vcard = [
+      "BEGIN:VCARD",
+      "N:,test",
+      "VERSION:3.0",
+      "TEL;TYPE=cell:01234567890",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+    phone_number = contact.phone_numbers.first
+    phone_number.type.should eq "cell"
+  end
+
+  it "should decode the contact's phone number's nonstandard type" do
+    vcard = [
+      "BEGIN:VCARD",
+      "N:,test",
+      "VERSION:3.0",
+      "TEL;TYPE=testing:01234567890",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+    phone_number = contact.phone_numbers.first
+    phone_number.type.should eq "testing"
   end
 
   it "should decode the contact's organization" do
