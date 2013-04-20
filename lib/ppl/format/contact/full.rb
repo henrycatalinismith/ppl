@@ -64,7 +64,13 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
   end
 
   def format_phone_numbers(contact)
-    push_list("Phone Numbers", contact.phone_numbers)
+    unless contact.phone_numbers.empty?
+      @lines << ""
+      @lines << "Phone Numbers"
+      contact.phone_numbers.each do |pn|
+        @lines << "  #{pn.number}"
+      end
+    end
   end
 
   def format_postal_addresses(contact)
