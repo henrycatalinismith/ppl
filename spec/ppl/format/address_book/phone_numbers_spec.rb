@@ -34,7 +34,7 @@ describe Ppl::Format::AddressBook::PhoneNumbers do
     end
 
     it "should show the phone number if it's available" do
-      @contact.phone_numbers.push("01234567890")
+      @contact.phone_numbers << Ppl::Entity::PhoneNumber.new("01234567890")
       @table.should_receive(:add_row).with({
         :id            => "test:",
         :phone_numbers => "01234567890",
