@@ -45,6 +45,14 @@ describe Ppl::Command::Phone do
       @command.execute(@input, @output)
     end
 
+    it "shouldn't duplicate the number if the contact already has it" do
+      @contact.phone_numbers << Ppl::Entity::PhoneNumber.new("01234567")
+      @storage.should_receive(:save_contact) do |c|
+        c.phone_numbers.length.should eq 1
+      end
+      @command.execute(@input, @output)
+    end
+
   end
 
 end
