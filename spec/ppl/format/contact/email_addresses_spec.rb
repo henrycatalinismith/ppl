@@ -15,7 +15,7 @@ describe Ppl::Format::Contact::EmailAddresses do
     end
 
     it "should return the contact's email address if it is set" do
-      @contact.email_addresses.push "jdoe@example.org"
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("jdoe@example.org")
       @format.process(@contact).should eq "jdoe@example.org"
     end
 

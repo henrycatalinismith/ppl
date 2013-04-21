@@ -12,7 +12,7 @@ class Ppl::Format::Contact::EmailAddresses < Ppl::Format::Contact
   def process(contact)
     lines = []
     contact.email_addresses.each do |email_address|
-      lines.push email_address
+      lines << email_address.address
     end
     colorize_output(lines.join("\n"))
   end
