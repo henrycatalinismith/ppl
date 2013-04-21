@@ -16,6 +16,11 @@ _ppl()
     return 0
   fi
 
+  if __ppl_needs_contact_phone_numher; then
+    COMPREPLY=($(__ppl_suggest_contact_phone_numher))
+    return 0
+  fi
+
   if __ppl_needs_git_remote; then
     COMPREPLY=($(__ppl_suggest_git_remote))
     return 0
@@ -63,6 +68,15 @@ __ppl_needs_contact_email_address()
   fi
 }
 
+__ppl_needs_contact_phone_numher()
+{
+  if [ "${COMP_WORDS[1]}" == "phone" ] && [ "$COMP_CWORD" == 3 ]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 __ppl_suggest_command_name()
 {
   compgen -W "$(__ppl_commands)" -- ${COMP_WORDS[COMP_CWORD]}
@@ -82,6 +96,11 @@ __ppl_suggest_contact_email_address()
 {
   contact_id=${COMP_WORDS[2]}
   compgen -W "$(__ppl_contact_email_addresses $contact_id)" -- ${COMP_WORDS[$COMP_CWORD]}
+}
+
+__ppl_suggest_contact_phone_numher()
+{
+  compgen -W "$(__ppl_contact_phone_numbers ${COMP_WORDS[2]})" -- ${COMP_WORDS[$COMP_CWORD]}
 }
 
 __ppl_commands_needing_contact_ids()
@@ -141,6 +160,11 @@ __ppl_contact_ids()
 __ppl_contact_email_addresses()
 {
   ppl email $1
+}
+
+__ppl_contact_phone_numbers()
+{
+  ppl phone $1
 }
 
 __ppl_git_remotes()
