@@ -37,7 +37,7 @@ describe Ppl::Command::Mutt do
     it "should return email address matches" do
 
       @contact.name = "Test User"
-      @contact.email_addresses.push "test@example.org"
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("test@example.org")
       @address_book.contacts.push(@contact)
 
       @input.arguments.push "example"
@@ -55,13 +55,13 @@ describe Ppl::Command::Mutt do
       @input.arguments.push "prova"
       @contact.name = "Test User"
 
-      @contact.email_addresses.push "test@test.org"
-      @contact.email_addresses.push "prova@prova.org"
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("test@test.org")
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("prova@prova.org")
       @address_book.contacts.push(@contact)
       @storage.stub(:load_address_book).and_return(@address_book)
       @format.should_receive(:process) do |address_book|
         address_book.contacts[0].email_addresses.length.should eq 1
-        address_book.contacts[0].email_addresses[0].should eq "prova@prova.org"
+        address_book.contacts[0].email_addresses[0].address.should eq "prova@prova.org"
       end
       @output.stub(:line)
       @command.execute(@input, @output)
@@ -70,7 +70,7 @@ describe Ppl::Command::Mutt do
     it "should return name matches" do
 
       @contact.name = "Test User"
-      @contact.email_addresses.push "test@example.org"
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("test@example.org")
       @address_book.contacts.push(@contact)
 
       @input.arguments.push "User"
@@ -89,8 +89,8 @@ describe Ppl::Command::Mutt do
       @input.arguments.push "org"
 
       @contact.name = "Test User"
-      @contact.email_addresses.push "test@test.org"
-      @contact.email_addresses.push "prova@prova.org"
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("test@test.org")
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("prova@prova.org")
       @address_book.contacts << @contact
 
       @storage.stub(:load_address_book).and_return(@address_book)
@@ -109,8 +109,8 @@ describe Ppl::Command::Mutt do
     before(:each) do
       @input.options[:ignore_case] = true
       @contact.name = "Joe Schmoe"
-      @contact.email_addresses.push "joe@somewhere.com"
-      @contact.email_addresses.push "LOUD@SHOUTING.COM"
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("joe@somewhere.com")
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("LOUD@SHOUTING.COM")
       @address_book.contacts << @contact
       @storage.stub(:load_address_book).and_return(@address_book)
       @output.stub(:line)
@@ -128,7 +128,7 @@ describe Ppl::Command::Mutt do
       @input.arguments.push "loud"
       @format.should_receive(:process) do |address_book|
         address_book.contacts[0].email_addresses.length.should eq 1
-        address_book.contacts[0].email_addresses[0].should eq "LOUD@SHOUTING.COM"
+        address_book.contacts[0].email_addresses[0].address.should eq "LOUD@SHOUTING.COM"
       end
       @command.execute(@input, @output)
     end
