@@ -1,24 +1,126 @@
 _ppl()
 {
-  local cur prev opts nick_cmds base
-  COMPREPLY=()
-  cur="${COMP_WORDS[COMP_CWORD]}"
-  prev="${COMP_WORDS[COMP_CWORD-1]}"
 
-  # Complete options
-  opts="add age bday completion email init ls mutt mv name nick org phone post pull push remote rm scrape shell show url version"
-  if [[ ${prev} == "ppl" ]]; then
-    COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+  if __ppl_needs_command_name; then
+    COMPREPLY=($(__ppl_suggest_command_name))
     return 0
   fi
 
-  # Complete nicknames
-  nick_cmds=([age]="" [bday]="" [email]="" [mv]="" [name]="" [nick]="" [org]="" [phone]="" [post]="" [rm]="" [show]="" [url]="")
-  if [[ $nick_cmds[${prev}] ]]; then
-    local nicknames=$(for x in `ppl nick --no-color | cut -d ':' -f 1`; do echo ${x} ; done )
-    COMPREPLY=( $(compgen -W "${nicknames}" -- ${cur}) )
+  if __ppl_needs_contact_id; then
+    COMPREPLY=($(__ppl_suggest_contact_id))
     return 0
   fi
+
+  if __ppl_needs_git_remote; then
+    COMPREPLY=($(__ppl_suggest_git_remote))
+    return 0
+  fi
+
+}
+
+__ppl_needs_command_name()
+{
+  if [[ $COMP_CWORD == 1 ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+__ppl_needs_contact_id()
+{
+  command_list=$(__ppl_commands_needing_contact_ids)
+  command_name=${COMP_WORDS[1]}
+  if [[ $command_list =~ $command_name ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+__ppl_needs_git_remote()
+{
+  command_list=$(__ppl_commands_needing_git_remotes)
+  command_name=${COMP_WORDS[1]}
+  if [[ $command_list =~ $command_name ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+__ppl_suggest_command_name()
+{
+  compgen -W "$(__ppl_commands)" -- ${COMP_WORDS[COMP_CWORD]}
+}
+
+__ppl_suggest_contact_id()
+{
+  compgen -W "$(__ppl_contact_ids)" -- ${COMP_WORDS[$COMP_CWORD]}
+}
+
+__ppl_suggest_git_remote()
+{
+  compgen -W "$(__ppl_git_remotes)" -- ${COMP_WORDS[$COMP_CWORD]}
+}
+
+__ppl_commands_needing_contact_ids()
+{
+  echo "age"
+  echo "bday"
+  echo "email"
+  echo "mv"
+  echo "name"
+  echo "nick"
+  echo "org"
+  echo "phone"
+  echo "post"
+  echo "rm"
+  echo "show"
+  echo "url"
+}
+
+__ppl_commands_needing_git_remotes()
+{
+  echo "pull"
+  echo "push"
+}
+
+__ppl_commands()
+{
+  echo "add"
+  echo "age"
+  echo "bday"
+  echo "completion"
+  echo "email"
+  echo "init"
+  echo "ls"
+  echo "mutt"
+  echo "mv"
+  echo "name"
+  echo "nick"
+  echo "org"
+  echo "phone"
+  echo "post"
+  echo "pull"
+  echo "push"
+  echo "remote"
+  echo "rm"
+  echo "scrape"
+  echo "shell"
+  echo "show"
+  echo "url"
+  echo "version"
+}
+
+__ppl_contact_ids()
+{
+  ppl nick --no-color | cut -d ':' -f 1
+}
+
+__ppl_git_remotes()
+{
+  ppl remote
 }
 
 complete -F _ppl ppl
