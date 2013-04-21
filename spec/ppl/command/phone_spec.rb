@@ -53,6 +53,16 @@ describe Ppl::Command::Phone do
       @command.execute(@input, @output)
     end
 
+    it "should delete the given number from the contact" do
+      @input.arguments = ["jdoe", "01234567"]
+      @input.options[:delete] = "true"
+      @contact.phone_numbers << Ppl::Entity::PhoneNumber.new("01234567")
+      @storage.should_receive(:save_contact) do |c|
+        c.phone_numbers.length.should eq 0
+      end
+      @command.execute(@input, @output)
+    end
+
   end
 
 end

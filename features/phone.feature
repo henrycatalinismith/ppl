@@ -7,3 +7,8 @@ Feature: ppl phone
     Then bob should have 1 phone number
     And the 1st phone number should be "01234567890"
 
+  Scenario: Remove a phone number from a contact
+    Given I am in the same address book as before
+    And I run "ppl phone bob --delete 01234567890"
+    Then bob should have 0 phone numbers
+
