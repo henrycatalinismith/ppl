@@ -46,6 +46,11 @@ Then /^(bob) should have (\d+) phone numbers?$/ do |name, number|
   @phone_numbers.length.should eq number.to_i
 end
 
+Then /^(bob) should have (\d+) URLs?$/ do |name, number|
+  @urls = ppl("url #{name}").split("\n")
+  @urls.length.should eq number.to_i
+end
+
 And /^its ID should be "([^"]+)"$/ do |id|
   @contact_id.should eq id
 end
@@ -77,6 +82,10 @@ end
 
 Then(/^the (\d+).. phone number should be "([^"]+)"$/) do |nth, phone_number|
   @phone_numbers[nth.to_i - 1].should eq phone_number
+end
+
+Then(/^the (\d+).. URL should be "([^"]+)"$/) do |nth, url|
+  @urls[nth.to_i - 1].should eq url
 end
 
 Then /^(bob)'s birthday should be "([^"]+)"$/ do |id, birthday|
