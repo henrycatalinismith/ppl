@@ -43,6 +43,15 @@ Then(/^the (\d+).. email address should be "([^"]+)"$/) do |nth, address|
   @email_addresses[nth.to_i - 1].should eq address
 end
 
+Then /^running "ppl ([^"]+)" should output (\d+) lines?$/ do |command, lines|
+  @output = ppl(command).split("\n")
+  @output.length.should eq lines.to_i
+end
+
+And /^the (\d+).. line should be "([^"]+)"$/ do |nth, line|
+  @output[nth.to_i - 1].should eq line
+end
+
 Then(/^the (\d+).. organization should be "([^"]+)"$/) do |nth, organization|
   @organizations[nth.to_i - 1].should eq organization
 end
@@ -55,4 +64,11 @@ Then /^(bob)'s birthday should be "([^"]+)"$/ do |id, birthday|
   ppl("bday #{id}").should eq birthday
 end
 
+And /^(bob)'s name is "([^"]+)"$/ do |id, name|
+  ppl("name #{id} \"#{name}\"")
+end
+
+And /^(bob)'s email address is "([^"]+)"$/ do |id, email_address|
+  ppl("email #{id} \"#{email_address}\"")
+end
 
