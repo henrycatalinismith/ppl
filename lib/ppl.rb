@@ -21,6 +21,9 @@ module Ppl
   module Format
   end
 
+  module Service
+  end
+
 end
 
 
@@ -104,6 +107,8 @@ require "ppl/format/contact/urls"
 require "ppl/format/postal_address"
 require "ppl/format/postal_address/one_line"
 require "ppl/format/table"
+
+require "ppl/service/email_address"
 
 class String
   alias_method :each, :each_line
