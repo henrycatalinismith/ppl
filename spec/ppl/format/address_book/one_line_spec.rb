@@ -36,7 +36,7 @@ describe Ppl::Format::AddressBook::OneLine do
 
     it "should show all the info if it's available" do
       @contact.name = "John Doe"
-      @contact.email_addresses.push "jdoe@example.org"
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("jdoe@example.org")
       @table.should_receive(:add_row).with({
         :id    => "test:",
         :name  => "John Doe",
