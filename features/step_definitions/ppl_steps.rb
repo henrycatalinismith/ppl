@@ -10,6 +10,10 @@ When /^I run "ppl ([^"]+)"$/ do |command|
   ppl command
 end
 
+Then /^it should succeed$/ do
+  $?.exitstatus.should eq 0
+end
+
 Then /^it should fail$/ do
   $?.exitstatus.should_not eq 0
 end
@@ -33,6 +37,10 @@ end
 Then /^(bob) should have (\d+) phone numbers?$/ do |name, number|
   @phone_numbers = ppl("phone #{name}").split("\n")
   @phone_numbers.length.should eq number.to_i
+end
+
+And /^its ID should be "([^"]+)"$/ do |id|
+  @contact_id.should eq id
 end
 
 And /^its name should be "([^"]+)"$/ do |name|
