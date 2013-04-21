@@ -29,6 +29,12 @@ class Ppl::Command::Phone < Ppl::Command::Attribute
     true
   end
 
+  def remove_attribute(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    contact.phone_numbers.select! { |pn| pn.number != input.arguments[1] }
+    @storage.save_contact(contact)
+  end
+
   def new_number?(contact, input_number)
     matching_numbers = contact.phone_numbers.select do |pn|
       pn.number == input_number
