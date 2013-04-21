@@ -23,14 +23,14 @@ describe Ppl::Format::Contact::Full do
 
     it "should include their email address in brackets" do
       @contact.name = "John Doe"
-      @contact.email_addresses.push "john@example.org"
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("john@example.org")
       @format.process(@contact).should include "John Doe <john@example.org>"
     end
 
     it "should show all their email addresses" do
-      @contact.email_addresses.push "john@example.org"
-      @contact.email_addresses.push "john@example.com"
-      @contact.email_addresses.push "john@example.net"
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("john@example.org")
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("john@example.com")
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("john@example.net")
       @format.process(@contact).should include "john@example.org"
       @format.process(@contact).should include "john@example.com"
       @format.process(@contact).should include "john@example.net"
