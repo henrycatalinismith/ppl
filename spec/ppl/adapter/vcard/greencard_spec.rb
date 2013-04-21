@@ -137,7 +137,7 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
-    contact.email_addresses.first.should eq "home@example.org"
+    contact.email_addresses.first.address.should eq "home@example.org"
   end
 
   it "should decode the contact's phone number" do
