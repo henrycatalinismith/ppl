@@ -20,7 +20,7 @@ class Ppl::Format::AddressBook::OneLine < Ppl::Format::AddressBook
     email = nil
 
     if !contact.email_addresses.empty?
-      email = sprintf("<%s>", contact.email_addresses.first)
+      email = sprintf("<%s>", contact.email_addresses.first.address)
     end
 
     @table.add_row({
