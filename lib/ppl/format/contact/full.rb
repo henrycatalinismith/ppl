@@ -38,7 +38,7 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
       line += contact.name
     end
     if !contact.email_addresses.empty?
-      line += " <#{contact.email_addresses.first}>"
+      line += " <#{contact.email_addresses.first.address}>"
     end
     return line
   end
@@ -60,7 +60,7 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
   end
 
   def format_email_addresses(contact)
-    push_list("Email Addresses", contact.email_addresses)
+    push_list("Email Addresses", contact.email_addresses, :address)
   end
 
   def format_phone_numbers(contact)
@@ -86,12 +86,15 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
     push_list("URLs", contact.urls)
   end
 
-  def push_list(label, list)
+  def push_list(label, list, property = nil)
     return if list.empty?
     @lines.push("")
     @lines.push("#{label}:")
     if list.kind_of?(Array)
-      list.each { |item| @lines.push("  #{item}") }
+      list.each do |item|
+        string = property.nil? ? item : item.send(property)
+        @lines << "  #{string}"
+      end
     else
       @lines.push("  #{list}")
     end
