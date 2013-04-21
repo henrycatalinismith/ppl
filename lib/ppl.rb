@@ -70,6 +70,7 @@ require "ppl/command/scrape"
 
 require "ppl/entity/address_book"
 require "ppl/entity/contact"
+require "ppl/entity/email_address"
 require "ppl/entity/phone_number"
 require "ppl/entity/postal_address"
 
