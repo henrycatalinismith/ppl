@@ -19,7 +19,7 @@ describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
   end
 
   it "should encode the contact's email address" do
-    @contact.email_addresses = ["john@example.org"]
+    @contact.email_addresses << Ppl::Entity::EmailAddress.new("john@example.org")
     @adapter.encode(@contact).should include("EMAIL:john@example.org")
   end
 
