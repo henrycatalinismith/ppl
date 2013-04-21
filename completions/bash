@@ -21,6 +21,11 @@ _ppl()
     return 0
   fi
 
+  if __ppl_needs_contact_organization; then
+    COMPREPLY=($(__ppl_suggest_contact_organization))
+    return 0
+  fi
+
   if __ppl_needs_contact_phone_numher; then
     COMPREPLY=($(__ppl_suggest_contact_phone_numher))
     return 0
@@ -87,6 +92,15 @@ __ppl_needs_contact_nickname()
   fi
 }
 
+__ppl_needs_contact_organization()
+{
+  if [ "${COMP_WORDS[1]}" == "org" ] && [ "$COMP_CWORD" == 3 ]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 __ppl_needs_contact_phone_numher()
 {
   if [ "${COMP_WORDS[1]}" == "phone" ] && [ "$COMP_CWORD" == 3 ]; then
@@ -129,6 +143,11 @@ __ppl_suggest_contact_email_address()
 __ppl_suggest_contact_nickname()
 {
   compgen -W "$(__ppl_contact_nicknames ${COMP_WORDS[2]})" -- ${COMP_WORDS[$COMP_CWORD]}
+}
+
+__ppl_suggest_contact_organization()
+{
+  compgen -W "$(__ppl_contact_organizations ${COMP_WORDS[2]})" -- ${COMP_WORDS[$COMP_CWORD]}
 }
 
 __ppl_suggest_contact_phone_numher()
@@ -204,9 +223,10 @@ __ppl_contact_nicknames()
 {
   ppl nick $1
 }
-__ppl_contact_phone_numbers()
+
+__ppl_contact_organizations()
 {
-  ppl phone $1
+  ppl org $1
 }
 
 __ppl_contact_phone_numbers()
