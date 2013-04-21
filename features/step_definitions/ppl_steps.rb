@@ -29,6 +29,11 @@ Then /^(bob) should have (\d+) email addresse?s?$/ do |name, number|
   @email_addresses.length.should eq number.to_i
 end
 
+Then /^(bob) should have (\d+) nicknames?$/ do |name, number|
+  @nicknames = ppl("nick #{name}").split("\n")
+  @nicknames.length.should eq number.to_i
+end
+
 Then /^(bob) should have (\d+) organizations?$/ do |name, number|
   @organizations = ppl("org #{name}").split("\n")
   @organizations.length.should eq number.to_i
@@ -58,6 +63,10 @@ end
 
 And /^the (\d+).. line should be "([^"]+)"$/ do |nth, line|
   @output[nth.to_i - 1].should eq line
+end
+
+Then(/^the (\d+).. nickname should be "([^"]+)"$/) do |nth, nickname|
+  @nicknames[nth.to_i - 1].should eq nickname
 end
 
 Then(/^the (\d+).. organization should be "([^"]+)"$/) do |nth, organization|
