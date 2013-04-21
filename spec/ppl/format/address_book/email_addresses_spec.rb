@@ -34,7 +34,7 @@ describe Ppl::Format::AddressBook::EmailAddresses do
     end
 
     it "should show an email address if it's available" do
-      @contact.email_addresses.push "jdoe@example.org"
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("jdoe@example.org")
       @table.should_receive(:add_row).with({
         :id              => "test:",
         :email_addresses => "jdoe@example.org",

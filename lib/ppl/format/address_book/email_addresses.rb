@@ -18,10 +18,13 @@ class Ppl::Format::AddressBook::EmailAddresses < Ppl::Format::AddressBook
   def add_row(contact)
     @table.add_row({
       :id              => sprintf("%s:", contact.id),
-      :email_addresses => contact.email_addresses.join(", "),
+      :email_addresses => stringify_email_addresses(contact.email_addresses),
     })
   end
 
+  def stringify_email_addresses(email_addresses)
+    email_addresses.map { |em| em.address }.join(", ")
+  end
 
 end
 
