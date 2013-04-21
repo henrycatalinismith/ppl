@@ -28,3 +28,6 @@ Given /^I am in an address book with a blank contact called bob$/ do
   end
 end
 
+Given /^I am in the same address book as before$/ do
+end
+
