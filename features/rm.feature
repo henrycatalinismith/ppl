@@ -8,6 +8,6 @@ Feature: ppl rm
 
   Scenario: Fail when asked to remove a non-existent contact
     Given I am in the same address book as before
-    And I run "ppl rm bob"
+    And I run "ppl rm bob 2> /dev/null"
     Then it should fail
 
