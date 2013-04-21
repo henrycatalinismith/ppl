@@ -18,10 +18,12 @@ Then /^it should fail$/ do
   $?.exitstatus.should_not eq 0
 end
 
-Then /^there should be 1 contact$/ do
+Then /^there should be (\d+) contacts?$/ do |n|
   contact_list = ppl("ls").strip.split("\n")
-  contact_list.length.should eq 1
-  @contact_id = contact_list[0].split(":").first
+  contact_list.length.should eq n.to_i
+  if contact_list[0]
+    @contact_id = contact_list[0].split(":").first
+  end
 end
 
 Then /^(bob) should have (\d+) email addresse?s?$/ do |name, number|
