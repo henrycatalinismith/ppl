@@ -51,4 +51,8 @@ Then(/^the (\d+).. phone number should be "([^"]+)"$/) do |nth, phone_number|
   @phone_numbers[nth.to_i - 1].should eq phone_number
 end
 
+Then /^(bob)'s birthday should be "([^"]+)"$/ do |id, birthday|
+  ppl("bday #{id}").should eq birthday
+end
+
 
