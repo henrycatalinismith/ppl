@@ -7,7 +7,7 @@ describe Ppl::Format::AddressBook::MuttQuery do
     @contact      = Ppl::Entity::Contact.new
     @table        = double(Ppl::Format::Table)
 
-    @contact.email_addresses.push "test@example.org"
+    @contact.email_addresses << Ppl::Entity::EmailAddress.new("test@example.org")
     @contact.name = "Test Contact"
 
     @format.table = @table
@@ -25,7 +25,7 @@ describe Ppl::Format::AddressBook::MuttQuery do
     end
 
     it "should list all of each contact's email addresses" do
-      @contact.email_addresses.push "test2@example.com"
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("test2@example.com")
       @table.should_receive(:add_row).with({
         :email => "test@example.org",
         :name  => "Test Contact",
