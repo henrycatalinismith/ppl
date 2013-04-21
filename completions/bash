@@ -1,4 +1,4 @@
-_ppl()
+__ppl()
 {
 
   if __ppl_needs_command_name; then
@@ -244,5 +244,5 @@ __ppl_git_remotes()
   ppl remote
 }
 
-complete -F _ppl ppl
+complete -F __ppl ppl
 
