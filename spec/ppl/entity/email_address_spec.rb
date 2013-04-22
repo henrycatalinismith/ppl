@@ -11,6 +11,12 @@ describe Ppl::Entity::EmailAddress do
     end
   end
 
+  describe "#preferred" do
+    it "should be fale by default" do
+      @email_address.preferred.should eq false
+    end
+  end
+
   describe "#initialize" do
     it "should accept an address" do
       email = Ppl::Entity::EmailAddress.new("bob@example.org")
