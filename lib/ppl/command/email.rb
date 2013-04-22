@@ -58,15 +58,15 @@ class Ppl::Command::Email < Ppl::Application::Command
 
   def update_contact_email_addresses(input, output)
     contact = @storage.require_contact(input.arguments[0])
-    if has_email_address?(contact, input.arguments[1])
-      @email_service.update(contact, input.arguments[1], input.options)
-    else
+    if new_email_address?(contact, input.arguments[1])
       @email_service.add(contact, input.arguments[1])
+    else
+      @email_service.update(contact, input.arguments[1], input.options)
     end
   end
 
-  def has_email_address?(contact, email_address)
-    !contact.email_addresses.select { |ea| ea.address = email_address }.empty?
+  def new_email_address?(contact, email_address)
+    (contact.email_addresses.select { |ea| ea.address == email_address }).empty?
   end
 
 end
