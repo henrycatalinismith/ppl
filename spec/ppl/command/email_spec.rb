@@ -51,6 +51,14 @@ describe Ppl::Command::Email do
       @command.execute(@input, @output)
     end
 
+    it "should delegate to the service layer to update an existing address" do
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("jdoe@example.org")
+      @input.arguments = ["jdoe", "jdoe@example.org"]
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @service.should_receive(:update).with(@contact, "jdoe@example.org", {})
+      @command.execute(@input, @output)
+    end
+
     it "should delegate to the service layer to remove an email address" do
       @input.arguments = ["jdoe", "jdoe@example.org"]
       @input.options[:delete] = true

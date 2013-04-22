@@ -31,7 +31,7 @@ class Ppl::Command::Email < Ppl::Application::Command
     elsif input.options[:delete]
       :remove_email_address_from_contact
     else
-      :add_email_address_to_contact
+      :update_contact_email_addresses
     end
   end
 
@@ -45,14 +45,22 @@ class Ppl::Command::Email < Ppl::Application::Command
     output.line(@show_format.process(contact))
   end
 
-  def add_email_address_to_contact(input, output)
-    contact = @storage.require_contact(input.arguments[0])
-    @email_service.add(contact, input.arguments[1])
-  end
-
   def remove_email_address_from_contact(input, output)
     contact = @storage.require_contact(input.arguments[0])
     @email_service.remove(contact, input.arguments[1])
+  end
+
+  def update_contact_email_addresses(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    if has_email_address?(contact, input.arguments[1])
+      @email_service.update(contact, input.arguments[1], input.options)
+    else
+      @email_service.add(contact, input.arguments[1])
+    end
+  end
+
+  def has_email_address?(contact, email_address)
+    !contact.email_addresses.select { |ea| ea.address = email_address }.empty?
   end
 
 end
