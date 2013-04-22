@@ -27,7 +27,9 @@ class Ppl::Command::Email < Ppl::Application::Command
       :list_address_book_email_addresses
     elsif input.arguments.length < 2
       :show_contact_email_addresses
-    elsif input.arguments.length < 3
+    elsif input.options[:delete]
+      :remove_email_address_from_contact
+    else
       :add_email_address_to_contact
     end
   end
@@ -45,6 +47,11 @@ class Ppl::Command::Email < Ppl::Application::Command
   def add_email_address_to_contact(input, output)
     contact = @storage.require_contact(input.arguments[0])
     @email_service.add(contact, input.arguments[1])
+  end
+
+  def remove_email_address_from_contact(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    @email_service.remove(contact, input.arguments[1])
   end
 
 end

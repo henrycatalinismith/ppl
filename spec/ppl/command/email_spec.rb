@@ -51,6 +51,14 @@ describe Ppl::Command::Email do
       @command.execute(@input, @output)
     end
 
+    it "should delegate to the service layer to remove an email address" do
+      @input.arguments = ["jdoe", "jdoe@example.org"]
+      @input.options[:delete] = true
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @service.should_receive(:remove).with(@contact, "jdoe@example.org")
+      @command.execute(@input, @output)
+    end
+
   end
 
 end
