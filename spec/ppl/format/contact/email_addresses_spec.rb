@@ -24,7 +24,7 @@ describe Ppl::Format::Contact::EmailAddresses do
 
     it "should pass each email address to the table" do
       @table.should_receive(:add_row).with({
-        :star            => "",
+        :star            => " ",
         :email_addresses => "test@example.org",
       })
       @format.process(@contact)
