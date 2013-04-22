@@ -10,7 +10,7 @@ class Ppl::Format::Contact::EmailAddresses < Ppl::Format::Contact
   def process(contact)
     contact.email_addresses.each do |email_address|
       @table.add_row({
-        :star            => email_address.preferred ? "*" : "",
+        :star            => email_address.preferred ? "*" : " ",
         :email_addresses => email_address.address,
       })
     end
