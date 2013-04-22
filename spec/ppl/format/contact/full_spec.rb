@@ -27,6 +27,14 @@ describe Ppl::Format::Contact::Full do
       @format.process(@contact).should include "John Doe <john@example.org>"
     end
 
+    it "should include their preferred email address in brackets" do
+      @contact.name = "John Doe"
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("john@example.org")
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("fred@testtest.es")
+      @contact.email_addresses[1].preferred = true
+      @format.process(@contact).should include "John Doe <fred@testtest.es>"
+    end
+
     it "should show all their email addresses" do
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("john@example.org")
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("john@example.com")
