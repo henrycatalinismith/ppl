@@ -33,6 +33,8 @@ class Ppl::Command::Phone < Ppl::Application::Command
       :show_contact_phone_numbers
     elsif input.options[:delete]
       :remove_phone_number_from_contact
+    else
+      :update_contact_phone_numbers
     end
   end
 
@@ -49,6 +51,19 @@ class Ppl::Command::Phone < Ppl::Application::Command
   def remove_phone_number_from_contact(input, output)
     contact = @storage.require_contact(input.arguments[0])
     @phone_service.remove(contact, input.arguments[1])
+  end
+
+  def update_contact_phone_numbers(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    if new_phone_number?(contact, input.arguments[1])
+      @phone_service.add(contact, input.arguments[1])
+    else
+      @phone_service.update(contact, input.arguments[1], input.options)
+    end
+  end
+
+  def new_phone_number?(contact, number)
+    (contact.phone_numbers.select { |pn| pn.number == number }).empty?
   end
 
 end

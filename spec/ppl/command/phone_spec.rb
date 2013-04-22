@@ -52,6 +52,22 @@ describe Ppl::Command::Phone do
       @command.execute(@input, @output)
     end
 
+    
+    it "should delegate to the service layer to add a new phone number" do
+      @input.arguments = ["jdoe", "98776332"]
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @service.should_receive(:add).with(@contact, "98776332")
+      @command.execute(@input, @output)
+    end
+
+    it "should delegate to the service layer to update an existing number" do
+      @contact.phone_numbers << Ppl::Entity::PhoneNumber.new("012345678")
+      @input.arguments = ["jdoe", "012345678"]
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @service.should_receive(:update).with(@contact, "012345678", {})
+      @command.execute(@input, @output)
+    end
+
   end
 
 end
