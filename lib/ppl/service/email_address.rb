@@ -9,6 +9,10 @@ class Ppl::Service::EmailAddress
     @storage.save_contact(contact)
   end
 
+  def update(contact, address, options)
+    @storage.save_contact(contact)
+  end
+
   def remove(contact, address)
     contact.email_addresses.select! do |email_address|
       email_address.address != address
