@@ -21,24 +21,21 @@ Feature: ppl email
     And I run "ppl email bob --preferred rob@testing.com"
     Then it should succeed
     And bob should have 2 email addresses
-    And the 1st email address should be "bob@example.org"
-    And the 2nd email address should be "*  rob@testing.com"
+    And "rob@testing.com" should be the favourite email address
 
   Scenario: Choose a different preferred email address
     Given I am in the same address book as before
     And I run "ppl email bob --preferred bob@example.org"
     Then it should succeed
     And bob should have 2 email addresses
-    And the 1st email address should be "*  bob@example.org"
-    And the 2nd email address should be "rob@testing.com"
+    And "bob@example.org" should be the favourite email address
 
   Scenario: Remove the preferred flag from an email address
     Given I am in the same address book as before
     And I run "ppl email bob --not-preferred bob@example.org"
     Then it should succeed
     And bob should have 2 email addresses
-    And the 1st email address should be "bob@example.org"
-    And the 2nd email address should be "rob@testing.com"
+    And there should be no favourite email address
 
   Scenario: Remove email addresses from a contact
     Given I am in the same address book as before
