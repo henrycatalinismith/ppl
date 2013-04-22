@@ -37,10 +37,20 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
     if !contact.name.nil?
       line += contact.name
     end
-    if !contact.email_addresses.empty?
-      line += " <#{contact.email_addresses.first.address}>"
+    email_address = choose_first_line_address(contact)
+    unless email_address.nil?
+      line += " <#{email_address.address}>"
     end
     return line
+  end
+
+  def choose_first_line_address(contact)
+    preferred = contact.email_addresses.find { |e| e.preferred }
+    if preferred.nil?
+      contact.email_addresses.first
+    else
+      preferred
+    end
   end
 
   def vitals(contact)
