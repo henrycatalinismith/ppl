@@ -118,6 +118,7 @@ class Ppl::Adapter::Vcard::GreenCard
   def decode_email_addresses(vcard, contact)
     vcard.emails.each do |email|
       email_address = Ppl::Entity::EmailAddress.new(email.to_s)
+      email_address.preferred = email.preferred
       contact.email_addresses << email_address
     end
   end

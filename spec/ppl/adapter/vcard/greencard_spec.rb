@@ -140,6 +140,18 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
     contact.email_addresses.first.address.should eq "home@example.org"
   end
 
+  it "should mark preferred email addresses as such" do
+    vcard = [
+      "BEGIN:VCARD",
+      "N:,test",
+      "VERSION:3.0",
+      "EMAIL;PREF:home@example.org",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+    contact.email_addresses.first.preferred.should eq true
+  end
+
   it "should decode the contact's phone number" do
     vcard = [
       "BEGIN:VCARD",
