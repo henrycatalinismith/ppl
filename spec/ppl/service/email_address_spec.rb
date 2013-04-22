@@ -31,6 +31,21 @@ describe Ppl::Service::EmailAddress do
       @storage.should_receive(:save_contact).with(@contact)
       @service.update(@contact, "", {})
     end
+
+    it "should mark the address as preferred if asked to" do
+      @storage.stub(:save_contact) do |contact|
+        contact.email_addresses.first.preferred.should eq true
+      end
+      @service.update(@contact, "one@example.org", {:preferred => true})
+    end
+
+    it "should mark the address as not preferred if asked to" do
+      @contact.email_addresses.first.preferred = true
+      @storage.stub(:save_contact) do |contact|
+        contact.email_addresses.first.preferred.should eq false
+      end
+      @service.update(@contact, "one@example.org", {:preferred => false})
+    end
   end
 
   describe "#remove" do
