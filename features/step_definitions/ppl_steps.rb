@@ -60,7 +60,7 @@ And /^its name should be "([^"]+)"$/ do |name|
 end
 
 Then(/^the (\d+).. email address should be "([^"]+)"$/) do |nth, address|
-  @email_addresses[nth.to_i - 1].should eq address
+  @email_addresses[nth.to_i - 1].strip.should eq address
 end
 
 Then /^running "ppl ([^"]+)" should output (\d+) lines?$/ do |command, lines|
