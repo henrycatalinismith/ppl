@@ -18,6 +18,7 @@ class Ppl::Command::Email < Ppl::Application::Command
   def execute(input, output)
     action = determine_action(input)
     send(action, input, output)
+    true
   end
 
   private
