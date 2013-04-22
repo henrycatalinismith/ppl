@@ -20,7 +20,6 @@ describe Ppl::Command::Phone do
       @show_format = double(Ppl::Format::Contact)
       @input = Ppl::Application::Input.new
       @output = double(Ppl::Application::Output)
-      @input.arguments = ["jdoe", "01234567"]
       @storage.stub(:require_contact).and_return(@contact)
       @storage.stub(:save_contact)
       @command.storage = @storage
@@ -31,6 +30,14 @@ describe Ppl::Command::Phone do
     it "should list all phone numbers by default" do
       @storage.should_receive(:load_address_book).and_return(@address_book)
       @list_format.should_receive(:process)
+      @output.should_receive(:line)
+      @command.execute(@input, @output)
+    end
+
+    it "should show a single contact's numbers if one is specified" do
+      @input.arguments << "jdoe"
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @show_format.should_receive(:process)
       @output.should_receive(:line)
       @command.execute(@input, @output)
     end
