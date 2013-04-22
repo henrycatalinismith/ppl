@@ -1,12 +1,12 @@
 
-class Ppl::Command::Email < Ppl::Command::Attribute
+class Ppl::Command::Email < Ppl::Application::Command
 
   name        "email"
   description "Show or change a contact's email address"
 
-  def initialize
-    @attribute = :email_addresses
-  end
+  attr_writer :email_service
+  attr_writer :list_format
+  attr_writer :show_format
 
   def options(parser, options)
     parser.banner = "usage: ppl email <contact> [<email-address>]"
@@ -15,34 +15,29 @@ class Ppl::Command::Email < Ppl::Command::Attribute
     end
   end
 
-  def add_attribute(input, output)
-    contact = @storage.require_contact(input.arguments.shift)
-    if new_email_address?(contact, input.arguments[0])
-      add_new_email_address(contact, input)
-    end
-    @storage.save_contact(contact)
-    true
-  end
-
-  def remove_attribute(input, output)
-    contact = @storage.require_contact(input.arguments[0])
-    contact.email_addresses.select! { |ea| ea.address != input.arguments[1] }
-    @storage.save_contact(contact)
+  def execute(input, output)
+    action = determine_action(input)
+    send(action, input, output)
   end
 
   private
 
-  def new_email_address?(contact, input_address)
-    matching_addresses = contact.email_addresses.select do |em|
-      em.address == input_address
+  def determine_action(input)
+    if input.arguments[0].nil?
+      :list_address_book_email_addresses
+    elsif input.arguments[1].nil?
+      :show_contact_email_addresses
     end
-    matching_addresses.length < 1
   end
 
-  def add_new_email_address(contact, input)
-    email_address = Ppl::Entity::EmailAddress.new
-    email_address.address = input.arguments[0]
-    contact.email_addresses << email_address
+  def list_address_book_email_addresses(input, output)
+    address_book = @storage.load_address_book
+    output.line(@list_format.process(address_book))
+  end
+
+  def show_contact_email_addresses(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    output.line(@show_format.process(contact))
   end
 
 end

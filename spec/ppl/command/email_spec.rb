@@ -15,43 +15,32 @@ describe Ppl::Command::Email do
 
     before(:each) do
       @contact = Ppl::Entity::Contact.new
+      @service = double(Ppl::Service::EmailAddress)
       @storage = double(Ppl::Adapter::Storage)
       @input = Ppl::Application::Input.new
-      @input.arguments = ["jdoe", "bob@example.org"]
+      @output = double(Ppl::Application::Output)
+      @list_format = double(Ppl::Format::AddressBook)
+      @show_format = double(Ppl::Format::Contact)
       @storage.stub(:require_contact).and_return(@contact)
       @storage.stub(:save_contact)
       @command.storage = @storage
+      @command.email_service = @service
+      @command.list_format = @list_format
+      @command.show_format = @show_format
     end
 
-    it "should save email addresses as instances of Ppl::Entity::EmailAddress" do
-      @storage.should_receive(:save_contact) do |c|
-        c.email_addresses.first.should be_a(Ppl::Entity::EmailAddress)
-      end
+    it "should list all email addresses by default" do
+      @storage.should_receive(:load_address_book).and_return(@address_book)
+      @list_format.should_receive(:process).and_return("imagine this is a list")
+      @output.should_receive(:line).with("imagine this is a list")
       @command.execute(@input, @output)
     end
 
-    it "should save the given address as an attribute of the EmailAddress" do
-      @storage.should_receive(:save_contact) do |c|
-        c.email_addresses.first.address.should eq "bob@example.org"
-      end
-      @command.execute(@input, @output)
-    end
-
-    it "shouldn't duplicate the address if the contact already has it" do
-      @contact.email_addresses << Ppl::Entity::EmailAddress.new("bob@example.org")
-      @storage.should_receive(:save_contact) do |c|
-        c.email_addresses.length.should eq 1
-      end
-      @command.execute(@input, @output)
-    end
-
-    it "should delete the given email address from the contact" do
-      @input.arguments = ["jdoe", "bob@example.org"]
-      @input.options[:delete] = "true"
-      @contact.email_addresses << Ppl::Entity::EmailAddress.new("bob@example.org")
-      @storage.should_receive(:save_contact) do |c|
-        c.email_addresses.length.should eq 0
-      end
+    it "should show a single contact's addresses if one is specified" do
+      @input.arguments << "jdoe"
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @show_format.should_receive(:process).and_return("imagine this is a list")
+      @output.should_receive(:line).with("imagine this is a list")
       @command.execute(@input, @output)
     end
 
