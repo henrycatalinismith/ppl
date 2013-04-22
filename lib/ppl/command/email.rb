@@ -13,6 +13,12 @@ class Ppl::Command::Email < Ppl::Application::Command
     parser.on("-d", "--delete", "delete email address") do
       options[:delete] = true
     end
+    parser.on("-p", "--preferred", "mark address as preferred") do
+      options[:preferred] = true
+    end
+    parser.on("-P", "--not-preferred", "mark address as not preferred") do
+      options[:preferred] = false
+    end
   end
 
   def execute(input, output)
