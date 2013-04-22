@@ -37,6 +37,7 @@ class Ppl::Application::Bootstrap
 
   register :command_email do
     email = Ppl::Command::Email.new
+    email.email_service = email_service
     email.storage = storage_adapter
     email.list_format = format_address_book_email_addresses
     email.show_format = format_contact_email_addresses
@@ -347,6 +348,12 @@ class Ppl::Application::Bootstrap
 
   register :email_scraper do
     Ppl::Adapter::EmailScraper::Mail.new
+  end
+
+  register :email_service do
+    email_service = Ppl::Service::EmailAddress.new
+    email_service.storage = storage_adapter
+    email_service
   end
 
 end
