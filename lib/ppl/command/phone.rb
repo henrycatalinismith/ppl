@@ -1,12 +1,12 @@
 
-class Ppl::Command::Phone < Ppl::Command::Attribute
+class Ppl::Command::Phone < Ppl::Application::Command
 
   name        "phone"
   description "List, show or change phone numbers"
 
-  def initialize
-    @attribute = :phone_numbers
-  end
+  attr_writer :phone_service
+  attr_writer :list_format
+  attr_writer :show_format
 
   def options(parser, options)
     parser.banner = "usage: ppl phone <contact> [<number>]"
@@ -18,43 +18,21 @@ class Ppl::Command::Phone < Ppl::Command::Attribute
     end
   end
 
-  def add_attribute(input, output)
-    contact = @storage.require_contact(input.arguments.shift)
-    if new_number?(contact, input.arguments[0])
-      add_new_number(contact, input)
-    else
-      update_existing_number(contact, input)
-    end
-    @storage.save_contact(contact)
+  def execute(input, output)
+    action = determine_action(input)
+    send(action, input, output)
     true
   end
 
-  def remove_attribute(input, output)
-    contact = @storage.require_contact(input.arguments[0])
-    contact.phone_numbers.select! { |pn| pn.number != input.arguments[1] }
-    @storage.save_contact(contact)
+  private
+
+  def determine_action(input)
+    :list_address_book_phone_numbers
   end
 
-  def new_number?(contact, input_number)
-    matching_numbers = contact.phone_numbers.select do |pn|
-      pn.number == input_number
-    end
-    matching_numbers.length < 1
-  end
-
-  def add_new_number(contact, input)
-    phone_number = Ppl::Entity::PhoneNumber.new
-    phone_number.number = input.arguments[0]
-    phone_number.type = input.options[:type]
-    contact.phone_numbers << phone_number
-  end
-
-  def update_existing_number(contact, input)
-    contact.phone_numbers.each do |pn|
-      if pn.number == input.arguments[0]
-        pn.type = input.options[:type]
-      end
-    end
+  def list_address_book_phone_numbers(input, output)
+    address_book = @storage.load_address_book
+    output.line(@list_format.process(address_book))
   end
 
 end
