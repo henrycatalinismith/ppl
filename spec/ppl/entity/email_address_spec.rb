@@ -12,7 +12,7 @@ describe Ppl::Entity::EmailAddress do
   end
 
   describe "#preferred" do
-    it "should be fale by default" do
+    it "should be false by default" do
       @email_address.preferred.should eq false
     end
   end
