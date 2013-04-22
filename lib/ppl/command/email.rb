@@ -23,10 +23,12 @@ class Ppl::Command::Email < Ppl::Application::Command
   private
 
   def determine_action(input)
-    if input.arguments[0].nil?
+    if input.arguments.length < 1
       :list_address_book_email_addresses
-    elsif input.arguments[1].nil?
+    elsif input.arguments.length < 2
       :show_contact_email_addresses
+    elsif input.arguments.length < 3
+      :add_email_address_to_contact
     end
   end
 
@@ -38,6 +40,11 @@ class Ppl::Command::Email < Ppl::Application::Command
   def show_contact_email_addresses(input, output)
     contact = @storage.require_contact(input.arguments[0])
     output.line(@show_format.process(contact))
+  end
+
+  def add_email_address_to_contact(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    @email_service.add(contact, input.arguments[1])
   end
 
 end
