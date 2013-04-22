@@ -88,6 +88,21 @@ Then(/^the (\d+).. URL should be "([^"]+)"$/) do |nth, url|
   @urls[nth.to_i - 1].should eq url
 end
 
+And /^"([^"]+)" should be the favourite email address$/ do |email_address|
+  @email_addresses.should include "*  #{email_address}"
+  @email_addresses.each do |line|
+    if line.include? "*"
+      line.should eq "*  #{email_address}"
+    end
+  end
+end
+
+And /^there should be no favourite email address$/ do
+  @email_addresses.each do |line|
+    line.should_not include "*"
+  end
+end
+
 Then /^(bob)'s birthday should be "([^"]+)"$/ do |id, birthday|
   ppl("bday #{id}").should eq birthday
 end
