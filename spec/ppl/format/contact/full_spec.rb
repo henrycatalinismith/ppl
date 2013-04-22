@@ -6,8 +6,12 @@ describe Ppl::Format::Contact::Full do
     @contact = Ppl::Entity::Contact.new
     @address = Ppl::Entity::PostalAddress.new
 
+    @email_address_format = double(Ppl::Format::Contact)
     @postal_address_format = double(Ppl::Format::Contact)
+    @format.email_address_format = @email_address_format
     @format.postal_address_format = @postal_address_format
+
+    @email_address_format.stub(:process)
   end
 
   describe "#process" do
@@ -35,13 +39,10 @@ describe Ppl::Format::Contact::Full do
       @format.process(@contact).should include "John Doe <fred@testtest.es>"
     end
 
-    it "should show all their email addresses" do
-      @contact.email_addresses << Ppl::Entity::EmailAddress.new("john@example.org")
-      @contact.email_addresses << Ppl::Entity::EmailAddress.new("john@example.com")
+    it "should invoke the email address formatter if there are any addresses" do
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("john@example.net")
-      @format.process(@contact).should include "john@example.org"
-      @format.process(@contact).should include "john@example.com"
-      @format.process(@contact).should include "john@example.net"
+      @email_address_format.should_receive(:process).with(@contact)
+      @format.process(@contact)
     end
 
     it "should show their birthday if available" do
