@@ -26,6 +26,13 @@ describe Ppl::Service::EmailAddress do
 
   end
 
+  describe "#update" do
+    it "should store the updated contact" do
+      @storage.should_receive(:save_contact).with(@contact)
+      @service.update(@contact, "", {})
+    end
+  end
+
   describe "#remove" do
 
     it "should remove the email address from the contact" do
