@@ -58,7 +58,9 @@ class Ppl::Adapter::Vcard::GreenCard
 
   def encode_email_addresses(contact, vcard_maker)
     contact.email_addresses.each do |email_address|
-      vcard_maker.add_email(email_address.address)
+      vcard_maker.add_email(email_address.address) do |vcard_email|
+        vcard_email.preferred = email_address.preferred
+      end
     end
   end
 
