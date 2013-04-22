@@ -20,7 +20,7 @@ class Ppl::Format::AddressBook::OneLine < Ppl::Format::AddressBook
     email = nil
 
     if !contact.email_addresses.empty?
-      email = sprintf("<%s>", contact.email_addresses.first.address)
+      email = sprintf("<%s>", choose_email_address(contact).address)
     end
 
     @table.add_row({
@@ -28,6 +28,15 @@ class Ppl::Format::AddressBook::OneLine < Ppl::Format::AddressBook
       :name  => name,
       :email => email,
     })
+  end
+
+  def choose_email_address(contact)
+    preferred = contact.email_addresses.find { |e| e.preferred }
+    if preferred.nil?
+      contact.email_addresses.first
+    else
+      preferred
+    end
   end
 
 end
