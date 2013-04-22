@@ -31,6 +31,8 @@ class Ppl::Command::Phone < Ppl::Application::Command
       :list_address_book_phone_numbers
     elsif input.arguments.length < 2
       :show_contact_phone_numbers
+    elsif input.options[:delete]
+      :remove_phone_number_from_contact
     end
   end
 
@@ -42,6 +44,11 @@ class Ppl::Command::Phone < Ppl::Application::Command
   def show_contact_phone_numbers(input, output)
     contact = @storage.require_contact(input.arguments[0])
     output.line(@show_format.process(contact))
+  end
+
+  def remove_phone_number_from_contact(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    @phone_service.remove(contact, input.arguments[1])
   end
 
 end
