@@ -23,6 +23,13 @@ describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
     @adapter.encode(@contact).should include("EMAIL:john@example.org")
   end
 
+  it "should encode the contact's preferred email address as such" do
+    email_address = Ppl::Entity::EmailAddress.new("john@example.org")
+    email_address.preferred = true
+    @contact.email_addresses << email_address
+    @adapter.encode(@contact).should include("EMAIL;TYPE=pref:john@example.org")
+  end
+
   it "should encode the contact's phone number" do
     @contact.phone_numbers << Ppl::Entity::PhoneNumber.new("01234567890")
     @adapter.encode(@contact).should include("TEL:01234567890")
