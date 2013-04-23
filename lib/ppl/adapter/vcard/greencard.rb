@@ -58,7 +58,9 @@ class Ppl::Adapter::Vcard::GreenCard
 
   def encode_email_addresses(contact, vcard_maker)
     contact.email_addresses.each do |email_address|
-      vcard_maker.add_email(email_address)
+      vcard_maker.add_email(email_address.address) do |vcard_email|
+        vcard_email.preferred = email_address.preferred
+      end
     end
   end
 
@@ -66,6 +68,7 @@ class Ppl::Adapter::Vcard::GreenCard
     contact.phone_numbers.each do |phone_number|
       vcard_maker.add_tel(phone_number.number) do |tel|
         tel.location = phone_number.type
+        tel.preferred = phone_number.preferred
       end
     end
   end
@@ -117,7 +120,9 @@ class Ppl::Adapter::Vcard::GreenCard
 
   def decode_email_addresses(vcard, contact)
     vcard.emails.each do |email|
-      contact.email_addresses.push(email.to_s)
+      email_address = Ppl::Entity::EmailAddress.new(email.to_s)
+      email_address.preferred = email.preferred
+      contact.email_addresses << email_address
     end
   end
 
@@ -137,6 +142,7 @@ class Ppl::Adapter::Vcard::GreenCard
       phone_number = Ppl::Entity::PhoneNumber.new
       phone_number.number = tel.to_s
       phone_number.type = (tel.location | tel.nonstandard).join
+      phone_number.preferred = tel.preferred
       contact.phone_numbers << phone_number
     end
   end

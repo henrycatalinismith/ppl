@@ -60,7 +60,7 @@ And /^its name should be "([^"]+)"$/ do |name|
 end
 
 Then(/^the (\d+).. email address should be "([^"]+)"$/) do |nth, address|
-  @email_addresses[nth.to_i - 1].should eq address
+  @email_addresses[nth.to_i - 1].strip.should eq address
 end
 
 Then /^running "ppl ([^"]+)" should output (\d+) lines?$/ do |command, lines|
@@ -86,6 +86,36 @@ end
 
 Then(/^the (\d+).. URL should be "([^"]+)"$/) do |nth, url|
   @urls[nth.to_i - 1].should eq url
+end
+
+And /^"([^"]+)" should be the favourite email address$/ do |email_address|
+  @email_addresses.should include "*  #{email_address}"
+  @email_addresses.each do |line|
+    if line.include? "*"
+      line.should eq "*  #{email_address}"
+    end
+  end
+end
+
+And /^"([^"]+)" should be the preferred phone number$/ do |phone_number|
+  @phone_numbers.should include "*  #{phone_number}"
+  @phone_numbers.each do |line|
+    if line.include? "*"
+      line.should eq "*  #{phone_number}"
+    end
+  end
+end
+
+And /^there should be no favourite email address$/ do
+  @email_addresses.each do |line|
+    line.should_not include "*"
+  end
+end
+
+And /^there should be no preferred phone number$/ do
+  @phone_numbers.each do |line|
+    line.should_not include "*"
+  end
 end
 
 Then /^(bob)'s birthday should be "([^"]+)"$/ do |id, birthday|

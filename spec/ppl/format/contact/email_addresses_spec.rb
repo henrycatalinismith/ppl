@@ -1,28 +1,42 @@
 
 describe Ppl::Format::Contact::EmailAddresses do
+  describe "#initialize" do
+    it "should pass the colors through to the table" do
+      colors = {"id" => "blue"}
+      Ppl::Format::Table.should_receive(:new).with([:star, :email_addresses], colors)
+      format = Ppl::Format::Contact::EmailAddresses.new(colors)
+    end
+  end
+end
+
+describe Ppl::Format::Contact::EmailAddresses do
 
   before(:each) do
     @format  = Ppl::Format::Contact::EmailAddresses.new
     @contact = Ppl::Entity::Contact.new
-    @color   = double(Ppl::Adapter::Color)
-    @format.color_adapter = @color
+    @email   = Ppl::Entity::EmailAddress.new("test@example.org")
+    @table   = double(Ppl::Format::Table)
+    @format.table = @table
+    @contact.email_addresses << @email
   end
 
   describe "#process" do
 
-    it "should return an empty string if the contact lacks an email address" do
-      @format.process(Ppl::Entity::Contact.new).should eq ""
+    it "should pass each email address to the table" do
+      @table.should_receive(:add_row).with({
+        :star            => " ",
+        :email_addresses => "test@example.org",
+      })
+      @format.process(@contact)
     end
 
-    it "should return the contact's email address if it is set" do
-      @contact.email_addresses.push "jdoe@example.org"
-      @format.process(@contact).should eq "jdoe@example.org"
-    end
-
-    it "should colorize the string if configured to do so" do
-      @format.colors = { "email_addresses" => "blue" }
-      @color.should_receive(:colorize).and_return("email addresses in blue")
-      @format.process(@contact).should eq "email addresses in blue"
+    it "should mark the preferred email with a star" do
+      @email.preferred = true
+      @table.should_receive(:add_row).with({
+        :star            => "*",
+        :email_addresses => "test@example.org",
+      })
+      @format.process(@contact)
     end
 
   end

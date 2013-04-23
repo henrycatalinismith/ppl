@@ -19,13 +19,26 @@ describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
   end
 
   it "should encode the contact's email address" do
-    @contact.email_addresses = ["john@example.org"]
+    @contact.email_addresses << Ppl::Entity::EmailAddress.new("john@example.org")
     @adapter.encode(@contact).should include("EMAIL:john@example.org")
+  end
+
+  it "should encode the contact's preferred email address as such" do
+    email_address = Ppl::Entity::EmailAddress.new("john@example.org")
+    email_address.preferred = true
+    @contact.email_addresses << email_address
+    @adapter.encode(@contact).should include("EMAIL;TYPE=pref:john@example.org")
   end
 
   it "should encode the contact's phone number" do
     @contact.phone_numbers << Ppl::Entity::PhoneNumber.new("01234567890")
     @adapter.encode(@contact).should include("TEL:01234567890")
+  end
+
+  it "should encode the contact's preferred phone number as such" do
+    @contact.phone_numbers << Ppl::Entity::PhoneNumber.new("01234567890")
+    @contact.phone_numbers[0].preferred = true
+    @adapter.encode(@contact).should include("TEL;TYPE=pref:01234567890")
   end
 
   it "should encode the contact's phone number's type" do
@@ -137,7 +150,19 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
-    contact.email_addresses.first.should eq "home@example.org"
+    contact.email_addresses.first.address.should eq "home@example.org"
+  end
+
+  it "should mark preferred email addresses as such" do
+    vcard = [
+      "BEGIN:VCARD",
+      "N:,test",
+      "VERSION:3.0",
+      "EMAIL;PREF:home@example.org",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+    contact.email_addresses.first.preferred.should eq true
   end
 
   it "should decode the contact's phone number" do
@@ -151,6 +176,19 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
     contact = @adapter.decode(vcard)
     phone_number = contact.phone_numbers.first
     phone_number.number.should eq "01234567890"
+  end
+
+  it "should mark preferred phone numbers as such" do
+    vcard = [
+      "BEGIN:VCARD",
+      "N:,test",
+      "VERSION:3.0",
+      "TEL;TYPE=pref:01234567890",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+    phone_number = contact.phone_numbers.first
+    phone_number.preferred.should eq true
   end
 
   it "should decode the contact's phone number's type" do

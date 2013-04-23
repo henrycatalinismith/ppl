@@ -62,9 +62,9 @@ class Ppl::Command::Mutt < Ppl::Application::Command
   def match_by_email_address(contact, query)
     matches = contact.email_addresses.select do |email_address|
       if @options[:ignore_case]
-        email_address.downcase.include? query.downcase
+        email_address.address.downcase.include? query.downcase
       else
-        email_address.include? query
+        email_address.address.include? query
       end
     end
     if matches.length > 0
