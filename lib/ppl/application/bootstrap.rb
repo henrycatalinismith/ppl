@@ -59,7 +59,8 @@ class Ppl::Application::Bootstrap
   register :command_ls do
     ls = Ppl::Command::Ls.new
     ls.storage = storage_adapter
-    ls.format = format_address_book_one_line
+    ls.default_format = format_address_book_one_line
+    ls.custom_format = Ppl::Format::Custom::Contact.new
     ls
   end
 
