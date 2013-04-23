@@ -24,6 +24,15 @@ describe Ppl::Service::PhoneNumber do
 
   end
 
+  describe "#update" do
+    
+    it "should update the number's type" do
+      @service.update(@contact, "01234567890", {:type => "cell"})
+      @contact.phone_numbers.first.type.should eq "cell"
+    end
+
+  end
+
   describe "#remove" do
 
     it "should remove the phone number from the contact" do
