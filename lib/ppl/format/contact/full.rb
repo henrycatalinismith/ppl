@@ -2,10 +2,12 @@
 class Ppl::Format::Contact::Full < Ppl::Format::Contact
 
   attr_writer :email_address_format
+  attr_writer :phone_number_format
   attr_writer :postal_address_format
 
   def initialize
     @email_address_format = Ppl::Format::Contact::EmailAddresses.new
+    @phone_number_format = Ppl::Format::Contact::PhoneNumber.new
     @postal_address_format = Ppl::Format::PostalAddress::OneLine.new
   end
 
@@ -83,9 +85,7 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
     unless contact.phone_numbers.empty?
       @lines << ""
       @lines << "Phone Numbers"
-      contact.phone_numbers.each do |pn|
-        @lines << "  #{pn.number}"
-      end
+      @lines << @phone_number_format.process(contact)
     end
   end
 
