@@ -13,13 +13,18 @@ describe Ppl::Service::PhoneNumber do
   describe "#add" do
 
     it "should add the phone number to the contact" do
-      @service.add(@contact, "10987654321")
+      @service.add(@contact, "10987654321", {})
       @contact.phone_numbers[1].number.should eq "10987654321"
+    end
+
+    it "should process the input options against the new contact" do
+      @service.add(@contact, "10987654321", {:preferred => true})
+      @contact.phone_numbers[1].preferred.should eq true
     end
 
     it "should store the contact" do
       @storage.should_receive(:save_contact).with(@contact)
-      @service.add(@contact, "")
+      @service.add(@contact, "", {})
     end
 
   end
