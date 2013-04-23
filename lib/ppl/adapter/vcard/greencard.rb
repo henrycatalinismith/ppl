@@ -68,6 +68,7 @@ class Ppl::Adapter::Vcard::GreenCard
     contact.phone_numbers.each do |phone_number|
       vcard_maker.add_tel(phone_number.number) do |tel|
         tel.location = phone_number.type
+        tel.preferred = phone_number.preferred
       end
     end
   end
