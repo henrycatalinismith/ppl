@@ -11,6 +11,12 @@ describe Ppl::Entity::PhoneNumber do
     end
   end
 
+  describe "#preferred" do
+    it "should be false by default" do
+      @phone_number.preferred.should eq false
+    end
+  end
+
   describe "#type" do
     it "should return a value" do
       @phone_number.type.should eq nil

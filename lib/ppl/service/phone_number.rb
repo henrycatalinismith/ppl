@@ -11,7 +11,7 @@ class Ppl::Service::PhoneNumber
 
   def update(contact, number, options)
     matching_numbers = contact.phone_numbers.select { |p| p.number == number }
-    matching_numbers.each { |mn| update_phone_number(mn, options) }
+    matching_numbers.each { |mn| update_phone_number(contact, mn, options) }
   end
 
   def remove(contact, number)
@@ -23,9 +23,12 @@ class Ppl::Service::PhoneNumber
 
   private
 
-  def update_phone_number(phone_number, options)
+  def update_phone_number(contact, phone_number, options)
     if options[:type]
       phone_number.type = options[:type]
+    end
+    if options[:preferred] == true
+      contact.phone_numbers.each { |p| p.preferred = (p.number == phone_number.number) }
     end
   end
 
