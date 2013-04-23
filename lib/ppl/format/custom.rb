@@ -17,7 +17,7 @@ class Ppl::Format::Custom
     end
   end
 
-  def initialize(format)
+  def initialize(format = nil)
     @format = format
   end
 
