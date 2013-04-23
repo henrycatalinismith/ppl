@@ -3,9 +3,10 @@ class Ppl::Service::PhoneNumber
 
   attr_writer :storage
 
-  def add(contact, number)
+  def add(contact, number, options)
     phone_number = Ppl::Entity::PhoneNumber.new(number)
     contact.phone_numbers << phone_number
+    update_phone_number(contact, phone_number, options)
     @storage.save_contact(contact)
   end
 
