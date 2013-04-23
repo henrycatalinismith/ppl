@@ -29,6 +29,8 @@ class Ppl::Service::PhoneNumber
     end
     if options[:preferred] == true
       contact.phone_numbers.each { |p| p.preferred = (p.number == phone_number.number) }
+    elsif options[:preferred] == false
+      phone_number.preferred = false
     end
   end
 
