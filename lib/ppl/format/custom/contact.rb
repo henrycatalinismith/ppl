@@ -1,7 +1,8 @@
 
 class Ppl::Format::Custom::Contact < Ppl::Format::Custom
 
-  def process(contact)
+  format :n do |contact|
+    contact.name
   end
 
 end
