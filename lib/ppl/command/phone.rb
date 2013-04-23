@@ -62,7 +62,7 @@ class Ppl::Command::Phone < Ppl::Application::Command
   def update_contact_phone_numbers(input, output)
     contact = @storage.require_contact(input.arguments[0])
     if new_phone_number?(contact, input.arguments[1])
-      @phone_service.add(contact, input.arguments[1])
+      @phone_service.add(contact, input.arguments[1], input.options)
     else
       @phone_service.update(contact, input.arguments[1], input.options)
     end
