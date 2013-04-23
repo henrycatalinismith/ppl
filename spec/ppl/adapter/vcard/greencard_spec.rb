@@ -178,6 +178,19 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
     phone_number.number.should eq "01234567890"
   end
 
+  it "should mark preferred phone numbers as such" do
+    vcard = [
+      "BEGIN:VCARD",
+      "N:,test",
+      "VERSION:3.0",
+      "TEL;TYPE=pref:01234567890",
+      "END:VCARD",
+    ].join("\n")
+    contact = @adapter.decode(vcard)
+    phone_number = contact.phone_numbers.first
+    phone_number.preferred.should eq true
+  end
+
   it "should decode the contact's phone number's type" do
     vcard = [
       "BEGIN:VCARD",
