@@ -142,6 +142,7 @@ class Ppl::Adapter::Vcard::GreenCard
       phone_number = Ppl::Entity::PhoneNumber.new
       phone_number.number = tel.to_s
       phone_number.type = (tel.location | tel.nonstandard).join
+      phone_number.preferred = tel.preferred
       contact.phone_numbers << phone_number
     end
   end
