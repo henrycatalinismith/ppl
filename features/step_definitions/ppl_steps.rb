@@ -97,8 +97,23 @@ And /^"([^"]+)" should be the favourite email address$/ do |email_address|
   end
 end
 
+And /^"([^"]+)" should be the preferred phone number$/ do |phone_number|
+  @phone_numbers.should include "*  #{phone_number}"
+  @phone_numbers.each do |line|
+    if line.include? "*"
+      line.should eq "*  #{phone_number}"
+    end
+  end
+end
+
 And /^there should be no favourite email address$/ do
   @email_addresses.each do |line|
+    line.should_not include "*"
+  end
+end
+
+And /^there should be no preferred phone number$/ do
+  @phone_numbers.each do |line|
     line.should_not include "*"
   end
 end
