@@ -1,6 +1,13 @@
 
 Feature: ppl email
 
+  Scenario: Add a preferred email address to a contact
+    Given I am in an address book with a blank contact called bob
+    And I run "ppl email bob --preferred bob@example.org"
+    Then it should succeed
+    And bob should have 1 email address
+    And the 1st email address should be "*  bob@example.org"
+
   Scenario: Add an email address to a contact
     Given I am in an address book with a blank contact called bob
     And I run "ppl email bob bob@example.org"

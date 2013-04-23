@@ -16,12 +16,17 @@ describe Ppl::Service::EmailAddress do
       @storage.stub(:save_contact) do |contact|
         contact.email_addresses[1].address.should eq "two@example.org"
       end
-      @service.add(@contact, "two@example.org")
+      @service.add(@contact, "two@example.org", {})
+    end
+
+    it "should set the new address as preferred if asked" do
+      @service.add(@contact, "two@example.org", {:preferred => true})
+      @contact.email_addresses[1].preferred.should eq true
     end
 
     it "should store the contact" do
       @storage.should_receive(:save_contact).with(@contact)
-      @service.add(@contact, "")
+      @service.add(@contact, "", {})
     end
 
   end
