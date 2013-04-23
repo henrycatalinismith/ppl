@@ -23,7 +23,7 @@ class Ppl::Format::AddressBook::MuttQuery < Ppl::Format::AddressBook
 
   def add_email_address(email_address, name)
     @table.add_row({
-      :email => email_address,
+      :email => email_address.address,
       :name  => name,
     })
   end

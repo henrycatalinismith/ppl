@@ -1,30 +1,20 @@
 
 class Ppl::Format::Contact::EmailAddresses < Ppl::Format::Contact
 
-  attr_writer :color_adapter
-  attr_writer :colors
+  attr_writer :table
 
   def initialize(colors={})
-    @colors = colors
-    @color_adapter = Ppl::Adapter::Color::Colored.new
+    @table = Ppl::Format::Table.new([:star, :email_addresses], colors)
   end
 
   def process(contact)
-    lines = []
     contact.email_addresses.each do |email_address|
-      lines.push email_address
+      @table.add_row({
+        :star            => email_address.preferred ? "*" : " ",
+        :email_addresses => email_address.address,
+      })
     end
-    colorize_output(lines.join("\n"))
-  end
-
-  private
-
-  def colorize_output(string)
-    if @colors["email_addresses"]
-      @color_adapter.colorize(string, @colors["email_addresses"])
-    else
-      string
-    end
+    @table.to_s
   end
 
 end

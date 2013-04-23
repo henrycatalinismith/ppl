@@ -36,12 +36,22 @@ describe Ppl::Format::AddressBook::OneLine do
 
     it "should show all the info if it's available" do
       @contact.name = "John Doe"
-      @contact.email_addresses.push "jdoe@example.org"
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("jdoe@example.org")
       @table.should_receive(:add_row).with({
         :id    => "test:",
         :name  => "John Doe",
         :email => "<jdoe@example.org>",
       })
+      @format.process(@address_book)
+    end
+
+    it "should show all the info if it's available" do
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("jdoe@example.org")
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("fred@testtest.es")
+      @contact.email_addresses[1].preferred = true
+      @table.should_receive(:add_row) do |row|
+        row[:email].should eq "<fred@testtest.es>"
+      end
       @format.process(@address_book)
     end
 

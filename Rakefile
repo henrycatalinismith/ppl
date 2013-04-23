@@ -40,3 +40,9 @@ task :enable_config do
   end
 end
 
+task :feature, :feature_name do |task, params|
+  Rake::Task["disable_config"].invoke
+  system "bundle exec cucumber features/#{params[:feature_name]}.feature"
+  Rake::Task["enable_config"].invoke
+end
+
