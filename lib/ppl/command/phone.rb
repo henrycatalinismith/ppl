@@ -13,8 +13,14 @@ class Ppl::Command::Phone < Ppl::Application::Command
     parser.on("-d", "--delete", "delete phone number") do
       options[:delete] = true
     end
-    parser.on("-t", "--type <type>") do |type|
+    parser.on("-t", "--type <type>", "set the phone number's type") do |type|
       options[:type] = type
+    end
+    parser.on("-p", "--preferred", "mark phone number as preferred") do
+      options[:preferred] = true
+    end
+    parser.on("-P", "--not-preferred", "mark phone number as not preferred") do
+      options[:preferred] = false
     end
   end
 
