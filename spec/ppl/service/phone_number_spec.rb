@@ -39,6 +39,12 @@ describe Ppl::Service::PhoneNumber do
       @contact.phone_numbers[1].preferred.should eq false
     end
 
+    it "should mark numbers as not preferred" do
+      @contact.phone_numbers[0].preferred = true
+      @service.update(@contact, "01234567890", {:preferred => false})
+      @contact.phone_numbers[0].preferred.should eq false
+    end
+
   end
 
   describe "#remove" do
