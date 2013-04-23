@@ -1,9 +1,13 @@
 
 class Ppl::Format::Contact::Full < Ppl::Format::Contact
 
+  attr_writer :email_address_format
+  attr_writer :phone_number_format
   attr_writer :postal_address_format
 
   def initialize
+    @email_address_format = Ppl::Format::Contact::EmailAddresses.new
+    @phone_number_format = Ppl::Format::Contact::PhoneNumber.new
     @postal_address_format = Ppl::Format::PostalAddress::OneLine.new
   end
 
@@ -37,10 +41,20 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
     if !contact.name.nil?
       line += contact.name
     end
-    if !contact.email_addresses.empty?
-      line += " <#{contact.email_addresses.first}>"
+    email_address = choose_first_line_address(contact)
+    unless email_address.nil?
+      line += " <#{email_address.address}>"
     end
     return line
+  end
+
+  def choose_first_line_address(contact)
+    preferred = contact.email_addresses.find { |e| e.preferred }
+    if preferred.nil?
+      contact.email_addresses.first
+    else
+      preferred
+    end
   end
 
   def vitals(contact)
@@ -60,16 +74,18 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
   end
 
   def format_email_addresses(contact)
-    push_list("Email Addresses", contact.email_addresses)
+    unless contact.email_addresses.empty?
+      @lines << ""
+      @lines << "Email Addresses:"
+      @lines << @email_address_format.process(contact)
+    end
   end
 
   def format_phone_numbers(contact)
     unless contact.phone_numbers.empty?
       @lines << ""
       @lines << "Phone Numbers"
-      contact.phone_numbers.each do |pn|
-        @lines << "  #{pn.number}"
-      end
+      @lines << @phone_number_format.process(contact)
     end
   end
 
@@ -86,12 +102,15 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
     push_list("URLs", contact.urls)
   end
 
-  def push_list(label, list)
+  def push_list(label, list, property = nil)
     return if list.empty?
     @lines.push("")
     @lines.push("#{label}:")
     if list.kind_of?(Array)
-      list.each { |item| @lines.push("  #{item}") }
+      list.each do |item|
+        string = property.nil? ? item : item.send(property)
+        @lines << "  #{string}"
+      end
     else
       @lines.push("  #{list}")
     end

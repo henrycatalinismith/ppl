@@ -34,8 +34,8 @@ class Ppl::Format::Table
 
   def to_s
     string = ""
-    @rows.each { |row| string += format_row(row).strip + "\n" }
-    string.strip
+    @rows.each { |row| string += format_row(row).rstrip + "\n" }
+    string.rstrip
   end
 
   def disable_colors!
