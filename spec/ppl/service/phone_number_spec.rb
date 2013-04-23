@@ -45,6 +45,11 @@ describe Ppl::Service::PhoneNumber do
       @contact.phone_numbers[0].preferred.should eq false
     end
 
+    it "should store the contact" do
+      @storage.should_receive(:save_contact).with(@contact)
+      @service.update(@contact, "", {})
+    end
+
   end
 
   describe "#remove" do
