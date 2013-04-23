@@ -1,6 +1,13 @@
 
 Feature: ppl phone
 
+  Scenario: Add a preferred phone number with a type
+    Given I am in an address book with a blank contact called bob
+    And I run "ppl phone bob 123 --type cell --preferred"
+    Then it should succeed
+    And bob should have 1 phone number
+    And the 1st phone number should be "*  123  (cell)"
+
   Scenario: Add a phone number to a contact
     Given I am in an address book with a blank contact called bob
     And I run "ppl phone bob 01234567890"
