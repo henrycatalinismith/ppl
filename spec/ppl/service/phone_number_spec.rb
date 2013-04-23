@@ -31,6 +31,14 @@ describe Ppl::Service::PhoneNumber do
       @contact.phone_numbers.first.type.should eq "cell"
     end
 
+    it "should update the number's preferred status" do
+      @contact.phone_numbers << Ppl::Entity::PhoneNumber.new("109876543210")
+      @contact.phone_numbers[1].preferred = true
+      @service.update(@contact, "01234567890", {:preferred => true})
+      @contact.phone_numbers[0].preferred.should eq true
+      @contact.phone_numbers[1].preferred.should eq false
+    end
+
   end
 
   describe "#remove" do
