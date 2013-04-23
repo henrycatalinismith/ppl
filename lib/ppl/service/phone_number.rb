@@ -9,11 +9,24 @@ class Ppl::Service::PhoneNumber
     @storage.save_contact(contact)
   end
 
+  def update(contact, number, options)
+    matching_numbers = contact.phone_numbers.select { |p| p.number == number }
+    matching_numbers.each { |mn| update_phone_number(mn, options) }
+  end
+
   def remove(contact, number)
     contact.phone_numbers.select! do |phone_number|
       phone_number.number != number
     end
     @storage.save_contact(contact)
+  end
+
+  private
+
+  def update_phone_number(phone_number, options)
+    if options[:type]
+      phone_number.type = options[:type]
+    end
   end
 
 end
