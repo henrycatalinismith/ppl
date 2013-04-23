@@ -47,7 +47,7 @@ describe Ppl::Command::Email do
     it "should delegate to the service layer to add a new email address" do
       @input.arguments = ["jdoe", "jdoe@example.org"]
       @storage.should_receive(:require_contact).and_return(@contact)
-      @service.should_receive(:add).with(@contact, "jdoe@example.org")
+      @service.should_receive(:add).with(@contact, "jdoe@example.org", @input.options)
       @command.execute(@input, @output)
     end
 
