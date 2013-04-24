@@ -22,18 +22,33 @@ class Ppl::Format::Custom
 
   def process(object)
     @object = object
-    string_pieces = @format.scan(/[^%]+|%./)
+    string_pieces = @format.scan(/[^%]+|%-?\d*./)
     string_pieces.map(&method(:process_piece)).join
   end
 
   private
 
   def process_piece(string)
-    if string[0...1] == "%"
-      letter = string[1..-1]
-      self.class.process(letter.to_sym, @object)
+    matches = string.scan(/^%(-?\d+)?([a-z])$/)
+    if !matches.empty?
+      output = generate_output(matches[0][1].to_sym)
+      pad_output(output, matches[0][0].to_i)
     else
       string
+    end
+  end
+
+  def generate_output(symbol)
+    self.class.process(symbol, @object)
+  end
+
+  def pad_output(output, padding)
+    if padding > 0
+      output.rjust(padding, " ")
+    elsif padding < 0
+      output.ljust(padding.abs, " ")
+    else
+      output
     end
   end
 
