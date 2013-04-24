@@ -44,6 +44,10 @@ class Ppl::Application::Configuration
     result = config[search]
   end
 
+  def pretty
+    user_configuration["pretty"]
+  end
+
   private
 
   def default_configuration

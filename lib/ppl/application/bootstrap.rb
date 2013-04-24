@@ -281,6 +281,7 @@ class Ppl::Application::Bootstrap
 
   register :format_contact_custom do
     custom = Ppl::Format::Custom::Contact.new
+    custom.preset_formats = configuration.pretty
     custom
   end
 
