@@ -49,9 +49,9 @@ class Ppl::Format::Custom
 
   def pad_output(output, padding)
     if padding > 0
-      output.rjust(padding, " ")
+      output.to_s.rjust(padding, " ")
     elsif padding < 0
-      output.ljust(padding.abs, " ")
+      output.to_s.ljust(padding.abs, " ")
     else
       output
     end
