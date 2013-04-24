@@ -23,21 +23,33 @@ describe Ppl::Command::Ls do
 
   describe "#execute" do
 
-    it "should show the list of contacts in the address book" do
+    before(:each) do
       @storage.should_receive(:load_address_book).and_return(@address_book)
+    end
+
+    after(:each) do
+      @command.execute(@input, @output)
+    end
+
+    it "should show the list of contacts in the address book" do
       @format.should_receive(:process).and_return("list of contacts")
       @output.should_receive(:line).with("list of contacts")
-      @command.execute(@input, @output)
+    end
+
+    it "should let the user specify a preset pretty format" do
+      @input.options[:pretty] = "test"
+      @address_book.should_receive(:contacts).and_return([1])
+      @custom.should_receive(:use_preset).with("test")
+      @custom.should_receive(:process).and_return("list of contacts")
+      @output.should_receive(:line).with("list of contacts")
     end
 
     it "should let the user specify a custom format" do
       @input.options[:format] = "%n"
-      @storage.should_receive(:load_address_book).and_return(@address_book)
       @address_book.should_receive(:contacts).and_return([1])
       @custom.should_receive(:format=).with("%n")
       @custom.should_receive(:process).and_return("list of contacts")
       @output.should_receive(:line).with("list of contacts")
-      @command.execute(@input, @output)
     end
 
   end
