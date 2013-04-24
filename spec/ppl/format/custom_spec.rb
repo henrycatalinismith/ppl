@@ -25,6 +25,16 @@ describe "Ppl::Format::Custom" do
       object = { :name => "jdoe" }
       custom.process(object).should eq "jdoe jdoe jdoe"
     end
+    it "should pad with leading spaces if a positive width is given" do
+      custom = Ppl::Format::Custom.new("%10n")
+      object = { :name => "jdoe" }
+      custom.process(object).should eq "      jdoe"
+    end
+    it "should pad with trailing spaces if a negative width is given" do
+      custom = Ppl::Format::Custom.new("%-10n")
+      object = { :name => "jdoe" }
+      custom.process(object).should eq "jdoe      "
+    end
   end
 
 end
