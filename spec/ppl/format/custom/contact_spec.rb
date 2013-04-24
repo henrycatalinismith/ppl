@@ -50,6 +50,14 @@ describe Ppl::Format::Custom::Contact do
     end
   end
 
+  describe "%o" do
+    it "should output the contact's organization" do
+      @contact.organizations << "WTF Inc"
+      @format.format = "%o"
+      @format.process(@contact).should eq "WTF Inc"
+    end
+  end
+
 end
 
 
