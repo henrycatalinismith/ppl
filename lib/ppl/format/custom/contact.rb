@@ -25,5 +25,9 @@ class Ppl::Format::Custom::Contact < Ppl::Format::Custom
     end
   end
 
+  format :o do |contact|
+    contact.organizations.first
+  end
+
 end
 
