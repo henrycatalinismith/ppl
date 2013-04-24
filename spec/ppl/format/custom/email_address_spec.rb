@@ -14,6 +14,20 @@ describe Ppl::Format::Custom::EmailAddress do
     end
   end
 
+  describe "%f" do
+    before(:each) do
+      @format.format = "%f"
+    end
+    it "should output a star if the address is preferred" do
+      @address.preferred = true
+      @format.process(@address).should eq "*"
+    end
+    it "should output nothing if the address is not preferred" do
+      @address.preferred = false
+      @format.process(@address).should eq ""
+    end
+  end
+
 end
 
 
