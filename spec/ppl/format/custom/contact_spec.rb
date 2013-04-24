@@ -30,6 +30,15 @@ describe Ppl::Format::Custom::Contact do
     end
   end
 
+  describe "%a" do
+    it "should output the contact's age" do
+      @contact.birthday = Date.parse("2000-01-01")
+      Date.stub(:today).and_return(Date.parse("2010-01-02"))
+      @format.format = "%a"
+      @format.process(@contact).should eq "10"
+    end
+  end
+
   describe "%b" do
     it "should output the contact's birthday" do
       @contact.birthday = Date.parse("1985-06-07")
