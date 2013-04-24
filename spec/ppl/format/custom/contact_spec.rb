@@ -22,6 +22,14 @@ describe Ppl::Format::Custom::Contact do
     end
   end
 
+  describe "%k" do
+    it "should output the contact's nickname" do
+      @contact.nicknames << "Johnny"
+      @format.format = "%k"
+      @format.process(@contact).should eq "Johnny"
+    end
+  end
+
   describe "%b" do
     it "should output the contact's birthday" do
       @contact.birthday = Date.parse("1985-06-07")
