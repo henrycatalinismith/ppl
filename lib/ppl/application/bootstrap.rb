@@ -41,6 +41,7 @@ class Ppl::Application::Bootstrap
     email.storage = storage_adapter
     email.list_format = format_address_book_email_addresses
     email.show_format = format_contact_email_addresses
+    email.custom_format = format_email_address_custom
     email
   end
 
@@ -59,7 +60,8 @@ class Ppl::Application::Bootstrap
   register :command_ls do
     ls = Ppl::Command::Ls.new
     ls.storage = storage_adapter
-    ls.format = format_address_book_one_line
+    ls.default_format = format_address_book_one_line
+    ls.custom_format = format_contact_custom
     ls
   end
 
@@ -276,6 +278,18 @@ class Ppl::Application::Bootstrap
   register :format_contact_birthday do
     colors = configuration.command_colors("bday")
     Ppl::Format::Contact::Birthday.new(colors)
+  end
+
+  register :format_contact_custom do
+    custom = Ppl::Format::Custom::Contact.new
+    custom.preset_formats = configuration.pretty
+    custom
+  end
+
+  register :format_email_address_custom do
+    custom = Ppl::Format::Custom::EmailAddress.new
+    custom.preset_formats = configuration.pretty
+    custom
   end
 
   register :format_contact_email_addresses do
