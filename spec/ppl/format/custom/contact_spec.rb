@@ -35,6 +35,21 @@ describe Ppl::Format::Custom::Contact do
     end
   end
 
+  describe "%e" do
+    before(:each) do
+      @format.format = "%e"
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("a@example.org")
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new("b@example.org")
+    end
+    it "should output the first email address" do
+      @format.process(@contact).should eq "a@example.org"
+    end
+    it "should output the preferred email address" do
+      @contact.email_addresses[1].preferred = true
+      @format.process(@contact).should eq "b@example.org"
+    end
+  end
+
 end
 
 
