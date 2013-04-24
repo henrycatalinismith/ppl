@@ -46,5 +46,12 @@ describe "Ppl::Format::Custom" do
     end
   end
 
+  describe "%n" do
+    it "should be replaced with a newlines" do
+      custom = Ppl::Format::Custom.new("%n")
+      custom.process({}).should eq "\n"
+    end
+  end
+
 end
 
