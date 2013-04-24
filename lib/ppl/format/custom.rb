@@ -2,6 +2,7 @@
 class Ppl::Format::Custom
 
   attr_accessor :format
+  attr_accessor :preset_formats
 
   def self.format(symbol, &block)
     @format_blocks ||= {}
@@ -24,6 +25,10 @@ class Ppl::Format::Custom
     @object = object
     string_pieces = @format.scan(/[^%]+|%-?\d*./)
     string_pieces.map(&method(:process_piece)).join
+  end
+
+  def use_preset(format_name)
+    @format = @preset_formats[format_name]
   end
 
   private
