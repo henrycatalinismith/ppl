@@ -15,5 +15,15 @@ class Ppl::Format::Custom::Contact < Ppl::Format::Custom
     end
   end
 
+  format :e do |contact|
+    preferred = contact.email_addresses.find { |e| e.preferred }
+    first = contact.email_addresses.first
+    if !preferred.nil?
+      preferred.address
+    elsif !first.nil?
+      first.address
+    end
+  end
+
 end
 
