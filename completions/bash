@@ -211,7 +211,7 @@ __ppl_commands()
 
 __ppl_contact_ids()
 {
-  ppl nick --no-color | cut -d ':' -f 1
+  ppl ls --format "%i"
 }
 
 __ppl_contact_email_addresses()
