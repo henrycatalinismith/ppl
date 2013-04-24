@@ -1,6 +1,10 @@
 
 class Ppl::Format::Custom::Contact < Ppl::Format::Custom
 
+  format :n do |anything|
+    "\n"
+  end
+
   format :i do |contact|
     contact.id
   end

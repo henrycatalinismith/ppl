@@ -6,6 +6,13 @@ describe Ppl::Format::Custom::Contact do
     @contact = Ppl::Entity::Contact.new
   end
 
+  describe "%n" do
+    it "should be replaced with a newlines" do
+      @format.format = "%n"
+      @format.process(@contact).should eq "\n"
+    end
+  end
+
   describe "%i" do
     it "should output the contact's ID" do
       @contact.id = "test"
