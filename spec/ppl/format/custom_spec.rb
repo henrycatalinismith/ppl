@@ -37,5 +37,14 @@ describe "Ppl::Format::Custom" do
     end
   end
 
+  describe "#use_preset" do
+    it "should set the format string to the preset with the given name" do
+      custom = Ppl::Format::Custom.new
+      custom.preset_formats = { "example" => "%n (%n)" }
+      custom.use_preset "example"
+      custom.process({:name => "a"}).should eq "a (a)"
+    end
+  end
+
 end
 
