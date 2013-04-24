@@ -7,6 +7,7 @@ class Ppl::Command::Email < Ppl::Application::Command
   attr_writer :email_service
   attr_writer :list_format
   attr_writer :show_format
+  attr_writer :custom_format
 
   def options(parser, options)
     parser.banner = "usage: ppl email <contact> [<email-address>]"
@@ -18,6 +19,9 @@ class Ppl::Command::Email < Ppl::Application::Command
     end
     parser.on("-P", "--not-preferred", "mark address as not preferred") do
       options[:preferred] = false
+    end
+    parser.on("--format <format>", "specify a custom output format") do |f|
+      options[:format] = f
     end
   end
 
@@ -48,7 +52,7 @@ class Ppl::Command::Email < Ppl::Application::Command
 
   def show_contact_email_addresses(input, output)
     contact = @storage.require_contact(input.arguments[0])
-    output.line(@show_format.process(contact))
+    output.line(format_contact(contact, input.options))
   end
 
   def remove_email_address_from_contact(input, output)
@@ -67,6 +71,15 @@ class Ppl::Command::Email < Ppl::Application::Command
 
   def new_email_address?(contact, email_address)
     (contact.email_addresses.select { |ea| ea.address == email_address }).empty?
+  end
+
+  def format_contact(contact, options)
+    if options[:format].nil?
+      @show_format.process(contact)
+    else
+      @custom_format.format = options[:format]
+      contact.email_addresses.map { |e| @custom_format.process(e) }.join("\n")
+    end
   end
 
 end

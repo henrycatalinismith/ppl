@@ -41,6 +41,7 @@ class Ppl::Application::Bootstrap
     email.storage = storage_adapter
     email.list_format = format_address_book_email_addresses
     email.show_format = format_contact_email_addresses
+    email.custom_format = format_email_address_custom
     email
   end
 
@@ -281,6 +282,12 @@ class Ppl::Application::Bootstrap
 
   register :format_contact_custom do
     custom = Ppl::Format::Custom::Contact.new
+    custom.preset_formats = configuration.pretty
+    custom
+  end
+
+  register :format_email_address_custom do
+    custom = Ppl::Format::Custom::EmailAddress.new
     custom.preset_formats = configuration.pretty
     custom
   end
