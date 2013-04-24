@@ -14,10 +14,10 @@ describe Ppl::Format::Custom::Contact do
     end
   end
 
-  describe "%n" do
+  describe "%N" do
     it "should output the contact's name" do
       @contact.name = "John Doe"
-      @format.format = "%n"
+      @format.format = "%N"
       @format.process(@contact).should eq "John Doe"
     end
   end

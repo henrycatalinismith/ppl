@@ -5,7 +5,7 @@ class Ppl::Format::Custom::Contact < Ppl::Format::Custom
     contact.id
   end
 
-  format :n do |contact|
+  format :N do |contact|
     contact.name
   end
 

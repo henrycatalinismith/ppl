@@ -34,7 +34,7 @@ class Ppl::Format::Custom
   private
 
   def process_piece(string)
-    matches = string.scan(/^%(-?\d+)?([a-z])$/)
+    matches = string.scan(/^%(-?\d+)?([a-z])$/i)
     if !matches.empty?
       output = generate_output(matches[0][1].to_sym)
       pad_output(output, matches[0][0].to_i)
