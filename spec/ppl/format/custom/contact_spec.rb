@@ -50,6 +50,21 @@ describe Ppl::Format::Custom::Contact do
     end
   end
 
+  describe "%p" do
+    before(:each) do
+      @format.format = "%p"
+      @contact.phone_numbers << Ppl::Entity::PhoneNumber.new("0123456789")
+      @contact.phone_numbers << Ppl::Entity::PhoneNumber.new("1098765432")
+    end
+    it "should output the first phone number" do
+      @format.process(@contact).should eq "0123456789"
+    end
+    it "should output the preferred phone number" do
+      @contact.phone_numbers[1].preferred = true
+      @format.process(@contact).should eq "1098765432"
+    end
+  end
+
   describe "%o" do
     it "should output the contact's organization" do
       @contact.organizations << "WTF Inc"

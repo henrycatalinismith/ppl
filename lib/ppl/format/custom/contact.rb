@@ -29,5 +29,15 @@ class Ppl::Format::Custom::Contact < Ppl::Format::Custom
     contact.organizations.first
   end
 
+  format :p do |contact|
+    preferred = contact.phone_numbers.find { |p| p.preferred }
+    first = contact.phone_numbers.first
+    if !preferred.nil?
+      preferred.number
+    elsif !first.nil?
+      first.number
+    end
+  end
+
 end
 
