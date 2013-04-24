@@ -9,6 +9,10 @@ class Ppl::Format::Custom::Contact < Ppl::Format::Custom
     contact.name
   end
 
+  format :a do |contact|
+    contact.age(Date.today)
+  end
+
   format :b do |contact|
     unless contact.birthday.nil?
       contact.birthday.strftime("%Y-%m-%d")
