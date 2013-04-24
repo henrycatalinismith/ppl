@@ -9,10 +9,6 @@ class Ppl::Format::Custom
     @format_blocks[symbol] = block
   end
 
-  format :n do |anything|
-    "\n"
-  end
-
   def self.process(key, object)
     if @format_blocks[key]
       @format_blocks[key][object]
