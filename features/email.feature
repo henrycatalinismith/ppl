@@ -8,6 +8,16 @@ Feature: ppl email
     And bob should have 1 email address
     And the 1st email address should be "*  bob@example.org"
 
+  Scenario: Custom output with %a
+    Given I am in the same address book as before
+    Then running "ppl email bob --format '%a'" should output 1 line
+    And the 1st line should be "bob@example.org"
+
+  Scenario: Custom output with %f
+    Given I am in the same address book as before
+    Then running "ppl email bob --format '%f'" should output 1 line
+    And the 1st line should be "*"
+
   Scenario: Add an email address to a contact
     Given I am in an address book with a blank contact called bob
     And I run "ppl email bob bob@example.org"
