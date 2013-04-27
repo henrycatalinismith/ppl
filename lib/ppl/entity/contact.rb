@@ -39,5 +39,9 @@ class Ppl::Entity::Contact
     @email_addresses.find { |e| e.preferred }
   end
 
+  def preferred_phone_number
+    @phone_numbers.find { |p| p.preferred }
+  end
+
 end
 
