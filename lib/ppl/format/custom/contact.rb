@@ -40,12 +40,10 @@ class Ppl::Format::Custom::Contact < Ppl::Format::Custom
   end
 
   format :p do |contact|
-    preferred = contact.phone_numbers.find { |p| p.preferred }
-    first = contact.phone_numbers.first
-    if !preferred.nil?
-      preferred.number
-    elsif !first.nil?
-      first.number
+    if !contact.preferred_phone_number.nil?
+      contact.preferred_phone_number.number
+    elsif !contact.phone_numbers.first.nil?
+      contact.phone_numbers.first.number
     end
   end
 
