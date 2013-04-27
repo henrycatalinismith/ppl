@@ -35,5 +35,9 @@ class Ppl::Entity::Contact
     end
   end
 
+  def preferred_email_address
+    @email_addresses.find { |e| e.preferred }
+  end
+
 end
 
