@@ -28,12 +28,10 @@ class Ppl::Format::Custom::Contact < Ppl::Format::Custom
   end
 
   format :e do |contact|
-    preferred = contact.email_addresses.find { |e| e.preferred }
-    first = contact.email_addresses.first
-    if !preferred.nil?
-      preferred.address
-    elsif !first.nil?
-      first.address
+    if !contact.preferred_email_address.nil?
+      contact.preferred_email_address.address
+    elsif !contact.email_addresses.first.nil?
+      contact.email_addresses.first.address
     end
   end
 
