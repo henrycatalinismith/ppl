@@ -70,5 +70,22 @@ describe Ppl::Entity::Contact do
     end
   end
 
+  describe "#preferred_email_address" do
+
+    before(:each) do
+      @contact.email_addresses << Ppl::Entity::EmailAddress.new
+    end
+
+    it "returns nil if there's no preferred address" do
+      @contact.preferred_email_address.should eq nil
+    end
+
+    it "returns the preferred email address" do
+      @contact.email_addresses[0].preferred = true
+      @contact.preferred_email_address.should be_a(Ppl::Entity::EmailAddress)
+    end
+
+  end
+
 end
 
