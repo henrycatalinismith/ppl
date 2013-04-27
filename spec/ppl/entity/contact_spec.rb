@@ -36,16 +36,6 @@ describe Ppl::Entity::Contact do
     end
   end
 
-  describe "#has_email_address?" do
-    it "should know if the contact has the given email address" do
-      @contact.email_addresses.push "test@example.org"
-      @contact.has_email_address?("test@example.org").should eq true
-    end
-    it "should know if the contact lacks the given email address" do
-      @contact.has_email_address?("test@example.org").should eq false
-    end
-  end
-
   describe "#urls" do
     it "should return an array" do
       @contact.urls.should be_a(Array)
