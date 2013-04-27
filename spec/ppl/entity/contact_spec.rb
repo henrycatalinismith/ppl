@@ -87,5 +87,22 @@ describe Ppl::Entity::Contact do
 
   end
 
+  describe "#preferred_phone_number" do
+
+    before(:each) do
+      @contact.phone_numbers << Ppl::Entity::PhoneNumber.new
+    end
+
+    it "returns nil if there's no preferred number" do
+      @contact.preferred_phone_number.should eq nil
+    end
+
+    it "returns the preferred phone number" do
+      @contact.phone_numbers[0].preferred = true
+      @contact.preferred_phone_number.should be_a(Ppl::Entity::PhoneNumber)
+    end
+
+  end
+
 end
 
