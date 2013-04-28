@@ -18,7 +18,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency("rugged", "0.17.0.b6")
   spec.add_dependency("greencard", "0.0.5")
 
-  spec.add_development_dependency("coveralls")
   spec.add_development_dependency("cucumber")
   spec.add_development_dependency("rspec")
   spec.add_development_dependency("rake")
