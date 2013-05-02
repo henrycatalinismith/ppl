@@ -114,6 +114,7 @@ require "ppl/format/table"
 
 require "ppl/service/email_address"
 require "ppl/service/phone_number"
+require "ppl/service/postal_address"
 
 class String
   alias_method :each, :each_line
