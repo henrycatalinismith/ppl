@@ -24,6 +24,12 @@ describe Ppl::Entity::Contact do
     end
   end
 
+  describe "#postal_addresses" do
+    it "should return an array" do
+      @contact.postal_addresses.should be_a(Array)
+    end
+  end
+
   describe "#birthday" do
     it "should return a value" do
       @contact.birthday.should eq nil
