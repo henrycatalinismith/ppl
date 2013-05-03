@@ -3,13 +3,25 @@ class Ppl::Service::PostalAddress
 
   def add(contact, options)
     address = Ppl::Entity::PostalAddress.new
-    address.country = options[:country]
-    address.locality = options[:locality]
-    address.po_box = options[:po_box]
-    address.postal_code = options[:postal_code]
-    address.region = options[:region]
-    address.street = options[:street]
+    update_postal_address(address, options)
     contact.postal_addresses << address
+  end
+
+  private
+
+  def update_postal_address(address, options)
+    [
+      :country,
+      :locality,
+      :po_box,
+      :postal_code,
+      :region,
+      :street,
+    ].each do |property|
+      unless options[property].nil?
+        address.send("#{property.to_s}=", options[property])
+      end
+    end
   end
 
 end
