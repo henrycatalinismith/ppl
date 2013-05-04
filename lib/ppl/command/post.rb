@@ -4,6 +4,7 @@ class Ppl::Command::Post < Ppl::Application::Command
   name        "post"
   description "List, show or change postal addresses"
 
+  attr_writer :address_service
   attr_writer :show_format
   attr_writer :list_format
 

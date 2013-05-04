@@ -7,10 +7,12 @@ describe Ppl::Command::Post do
     @contact = Ppl::Entity::Contact.new
     @command = Ppl::Command::Post.new
     @storage = double(Ppl::Adapter::Storage)
+    @service = double(Ppl::Service::PostalAddress)
 
     @list_format = double(Ppl::Format::Contact)
     @show_format = double(Ppl::Format::Contact)
 
+    @command.address_service = @service
     @command.storage     = @storage
     @command.show_format = @show_format
     @command.list_format = @list_format
