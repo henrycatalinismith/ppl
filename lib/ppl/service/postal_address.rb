@@ -7,6 +7,10 @@ class Ppl::Service::PostalAddress
     contact.postal_addresses << address
   end
 
+  def update(contact, address, options)
+    update_postal_address(address, options)
+  end
+
   private
 
   def update_postal_address(address, options)
