@@ -8,7 +8,7 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
   def initialize
     @email_address_format = Ppl::Format::Contact::EmailAddresses.new
     @phone_number_format = Ppl::Format::Contact::PhoneNumber.new
-    @postal_address_format = Ppl::Format::PostalAddress::OneLine.new
+    @postal_address_format = Ppl::Format::Contact::PostalAddresses.new
   end
 
   def process(contact)
@@ -93,7 +93,7 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
     unless contact.postal_addresses.empty?
       @lines << ""
       @lines << "Postal Addresses"
-      @lines << @postal_address_format.process(contact.postal_addresses)
+      @lines << @postal_address_format.process(contact)
     end
   end
 
