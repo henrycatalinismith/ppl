@@ -1,6 +1,7 @@
 
 class Ppl::Entity::PostalAddress
 
+  attr_accessor :id
   attr_accessor :country
   attr_accessor :locality
   attr_accessor :street
