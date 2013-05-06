@@ -64,7 +64,7 @@ describe Ppl::Format::Contact::Full do
     end
 
     it "should show their postal address if available" do
-      @contact.postal_address = @address
+      @contact.postal_addresses << @address
       @postal_address_format.should_receive(:process).and_return("")
       @format.process(@contact)
     end

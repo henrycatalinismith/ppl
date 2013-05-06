@@ -90,11 +90,10 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
   end
 
   def format_postal_addresses(contact)
-    if !contact.postal_address.nil?
-      push_list(
-        "Postal Address",
-        @postal_address_format.process(contact.postal_address)
-      )
+    unless contact.postal_addresses.empty?
+      @lines << ""
+      @lines << "Postal Addresses"
+      @lines << @postal_address_format.process(contact.postal_addresses)
     end
   end
 
