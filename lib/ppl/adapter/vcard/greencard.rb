@@ -20,7 +20,7 @@ class Ppl::Adapter::Vcard::GreenCard
       encode_phone_numbers(contact, maker)
       encode_nicknames(contact, maker)
       encode_organizations(contact, maker)
-      encode_postal_address(contact, maker)
+      encode_postal_addresses(contact, maker)
       encode_urls(contact, maker)
     end
     vcard.to_s
@@ -79,15 +79,19 @@ class Ppl::Adapter::Vcard::GreenCard
     end
   end
 
-  def encode_postal_address(contact, vcard_maker)
-    if !contact.postal_address.nil?
-      vcard_maker.add_addr do |address|
-        @@postal_address_property_map.each_pair do |vpim_name, ppl_name|
-          value = contact.postal_address.send(ppl_name)
-          if !value.nil?
-            address.send("#{vpim_name.to_s}=", value)
-          end
-        end
+  def encode_postal_addresses(contact, vcard_maker)
+    contact.postal_addresses.each do |postal_address|
+      vcard_maker.add_addr do |vcard_address|
+        encode_postal_address(postal_address, vcard_address)
+      end
+    end
+  end
+
+  def encode_postal_address(ppl_address, vcard_address)
+    @@postal_address_property_map.each_pair do |vpim_name, ppl_name|
+      value = ppl_address.send(ppl_name)
+      if !value.nil?
+        vcard_address.send("#{vpim_name.to_s}=", value)
       end
     end
   end

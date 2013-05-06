@@ -51,40 +51,43 @@ describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
     @adapter.encode(@contact).should include("ORG:Example Ltd")
   end
 
-  it "should encode the contact's street address" do
-    @contact.postal_address = Ppl::Entity::PostalAddress.new
-    @contact.postal_address.street = "1 Testing Road"
-    @adapter.encode(@contact).should include("ADR:;;1 Testing Road;;;;")
-  end
+  describe "postal address encoding" do
 
-  it "should encode the contact's postal code" do
-    @contact.postal_address = Ppl::Entity::PostalAddress.new
-    @contact.postal_address.postal_code = "L7 8AA"
-    @adapter.encode(@contact).should include("ADR:;;;;;L7 8AA;")
-  end
+    before(:each) do
+      @address = Ppl::Entity::PostalAddress.new
+      @contact.postal_addresses << @address
+    end
 
-  it "should encode the contact's po box" do
-    @contact.postal_address = Ppl::Entity::PostalAddress.new
-    @contact.postal_address.po_box = "123456"
-    @adapter.encode(@contact).should include("ADR:123456;;;;;;")
-  end
+    it "should encode the contact's street address" do
+      @contact.postal_addresses[0].street = "1 Testing Road"
+      @adapter.encode(@contact).should include("ADR:;;1 Testing Road;;;;")
+    end
 
-  it "should encode the contact's locality" do
-    @contact.postal_address = Ppl::Entity::PostalAddress.new
-    @contact.postal_address.locality = "Liverpool"
-    @adapter.encode(@contact).should include("ADR:;;;Liverpool;;;")
-  end
+    it "should encode the contact's postal code" do
+      @contact.postal_addresses[0].postal_code = "L7 8AA"
+      @adapter.encode(@contact).should include("ADR:;;;;;L7 8AA;")
+    end
 
-  it "should encode the contact's country" do
-    @contact.postal_address = Ppl::Entity::PostalAddress.new
-    @contact.postal_address.country = "UK"
-    @adapter.encode(@contact).should include("ADR:;;;;;;UK")
-  end
+    it "should encode the contact's po box" do
+      @contact.postal_addresses[0].po_box = "123456"
+      @adapter.encode(@contact).should include("ADR:123456;;;;;;")
+    end
 
-  it "should encode the contact's region" do
-    @contact.postal_address = Ppl::Entity::PostalAddress.new
-    @contact.postal_address.region = "South West"
-    @adapter.encode(@contact).should include("ADR:;;;;South West;;")
+    it "should encode the contact's locality" do
+      @contact.postal_addresses[0].locality = "Liverpool"
+      @adapter.encode(@contact).should include("ADR:;;;Liverpool;;;")
+    end
+
+    it "should encode the contact's country" do
+      @contact.postal_addresses[0].country = "UK"
+      @adapter.encode(@contact).should include("ADR:;;;;;;UK")
+    end
+
+    it "should encode the contact's region" do
+      @contact.postal_addresses[0].region = "South West"
+      @adapter.encode(@contact).should include("ADR:;;;;South West;;")
+    end
+
   end
 
   it "should encode the contact's URL" do
