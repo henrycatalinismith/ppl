@@ -1,17 +1,24 @@
 
 class Ppl::Format::PostalAddress::OneLine < Ppl::Format::AddressBook
 
-  def process(postal_address)
-    pieces = []
+  def process(postal_address, table)
+    table.add_row({
+      :address_id   => postal_address.id,
+      :address_text => format_address_text(postal_address),
+    })
+  end
 
-    pieces.push(postal_address.street)      unless postal_address.street.nil?
-    pieces.push(postal_address.locality)    unless postal_address.locality.nil?
-    pieces.push(postal_address.region)      unless postal_address.region.nil?
-    pieces.push(postal_address.country)     unless postal_address.country.nil?
-    pieces.push(postal_address.postal_code) unless postal_address.postal_code.nil?
-    pieces.push(postal_address.po_box)      unless postal_address.po_box.nil?
+  private
 
-    pieces.join(", ")
+  def format_address_text(postal_address)
+    [
+      postal_address.street,
+      postal_address.locality,
+      postal_address.region,
+      postal_address.country,
+      postal_address.postal_code,
+      postal_address.po_box,
+    ].compact.join(", ")
   end
 
 end

@@ -3,39 +3,37 @@ describe Ppl::Format::PostalAddress::OneLine do
 
   before(:each) do
     @format  = Ppl::Format::PostalAddress::OneLine.new
+    @table   = double(Ppl::Format::Table)
     @address = Ppl::Entity::PostalAddress.new
   end
 
   describe "#process" do
 
-    it "should include the country if available" do
-      @address.country = "UK"
-      @format.process(@address).should include "UK"
+    before(:each) do
+      @address.id = "home"
+      @address.street = "123 Happy Lane"
+      @address.country = "United Kingdom"
     end
 
-    it "should include the locality if available" do
-      @address.locality = "Liverpool"
-      @format.process(@address).should include "Liverpool"
+    after(:each) do
+      @format.process(@address, @table)
     end
 
-    it "should include the street if available" do
-      @address.street = "1 Test Road"
-      @format.process(@address).should include "1 Test Road"
+    it "puts the ID in its own column" do
+      @table.should_receive(:add_row) { |r| r[:address_id].should eq "home" }
     end
 
-    it "should include the po box if available" do
-      @address.po_box = "123456"
-      @format.process(@address).should include "123456"
+    it "concatenates the rest of the address in its own column" do
+      @address.country = nil
+      @table.should_receive(:add_row) do |row|
+        row[:address_text].should eq "123 Happy Lane"
+      end
     end
 
-    it "should include the postal code if available" do
-      @address.postal_code = "L1 9AA"
-      @format.process(@address).should include "L1 9AA"
-    end
-
-    it "should include the region if available" do
-      @address.region = "Merseyside"
-      @format.process(@address).should include "Merseyside"
+    it "separates address elements with commas" do
+      @table.should_receive(:add_row) do |row|
+        row[:address_text].should eq "123 Happy Lane, United Kingdom"
+      end
     end
 
   end
