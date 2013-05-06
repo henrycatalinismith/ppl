@@ -3,6 +3,7 @@ class Ppl::Format::PostalAddress::OneLine < Ppl::Format::AddressBook
 
   def process(postal_address, table)
     table.add_row({
+      :star         => " ",
       :address_id   => postal_address.id,
       :address_text => format_address_text(postal_address),
     })
