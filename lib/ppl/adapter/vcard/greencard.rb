@@ -1,5 +1,6 @@
 
 require "greencard/vcard"
+require "digest/sha1"
 
 class Ppl::Adapter::Vcard::GreenCard
 
@@ -139,12 +140,29 @@ class Ppl::Adapter::Vcard::GreenCard
 
   def decode_postal_address(vcard_address)
     postal_address = Ppl::Entity::PostalAddress.new
+    postal_address.id = determine_postal_address_id(vcard_address)
     @@postal_address_property_map.each_pair do |vpim_name, ppl_name|
       value  = vcard_address.send(vpim_name)
       method = "#{ppl_name.to_s}="
       postal_address.send(method, value)
     end
     postal_address
+  end
+
+  def determine_postal_address_id(vcard_address)
+    id = (vcard_address.location | vcard_address.nonstandard).join
+    if id == ""
+      id = Digest::SHA1.hexdigest([
+        vcard_address.country,
+        vcard_address.delivery,
+        vcard_address.locality,
+        vcard_address.pobox,
+        vcard_address.postalcode,
+        vcard_address.region,
+        vcard_address.street,
+      ].join)[0..6]
+    end
+    id
   end
 
   def decode_phone_numbers(vcard, contact)
