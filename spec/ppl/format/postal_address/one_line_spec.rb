@@ -36,6 +36,13 @@ describe Ppl::Format::PostalAddress::OneLine do
       end
     end
 
+    it "prunes elements that are empty" do
+      @address.country = ""
+      @table.should_receive(:add_row) do |row|
+        row[:address_text].should eq "123 Happy Lane"
+      end
+    end
+
   end
 
 end
