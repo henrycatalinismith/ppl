@@ -19,6 +19,10 @@ describe Ppl::Format::PostalAddress::OneLine do
       @format.process(@address, @table)
     end
 
+    it "inserts a blank 'star' column" do
+      @table.should_receive(:add_row) { |r| r[:star].should eq " " }
+    end
+
     it "puts the ID in its own column" do
       @table.should_receive(:add_row) { |r| r[:address_id].should eq "home" }
     end
