@@ -389,8 +389,8 @@ describe Ppl::Application::Bootstrap do
   end
 
   describe "#format_contact_postal_addresses" do
-    it "should return a Ppl::Format::Contact::PostalAddress" do
-      @bootstrap.format_contact_postal_addresses.should be_a(Ppl::Format::Contact::PostalAddress)
+    it "should return a Ppl::Format::Contact::PostalAddresses" do
+      @bootstrap.format_contact_postal_addresses.should be_a(Ppl::Format::Contact::PostalAddresses)
     end
   end
 

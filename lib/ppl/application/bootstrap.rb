@@ -318,7 +318,7 @@ class Ppl::Application::Bootstrap
   end
 
   register :format_contact_postal_addresses do
-    Ppl::Format::Contact::PostalAddress.new
+    Ppl::Format::Contact::PostalAddresses.new
   end
 
   register :format_contact_urls do
