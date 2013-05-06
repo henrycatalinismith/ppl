@@ -32,7 +32,7 @@ class Ppl::Adapter::Vcard::GreenCard
     decode_birthday(vcard, contact)
     decode_email_addresses(vcard, contact)
     decode_phone_numbers(vcard, contact)
-    decode_postal_address(vcard, contact)
+    decode_postal_addresses(vcard, contact)
     decode_nicknames(vcard, contact)
     decode_organizations(vcard, contact)
     decode_name(vcard, contact)
@@ -130,15 +130,21 @@ class Ppl::Adapter::Vcard::GreenCard
     end
   end
 
-  def decode_postal_address(vcard, contact)
-    if !vcard.address.nil?
-      contact.postal_address             = Ppl::Entity::PostalAddress.new
-      @@postal_address_property_map.each_pair do |vpim_name, ppl_name|
-        value  = vcard.address.send(vpim_name)
-        method = "#{ppl_name.to_s}="
-        contact.postal_address.send(method, value)
-      end
+  def decode_postal_addresses(vcard, contact)
+    vcard.addresses.each do |vcard_address|
+      postal_address = decode_postal_address(vcard_address)
+      contact.postal_addresses << postal_address
     end
+  end
+
+  def decode_postal_address(vcard_address)
+    postal_address = Ppl::Entity::PostalAddress.new
+    @@postal_address_property_map.each_pair do |vpim_name, ppl_name|
+      value  = vcard_address.send(vpim_name)
+      method = "#{ppl_name.to_s}="
+      postal_address.send(method, value)
+    end
+    postal_address
   end
 
   def decode_phone_numbers(vcard, contact)
