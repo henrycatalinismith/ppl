@@ -114,8 +114,8 @@ class Ppl::Application::Bootstrap
   register :command_post do
     post = Ppl::Command::Post.new
     post.storage = storage_adapter
-    post.list_format = format_address_book_postal_addresses
-    post.show_format = format_contact_postal_addresses
+    post.address_book_format = format_address_book_postal_addresses
+    post.contact_format = format_contact_postal_addresses
     post
   end
 

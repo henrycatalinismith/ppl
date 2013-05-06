@@ -5,8 +5,8 @@ class Ppl::Command::Post < Ppl::Application::Command
   description "List, show or change postal addresses"
 
   attr_writer :address_service
-  attr_writer :show_format
-  attr_writer :list_format
+  attr_writer :contact_format
+  attr_writer :address_book_format
 
   def options(parser, options)
     parser.banner = "usage: ppl post <contact> [address]"
@@ -52,13 +52,13 @@ class Ppl::Command::Post < Ppl::Application::Command
 
   def list_postal_addresses(input, output)
     address_book = @storage.load_address_book
-    address_list = @list_format.process(address_book)
+    address_list = @address_book_format.process(address_book)
     output.line(address_list)
   end
 
   def show_postal_address(input, output)
     contact = @storage.require_contact(input.arguments[0])
-    address = @show_format.process(contact)
+    address = @contact_format.process(contact)
     if address != ""
       output.line(address)
       true

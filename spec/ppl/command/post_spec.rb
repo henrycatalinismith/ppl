@@ -9,13 +9,13 @@ describe Ppl::Command::Post do
     @storage = double(Ppl::Adapter::Storage)
     @service = double(Ppl::Service::PostalAddress)
 
-    @list_format = double(Ppl::Format::Contact)
-    @show_format = double(Ppl::Format::Contact)
+    @address_book_format = double(Ppl::Format::Contact)
+    @contact_format = double(Ppl::Format::Contact)
 
     @command.address_service = @service
     @command.storage     = @storage
-    @command.show_format = @show_format
-    @command.list_format = @list_format
+    @command.contact_format = @contact_format
+    @command.address_book_format = @address_book_format
     @contact.id = "jim"
   end
 
@@ -29,7 +29,7 @@ describe Ppl::Command::Post do
 
     it "should list all postal addresses if no contact ID is given" do
       @storage.should_receive(:load_address_book).and_return(@address_book)
-      @list_format.should_receive(:process).and_return("all the postal addresses")
+      @address_book_format.should_receive(:process).and_return("all the postal addresses")
       @output.should_receive(:line).with("all the postal addresses")
       @input.arguments = []
       @command.execute(@input, @output)
@@ -37,7 +37,7 @@ describe Ppl::Command::Post do
 
     it "should show the current address if no new address is given" do
       @storage.should_receive(:require_contact).and_return(@contact)
-      @show_format.should_receive(:process).and_return("1 Test Road")
+      @contact_format.should_receive(:process).and_return("1 Test Road")
       @output.should_receive(:line).with("1 Test Road")
       @input.arguments = ["jim"]
       @command.execute(@input, @output).should eq true
@@ -45,7 +45,7 @@ describe Ppl::Command::Post do
 
     it "should not output anything if there's nothing to show" do
       @storage.should_receive(:require_contact).and_return(@contact)
-      @show_format.should_receive(:process).and_return("")
+      @contact_format.should_receive(:process).and_return("")
       @input.arguments = ["jim"]
       @command.execute(@input, @output).should eq false
     end
