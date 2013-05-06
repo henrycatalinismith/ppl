@@ -241,7 +241,7 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
-    contact.postal_address.street.should eq "1 Testing Road"
+    contact.postal_addresses[0].street.should eq "1 Testing Road"
   end
 
   it "should decode the contact's postal code" do
@@ -253,7 +253,7 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
-    contact.postal_address.postal_code.should eq "L7 8AA"
+    contact.postal_addresses[0].postal_code.should eq "L7 8AA"
   end
 
   it "should decode the contact's po box" do
@@ -265,7 +265,7 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
-    contact.postal_address.po_box.should eq "123456"
+    contact.postal_addresses[0].po_box.should eq "123456"
   end
 
   it "should decode the contact's locality" do
@@ -277,7 +277,7 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
-    contact.postal_address.locality.should eq "Liverpool"
+    contact.postal_addresses[0].locality.should eq "Liverpool"
   end
 
   it "should decode the contact's region" do
@@ -289,7 +289,7 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
-    contact.postal_address.region.should eq "South West"
+    contact.postal_addresses[0].region.should eq "South West"
   end
 
   it "should decode the contact's country" do
@@ -301,7 +301,7 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
-    contact.postal_address.country.should eq "UK"
+    contact.postal_addresses[0].country.should eq "UK"
   end
 
   it "should decode the contact's URL" do
