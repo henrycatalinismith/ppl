@@ -18,7 +18,7 @@ class Ppl::Format::PostalAddress::OneLine < Ppl::Format::AddressBook
       postal_address.country,
       postal_address.postal_code,
       postal_address.po_box,
-    ].compact.join(", ")
+    ].compact.reject(&:empty?).join(", ")
   end
 
 end
