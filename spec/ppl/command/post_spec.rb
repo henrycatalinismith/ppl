@@ -9,14 +9,20 @@ describe Ppl::Command::Post do
     @storage = double(Ppl::Adapter::Storage)
     @service = double(Ppl::Service::PostalAddress)
 
-    @address_book_format = double(Ppl::Format::Contact)
+    @address_book_format = double(Ppl::Format::AddressBook)
     @contact_format = double(Ppl::Format::Contact)
+    @postal_address_format = double(Ppl::Format::PostalAddress)
 
     @command.address_service = @service
     @command.storage     = @storage
     @command.contact_format = @contact_format
     @command.address_book_format = @address_book_format
+    @command.postal_address_format = @postal_address_format
     @contact.id = "jim"
+
+    @address = Ppl::Entity::PostalAddress.new
+    @address.id = "home"
+    @contact.postal_addresses << @address
   end
 
   describe "#name" do
@@ -27,28 +33,51 @@ describe Ppl::Command::Post do
 
   describe "#execute" do
 
-    it "should list all postal addresses if no contact ID is given" do
-      @storage.should_receive(:load_address_book).and_return(@address_book)
-      @address_book_format.should_receive(:process).and_return("all the postal addresses")
-      @output.should_receive(:line).with("all the postal addresses")
-      @input.arguments = []
-      @command.execute(@input, @output)
+    context "show address book" do
+
+      before { @input.arguments = [] }
+
+      it "displays postal address information for the whole address book" do
+        @storage.should_receive(:load_address_book).and_return(@address_book)
+        @address_book_format.should_receive(:process).and_return("all the postal addresses")
+        @output.should_receive(:line).with("all the postal addresses")
+        @input.arguments = []
+        @command.execute(@input, @output)
+      end
     end
 
-    it "should show the current address if no new address is given" do
-      @storage.should_receive(:require_contact).and_return(@contact)
-      @contact_format.should_receive(:process).and_return("1 Test Road")
-      @output.should_receive(:line).with("1 Test Road")
-      @input.arguments = ["jim"]
-      @command.execute(@input, @output).should eq true
+    context "show contact" do
+
+      before { @input.arguments = ["jim"] }
+
+      it "shows all of a contact's postal addresses" do
+        @storage.should_receive(:require_contact).and_return(@contact)
+        @contact_format.should_receive(:process).and_return("1 Test Road")
+        @output.should_receive(:line).with("1 Test Road")
+        @command.execute(@input, @output).should eq true
+      end
+
+      it "outputs nothing if the contact has no addresses" do
+        @storage.should_receive(:require_contact).and_return(@contact)
+        @contact_format.should_receive(:process).and_return("")
+        @command.execute(@input, @output).should eq false
+      end
+
     end
 
-    it "should not output anything if there's nothing to show" do
-      @storage.should_receive(:require_contact).and_return(@contact)
-      @contact_format.should_receive(:process).and_return("")
-      @input.arguments = ["jim"]
-      @command.execute(@input, @output).should eq false
+    context "show postal address" do
+
+      before { @input.arguments = ["jim", "home"] }
+
+      it "shows a single postal address" do
+        @storage.should_receive(:require_contact).and_return(@contact)
+        @postal_address_format.should_receive(:process).with(@address).and_return("1 Test Road")
+        @output.should_receive(:line).with("1 Test Road")
+        @command.execute(@input, @output).should eq true
+      end
+
     end
+
 
   end
 
