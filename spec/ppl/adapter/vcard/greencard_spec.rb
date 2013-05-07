@@ -58,6 +58,11 @@ describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
       @contact.postal_addresses << @address
     end
 
+    it "should encode the address id" do
+      @contact.postal_addresses[0].id = "home"
+      @adapter.encode(@contact).should include("ADR;TYPE=home:;;;;;;")
+    end
+
     it "should encode the contact's street address" do
       @contact.postal_addresses[0].street = "1 Testing Road"
       @adapter.encode(@contact).should include("ADR:;;1 Testing Road;;;;")
