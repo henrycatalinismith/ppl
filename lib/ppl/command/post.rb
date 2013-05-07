@@ -31,6 +31,10 @@ class Ppl::Command::Post < Ppl::Application::Command
       options[:country] = country
     end
 
+    parser.on("-d", "--delete") do
+      options[:delete] = true
+    end
+
   end
 
   def execute(input, output)
