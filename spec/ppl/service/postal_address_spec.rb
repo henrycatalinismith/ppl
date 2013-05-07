@@ -10,7 +10,7 @@ describe Ppl::Service::PostalAddress do
   describe "#add" do
 
     before(:each) do
-      @service.add(@contact, {
+      @service.add(@contact, "home", {
         :country     => "United Kingdom",
         :locality    => "Bristol",
         :street      => "1 Broad Mead",
@@ -49,8 +49,9 @@ describe Ppl::Service::PostalAddress do
   describe "#update" do
 
     before(:each) do
+      @address.id = "home"
       @contact.postal_addresses << @address
-      @service.update(@contact, @address, {
+      @service.update(@contact, "home", {
         :country     => "United Kingdom",
         :locality    => "Bristol",
         :street      => "1 Broad Mead",
