@@ -85,5 +85,17 @@ describe Ppl::Service::PostalAddress do
 
   end
 
+  describe "#remove" do
+    before(:each) do
+      @address.id = "home"
+      @contact.postal_addresses << @address
+      @service.remove(@contact, "home")
+    end
+
+    it "removes the specified address" do
+      @contact.postal_addresses.length.should eq 0
+    end
+  end
+
 end
 
