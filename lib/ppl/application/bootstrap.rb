@@ -116,6 +116,7 @@ class Ppl::Application::Bootstrap
     post.storage = storage_adapter
     post.address_book_format = format_address_book_postal_addresses
     post.contact_format = format_contact_postal_addresses
+    post.address_service = postal_address_service
     post
   end
 
@@ -375,6 +376,10 @@ class Ppl::Application::Bootstrap
     phone_service = Ppl::Service::PhoneNumber.new
     phone_service.storage = storage_adapter
     phone_service
+  end
+
+  register :postal_address_service do
+    Ppl::Service::PostalAddress.new
   end
 
 end

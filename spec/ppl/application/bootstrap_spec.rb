@@ -553,5 +553,11 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
+  describe "#postal_address_service" do
+    it "should return a Ppl::Service::PostalAddress" do
+      @bootstrap.postal_address_service.should be_a(Ppl::Service::PostalAddress)
+    end
+  end
+
 end
 
