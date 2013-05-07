@@ -7,8 +7,8 @@ class Ppl::Service::PostalAddress
     contact.postal_addresses << address
   end
 
-  def update(contact, address, options)
-    update_postal_address(address, options)
+  def update(contact, address_id, options)
+    update_postal_address(address_id, options)
   end
 
   def remove(contact, address_id)

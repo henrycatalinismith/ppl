@@ -42,22 +42,14 @@ class Ppl::Command::Post < Ppl::Application::Command
   private
 
   def determine_action(input)
-    if input.arguments[0].nil?
-      :show_address_book
-    elsif input.options.empty?
-      :show_contact
-    else
-      :show_postal_address
-    end
-  end
-
-  def determine_action(input)
     if input.arguments.length < 1
       :list_address_book_postal_addresses
     elsif input.arguments.length < 2
       :show_contact_postal_addresses
     elsif input.options[:delete]
       :delete_postal_address
+    elsif !input.options.empty?
+      :update_postal_address
     else
       :show_postal_address
     end
@@ -91,6 +83,13 @@ class Ppl::Command::Post < Ppl::Application::Command
   def delete_postal_address(input, output)
     contact = @storage.require_contact(input.arguments[0])
     @address_service.remove(contact, input.arguments[1])
+    @storage.save_contact(contact)
+    true
+  end
+
+  def update_postal_address(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    @address_service.update(contact, input.arguments[1], input.options)
     @storage.save_contact(contact)
     true
   end
