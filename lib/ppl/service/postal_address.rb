@@ -11,6 +11,9 @@ class Ppl::Service::PostalAddress
     update_postal_address(address, options)
   end
 
+  def remove(contact, address_id)
+  end
+
   private
 
   def update_postal_address(address, options)
