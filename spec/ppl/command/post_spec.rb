@@ -107,6 +107,20 @@ describe Ppl::Command::Post do
     end
 
 
+    context "add postal address" do
+
+      before { @input.arguments = ["jim", "newaddress"] }
+      before { @input.options = { :street => "123 Swim St" }}
+
+      it "adds the postal address" do
+        @storage.should_receive(:require_contact).and_return(@contact)
+        @service.should_receive(:add).with(@contact, "newaddress", {:street => "123 Swim St"})
+        @storage.should_receive(:save_contact)
+        @command.execute(@input, @output).should eq true
+      end
+
+    end
+
   end
 
 end

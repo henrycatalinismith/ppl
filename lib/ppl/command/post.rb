@@ -48,11 +48,18 @@ class Ppl::Command::Post < Ppl::Application::Command
       :show_contact_postal_addresses
     elsif input.options[:delete]
       :delete_postal_address
-    elsif !input.options.empty?
+    elsif input.options.empty?
+      :show_postal_address
+    elsif existing_address?(input)
       :update_postal_address
     else
-      :show_postal_address
+      :create_postal_address
     end
+  end
+
+  def existing_address?(input)
+    @contact = @storage.require_contact(input.arguments[0])
+    !@contact.postal_addresses.find { |p| p.id == input.arguments[1] }.nil?
   end
 
   def list_address_book_postal_addresses(input, output)
@@ -88,9 +95,14 @@ class Ppl::Command::Post < Ppl::Application::Command
   end
 
   def update_postal_address(input, output)
-    contact = @storage.require_contact(input.arguments[0])
-    @address_service.update(contact, input.arguments[1], input.options)
-    @storage.save_contact(contact)
+    @address_service.update(@contact, input.arguments[1], input.options)
+    @storage.save_contact(@contact)
+    true
+  end
+
+  def create_postal_address(input, output)
+    @address_service.add(@contact, input.arguments[1], input.options)
+    @storage.save_contact(@contact)
     true
   end
 
