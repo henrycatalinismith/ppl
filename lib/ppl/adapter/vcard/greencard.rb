@@ -89,6 +89,7 @@ class Ppl::Adapter::Vcard::GreenCard
   end
 
   def encode_postal_address(ppl_address, vcard_address)
+    vcard_address.location = ppl_address.id
     @@postal_address_property_map.each_pair do |vpim_name, ppl_name|
       value = ppl_address.send(ppl_name)
       if !value.nil?
