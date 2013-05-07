@@ -3,7 +3,7 @@ describe Ppl::Format::AddressBook::PostalAddresses do
   describe "#initialize" do
     it "should pass the colors through to the table" do
       colors = {"id" => "blue"}
-      Ppl::Format::Table.should_receive(:new).with([:id, :postal_address], colors)
+      Ppl::Format::Table.should_receive(:new).with([:id, :address_ids], colors)
       format = Ppl::Format::AddressBook::PostalAddresses.new(colors)
     end
   end
@@ -18,8 +18,9 @@ describe Ppl::Format::AddressBook::PostalAddresses do
     @address      = Ppl::Entity::PostalAddress.new
     @table        = double(Ppl::Format::Table)
 
+    @address.id = "home"
     @contact.id = "test"
-    @contact.postal_address = @address
+    @contact.postal_addresses << @address
     @format.table = @table
 
     @address_book.contacts.push(@contact)
@@ -27,19 +28,10 @@ describe Ppl::Format::AddressBook::PostalAddresses do
 
   describe "#process" do
 
-    it "should at least show the contact's id" do
+    it "shows the contact's and address' IDs" do
       @table.should_receive(:add_row).with({
-        :id             => "test:",
-        :postal_address => "",
-      })
-      @format.process(@address_book)
-    end
-
-    it "should show the postal address if it's available" do
-      @address.street = "1 Test Road"
-      @table.should_receive(:add_row).with({
-        :id             => "test:",
-        :postal_address => "1 Test Road",
+        :id          => "test:",
+        :address_ids => "home",
       })
       @format.process(@address_book)
     end
