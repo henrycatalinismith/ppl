@@ -78,6 +78,20 @@ describe Ppl::Command::Post do
 
     end
 
+    context "delete postal address" do
+
+      before { @input.arguments = ["jim", "home"] }
+      before { @input.options = { :delete => true }}
+
+      it "deletes the postal address" do
+        @storage.should_receive(:require_contact).and_return(@contact)
+        @service.should_receive(:remove).with(@contact, "home")
+        @storage.should_receive(:save_contact)
+        @command.execute(@input, @output).should eq true
+      end
+
+    end
+
 
   end
 

@@ -56,6 +56,8 @@ class Ppl::Command::Post < Ppl::Application::Command
       :list_address_book_postal_addresses
     elsif input.arguments.length < 2
       :show_contact_postal_addresses
+    elsif input.options[:delete]
+      :delete_postal_address
     else
       :show_postal_address
     end
@@ -83,6 +85,13 @@ class Ppl::Command::Post < Ppl::Application::Command
     address = contact.postal_addresses.find { |pa| pa.id = input.arguments[1] }
     display = @postal_address_format.process(address)
     output.line(display)
+    true
+  end
+
+  def delete_postal_address(input, output)
+    contact = @storage.require_contact(input.arguments[0])
+    @address_service.remove(contact, input.arguments[1])
+    @storage.save_contact(contact)
     true
   end
 
