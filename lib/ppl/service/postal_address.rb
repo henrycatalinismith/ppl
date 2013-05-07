@@ -14,6 +14,7 @@ class Ppl::Service::PostalAddress
   end
 
   def remove(contact, address_id)
+    contact.postal_addresses.reject! { |pa| pa.id == address_id }
   end
 
   private
