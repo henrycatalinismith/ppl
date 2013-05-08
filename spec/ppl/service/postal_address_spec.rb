@@ -94,7 +94,7 @@ describe Ppl::Service::PostalAddress do
 
     it "allows addresses to be moved" do
       @service.should_receive(:move)
-      @service.update(@contact, "home", {:move => "work"})
+      @service.update(@contact, "home", {:new_id => "work"})
     end
 
   end
