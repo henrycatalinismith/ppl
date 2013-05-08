@@ -15,6 +15,8 @@ class Ppl::Application::Shell
       output.error("ppl: No completion function available for '#{$!}'")
     rescue Ppl::Error::ContactNotFound
       output.error("ppl: Contact '#{$!}' not found")
+    rescue Ppl::Error::PostalAddressNotFound
+      output.error("ppl: Postal address '#{$!}' not found")
     rescue OptionParser::InvalidOption, OptionParser::MissingArgument, Ppl::Error::IncorrectUsage
       output.error($!)
       output.error(@optparse.to_s)

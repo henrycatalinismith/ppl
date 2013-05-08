@@ -99,6 +99,14 @@ describe Ppl::Application::Shell do
       @shell.run(@input, @output)
     end
 
+    it "should handle PostalAddressNotFound errors nicely" do
+      @command.stub(:options)
+      @command.should_receive(:execute) { raise Ppl::Error::PostalAddressNotFound, "example" }
+      @router.should_receive(:route).and_return(@command)
+      @output.should_receive(:error).with("ppl: Postal address 'example' not found")
+      @shell.run(@input, @output)
+    end
+
   end
 
 end
