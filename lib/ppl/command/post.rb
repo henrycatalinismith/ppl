@@ -38,6 +38,13 @@ class Ppl::Command::Post < Ppl::Application::Command
       options[:new_id] = new_id
     end
 
+    parser.on("-p", "--preferred", "mark address as preferred") do
+      options[:preferred] = true
+    end
+    parser.on("-P", "--not-preferred", "mark address as not preferred") do
+      options[:preferred] = false
+    end
+
   end
 
   def execute(input, output)
