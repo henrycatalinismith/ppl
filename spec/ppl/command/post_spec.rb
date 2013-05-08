@@ -76,6 +76,12 @@ describe Ppl::Command::Post do
         @command.execute(@input, @output).should eq true
       end
 
+      it "raises an error if there's no such address" do
+        @input.arguments[1] = "other"
+        @storage.should_receive(:require_contact).and_return(@contact)
+        expect{@command.execute(@input, @output).should eq true}.to raise_error(Ppl::Error::PostalAddressNotFound)
+      end
+
     end
 
     context "delete postal address" do

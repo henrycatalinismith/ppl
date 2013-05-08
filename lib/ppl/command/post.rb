@@ -85,7 +85,10 @@ class Ppl::Command::Post < Ppl::Application::Command
 
   def show_postal_address(input, output)
     contact = @storage.require_contact(input.arguments[0])
-    address = contact.postal_addresses.find { |pa| pa.id = input.arguments[1] }
+    address = contact.postal_addresses.find { |pa| pa.id == input.arguments[1] }
+    if address.nil?
+      raise Ppl::Error::PostalAddressNotFound, input.arguments[1]
+    end
     display = @postal_address_format.process(address)
     output.line(display)
     true
