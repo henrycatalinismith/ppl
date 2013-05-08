@@ -11,6 +11,7 @@ class Ppl::Adapter::Vcard::GreenCard
     :country    => :country,
     :region     => :region,
     :locality   => :locality,
+    :preferred  => :preferred,
   }
 
   def encode(contact)

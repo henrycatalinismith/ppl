@@ -63,6 +63,11 @@ describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
       @adapter.encode(@contact).should include("ADR;TYPE=home:;;;;;;")
     end
 
+    it "should encode the preferred status of the address" do
+      @contact.postal_addresses[0].preferred = true
+      @adapter.encode(@contact).should include("ADR;TYPE=pref:;;;;;;")
+    end
+
     it "should encode the contact's street address" do
       @contact.postal_addresses[0].street = "1 Testing Road"
       @adapter.encode(@contact).should include("ADR:;;1 Testing Road;;;;")
