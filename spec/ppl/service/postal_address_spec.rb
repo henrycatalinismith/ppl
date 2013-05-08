@@ -84,6 +84,21 @@ describe Ppl::Service::PostalAddress do
     end
   end
 
+
+  describe "#update" do
+
+    before(:each) do
+      @address.id = "home"
+      @contact.postal_addresses << @address
+    end
+
+    it "allows addresses to be moved" do
+      @service.should_receive(:move)
+      @service.update(@contact, "home", {:move => "work"})
+    end
+
+  end
+
   describe "#move" do
     before(:each) do
       @address.id = "home"
