@@ -11,8 +11,8 @@ class Ppl::Service::PostalAddress
   def update(contact, address_id, options)
     address = contact.postal_addresses.find { |p| p.id == address_id }
     update_postal_address(address, options)
-    if options[:move]
-      move(contact, address_id, options[:move])
+    if options[:new_id]
+      move(contact, address_id, options[:new_id])
     end
   end
 
