@@ -14,10 +14,19 @@ class Ppl::Service::PostalAddress
   end
 
   def remove(contact, address_id)
+    require_address(contact, address_id)
     contact.postal_addresses.reject! { |pa| pa.id == address_id }
   end
 
   private
+
+  def require_address(contact, address_id)
+    address = contact.postal_addresses.find { |p| p.id == address_id }
+    if address.nil?
+      raise Ppl::Error::PostalAddressNotFound, address_id
+    end
+    address
+  end
 
   def update_postal_address(address, options)
     [

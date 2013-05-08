@@ -95,6 +95,10 @@ describe Ppl::Service::PostalAddress do
     it "removes the specified address" do
       @contact.postal_addresses.length.should eq 0
     end
+
+    it "raises an error if there is no such address" do
+      expect{@service.remove(@contact, "home")}.to raise_error(Ppl::Error::PostalAddressNotFound)
+    end
   end
 
 end
