@@ -82,7 +82,23 @@ describe Ppl::Service::PostalAddress do
     it "sets the region of the new address" do
       @address.region.should eq "South West"
     end
+  end
 
+  describe "#move" do
+    before(:each) do
+      @address.id = "home"
+      @contact.postal_addresses << @address
+      other_address = Ppl::Entity::PostalAddress.new
+      other_address.id = "other"
+      @contact.postal_addresses << other_address
+    end
+    it "raises an error if the new ID is already in use" do
+      expect{@service.move(@contact, "home", "other")}.to raise_error
+    end
+    it "moves the address to the new ID" do
+      @service.move(@contact, "home", "available")
+      @address.id.should eq "available"
+    end
   end
 
   describe "#remove" do

@@ -18,6 +18,16 @@ class Ppl::Service::PostalAddress
     contact.postal_addresses.reject! { |pa| pa.id == address_id }
   end
 
+  def move(contact, address_id, new_address_id)
+    address = require_address(contact, address_id)
+    id_okay = contact.postal_addresses.select { |pa| pa.id == new_address_id }.empty?
+    if id_okay
+      address.id = new_address_id
+    else
+      raise "Address '#{new_address_id}' is already in use"
+    end
+  end
+
   private
 
   def require_address(contact, address_id)
