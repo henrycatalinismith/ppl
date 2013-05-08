@@ -97,6 +97,22 @@ describe Ppl::Service::PostalAddress do
       @service.update(@contact, "home", {:new_id => "work"})
     end
 
+    it "sets addresses as preferred" do
+      second_address = Ppl::Entity::PostalAddress.new
+      second_address.id = "other"
+      second_address.preferred = true
+      @contact.postal_addresses << second_address
+      @service.update(@contact, "home", {:preferred => true})
+      @address.preferred.should eq true
+      second_address.preferred.should eq false
+    end
+
+    it "sets addresses as not preferred" do
+      @address.preferred = true
+      @service.update(@contact, "home", {:preferred => false})
+      @address.preferred.should eq false
+    end
+
   end
 
   describe "#move" do
