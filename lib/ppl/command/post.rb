@@ -34,6 +34,9 @@ class Ppl::Command::Post < Ppl::Application::Command
     parser.on("-d", "--delete") do
       options[:delete] = true
     end
+    parser.on("-m", "--move <new-id>") do |new_id|
+      options[:new_id] = new_id
+    end
 
   end
 
