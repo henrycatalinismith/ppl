@@ -4,13 +4,13 @@ class Ppl::Service::PostalAddress
   def add(contact, address_id, options)
     address = Ppl::Entity::PostalAddress.new
     address.id = address_id
-    update_postal_address(address, options)
+    update_postal_address(contact, address, options)
     contact.postal_addresses << address
   end
 
   def update(contact, address_id, options)
     address = contact.postal_addresses.find { |p| p.id == address_id }
-    update_postal_address(address, options)
+    update_postal_address(contact, address, options)
     if options[:new_id]
       move(contact, address_id, options[:new_id])
     end
@@ -41,7 +41,7 @@ class Ppl::Service::PostalAddress
     address
   end
 
-  def update_postal_address(address, options)
+  def update_postal_address(contact, address, options)
     [
       :country,
       :locality,
@@ -53,6 +53,11 @@ class Ppl::Service::PostalAddress
       unless options[property].nil?
         address.send("#{property.to_s}=", options[property])
       end
+    end
+    if options[:preferred] == true
+      contact.postal_addresses.each { |pa| pa.preferred = (pa.id == address.id) }
+    elsif options[:preferred] == false
+      address.preferred = false
     end
   end
 
