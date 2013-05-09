@@ -1,5 +1,6 @@
 
 require "greencard/vcard"
+require "digest/sha1"
 
 class Ppl::Adapter::Vcard::GreenCard
 
@@ -10,6 +11,7 @@ class Ppl::Adapter::Vcard::GreenCard
     :country    => :country,
     :region     => :region,
     :locality   => :locality,
+    :preferred  => :preferred,
   }
 
   def encode(contact)
@@ -20,7 +22,7 @@ class Ppl::Adapter::Vcard::GreenCard
       encode_phone_numbers(contact, maker)
       encode_nicknames(contact, maker)
       encode_organizations(contact, maker)
-      encode_postal_address(contact, maker)
+      encode_postal_addresses(contact, maker)
       encode_urls(contact, maker)
     end
     vcard.to_s
@@ -32,7 +34,7 @@ class Ppl::Adapter::Vcard::GreenCard
     decode_birthday(vcard, contact)
     decode_email_addresses(vcard, contact)
     decode_phone_numbers(vcard, contact)
-    decode_postal_address(vcard, contact)
+    decode_postal_addresses(vcard, contact)
     decode_nicknames(vcard, contact)
     decode_organizations(vcard, contact)
     decode_name(vcard, contact)
@@ -79,15 +81,20 @@ class Ppl::Adapter::Vcard::GreenCard
     end
   end
 
-  def encode_postal_address(contact, vcard_maker)
-    if !contact.postal_address.nil?
-      vcard_maker.add_addr do |address|
-        @@postal_address_property_map.each_pair do |vpim_name, ppl_name|
-          value = contact.postal_address.send(ppl_name)
-          if !value.nil?
-            address.send("#{vpim_name.to_s}=", value)
-          end
-        end
+  def encode_postal_addresses(contact, vcard_maker)
+    contact.postal_addresses.each do |postal_address|
+      vcard_maker.add_addr do |vcard_address|
+        encode_postal_address(postal_address, vcard_address)
+      end
+    end
+  end
+
+  def encode_postal_address(ppl_address, vcard_address)
+    vcard_address.location = ppl_address.id
+    @@postal_address_property_map.each_pair do |vpim_name, ppl_name|
+      value = ppl_address.send(ppl_name)
+      if !value.nil?
+        vcard_address.send("#{vpim_name.to_s}=", value)
       end
     end
   end
@@ -126,15 +133,38 @@ class Ppl::Adapter::Vcard::GreenCard
     end
   end
 
-  def decode_postal_address(vcard, contact)
-    if !vcard.address.nil?
-      contact.postal_address             = Ppl::Entity::PostalAddress.new
-      @@postal_address_property_map.each_pair do |vpim_name, ppl_name|
-        value  = vcard.address.send(vpim_name)
-        method = "#{ppl_name.to_s}="
-        contact.postal_address.send(method, value)
-      end
+  def decode_postal_addresses(vcard, contact)
+    vcard.addresses.each do |vcard_address|
+      postal_address = decode_postal_address(vcard_address)
+      contact.postal_addresses << postal_address
     end
+  end
+
+  def decode_postal_address(vcard_address)
+    postal_address = Ppl::Entity::PostalAddress.new
+    postal_address.id = determine_postal_address_id(vcard_address)
+    @@postal_address_property_map.each_pair do |vpim_name, ppl_name|
+      value  = vcard_address.send(vpim_name)
+      method = "#{ppl_name.to_s}="
+      postal_address.send(method, value)
+    end
+    postal_address
+  end
+
+  def determine_postal_address_id(vcard_address)
+    id = (vcard_address.location | vcard_address.nonstandard).join
+    if id == ""
+      id = Digest::SHA1.hexdigest([
+        vcard_address.country,
+        vcard_address.delivery,
+        vcard_address.locality,
+        vcard_address.pobox,
+        vcard_address.postalcode,
+        vcard_address.region,
+        vcard_address.street,
+      ].join)[0..6]
+    end
+    id
   end
 
   def decode_phone_numbers(vcard, contact)

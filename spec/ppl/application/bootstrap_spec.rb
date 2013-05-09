@@ -389,8 +389,8 @@ describe Ppl::Application::Bootstrap do
   end
 
   describe "#format_contact_postal_addresses" do
-    it "should return a Ppl::Format::Contact::PostalAddress" do
-      @bootstrap.format_contact_postal_addresses.should be_a(Ppl::Format::Contact::PostalAddress)
+    it "should return a Ppl::Format::Contact::PostalAddresses" do
+      @bootstrap.format_contact_postal_addresses.should be_a(Ppl::Format::Contact::PostalAddresses)
     end
   end
 
@@ -404,6 +404,12 @@ describe Ppl::Application::Bootstrap do
       @bootstrap.stub(:configuration).and_return(@config)
       @config.should_receive(:command_colors).with("url").and_return(@colors)
       @bootstrap.format_contact_urls
+    end
+  end
+
+  describe "#format_postal_address_multi_line" do
+    it "should return a Ppl::Format::PostalAddress::MultiLine" do
+      @bootstrap.format_postal_address_multi_line.should be_a(Ppl::Format::PostalAddress::MultiLine)
     end
   end
 
@@ -550,6 +556,12 @@ describe Ppl::Application::Bootstrap do
   describe "#vcard_adapter" do
     it "should return a Ppl::Adapter::Vcard::GreenCard" do
       @bootstrap.vcard_adapter.should be_a(Ppl::Adapter::Vcard::GreenCard)
+    end
+  end
+
+  describe "#postal_address_service" do
+    it "should return a Ppl::Service::PostalAddress" do
+      @bootstrap.postal_address_service.should be_a(Ppl::Service::PostalAddress)
     end
   end
 

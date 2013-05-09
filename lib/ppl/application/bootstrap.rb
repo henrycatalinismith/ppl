@@ -114,8 +114,10 @@ class Ppl::Application::Bootstrap
   register :command_post do
     post = Ppl::Command::Post.new
     post.storage = storage_adapter
-    post.list_format = format_address_book_postal_addresses
-    post.show_format = format_contact_postal_addresses
+    post.address_book_format = format_address_book_postal_addresses
+    post.contact_format = format_contact_postal_addresses
+    post.postal_address_format = format_postal_address_multi_line
+    post.address_service = postal_address_service
     post
   end
 
@@ -318,12 +320,16 @@ class Ppl::Application::Bootstrap
   end
 
   register :format_contact_postal_addresses do
-    Ppl::Format::Contact::PostalAddress.new
+    Ppl::Format::Contact::PostalAddresses.new
   end
 
   register :format_contact_urls do
     colors = configuration.command_colors("url")
     Ppl::Format::Contact::Urls.new(colors)
+  end
+
+  register :format_postal_address_multi_line do
+    Ppl::Format::PostalAddress::MultiLine.new
   end
 
   register :input do
@@ -375,6 +381,10 @@ class Ppl::Application::Bootstrap
     phone_service = Ppl::Service::PhoneNumber.new
     phone_service.storage = storage_adapter
     phone_service
+  end
+
+  register :postal_address_service do
+    Ppl::Service::PostalAddress.new
   end
 
 end
