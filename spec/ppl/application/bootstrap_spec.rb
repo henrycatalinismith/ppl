@@ -407,6 +407,12 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
+  describe "#format_postal_address_multi_line" do
+    it "should return a Ppl::Format::PostalAddress::MultiLine" do
+      @bootstrap.format_postal_address_multi_line.should be_a(Ppl::Format::PostalAddress::MultiLine)
+    end
+  end
+
   describe "#command_suite" do
 
     before(:each) do

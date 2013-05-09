@@ -116,6 +116,7 @@ class Ppl::Application::Bootstrap
     post.storage = storage_adapter
     post.address_book_format = format_address_book_postal_addresses
     post.contact_format = format_contact_postal_addresses
+    post.postal_address_format = format_postal_address_multi_line
     post.address_service = postal_address_service
     post
   end
@@ -325,6 +326,10 @@ class Ppl::Application::Bootstrap
   register :format_contact_urls do
     colors = configuration.command_colors("url")
     Ppl::Format::Contact::Urls.new(colors)
+  end
+
+  register :format_postal_address_multi_line do
+    Ppl::Format::PostalAddress::MultiLine.new
   end
 
   register :input do
