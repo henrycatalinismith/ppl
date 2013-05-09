@@ -80,6 +80,7 @@ require "ppl/entity/postal_address"
 require "ppl/error/completion_not_found"
 require "ppl/error/contact_not_found"
 require "ppl/error/incorrect_usage"
+require "ppl/error/postal_address_not_found"
 
 require "ppl/format/address_book"
 require "ppl/format/address_book/ages"
@@ -103,17 +104,20 @@ require "ppl/format/contact/nicknames"
 require "ppl/format/contact/organization"
 require "ppl/format/contact/phone_number"
 require "ppl/format/contact/postal_address"
+require "ppl/format/contact/postal_addresses"
 require "ppl/format/contact/urls"
 require "ppl/format/custom"
 require "ppl/format/custom/contact"
 require "ppl/format/custom/email_address"
 require "ppl/format/custom/phone_number"
 require "ppl/format/postal_address"
+require "ppl/format/postal_address/multi_line"
 require "ppl/format/postal_address/one_line"
 require "ppl/format/table"
 
 require "ppl/service/email_address"
 require "ppl/service/phone_number"
+require "ppl/service/postal_address"
 
 class String
   alias_method :each, :each_line

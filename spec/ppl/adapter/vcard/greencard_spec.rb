@@ -51,40 +51,53 @@ describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
     @adapter.encode(@contact).should include("ORG:Example Ltd")
   end
 
-  it "should encode the contact's street address" do
-    @contact.postal_address = Ppl::Entity::PostalAddress.new
-    @contact.postal_address.street = "1 Testing Road"
-    @adapter.encode(@contact).should include("ADR:;;1 Testing Road;;;;")
-  end
+  describe "postal address encoding" do
 
-  it "should encode the contact's postal code" do
-    @contact.postal_address = Ppl::Entity::PostalAddress.new
-    @contact.postal_address.postal_code = "L7 8AA"
-    @adapter.encode(@contact).should include("ADR:;;;;;L7 8AA;")
-  end
+    before(:each) do
+      @address = Ppl::Entity::PostalAddress.new
+      @contact.postal_addresses << @address
+    end
 
-  it "should encode the contact's po box" do
-    @contact.postal_address = Ppl::Entity::PostalAddress.new
-    @contact.postal_address.po_box = "123456"
-    @adapter.encode(@contact).should include("ADR:123456;;;;;;")
-  end
+    it "should encode the address id" do
+      @contact.postal_addresses[0].id = "home"
+      @adapter.encode(@contact).should include("ADR;TYPE=home:;;;;;;")
+    end
 
-  it "should encode the contact's locality" do
-    @contact.postal_address = Ppl::Entity::PostalAddress.new
-    @contact.postal_address.locality = "Liverpool"
-    @adapter.encode(@contact).should include("ADR:;;;Liverpool;;;")
-  end
+    it "should encode the preferred status of the address" do
+      @contact.postal_addresses[0].preferred = true
+      @adapter.encode(@contact).should include("ADR;TYPE=pref:;;;;;;")
+    end
 
-  it "should encode the contact's country" do
-    @contact.postal_address = Ppl::Entity::PostalAddress.new
-    @contact.postal_address.country = "UK"
-    @adapter.encode(@contact).should include("ADR:;;;;;;UK")
-  end
+    it "should encode the contact's street address" do
+      @contact.postal_addresses[0].street = "1 Testing Road"
+      @adapter.encode(@contact).should include("ADR:;;1 Testing Road;;;;")
+    end
 
-  it "should encode the contact's region" do
-    @contact.postal_address = Ppl::Entity::PostalAddress.new
-    @contact.postal_address.region = "South West"
-    @adapter.encode(@contact).should include("ADR:;;;;South West;;")
+    it "should encode the contact's postal code" do
+      @contact.postal_addresses[0].postal_code = "L7 8AA"
+      @adapter.encode(@contact).should include("ADR:;;;;;L7 8AA;")
+    end
+
+    it "should encode the contact's po box" do
+      @contact.postal_addresses[0].po_box = "123456"
+      @adapter.encode(@contact).should include("ADR:123456;;;;;;")
+    end
+
+    it "should encode the contact's locality" do
+      @contact.postal_addresses[0].locality = "Liverpool"
+      @adapter.encode(@contact).should include("ADR:;;;Liverpool;;;")
+    end
+
+    it "should encode the contact's country" do
+      @contact.postal_addresses[0].country = "UK"
+      @adapter.encode(@contact).should include("ADR:;;;;;;UK")
+    end
+
+    it "should encode the contact's region" do
+      @contact.postal_addresses[0].region = "South West"
+      @adapter.encode(@contact).should include("ADR:;;;;South West;;")
+    end
+
   end
 
   it "should encode the contact's URL" do
@@ -229,76 +242,116 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
     contact.organizations.first.should eq "Example Ltd"
   end
 
-  it "should decode the contact's street address" do
-    vcard = [
-      "BEGIN:VCARD",
-      "N:,test",
-      "VERSION:3.0",
-      "ADR:;;1 Testing Road;;;;",
-      "END:VCARD",
-    ].join("\n")
-    contact = @adapter.decode(vcard)
-    contact.postal_address.street.should eq "1 Testing Road"
-  end
+  describe "postal address decoding" do
 
-  it "should decode the contact's postal code" do
-    vcard = [
-      "BEGIN:VCARD",
-      "N:,test",
-      "VERSION:3.0",
-      "ADR:;;;;;L7 8AA;",
-      "END:VCARD",
-    ].join("\n")
-    contact = @adapter.decode(vcard)
-    contact.postal_address.postal_code.should eq "L7 8AA"
-  end
+    it "should decode the postal address' ID" do
+      vcard = [
+        "BEGIN:VCARD",
+        "N:,test",
+        "VERSION:3.0",
+        "ADR;TYPE=home:;;1 Testing Road;;;;",
+        "END:VCARD",
+      ].join("\n")
+      contact = @adapter.decode(vcard)
+      contact.postal_addresses[0].id.should eq "home"
+    end
 
-  it "should decode the contact's po box" do
-    vcard = [
-      "BEGIN:VCARD",
-      "N:,test",
-      "VERSION:3.0",
-      "ADR:123456;;;;;;",
-      "END:VCARD",
-    ].join("\n")
-    contact = @adapter.decode(vcard)
-    contact.postal_address.po_box.should eq "123456"
-  end
+    it "should decode the postal address' ID even if it's a nonstandard type" do
+      vcard = [
+        "BEGIN:VCARD",
+        "N:,test",
+        "VERSION:3.0",
+        "ADR;TYPE=nasa:;;1 Testing Road;;;;",
+        "END:VCARD",
+      ].join("\n")
+      contact = @adapter.decode(vcard)
+      contact.postal_addresses[0].id.should eq "nasa"
+    end
 
-  it "should decode the contact's locality" do
-    vcard = [
-      "BEGIN:VCARD",
-      "N:,test",
-      "VERSION:3.0",
-      "ADR:;;;Liverpool;;;",
-      "END:VCARD",
-    ].join("\n")
-    contact = @adapter.decode(vcard)
-    contact.postal_address.locality.should eq "Liverpool"
-  end
+    it "should assign the postal address a fallback ID if necessary" do
+      vcard = [
+        "BEGIN:VCARD",
+        "N:,test",
+        "VERSION:3.0",
+        "ADR:;;1 Testing Road;;;;",
+        "END:VCARD",
+      ].join("\n")
+      contact = @adapter.decode(vcard)
+      contact.postal_addresses[0].id.should eq "910c67f"
+    end
 
-  it "should decode the contact's region" do
-    vcard = [
-      "BEGIN:VCARD",
-      "N:,test",
-      "VERSION:3.0",
-      "ADR:;;;;South West;;",
-      "END:VCARD",
-    ].join("\n")
-    contact = @adapter.decode(vcard)
-    contact.postal_address.region.should eq "South West"
-  end
+    it "should decode the contact's street address" do
+      vcard = [
+        "BEGIN:VCARD",
+        "N:,test",
+        "VERSION:3.0",
+        "ADR:;;1 Testing Road;;;;",
+        "END:VCARD",
+      ].join("\n")
+      contact = @adapter.decode(vcard)
+      contact.postal_addresses[0].street.should eq "1 Testing Road"
+    end
 
-  it "should decode the contact's country" do
-    vcard = [
-      "BEGIN:VCARD",
-      "N:,test",
-      "VERSION:3.0",
-      "ADR:;;;;;;UK",
-      "END:VCARD",
-    ].join("\n")
-    contact = @adapter.decode(vcard)
-    contact.postal_address.country.should eq "UK"
+    it "should decode the contact's postal code" do
+      vcard = [
+        "BEGIN:VCARD",
+        "N:,test",
+        "VERSION:3.0",
+        "ADR:;;;;;L7 8AA;",
+        "END:VCARD",
+      ].join("\n")
+      contact = @adapter.decode(vcard)
+      contact.postal_addresses[0].postal_code.should eq "L7 8AA"
+    end
+
+    it "should decode the contact's po box" do
+      vcard = [
+        "BEGIN:VCARD",
+        "N:,test",
+        "VERSION:3.0",
+        "ADR:123456;;;;;;",
+        "END:VCARD",
+      ].join("\n")
+      contact = @adapter.decode(vcard)
+      contact.postal_addresses[0].po_box.should eq "123456"
+    end
+
+    it "should decode the contact's locality" do
+      vcard = [
+        "BEGIN:VCARD",
+        "N:,test",
+        "VERSION:3.0",
+        "ADR:;;;Liverpool;;;",
+        "END:VCARD",
+      ].join("\n")
+      contact = @adapter.decode(vcard)
+      contact.postal_addresses[0].locality.should eq "Liverpool"
+    end
+
+    it "should decode the contact's region" do
+      vcard = [
+        "BEGIN:VCARD",
+        "N:,test",
+        "VERSION:3.0",
+        "ADR:;;;;South West;;",
+        "END:VCARD",
+      ].join("\n")
+      contact = @adapter.decode(vcard)
+      contact.postal_addresses[0].region.should eq "South West"
+    end
+
+    it "should decode the contact's country" do
+      vcard = [
+        "BEGIN:VCARD",
+        "N:,test",
+        "VERSION:3.0",
+        "ADR:;;;;;;UK",
+        "END:VCARD",
+      ].join("\n")
+      contact = @adapter.decode(vcard)
+      contact.postal_addresses[0].country.should eq "UK"
+    end
+
   end
 
   it "should decode the contact's URL" do
