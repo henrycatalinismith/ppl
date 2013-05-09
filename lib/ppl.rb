@@ -111,6 +111,7 @@ require "ppl/format/custom/contact"
 require "ppl/format/custom/email_address"
 require "ppl/format/custom/phone_number"
 require "ppl/format/postal_address"
+require "ppl/format/postal_address/multi_line"
 require "ppl/format/postal_address/one_line"
 require "ppl/format/table"
 
