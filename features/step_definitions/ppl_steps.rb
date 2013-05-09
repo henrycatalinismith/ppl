@@ -46,6 +46,11 @@ Then /^(bob) should have (\d+) phone numbers?$/ do |name, number|
   @phone_numbers.length.should eq number.to_i
 end
 
+Then /^(bob) should have (\d+) postal addresse?s?$/ do |name, number|
+  @postal_addresses = ppl("post #{name}").split("\n")
+  @postal_addresses.length.should eq number.to_i
+end
+
 Then /^(bob) should have (\d+) URLs?$/ do |name, number|
   @urls = ppl("url #{name}").split("\n")
   @urls.length.should eq number.to_i
@@ -84,6 +89,10 @@ Then(/^the (\d+).. phone number should be "([^"]+)"$/) do |nth, phone_number|
   @phone_numbers[nth.to_i - 1].should eq phone_number
 end
 
+Then(/^the (\d+).. postal address should be "([^"]+)"$/) do |nth, address|
+  @postal_addresses[nth.to_i - 1].should eq address
+end
+
 Then(/^the (\d+).. URL should be "([^"]+)"$/) do |nth, url|
   @urls[nth.to_i - 1].should eq url
 end
@@ -102,6 +111,14 @@ And /^"([^"]+)" should be the preferred phone number$/ do |phone_number|
   @phone_numbers.each do |line|
     if line.include? "*"
       line.should eq "*  #{phone_number}"
+    end
+  end
+end
+
+And /^"([^"]+)" should be the preferred postal address$/ do |postal_address|
+  @postal_addresses.each do |line|
+    if line.include? "*"
+      line.should include "*  #{postal_address}"
     end
   end
 end
