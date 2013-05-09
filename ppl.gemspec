@@ -2,13 +2,13 @@
 Gem::Specification.new do |spec|
 
   spec.name        = "ppl"
-  spec.version     = "1.25.0"
-  spec.date        = "2013-04-24"
+  spec.version     = "2.0.0"
+  spec.date        = "2013-05-09"
 
   spec.required_ruby_version = ">= 1.9.3"
 
-  spec.summary     = "CLI Address Book"
-  spec.description = "CLI Address Book"
+  spec.summary     = "The command line address book"
+  spec.description = "ppl is a command-line address book using vCard & git for storage and synchronisation"
   spec.license     = "GPL-2"
 
   spec.add_dependency("colored", "1.2")
