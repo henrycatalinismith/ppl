@@ -9,7 +9,7 @@ class Ppl::Format::PostalAddress::MultiLine < Ppl::Format::AddressBook
     lines << postal_address.country
     lines << postal_address.po_box
     lines << postal_address.postal_code
-    lines.compact.join "\n"
+    lines.compact.reject(&:empty?).join "\n"
   end
 
 end
