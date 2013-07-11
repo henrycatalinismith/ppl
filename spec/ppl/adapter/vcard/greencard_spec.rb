@@ -5,6 +5,7 @@ describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
   before(:each) do
     @adapter = Ppl::Adapter::Vcard::GreenCard.new
     @contact = Ppl::Entity::Contact.new
+    @contact.name = Ppl::Entity::Name.new
     @contact.id = "test"
   end
 
@@ -13,8 +14,8 @@ describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
     @adapter.encode(@contact).should include("BDAY:20000101")
   end
 
-  it "should encode the contact's name" do
-    @contact.name = "John Doe"
+  it "should encode the contact's full" do
+    @contact.name.full = "John Doe"
     @adapter.encode(@contact).should include("FN:John Doe")
   end
 
@@ -151,7 +152,7 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
     ].join("\n")
     contact = @adapter.decode(vcard)
 
-    contact.name.should eq "John Doe"
+    contact.name.full.should eq "John Doe"
   end
 
   it "should decode the contact's email address" do
@@ -387,7 +388,7 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
       "END:VCARD",
     ].join("\n")
     contact = @adapter.decode(vcard)
-    contact.name.should eq "Straße"
+    contact.name.full.should eq "Straße"
   end
 
 end

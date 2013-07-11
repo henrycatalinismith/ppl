@@ -53,8 +53,8 @@ class Ppl::Adapter::Vcard::GreenCard
 
   def encode_name(contact, vcard_maker)
     vcard_maker.add_name do |name|
-      name.given    = contact.id   unless contact.id.nil?
-      name.fullname = contact.name unless contact.name.nil?
+      name.given    = contact.id        unless contact.id.nil?
+      name.fullname = contact.name.full unless contact.name.full.nil?
     end
   end
 
@@ -112,8 +112,9 @@ class Ppl::Adapter::Vcard::GreenCard
   end
 
   def decode_name(vcard, contact)
+    contact.name = Ppl::Entity::Name.new
     if !vcard.name.nil?
-      contact.name = vcard.name.fullname
+      contact.name.full = vcard.name.fullname
     end
   end
 
