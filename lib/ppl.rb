@@ -117,6 +117,7 @@ require "ppl/format/postal_address/one_line"
 require "ppl/format/table"
 
 require "ppl/service/email_address"
+require "ppl/service/name"
 require "ppl/service/phone_number"
 require "ppl/service/postal_address"
 
