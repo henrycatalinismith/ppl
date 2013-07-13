@@ -14,7 +14,7 @@ describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
     @adapter.encode(@contact).should include("BDAY:20000101")
   end
 
-  it "should encode the contact's full" do
+  it "should encode the contact's full name" do
     @contact.name.full = "John Doe"
     @adapter.encode(@contact).should include("FN:John Doe")
   end
