@@ -24,6 +24,26 @@ describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
     @adapter.encode(@contact).should include("N:;John;;;")
   end
 
+  it "should encode the contact's family name" do
+    @contact.name.family = "Smith"
+    @adapter.encode(@contact).should include("N:Smith;;;;")
+  end
+
+  it "should encode the contact's middle name" do
+    @contact.name.middle = "Quentin"
+    @adapter.encode(@contact).should include("N:;;Quentin;;")
+  end
+
+  it "should encode the contact's name prefix" do
+    @contact.name.prefix = "Mr."
+    @adapter.encode(@contact).should include("N:;;;Mr.;")
+  end
+
+  it "should encode the contact's name suffix" do
+    @contact.name.suffix = "BSc"
+    @adapter.encode(@contact).should include("N:;;;;BSc")
+  end
+
   it "should encode the contact's email address" do
     @contact.email_addresses << Ppl::Entity::EmailAddress.new("john@example.org")
     @adapter.encode(@contact).should include("EMAIL:john@example.org")
