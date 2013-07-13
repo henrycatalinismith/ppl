@@ -1,6 +1,8 @@
 
 class Ppl::Command::Add < Ppl::Application::Command
 
+  attr_writer :name_service
+
   name        "add"
   description "Add a new contact"
 
@@ -22,7 +24,7 @@ class Ppl::Command::Add < Ppl::Application::Command
 
     contact = Ppl::Entity::Contact.new
     contact.id = contact_id.dup
-    contact.name = contact_name.dup
+    contact.name = @name_service.parse contact_name
 
     @storage.save_contact(contact)
     return true
