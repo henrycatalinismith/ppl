@@ -11,8 +11,8 @@ class Ppl::Command::Add < Ppl::Application::Command
   end
 
   def execute(input, output)
-    contact_id   = input.arguments.shift
-    contact_name = input.arguments.shift
+    contact_id   = input.arguments.shift.dup
+    contact_name = input.arguments.shift.dup
 
     if contact_id.nil?
       raise Ppl::Error::IncorrectUsage, "No contact specified"
@@ -23,7 +23,7 @@ class Ppl::Command::Add < Ppl::Application::Command
     end
 
     contact = Ppl::Entity::Contact.new
-    contact.id = contact_id.dup
+    contact.id = contact_id
     contact.name = @name_service.parse contact_name
 
     @storage.save_contact(contact)
