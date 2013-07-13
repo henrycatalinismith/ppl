@@ -6,6 +6,7 @@ class Ppl::Command::Name < Ppl::Application::Command
 
   attr_writer :show_format
   attr_writer :list_format
+  attr_writer :name_service
 
   def options(parser, options)
     parser.banner = "usage: ppl name <contact> [<name>]"
