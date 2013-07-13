@@ -9,6 +9,21 @@ class Ppl::Command::Name < Ppl::Application::Command
 
   def options(parser, options)
     parser.banner = "usage: ppl name <contact> [<name>]"
+    parser.on("-f", "--family <family-name(s)>") do |family|
+      options[:family] = family
+    end
+    parser.on("-g", "--given <given-name(s)>") do |given|
+      options[:given] = given
+    end
+    parser.on("-m", "--middle <middle-name(s)>") do |middle|
+      options[:middle] = middle
+    end
+    parser.on("-p", "--prefix <prefix>") do |prefix|
+      options[:prefix] = prefix
+    end
+    parser.on("-s", "--suffix <suffix>") do |suffix|
+      options[:suffix] = suffix
+    end
   end
 
   def execute(input, output)
