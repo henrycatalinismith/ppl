@@ -23,18 +23,21 @@ describe Ppl::Format::Contact::Full do
     end
 
     it "should start with the contact's name" do
-      @contact.name = "John Doe"
+      @contact.name = Ppl::Entity::Name.new
+      @contact.name.full = "John Doe"
       @format.process(@contact).should eq "John Doe"
     end
 
     it "should include their email address in brackets" do
-      @contact.name = "John Doe"
+      @contact.name = Ppl::Entity::Name.new
+      @contact.name.full = "John Doe"
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("john@example.org")
       @format.process(@contact).should include "John Doe <john@example.org>"
     end
 
     it "should include their preferred email address in brackets" do
-      @contact.name = "John Doe"
+      @contact.name = Ppl::Entity::Name.new
+      @contact.name.full = "John Doe"
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("john@example.org")
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("fred@testtest.es")
       @contact.email_addresses[1].preferred = true
