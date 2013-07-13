@@ -63,7 +63,11 @@ class Ppl::Command::Name < Ppl::Application::Command
 
   def set_name(input, output)
     contact = @storage.require_contact(input.arguments[0])
-    contact.name = input.arguments[1].dup
+    options = input.options.dup
+    if !input.arguments[1].nil?
+      options[:full] = input.arguments[1].dup
+    end
+    @name_service.update(contact.name, options)
     @storage.save_contact(contact)
   end
 
