@@ -336,16 +336,16 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
-  describe "#format_contact_name" do
+  describe "#format_name_full_only" do
     it "should return a Ppl::Format::Contact::Name" do
-      @bootstrap.format_contact_name.should be_a(Ppl::Format::Contact::Name)
+      @bootstrap.format_name_full_only.should be_a(Ppl::Format::Name::FullOnly)
     end
     it "should set up colored output if configured to do so" do
       @colors = {}
       @config = double(Ppl::Application::Configuration)
       @bootstrap.stub(:configuration).and_return(@config)
       @config.should_receive(:command_colors).with("name").and_return(@colors)
-      @bootstrap.format_contact_name
+      @bootstrap.format_name_full_only
     end
   end
 
