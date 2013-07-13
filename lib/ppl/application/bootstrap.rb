@@ -8,6 +8,7 @@ class Ppl::Application::Bootstrap
   register :command_add do
     add = Ppl::Command::Add.new
     add.storage = storage_adapter
+    add.name_service = name_service
     add
   end
 
@@ -375,6 +376,11 @@ class Ppl::Application::Bootstrap
     email_service = Ppl::Service::EmailAddress.new
     email_service.storage = storage_adapter
     email_service
+  end
+
+  register :name_service do
+    name_service = Ppl::Service::Name.new
+    name_service
   end
 
   register :phone_service do
