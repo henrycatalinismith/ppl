@@ -84,6 +84,7 @@ class Ppl::Application::Bootstrap
     name.storage = storage_adapter
     name.list_format = format_address_book_names
     name.show_format = format_contact_name
+    name.name_service = name_service
     name
   end
 
