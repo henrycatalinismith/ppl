@@ -25,6 +25,7 @@ describe Ppl::Adapter::EmailScraper::Mail do
         "This is a test email.",
         "Bye!",
       ].join("\n")
+      @storage.should_receive(:load_contact).and_return(nil)
       contacts = @adapter.scrape_contacts(email)
       contacts.first.name.should eq "Test User"
     end
@@ -41,6 +42,7 @@ describe Ppl::Adapter::EmailScraper::Mail do
         "This is a test email.",
         "Bye!",
       ].join("\n")
+      @storage.should_receive(:load_contact).and_return(nil)
       contacts = @adapter.scrape_contacts(email)
       contacts.first.email_addresses.first.should eq "test@example.org"
     end
@@ -57,6 +59,7 @@ describe Ppl::Adapter::EmailScraper::Mail do
         "This is a test email.",
         "Bye!",
       ].join("\n")
+      @storage.should_receive(:load_contact).and_return(nil)
       contacts = @adapter.scrape_contacts(email)
       contacts.first.id.should eq "test_user"
     end
@@ -75,6 +78,24 @@ describe Ppl::Adapter::EmailScraper::Mail do
       ].join("\n")
       contacts = @adapter.scrape_contacts(email)
       contacts.first.id.should eq "test@example.org"
+    end
+
+    it "avoids overwriting an existing contact ID" do
+      email = [
+        "Date: Fri, 30 Nov 2012 17:09:33 +0000",
+        "From: Test User <test@example.org>",
+        "Message-ID: <qwertyuioasdfghjk@mail.example.org>",
+        "Subject: Test Email",
+        "To: henry@henrysmith.org",
+        "",
+        "Hey,",
+        "This is a test email.",
+        "Bye!",
+      ].join("\n")
+      @storage.should_receive(:load_contact).with("test_user").and_return(Ppl::Entity::Contact.new)
+      @storage.should_receive(:load_contact).with("test_user_1").and_return(nil)
+      contacts = @adapter.scrape_contacts(email)
+      contacts.first.id.should eq "test_user_1"
     end
 
   end
