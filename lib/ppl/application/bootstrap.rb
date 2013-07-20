@@ -370,7 +370,9 @@ class Ppl::Application::Bootstrap
   end
 
   register :email_scraper do
-    Ppl::Adapter::EmailScraper::Mail.new
+    email_scraper = Ppl::Adapter::EmailScraper::Mail.new
+    email_scraper.storage_adapter = storage_adapter
+    email_scraper
   end
 
   register :email_service do
