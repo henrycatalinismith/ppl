@@ -1,7 +1,7 @@
 
 module Ppl
 
-  Version = "2.0.0"
+  Version = "2.1.0"
 
   module Adapter
   end
@@ -74,6 +74,7 @@ require "ppl/command/scrape"
 require "ppl/entity/address_book"
 require "ppl/entity/contact"
 require "ppl/entity/email_address"
+require "ppl/entity/name"
 require "ppl/entity/phone_number"
 require "ppl/entity/postal_address"
 
@@ -99,7 +100,6 @@ require "ppl/format/contact/age"
 require "ppl/format/contact/birthday"
 require "ppl/format/contact/email_addresses"
 require "ppl/format/contact/full"
-require "ppl/format/contact/name"
 require "ppl/format/contact/nicknames"
 require "ppl/format/contact/organization"
 require "ppl/format/contact/phone_number"
@@ -110,12 +110,15 @@ require "ppl/format/custom"
 require "ppl/format/custom/contact"
 require "ppl/format/custom/email_address"
 require "ppl/format/custom/phone_number"
+require "ppl/format/name"
+require "ppl/format/name/full_only"
 require "ppl/format/postal_address"
 require "ppl/format/postal_address/multi_line"
 require "ppl/format/postal_address/one_line"
 require "ppl/format/table"
 
 require "ppl/service/email_address"
+require "ppl/service/name"
 require "ppl/service/phone_number"
 require "ppl/service/postal_address"
 

@@ -39,7 +39,7 @@ class Ppl::Format::Contact::Full < Ppl::Format::Contact
   def first_line(contact)
     line = ""
     if !contact.name.nil?
-      line += contact.name
+      line += contact.name.full
     end
     email_address = choose_first_line_address(contact)
     unless email_address.nil?

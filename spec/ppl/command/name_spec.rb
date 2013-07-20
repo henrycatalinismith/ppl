@@ -9,15 +9,18 @@ describe Ppl::Command::Name do
 
     @address_book = Ppl::Entity::AddressBook.new
 
-    @storage     = double(Ppl::Adapter::Storage)
-    @show_format = double(Ppl::Format::Contact)
-    @list_format = double(Ppl::Format::Contact)
+    @storage      = double(Ppl::Adapter::Storage)
+    @show_format  = double(Ppl::Format::Contact)
+    @list_format  = double(Ppl::Format::Contact)
+    @name_service = double(Ppl::Service::Name)
 
-    @command.storage     = @storage
-    @command.show_format = @show_format
-    @command.list_format = @list_format
+    @command.storage      = @storage
+    @command.show_format  = @show_format
+    @command.list_format  = @list_format
+    @command.name_service = @name_service
 
     @contact.id = "jim"
+    @contact.name = Ppl::Entity::Name.new
   end
 
   describe "#name" do
@@ -53,10 +56,22 @@ describe Ppl::Command::Name do
 
     it "should change the contact's name if a name is given" do
       @storage.should_receive(:require_contact).and_return(@contact)
-      @storage.should_receive(:save_contact) do |contact|
-        contact.name.should eq "Jim Jamieson"
-      end
+      @name_service.should_receive(:update).with(@contact.name, {
+        :full => "Jim Jamieson"
+      })
+      @storage.should_receive(:save_contact)
       @input.arguments = ["jim", "Jim Jamieson"]
+      @command.execute(@input, @output)
+    end
+
+    it "should change the contact's name if a name is given" do
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @name_service.should_receive(:update).with(@contact.name, {
+        :family => "Smith"
+      })
+      @storage.should_receive(:save_contact)
+      @input.arguments = ["jim"]
+      @input.options = { :family => "Smith" }
       @command.execute(@input, @output)
     end
 
