@@ -53,9 +53,9 @@ class Ppl::Command::Mutt < Ppl::Application::Command
 
   def match_by_name(contact, query)
     if @options[:ignore_case]
-      contact.name.downcase.include? query.downcase
+      contact.name.full.downcase.include? query.downcase
     else
-      contact.name.include? query
+      contact.name.full.include? query
     end
   end
 

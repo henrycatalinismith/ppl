@@ -8,6 +8,7 @@ class Ppl::Application::Bootstrap
   register :command_add do
     add = Ppl::Command::Add.new
     add.storage = storage_adapter
+    add.name_service = name_service
     add
   end
 
@@ -82,7 +83,8 @@ class Ppl::Application::Bootstrap
     name = Ppl::Command::Name.new
     name.storage = storage_adapter
     name.list_format = format_address_book_names
-    name.show_format = format_contact_name
+    name.show_format = format_name_full_only
+    name.name_service = name_service
     name
   end
 
@@ -299,9 +301,9 @@ class Ppl::Application::Bootstrap
     Ppl::Format::Contact::EmailAddresses.new(colors)
   end
 
-  register :format_contact_name do
+  register :format_name_full_only do
     colors = configuration.command_colors("name")
-    Ppl::Format::Contact::Name.new(colors)
+    Ppl::Format::Name::FullOnly.new(colors)
   end
 
   register :format_contact_nicknames do
@@ -375,6 +377,11 @@ class Ppl::Application::Bootstrap
     email_service = Ppl::Service::EmailAddress.new
     email_service.storage = storage_adapter
     email_service
+  end
+
+  register :name_service do
+    name_service = Ppl::Service::Name.new
+    name_service
   end
 
   register :phone_service do
