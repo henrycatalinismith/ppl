@@ -44,7 +44,7 @@ describe Ppl::Adapter::EmailScraper::Mail do
       ].join("\n")
       @storage.should_receive(:load_contact).and_return(nil)
       contacts = @adapter.scrape_contacts(email)
-      contacts.first.email_addresses.first.should eq "test@example.org"
+      contacts.first.email_addresses.first.address.should eq "test@example.org"
     end
 
     it "should generate an ID for the sender based on their name" do

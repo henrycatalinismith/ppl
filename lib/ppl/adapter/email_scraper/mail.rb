@@ -25,7 +25,7 @@ class Ppl::Adapter::EmailScraper::Mail
       sender = Ppl::Entity::Contact.new
       sender.name = Ppl::Entity::Name.new
       sender.name.full = from.tree.addresses.first.display_name
-      sender.email_addresses << from.tree.addresses.first.address
+      sender.email_addresses << Ppl::Entity::EmailAddress.new(from.tree.addresses.first.address)
       sender.id = generate_contact_id(sender)
       sender
     end
@@ -35,7 +35,7 @@ class Ppl::Adapter::EmailScraper::Mail
     if !contact.name.full.nil?
       generate_contact_id_from_name(contact.name)
     elsif !contact.email_addresses.empty?
-      contact.email_addresses.first
+      contact.email_addresses.first.address
     end
   end
 
