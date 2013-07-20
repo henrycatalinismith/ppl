@@ -1,5 +1,5 @@
 
-class Ppl::Format::Contact::Name < Ppl::Format::Contact
+class Ppl::Format::Name::FullOnly < Ppl::Format::Name
 
   attr_writer :color_adapter
   attr_writer :colors
@@ -9,10 +9,10 @@ class Ppl::Format::Contact::Name < Ppl::Format::Contact
     @color_adapter = Ppl::Adapter::Color::Colored.new
   end
 
-  def process(contact)
+  def process(name)
     output = ""
-    if !contact.name.nil?
-      output += contact.name
+    if !name.full.nil?
+      output += name.full
     end
     colorize_output(output)
   end

@@ -5,8 +5,10 @@ describe Ppl::Command::Add do
     @command = Ppl::Command::Add.new
     @input   = Ppl::Application::Input.new
     @storage = double(Ppl::Adapter::Storage)
+    @name_service = double(Ppl::Service::Name)
 
     @command.storage = @storage
+    @command.name_service = @name_service
   end
 
   describe "#name" do
@@ -29,8 +31,12 @@ describe Ppl::Command::Add do
     it "should save a new contact" do
       @storage.should_receive(:save_contact) do |contact|
         contact.id.should eq "john"
-        contact.name.should eq "John Doe"
+        contact.name.should be_a(Ppl::Entity::Name)
       end
+      @name_service
+        .should_receive(:parse)
+        .with("John Doe")
+        .and_return(Ppl::Entity::Name.new)
       @input.arguments = ["john", "John Doe"]
       @command.execute(@input, nil)
     end

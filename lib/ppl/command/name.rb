@@ -6,9 +6,25 @@ class Ppl::Command::Name < Ppl::Application::Command
 
   attr_writer :show_format
   attr_writer :list_format
+  attr_writer :name_service
 
   def options(parser, options)
     parser.banner = "usage: ppl name <contact> [<name>]"
+    parser.on("-f", "--family <family-name(s)>") do |family|
+      options[:family] = family
+    end
+    parser.on("-g", "--given <given-name(s)>") do |given|
+      options[:given] = given
+    end
+    parser.on("-m", "--middle <middle-name(s)>") do |middle|
+      options[:middle] = middle
+    end
+    parser.on("-p", "--prefix <prefix>") do |prefix|
+      options[:prefix] = prefix
+    end
+    parser.on("-s", "--suffix <suffix>") do |suffix|
+      options[:suffix] = suffix
+    end
   end
 
   def execute(input, output)
@@ -21,7 +37,7 @@ class Ppl::Command::Name < Ppl::Application::Command
   def determine_action(input)
     if input.arguments[0].nil?
       :list_names
-    elsif input.arguments[1].nil?
+    elsif input.arguments[1].nil? && input.options.empty?
       :show_name
     else
       :set_name
@@ -36,7 +52,7 @@ class Ppl::Command::Name < Ppl::Application::Command
 
   def show_name(input, output)
     contact = @storage.require_contact(input.arguments[0])
-    name    = @show_format.process(contact)
+    name    = @show_format.process(contact.name)
     if name != ""
       output.line(name)
       true
@@ -47,7 +63,11 @@ class Ppl::Command::Name < Ppl::Application::Command
 
   def set_name(input, output)
     contact = @storage.require_contact(input.arguments[0])
-    contact.name = input.arguments[1].dup
+    options = input.options.dup
+    if !input.arguments[1].nil?
+      options[:full] = input.arguments[1].dup
+    end
+    @name_service.update(contact.name, options)
     @storage.save_contact(contact)
   end
 
