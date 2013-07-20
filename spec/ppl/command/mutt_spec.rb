@@ -10,6 +10,7 @@ describe Ppl::Command::Mutt do
 
     @address_book = Ppl::Entity::AddressBook.new
     @contact      = Ppl::Entity::Contact.new
+    @contact.name = Ppl::Entity::Name.new
 
     @command.storage = @storage
     @command.format = @format
@@ -36,7 +37,7 @@ describe Ppl::Command::Mutt do
 
     it "should return email address matches" do
 
-      @contact.name = "Test User"
+      @contact.name.full = "Test User"
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("test@example.org")
       @address_book.contacts.push(@contact)
 
@@ -53,7 +54,7 @@ describe Ppl::Command::Mutt do
 
     it "should only return matching email addresses" do
       @input.arguments.push "prova"
-      @contact.name = "Test User"
+      @contact.name.full = "Test User"
 
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("test@test.org")
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("prova@prova.org")
@@ -69,7 +70,7 @@ describe Ppl::Command::Mutt do
 
     it "should return name matches" do
 
-      @contact.name = "Test User"
+      @contact.name.full = "Test User"
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("test@example.org")
       @address_book.contacts.push(@contact)
 
@@ -88,7 +89,7 @@ describe Ppl::Command::Mutt do
     it "should count up email addresses in the status line" do
       @input.arguments.push "org"
 
-      @contact.name = "Test User"
+      @contact.name.full = "Test User"
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("test@test.org")
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("prova@prova.org")
       @address_book.contacts << @contact
@@ -108,7 +109,7 @@ describe Ppl::Command::Mutt do
 
     before(:each) do
       @input.options[:ignore_case] = true
-      @contact.name = "Joe Schmoe"
+      @contact.name.full = "Joe Schmoe"
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("joe@somewhere.com")
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("LOUD@SHOUTING.COM")
       @address_book.contacts << @contact
