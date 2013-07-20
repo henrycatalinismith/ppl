@@ -3,6 +3,8 @@ describe Ppl::Adapter::EmailScraper::Mail do
 
   before(:each) do
     @adapter = Ppl::Adapter::EmailScraper::Mail.new
+    @storage = double(Ppl::Adapter::Storage)
+    @adapter.storage_adapter = @storage
   end
 
   describe "#scrape_contacts" do

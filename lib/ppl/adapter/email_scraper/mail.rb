@@ -3,6 +3,8 @@ require "mail"
 
 class Ppl::Adapter::EmailScraper::Mail
 
+  attr_writer :storage_adapter
+
   def scrape_contacts(email)
     email = Mail.new(email)
     contacts = []
