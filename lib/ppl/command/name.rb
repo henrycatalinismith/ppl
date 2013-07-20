@@ -37,7 +37,7 @@ class Ppl::Command::Name < Ppl::Application::Command
   def determine_action(input)
     if input.arguments[0].nil?
       :list_names
-    elsif input.arguments[1].nil?
+    elsif input.arguments[1].nil? && input.options.empty?
       :show_name
     else
       :set_name
