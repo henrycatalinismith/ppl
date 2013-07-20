@@ -64,6 +64,17 @@ describe Ppl::Command::Name do
       @command.execute(@input, @output)
     end
 
+    it "should change the contact's name if a name is given" do
+      @storage.should_receive(:require_contact).and_return(@contact)
+      @name_service.should_receive(:update).with(@contact.name, {
+        :family => "Smith"
+      })
+      @storage.should_receive(:save_contact)
+      @input.arguments = ["jim"]
+      @input.options = { :family => "Smith" }
+      @command.execute(@input, @output)
+    end
+
   end
 
 end
