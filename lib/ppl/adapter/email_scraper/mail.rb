@@ -23,7 +23,8 @@ class Ppl::Adapter::EmailScraper::Mail
     from = email[:from]
     unless from.nil?
       sender = Ppl::Entity::Contact.new
-      sender.name = from.tree.addresses.first.display_name
+      sender.name = Ppl::Entity::Name.new
+      sender.name.full = from.tree.addresses.first.display_name
       sender.email_addresses << from.tree.addresses.first.address
       sender.id = generate_contact_id(sender)
       sender
@@ -31,7 +32,7 @@ class Ppl::Adapter::EmailScraper::Mail
   end
 
   def generate_contact_id(contact)
-    if !contact.name.nil?
+    if !contact.name.full.nil?
       generate_contact_id_from_name(contact.name)
     elsif !contact.email_addresses.empty?
       contact.email_addresses.first
@@ -39,7 +40,7 @@ class Ppl::Adapter::EmailScraper::Mail
   end
 
   def generate_contact_id_from_name(name)
-    name = name.downcase.tr(" ", "_")
+    name = name.full.downcase.tr(" ", "_")
     base = name
     suffix = 0
     until @storage_adapter.load_contact(name).nil?
