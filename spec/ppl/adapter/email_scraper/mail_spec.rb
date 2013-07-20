@@ -27,7 +27,7 @@ describe Ppl::Adapter::EmailScraper::Mail do
       ].join("\n")
       @storage.should_receive(:load_contact).and_return(nil)
       contacts = @adapter.scrape_contacts(email)
-      contacts.first.name.should eq "Test User"
+      contacts.first.name.full.should eq "Test User"
     end
 
     it "should scrape the sender's email address" do
