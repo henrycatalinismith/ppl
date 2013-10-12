@@ -43,6 +43,12 @@ describe Ppl::Application::Bootstrap do
     end
   end
 
+  describe "#command_grep" do
+    it "should return a command" do
+      @bootstrap.command_grep.should be_a(Ppl::Application::Command)
+    end
+  end
+
   describe "#command_help" do
     it "should return a Ppl::Command::Help" do
       @bootstrap.command_help.should be_a(Ppl::Command::Help)
@@ -436,6 +442,9 @@ describe Ppl::Application::Bootstrap do
     end
     it "should contain the 'email' command" do
       @bootstrap.command_suite.find_command("email").should_not be nil
+    end
+    it "should contain the 'grep' command" do
+      @bootstrap.command_suite.find_command("grep").should_not be nil
     end
     it "should contain the 'init' command" do
       @bootstrap.command_suite.find_command("init").should_not be nil
