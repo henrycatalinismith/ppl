@@ -52,6 +52,12 @@ class Ppl::Application::Bootstrap
     help
   end
 
+  register :command_grep do
+    grep = Ppl::Command::External.new("grep", "git grep", "Execute 'git grep' in the address book directory")
+    grep.storage = storage_adapter
+    grep
+  end
+
   register :command_init do
     init = Ppl::Command::Init.new
     init.storage = storage_adapter
@@ -187,6 +193,7 @@ class Ppl::Application::Bootstrap
     suite.add_command command_bday
     suite.add_command command_completion
     suite.add_command command_email
+    suite.add_command command_grep
     suite.add_command command_help
     suite.add_command command_init
     suite.add_command command_ls

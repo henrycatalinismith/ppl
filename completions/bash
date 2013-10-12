@@ -189,6 +189,7 @@ __ppl_commands()
   echo "bday"
   echo "completion"
   echo "email"
+  echo "grep"
   echo "init"
   echo "ls"
   echo "mutt"
