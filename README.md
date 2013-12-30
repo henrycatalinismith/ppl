@@ -14,6 +14,7 @@ ppl if:
 
 [![Build Status](https://secure.travis-ci.org/h2s/ppl.png)](http://travis-ci.org/h2s/ppl)
 [![Code Climate](https://codeclimate.com/github/h2s/ppl.png)](https://codeclimate.com/github/h2s/ppl)
+[![Coverage Status](https://coveralls.io/repos/h2s/ppl/badge.png?branch=master)](https://coveralls.io/r/h2s/ppl?branch=master)
 
 Installation
 ------------
