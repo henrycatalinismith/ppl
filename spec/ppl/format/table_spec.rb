@@ -96,6 +96,16 @@ describe Ppl::Format::Table do
       @table.to_s.should include "123    Luis Ignacio Lula da Silva  lula@planalto.biz"
     end
 
+    it "copes with mixed encodings" do
+      @table.add_row({
+        :id    => "franz_viehböck".force_encoding("ASCII-8BIT"),
+        :name  => "Franz Viehböck",
+        :email => "fv@example.org",
+      })
+      expect{ @table.to_s }.not_to raise_error()
+      @table.to_s.should include "franz_viehböck  Franz Viehböck  fv@example.org"
+    end
+
   end
 
   describe "#disable_colors!" do
