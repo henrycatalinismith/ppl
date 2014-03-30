@@ -46,7 +46,9 @@ class Ppl::Format::Table
 
   def format_row(row)
     string = ""
-    @columns.each { |column| string += format_cell(row, column) }
+    @columns.each do |column|
+      string += format_cell(row, column).force_encoding("UTF-8")
+    end
     return string
   end
 
