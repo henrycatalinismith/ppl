@@ -81,6 +81,7 @@ require "ppl/entity/postal_address"
 require "ppl/error/completion_not_found"
 require "ppl/error/contact_not_found"
 require "ppl/error/incorrect_usage"
+require "ppl/error/invalid_vcard"
 require "ppl/error/postal_address_not_found"
 
 require "ppl/format/address_book"
