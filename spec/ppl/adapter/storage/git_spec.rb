@@ -93,6 +93,16 @@ describe Ppl::Adapter::Storage::Git do
       contact = @git.load_contact("test")
     end
 
+    it "handles encoding errors gracefully" do
+      head        = OpenStruct.new
+      head.target = "asdfg"
+
+      @repo.should_receive(:head).and_return(head)
+      @repo.should_receive(:file_at).and_return("vcard contents")
+      @vcard.should_receive(:decode).and_raise(GreenCard::InvalidEncodingError)
+      expect{ @git.load_contact("test") }.to raise_error(Ppl::Error::InvalidVcard)
+    end
+
   end
 
   describe "#save_contact" do
