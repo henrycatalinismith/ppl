@@ -1,4 +1,3 @@
-
 require "rugged"
 require "socket"
 
@@ -40,17 +39,11 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
   end
 
   def load_contact(id)
-    filename = id + ".vcf"
-    target   = @repository.head.target
-    vcard    = @repository.file_at(target, filename)
-    contact  = nil
-
-    if !vcard.nil?
-      contact    = @vcard_adapter.decode(vcard)
-      contact.id = id
+    begin
+      read_contact_from_disk id
+    rescue GreenCard::InvalidEncodingError
+      raise Ppl::Error::InvalidVcard, "#{id}.vcf contains invalid data"
     end
-
-    return contact
   end
 
   def save_contact(contact)
@@ -117,5 +110,20 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
     @disk.path
   end
 
-end
+  private
 
+  def read_contact_from_disk(id)
+    filename = id + ".vcf"
+    target   = @repository.head.target
+    vcard    = @repository.file_at(target, filename)
+    contact  = nil
+
+    if !vcard.nil?
+      contact    = @vcard_adapter.decode(vcard)
+      contact.id = id
+    end
+
+    return contact
+  end
+
+end
