@@ -1,3 +1,4 @@
+# encoding: UTF-8
 
 describe Ppl::Format::Table do
 
