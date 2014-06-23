@@ -84,5 +84,6 @@ is test-driven.
 License
 -------
 
-ppl is licensed under the GNU GENERAL PUBLIC LICENSE Version 2.
+ppl is released under the [MIT License].
 
+[MIT License]: http://www.opensource.org/licenses/MIT
