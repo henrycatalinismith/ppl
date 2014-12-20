@@ -9,5 +9,9 @@ class Ppl::Entity::EmailAddress
     @preferred = false
   end
 
+  def to_s()
+    return @address
+  end
+
 end
 
