@@ -12,6 +12,9 @@ class Ppl::Entity::Contact
   attr_accessor :postal_addresses
   attr_accessor :urls
 
+  # The greencard adapter needs this attribute to restore all unknown fields.
+  attr_accessor :vcard
+
   def initialize
     @email_addresses = []
     @nicknames = []
