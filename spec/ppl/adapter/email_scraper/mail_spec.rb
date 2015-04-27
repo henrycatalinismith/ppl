@@ -98,6 +98,25 @@ describe Ppl::Adapter::EmailScraper::Mail do
       contacts.first.id.should eq "test_user_1"
     end
 
+    it "allows non-ASCII sender names" do
+      email = [
+        "Date: Fri, 30 Nov 2012 17:09:33 +0000",
+        "From: =?UTF-8?B?0JDQu9C10LrRgdCw0L3QtNGA?= <test@example.org>",
+        "Message-ID: <qwertyuioasdfghjk@mail.example.org>",
+        "Subject: Test Email",
+        "To: henry@henrysmith.org",
+        "",
+        "Hey,",
+        "This is a test email.",
+        "Bye!",
+      ].join("\n")
+
+      @storage.should_receive(:load_contact).and_return(nil)
+      contacts = @adapter.scrape_contacts(email)
+
+      contacts.first.name.full.should eq "Александр"
+    end
+
   end
 
 end
