@@ -24,9 +24,11 @@ class Ppl::Adapter::EmailScraper::Mail
     unless from.nil?
       sender = Ppl::Entity::Contact.new
       sender.name = Ppl::Entity::Name.new
-      sender.name.full = from.tree.addresses.first.display_name
+      display_name = from.tree.addresses.first.display_name
+      sender.name.full = Mail::Encodings.value_decode(display_name) unless display_name.nil?
       sender.email_addresses << Ppl::Entity::EmailAddress.new(from.tree.addresses.first.address)
       sender.id = generate_contact_id(sender)
+      sender.name.full = sender.id if display_name.nil?
       sender
     end
   end
