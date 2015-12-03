@@ -78,8 +78,7 @@ Contributing
 Bug reports, fixes, and additional features are encouraged. The project uses
 [Github issues](https://github.com/hnrysmth/ppl/issues) to track bug reports.
 
-If you'd like to contribute code, please just bear in mind that ppl development
-is test-driven.
+Everyone interacting in ppl’s codebases, issue trackers etc is expected to follow the [code of conduct](https://github.com/ppladdressbook/ppl/blob/master/CODE_OF_CONDUCT.md).
 
 License
 -------
