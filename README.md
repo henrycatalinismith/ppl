@@ -14,7 +14,6 @@ ppl if:
 
 [![Build Status](https://travis-ci.org/ppladdressbook/ppl.svg?branch=2.3.3)](https://travis-ci.org/ppladdressbook/ppl)
 [![Code Climate](https://codeclimate.com/github/ppladdressbook/ppl/badges/gpa.svg)](https://codeclimate.com/github/ppladdressbook/ppl)
-[![Coverage Status](https://coveralls.io/repos/ppladdressbook/ppl/badge.png?branch=master)](https://coveralls.io/r/ppladdressbook/ppl?branch=master)
 
 Installation
 ------------
