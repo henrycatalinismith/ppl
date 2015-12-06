@@ -16,14 +16,7 @@ class Ppl::Adapter::Vcard::GreenCard
 
   def encode(contact)
     vcard = GreenCard::Vcard::Maker.make2 do |maker|
-      encode_birthday(contact, maker)
-      encode_name(contact, maker)
-      encode_email_addresses(contact, maker)
-      encode_phone_numbers(contact, maker)
-      encode_nicknames(contact, maker)
-      encode_organizations(contact, maker)
-      encode_postal_addresses(contact, maker)
-      encode_urls(contact, maker)
+      do_encodings(maker, contact)
     end
     vcard.to_s
   end
@@ -42,8 +35,25 @@ class Ppl::Adapter::Vcard::GreenCard
     return contact
   end
 
+  def merge(vcard, contact)
+    vcard.make do |maker|
+      do_encodings(maker, contact)
+    end
+    vcard.to_s
+  end
 
   private
+
+  def do_encodings(maker, contact)
+    encode_birthday(contact, maker)
+    encode_name(contact, maker)
+    encode_email_addresses(contact, maker)
+    encode_phone_numbers(contact, maker)
+    encode_nicknames(contact, maker)
+    encode_organizations(contact, maker)
+    encode_postal_addresses(contact, maker)
+    encode_urls(contact, maker)
+  end
 
   def encode_birthday(contact, vcard_maker)
     if !contact.birthday.nil?

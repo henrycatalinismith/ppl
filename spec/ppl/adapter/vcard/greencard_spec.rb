@@ -418,3 +418,34 @@ describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
 
 end
 
+describe Ppl::Adapter::Vcard::GreenCard, "#merge" do
+
+  let(:vcard) {
+    GreenCard::Vcard::Maker.make2 do |maker|
+      maker.add_name do |name|
+        name.given = "test"
+      end
+      maker.add_tel("01189998819991197253")
+    end
+  }
+
+  let(:contact) {
+    contact = Ppl::Entity::Contact.new
+    contact.name = Ppl::Entity::Name.new
+    contact.name.full = "John Doe"
+    contact.id = "test"
+    contact.birthday = Date.parse "2000-01-01"
+    contact
+  }
+
+  let(:adapter) { Ppl::Adapter::Vcard::GreenCard.new }
+
+  it "preserves the telephone number from the original vcard" do
+    expect(adapter.merge(vcard, contact)).to include("TEL:01189998819991197253")
+  end
+
+  it "merges the birthday date into the new vcad" do
+    expect(adapter.merge(vcard, contact)).to include("BDAY:20000101")
+  end
+
+end
