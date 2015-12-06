@@ -53,9 +53,16 @@ class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage
   end
 
   def save_contact(contact)
-    vcard = @vcard_adapter.encode(contact)
-
     filename = filename_for_contact(contact)
+
+    if File.exists?(filename)
+      vcard = File.read filename
+      vcard = @vcard_adapter.merge(vcard, contact)
+    else
+      vcard = @vcard_adapter.encode(contact)
+    end
+
+
     File.open(filename, "w") do |file|
       file.write(vcard)
     end

@@ -36,6 +36,7 @@ class Ppl::Adapter::Vcard::GreenCard
   end
 
   def merge(vcard, contact)
+    vcard = GreenCard::Vcard.decode(vcard).first
     vcard.make do |maker|
       do_encodings(maker, contact)
     end

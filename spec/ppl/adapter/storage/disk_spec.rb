@@ -115,8 +115,18 @@ describe Ppl::Adapter::Storage::Disk do
 
   describe "#save_contact" do
 
-    it "should write the contact to disk" do
+    it "writes the contact to disk" do
       @adapter.should_receive(:encode).with(@contact).and_return("asdfg")
+
+      @contact.id = "test"
+      @storage.save_contact(@contact)
+
+      File.read("/contacts/test.vcf").should eq "asdfg"
+    end
+
+    it "merges with existing contact if data already present" do
+      File.open("/contacts/test.vcf", 'w') { |f| f.write("poiuytr") }
+      @adapter.should_receive(:merge).with("poiuytr", @contact).and_return("asdfg")
 
       @contact.id = "test"
       @storage.save_contact(@contact)

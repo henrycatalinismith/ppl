@@ -420,14 +420,14 @@ end
 
 describe Ppl::Adapter::Vcard::GreenCard, "#merge" do
 
-  let(:vcard) {
-    GreenCard::Vcard::Maker.make2 do |maker|
-      maker.add_name do |name|
-        name.given = "test"
-      end
-      maker.add_tel("01189998819991197253")
-    end
-  }
+  let(:vcard) {[
+    "BEGIN:VCARD",
+    "VERSION:3.0",
+    "N:;test;;;",
+    "FN:test",
+    "TEL:01189998819991197253",
+    "END:VCARD",
+  ].join("\n")}
 
   let(:contact) {
     contact = Ppl::Entity::Contact.new
