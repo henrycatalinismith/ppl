@@ -84,11 +84,14 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
       update_ref = "HEAD"
     end
 
-    name = ENV['USER']
-    host = Socket.gethostname
+    email = `git config user.email`.chomp
+    email = ENV['USER'] + '@' + Socket.gethostname if email.empty?
+
+    name = `git config user.name`.chomp
+    name = ENV['USER'] if name.empty?
 
     author = {
-      :email => name + "@" + host,
+      :email => email,
       :time  => Time.now,
       :name  => name,
     }
