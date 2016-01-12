@@ -84,16 +84,16 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
       update_ref = "HEAD"
     end
 
-    email = `git config user.email`.chomp
-    email = ENV['USER'] + '@' + Socket.gethostname if email.empty?
-
-    name = `git config user.name`.chomp
-    name = ENV['USER'] if name.empty?
+    begin
+      git_config = Rugged::Config.open_global.to_hash
+    rescue Rugged::OSError
+      git_config = {}
+    end
 
     author = {
-      :email => email,
+      :email => git_config.fetch('user.email', "#{ENV['USER']}@#{Socket.gethostname}"),
       :time  => Time.now,
-      :name  => name,
+      :name  => git_config.fetch('user.name', ENV['USER']),
     }
 
     data = {
