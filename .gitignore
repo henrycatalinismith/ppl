@@ -2,4 +2,4 @@ Gemfile.lock
 ppl-*.gem
 tmp
 _site
-
+node_modules/
