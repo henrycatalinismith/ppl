@@ -1,5 +1,12 @@
 {
   "dependencies": {
     "vcf": "^1.2.0"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^3.2.0"
+  },
+  "scripts": {
+    "test": "mocha test/*"
   }
 }
