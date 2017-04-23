@@ -1,4 +1,4 @@
-const { UsageError } = require('../error');
+const UsageError = require('../errors/usage');
 
 module.exports.usage = 'ppl add <contact> <name>';
 

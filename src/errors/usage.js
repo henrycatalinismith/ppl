@@ -4,4 +4,4 @@ class UsageError extends Error {
   }
 }
 
-module.exports = { UsageError };
+module.exports = UsageError;
