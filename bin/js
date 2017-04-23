@@ -3,6 +3,19 @@
 var path = require('path');
 var fs = require('fs');
 var src = path.join(path.dirname(fs.realpathSync(__filename)), '../src');
-var help = require(`${src}/commands/help`);
 
-help();
+var add = require(`${src}/commands/add`);
+var help = require(`${src}/commands/help`);
+const { UsageError } = require(`${src}/error`);
+
+try {
+  add.run(process.argv.slice(2));
+} catch (e) {
+  if (e instanceof UsageError) {
+    process.stderr.write(`${e.message}\n`);
+    process.stderr.write(`usage: ${add.usage}\n`);
+  } else {
+    process.stderr.write(`${e.message}\n`);
+    process.stderr.write(`${e.stack}\n`);
+  }
+}
