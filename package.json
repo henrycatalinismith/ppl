@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "nodegit": "^0.18.1",
     "vcf": "^1.2.0"
   },
   "devDependencies": {
