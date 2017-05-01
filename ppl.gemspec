@@ -1,8 +1,8 @@
 Gem::Specification.new do |spec|
 
   spec.name        = "ppl"
-  spec.version     = "2.4.0"
-  spec.date        = "2016-01-12"
+  spec.version     = "2.4.1"
+  spec.date        = "2017-05-01"
 
   spec.required_ruby_version = ">= 1.9.3"
 
