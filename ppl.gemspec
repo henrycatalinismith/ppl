@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency("inifile", "2.0.2")
   spec.add_dependency("mail", "2.5.3")
   spec.add_dependency("morphine", "0.1.1")
-  spec.add_dependency("rugged", "0.17.0.b6")
+  spec.add_dependency("rugged", "~> 0.24.0")
   spec.add_dependency("greencard", "0.0.5")
 
   spec.add_development_dependency("cucumber")

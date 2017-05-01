@@ -24,7 +24,7 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
   def load_address_book
     address_book = Ppl::Entity::AddressBook.new
 
-    head = @repository.lookup(@repository.head.target)
+    head = @repository.lookup(@repository.head.target.oid)
     head.tree.each do |file|
       extension = file[:name].slice(-4..-1)
       if extension != ".vcf"
@@ -77,7 +77,7 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
     end
 
     if !head.nil?
-      parents    = [ @repository.lookup( @repository.head.target ).oid ]
+      parents    = [ @repository.lookup( @repository.head.target.oid ).oid ]
       update_ref = "HEAD"
     else
       parents    = []
@@ -118,7 +118,8 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
   def read_contact_from_disk(id)
     filename = id + ".vcf"
     target   = @repository.head.target
-    vcard    = @repository.file_at(target, filename)
+    blob     = @repository.blob_at(target.oid, filename)
+    vcard    = blob.nil? ? nil : blob.content
     contact  = nil
 
     if !vcard.nil?
