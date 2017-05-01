@@ -12,6 +12,7 @@ describe Ppl::Adapter::Storage::Git do
     @repo    = double(Rugged::Repository)
     @commit  = double(Rugged::Commit)
     @vcard   = double(Ppl::Adapter::Vcard)
+    @target  = double(Rugged::Commit)
 
     Rugged::Repository.stub(:new).and_return(@repo)
 
@@ -50,7 +51,8 @@ describe Ppl::Adapter::Storage::Git do
 
       @files = [{:name => "test.vcf"}]
 
-      @commit.should_receive(:target)
+      @commit.should_receive(:target).and_return(@target)
+      @target.should_receive(:oid)
       @repo.should_receive(:lookup).and_return(@head)
       @repo.should_receive(:head).and_return(@commit)
 
@@ -82,11 +84,16 @@ describe Ppl::Adapter::Storage::Git do
   describe "#load_contact" do
 
     it "should return a contact" do
+      target      = OpenStruct.new
+      target.oid  = "asdfg"
       head        = OpenStruct.new
-      head.target = "asdfg"
+      head.target = target
+
+      blob         = OpenStruct.new
+      blob.content = 'vcard contents'
 
       @repo.should_receive(:head).and_return(head)
-      @repo.should_receive(:file_at).and_return("vcard contents")
+      @repo.should_receive(:blob_at).and_return(blob)
       @vcard.should_receive(:decode).and_return(@contact)
       @contact.should_receive(:id=).with("test")
 
@@ -94,11 +101,16 @@ describe Ppl::Adapter::Storage::Git do
     end
 
     it "handles encoding errors gracefully" do
+      target      = OpenStruct.new
+      target.oid  = "asdfg"
       head        = OpenStruct.new
-      head.target = "asdfg"
+      head.target = target
+
+      blob         = OpenStruct.new
+      blob.content = 'vcard contents'
 
       @repo.should_receive(:head).and_return(head)
-      @repo.should_receive(:file_at).and_return("vcard contents")
+      @repo.should_receive(:blob_at).and_return(blob)
       @vcard.should_receive(:decode).and_raise(GreenCard::InvalidEncodingError)
       expect{ @git.load_contact("test") }.to raise_error(Ppl::Error::InvalidVcard)
     end
