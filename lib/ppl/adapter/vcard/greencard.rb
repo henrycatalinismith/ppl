@@ -15,7 +15,7 @@ class Ppl::Adapter::Vcard::GreenCard
   }
 
   def encode(contact)
-    vcard = GreenCard::Vcard::Maker.make2 do |maker|
+    vcard = GreenCard::Vcard::Maker.make2(vcard = contact.vcard) do |maker|
       encode_birthday(contact, maker)
       encode_name(contact, maker)
       encode_email_addresses(contact, maker)
@@ -39,6 +39,7 @@ class Ppl::Adapter::Vcard::GreenCard
     decode_organizations(vcard, contact)
     decode_name(vcard, contact)
     decode_urls(vcard, contact)
+    contact.vcard = vcard
     return contact
   end
 
