@@ -1,8 +1,8 @@
 
-require "greencard/vcard"
+require "vpim/vcard"
 require "digest/sha1"
 
-class Ppl::Adapter::Vcard::GreenCard
+class Ppl::Adapter::Vcard::Vpim
 
   @@postal_address_property_map = {
     :street     => :street,
@@ -15,7 +15,7 @@ class Ppl::Adapter::Vcard::GreenCard
   }
 
   def encode(contact)
-    vcard = GreenCard::Vcard::Maker.make2 do |maker|
+    vcard = Vpim::Vcard::Maker.make2 do |maker|
       encode_birthday(contact, maker)
       encode_name(contact, maker)
       encode_email_addresses(contact, maker)
@@ -29,7 +29,7 @@ class Ppl::Adapter::Vcard::GreenCard
   end
 
   def decode(string)
-    vcard   = GreenCard::Vcard.decode(string).first
+    vcard   = Vpim::Vcard.decode(string).first
     contact = Ppl::Entity::Contact.new
     decode_birthday(vcard, contact)
     decode_email_addresses(vcard, contact)
