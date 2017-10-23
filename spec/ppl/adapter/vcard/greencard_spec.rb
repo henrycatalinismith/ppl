@@ -1,9 +1,9 @@
 # encoding: utf-8
 
-describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
+describe Ppl::Adapter::Vcard::Vpim, "#encode" do
 
   before(:each) do
-    @adapter = Ppl::Adapter::Vcard::GreenCard.new
+    @adapter = Ppl::Adapter::Vcard::Vpim.new
     @contact = Ppl::Entity::Contact.new
     @contact.name = Ppl::Entity::Name.new
     @contact.id = "test"
@@ -139,10 +139,10 @@ describe Ppl::Adapter::Vcard::GreenCard, "#encode" do
 end
 
 
-describe Ppl::Adapter::Vcard::GreenCard, "#decode" do
+describe Ppl::Adapter::Vcard::Vpim, "#decode" do
 
   before(:each) do
-    @adapter = Ppl::Adapter::Vcard::GreenCard.new
+    @adapter = Ppl::Adapter::Vcard::Vpim.new
   end
 
   it "should return a Ppl::Entity::Contact" do

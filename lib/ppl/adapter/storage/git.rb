@@ -41,7 +41,7 @@ class Ppl::Adapter::Storage::Git < Ppl::Adapter::Storage
   def load_contact(id)
     begin
       read_contact_from_disk id
-    rescue GreenCard::InvalidEncodingError
+    rescue Vpim::InvalidEncodingError
       raise Ppl::Error::InvalidVcard, "#{id}.vcf contains invalid data"
     end
   end

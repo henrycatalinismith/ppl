@@ -563,8 +563,8 @@ describe Ppl::Application::Bootstrap do
   end
 
   describe "#vcard_adapter" do
-    it "should return a Ppl::Adapter::Vcard::GreenCard" do
-      @bootstrap.vcard_adapter.should be_a(Ppl::Adapter::Vcard::GreenCard)
+    it "should return a Ppl::Adapter::Vcard::Vpim" do
+      @bootstrap.vcard_adapter.should be_a(Ppl::Adapter::Vcard::Vpim)
     end
   end
 
