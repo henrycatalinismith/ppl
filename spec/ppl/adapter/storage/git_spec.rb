@@ -111,7 +111,7 @@ describe Ppl::Adapter::Storage::Git do
 
       @repo.should_receive(:head).and_return(head)
       @repo.should_receive(:blob_at).and_return(blob)
-      @vcard.should_receive(:decode).and_raise(GreenCard::InvalidEncodingError)
+      @vcard.should_receive(:decode).and_raise(Vpim::InvalidEncodingError)
       expect{ @git.load_contact("test") }.to raise_error(Ppl::Error::InvalidVcard)
     end
 

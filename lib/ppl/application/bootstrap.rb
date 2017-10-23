@@ -373,7 +373,7 @@ class Ppl::Application::Bootstrap
   end
 
   register :vcard_adapter do
-    Ppl::Adapter::Vcard::GreenCard.new
+    Ppl::Adapter::Vcard::Vpim.new
   end
 
   register :email_scraper do
