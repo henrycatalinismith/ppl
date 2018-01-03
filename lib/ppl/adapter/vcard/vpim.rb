@@ -119,6 +119,11 @@ class Ppl::Adapter::Vcard::Vpim
     contact.name = Ppl::Entity::Name.new
     if !vcard.name.nil?
       contact.name.full = vcard.name.fullname
+      contact.name.given  = vcard.name.given      unless vcard.name.given.nil?
+      contact.name.family = vcard.name.family     unless vcard.name.family.nil?
+      contact.name.middle = vcard.name.additional unless vcard.name.additional.nil?
+      contact.name.prefix = vcard.name.prefix     unless vcard.name.prefix.nil?
+      contact.name.suffix = vcard.name.suffix     unless vcard.name.suffix.nil?
     end
   end
 
