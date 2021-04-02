@@ -72,7 +72,7 @@ Contributing
 Bug reports, fixes, and additional features are encouraged. The project uses
 [Github issues](https://github.com/hendotcat/ppl/issues) to track bug reports.
 
-Everyone interacting in ppl’s codebases, issue trackers etc is expected to follow the [code of conduct](https://github.com/hendotcat/ppl/blob/master/code_of_conduct.md).
+Everyone interacting in ppl’s codebases, issue trackers etc is expected to follow the [code of conduct](https://github.com/hendotcat/ppl/blob/trunk/code_of_conduct.md).
 
 License
 -------
