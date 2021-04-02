@@ -11,44 +11,44 @@ describe Ppl::Application::Configuration do
 
   describe "#address_book_path" do
     it "should default to the current working directory" do
-      @config.address_book_path.should eq Dir.pwd
+      expect(@config.address_book_path).to eq Dir.pwd
     end
     it "should be configurable by the user's config file" do
-      @config.stub(:user_configuration) do
+      allow(@config).to receive(:user_configuration) do
         {"address book" => {"path" => "/contacts"}}
       end
-      @config.address_book_path.should eq "/contacts"
+      expect(@config.address_book_path).to eq "/contacts"
     end
   end
 
   describe "#aliases" do
     it "should return a hash" do
-      @config.aliases.should be_a(Hash)
+      expect(@config.aliases).to be_a(Hash)
     end
   end
 
   describe "#color_enabled" do
 
     it "should return true if color is explicitly enabled" do
-      @config.stub(:user_configuration).and_return({
+      allow(@config).to receive(:user_configuration).and_return({
         "color" => {
           "cmd" => "true",
         },
       })
-      @config.color_enabled("cmd").should eq true
+      expect(@config.color_enabled("cmd")).to eq true
     end
 
     it "should return false if color is not explicitly enabled" do
-      @config.color_enabled("cmd").should eq false
+      expect(@config.color_enabled("cmd")).to eq false
     end
 
     it "should return false if color is explicitly disabled" do
-      @config.stub(:user_configuration).and_return({
+      allow(@config).to receive(:user_configuration).and_return({
         "color" => {
           "cmd" => "false",
         },
       })
-      @config.color_enabled("cmd").should eq false
+      expect(@config.color_enabled("cmd")).to eq false
     end
 
   end
@@ -56,8 +56,8 @@ describe Ppl::Application::Configuration do
   describe "#command_colors" do
 
     before(:each) do
-      @config.stub(:color_enabled).and_return(true)
-      @config.stub(:user_configuration).and_return({
+      allow(@config).to receive(:color_enabled).and_return(true)
+      allow(@config).to receive(:user_configuration).and_return({
         "color \"ls\"" => {
           "id" => "blue",
         },
@@ -65,19 +65,19 @@ describe Ppl::Application::Configuration do
     end
 
     it "should return the colors configured for the given command" do
-      @config.command_colors("ls").should eq({
+      expect(@config.command_colors("ls")).to eq({
         "id" => "blue",
       })
     end
 
     it "should return an empty hash if colors aren't enabled for the command" do
-      @config.stub(:color_enabled).and_return(false)
-      @config.command_colors("ls").should eq({})
+      allow(@config).to receive(:color_enabled).and_return(false)
+      expect(@config.command_colors("ls")).to eq({})
     end
 
     it "should return nil if no colors are configured for the given command" do
-      @config.stub(:user_configuration).and_return({})
-      @config.command_colors("show").should eq(nil)
+      allow(@config).to receive(:user_configuration).and_return({})
+      expect(@config.command_colors("show")).to eq(nil)
     end
 
   end

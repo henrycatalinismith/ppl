@@ -15,94 +15,94 @@ describe Ppl::Application::Shell do
 
     it "should return false if the given command isn't found" do
       @input.arguments = ["foo"]
-      @router
-        .should_receive(:route)
+      expect(@router)
+        .to receive(:route)
         .with("foo")
         .and_return(nil)
-      @shell.run(@input, @output).should eq false
+      expect(@shell.run(@input, @output)).to eq false
     end
 
     it "should execute the given command" do
       @input.arguments = ["foo"]
-      @router
-        .should_receive(:route)
+      expect(@router)
+        .to receive(:route)
         .with("foo")
         .and_return(@command)
 
-      @command.should_receive(:options)
-      @command
-        .should_receive(:execute)
+      expect(@command).to receive(:options)
+      expect(@command)
+        .to receive(:execute)
         .and_return(true)
 
-      @shell.run(@input, @output).should eq true
+      expect(@shell.run(@input, @output)).to eq true
     end
 
     it "should not pass the command name in the input to the command itself" do
       @input.arguments = ["mv", "foo", "bar"]
-      @router
-        .should_receive(:route)
+      expect(@router)
+        .to receive(:route)
         .with("mv")
         .and_return(@command)
 
-      @command.should_receive(:options)
-      @command.should_receive(:execute) do |input, output|
-        input.arguments.should eq ["foo", "bar"]
+      expect(@command).to receive(:options)
+      expect(@command).to receive(:execute) do |input, output|
+        expect(input.arguments).to eq ["foo", "bar"]
       end
       @shell.run(@input, @output)
     end
 
     it "should return false if the command throws an exception" do
-      @command.should_receive(:options)
-      @command
-        .should_receive(:execute)
+      expect(@command).to receive(:options)
+      expect(@command)
+        .to receive(:execute)
         .and_raise(StandardError)
 
-      @router
-        .should_receive(:route)
+      expect(@router)
+        .to receive(:route)
         .and_return(@command)
 
-      @output.should_receive(:error)
+      expect(@output).to receive(:error)
 
       @shell.run(@input, @output)
     end
 
     it "should not do any option parsing for Ppl::Command::External instances" do
       external = Ppl::Command::External.new("ls", "ls", "List directory contents")
-      external.stub(:execute).and_return(true)
-      @shell.should_receive(:select_command).and_return(external)
-      external.should_not_receive(:options)
+      allow(external).to receive(:execute).and_return(true)
+      expect(@shell).to receive(:select_command).and_return(external)
+      expect(external).not_to receive(:options)
       @shell.run(@input, @output)
     end
 
     it "should send exception messages to stderr" do
-      @command.should_receive(:options)
-      @command.should_receive(:execute) { raise "Pool's Closed" }
-      @router.should_receive(:route).and_return(@command)
-      @output.should_receive(:error).with("ppl: Pool's Closed")
+      expect(@command).to receive(:options)
+      expect(@command).to receive(:execute) { raise "Pool's Closed" }
+      expect(@router).to receive(:route).and_return(@command)
+      expect(@output).to receive(:error).with("ppl: Pool's Closed")
       @shell.run(@input, @output)
     end
 
     it "should handle ContactNotFound errors nicely" do
-      @command.stub(:options)
-      @command.should_receive(:execute) { raise Ppl::Error::ContactNotFound, "example" }
-      @router.should_receive(:route).and_return(@command)
-      @output.should_receive(:error).with("ppl: Contact 'example' not found")
+      allow(@command).to receive(:options)
+      expect(@command).to receive(:execute) { raise Ppl::Error::ContactNotFound, "example" }
+      expect(@router).to receive(:route).and_return(@command)
+      expect(@output).to receive(:error).with("ppl: Contact 'example' not found")
       @shell.run(@input, @output)
     end
 
     it "should handle CompletionNotFound errors nicely" do
-      @command.stub(:options)
-      @command.should_receive(:execute) { raise Ppl::Error::CompletionNotFound, "example" }
-      @router.should_receive(:route).and_return(@command)
-      @output.should_receive(:error).with("ppl: No completion function available for 'example'")
+      allow(@command).to receive(:options)
+      expect(@command).to receive(:execute) { raise Ppl::Error::CompletionNotFound, "example" }
+      expect(@router).to receive(:route).and_return(@command)
+      expect(@output).to receive(:error).with("ppl: No completion function available for 'example'")
       @shell.run(@input, @output)
     end
 
     it "should handle PostalAddressNotFound errors nicely" do
-      @command.stub(:options)
-      @command.should_receive(:execute) { raise Ppl::Error::PostalAddressNotFound, "example" }
-      @router.should_receive(:route).and_return(@command)
-      @output.should_receive(:error).with("ppl: Postal address 'example' not found")
+      allow(@command).to receive(:options)
+      expect(@command).to receive(:execute) { raise Ppl::Error::PostalAddressNotFound, "example" }
+      expect(@router).to receive(:route).and_return(@command)
+      expect(@output).to receive(:error).with("ppl: Postal address 'example' not found")
       @shell.run(@input, @output)
     end
 

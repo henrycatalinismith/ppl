@@ -13,7 +13,7 @@ describe Ppl::Format::Contact::PostalAddress do
 
     it "should return the contact's street address if it is set" do
       @address.street = "1 Test Road"
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :label => "Street:",
         :value => "1 Test Road",
       })

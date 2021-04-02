@@ -10,16 +10,16 @@ describe Ppl::Command::Completion do
 
   describe "#name" do
     it "should be 'completion'" do
-      @command.name.should eq "completion"
+      expect(@command.name).to eq "completion"
     end
   end
 
   describe "#execute" do
 
     before(:each) do
-      @directory.stub(:path).and_return("")
-      File.stub(:exists?).and_return(true)
-      File.stub(:read)
+      allow(@directory).to receive(:path).and_return("")
+      allow(File).to receive(:exists?).and_return(true)
+      allow(File).to receive(:read)
     end
 
     it "should raise an error if no shell is specified" do
@@ -29,14 +29,14 @@ describe Ppl::Command::Completion do
 
     it "should raise an error if the shell is not recognised" do
       @input.arguments = ["invalidshell"]
-      File.should_receive(:exists?).with("/invalidshell").and_return(false)
+      expect(File).to receive(:exists?).with("/invalidshell").and_return(false)
       expect{@command.execute(@input, @output)}.to raise_error(Ppl::Error::CompletionNotFound)
     end
 
     it "should read the function from disk and print it to stdout" do
       @input.arguments = ["zsh"]
-      File.should_receive(:read).and_return("completion function")
-      @output.should_receive(:line).with("completion function")
+      expect(File).to receive(:read).and_return("completion function")
+      expect(@output).to receive(:line).with("completion function")
       @command.execute(@input, @output)
     end
 

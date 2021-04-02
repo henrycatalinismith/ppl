@@ -3,7 +3,7 @@ describe Ppl::Format::Contact::PhoneNumber do
   describe "#initialize" do
     it "should pass the colors through to the table" do
       colors = {"number" => "blue"}
-      Ppl::Format::Table.should_receive(:new).with([:star, :phone_numbers, :type], colors)
+      expect(Ppl::Format::Table).to receive(:new).with([:star, :phone_numbers, :type], colors)
       format = Ppl::Format::Contact::PhoneNumber.new(colors)
     end
   end
@@ -20,7 +20,7 @@ describe Ppl::Format::Contact::PhoneNumber do
     end
 
     it "should always include the phone number" do
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :star          => " ",
         :phone_numbers => "01234567890",
         :type          => nil,
@@ -30,7 +30,7 @@ describe Ppl::Format::Contact::PhoneNumber do
 
     it "should put the type in parentheses" do
       @number.type = "work"
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :star          => " ",
         :phone_numbers => "01234567890",
         :type          => "(work)",
@@ -40,7 +40,7 @@ describe Ppl::Format::Contact::PhoneNumber do
 
     it "should mark preferred numbers with a star" do
       @number.preferred = true
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :star          => "*",
         :phone_numbers => "01234567890",
         :type          => nil,

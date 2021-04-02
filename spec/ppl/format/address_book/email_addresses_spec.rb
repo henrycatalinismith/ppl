@@ -2,7 +2,7 @@ describe Ppl::Format::AddressBook::EmailAddresses do
   describe "#initialize" do
     it "should pass the colors through to the table" do
       colors = {"id" => "blue"}
-      Ppl::Format::Table.should_receive(:new).with([:id, :email_addresses], colors)
+      expect(Ppl::Format::Table).to receive(:new).with([:id, :email_addresses], colors)
       format = Ppl::Format::AddressBook::EmailAddresses.new(colors)
     end
   end
@@ -25,7 +25,7 @@ describe Ppl::Format::AddressBook::EmailAddresses do
   describe "#process" do
 
     it "should at least show the contact's id" do
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :id              => "test:",
         :email_addresses => "",
       })
@@ -34,7 +34,7 @@ describe Ppl::Format::AddressBook::EmailAddresses do
 
     it "should show an email address if it's available" do
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("jdoe@example.org")
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :id              => "test:",
         :email_addresses => "jdoe@example.org",
       })

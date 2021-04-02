@@ -9,7 +9,7 @@ describe Ppl::Format::Custom::PhoneNumber do
     it "should output the number itself" do
       @number.number = "1234567890"
       @format.format = "tel: %n"
-      @format.process(@number).should eq "tel: 1234567890"
+      expect(@format.process(@number)).to eq "tel: 1234567890"
     end
   end
 
@@ -17,7 +17,7 @@ describe Ppl::Format::Custom::PhoneNumber do
     it "should output the type of the number" do
       @number.type = "cell"
       @format.format = "(%t)"
-      @format.process(@number).should eq "(cell)"
+      expect(@format.process(@number)).to eq "(cell)"
     end
   end
 
@@ -27,11 +27,11 @@ describe Ppl::Format::Custom::PhoneNumber do
     end
     it "should output a star if the number is preferred" do
       @number.preferred = true
-      @format.process(@number).should eq "*"
+      expect(@format.process(@number)).to eq "*"
     end
     it "should output nothing if the number is not preferred" do
       @number.preferred = false
-      @format.process(@number).should eq ""
+      expect(@format.process(@number)).to eq ""
     end
   end
 

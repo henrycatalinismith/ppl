@@ -21,47 +21,47 @@ describe Ppl::Command::Attribute do
   describe "#execute" do
 
     it "should list all the contacts and the value of the attribute for each" do
-      @storage.should_receive(:load_address_book).and_return(@address_book)
-      @list_format.should_receive(:process).and_return("imagine this is a list")
-      @output.should_receive(:line).with("imagine this is a list")
-      @command.execute(@input, @output).should eq true
+      expect(@storage).to receive(:load_address_book).and_return(@address_book)
+      expect(@list_format).to receive(:process).and_return("imagine this is a list")
+      expect(@output).to receive(:line).with("imagine this is a list")
+      expect(@command.execute(@input, @output)).to eq true
     end
 
     it "should disable color output if :no_color is set" do
       @input.options[:no_color] = true
-      @storage.stub(:load_address_book).and_return(@address_book)
-      @list_format.should_receive(:disable_colors!)
-      @list_format.stub(:process)
-      @output.should_receive(:line)
-      @command.execute(@input, @output).should eq true
+      allow(@storage).to receive(:load_address_book).and_return(@address_book)
+      expect(@list_format).to receive(:disable_colors!)
+      allow(@list_format).to receive(:process)
+      expect(@output).to receive(:line)
+      expect(@command.execute(@input, @output)).to eq true
     end
 
     it "should show the full list of attributes for the given contact" do
       @input.arguments.push("jdoe")
-      @storage.should_receive(:require_contact).and_return(@contact)
-      @show_format.should_receive(:process).and_return("all the info")
-      @output.should_receive(:line).with("all the info")
-      @command.execute(@input, @output).should eq true
+      expect(@storage).to receive(:require_contact).and_return(@contact)
+      expect(@show_format).to receive(:process).and_return("all the info")
+      expect(@output).to receive(:line).with("all the info")
+      expect(@command.execute(@input, @output)).to eq true
     end
 
     it "should add the given value to the contact's attributes" do
       @input.arguments.push("jdoe", "anyvalue")
-      @storage.should_receive(:require_contact).and_return(@contact)
-      @contact.should_receive(:phone_numbers).and_return([])
-      @storage.should_receive(:save_contact)
-      @command.execute(@input, @output).should eq true
+      expect(@storage).to receive(:require_contact).and_return(@contact)
+      expect(@contact).to receive(:phone_numbers).and_return([])
+      expect(@storage).to receive(:save_contact)
+      expect(@command.execute(@input, @output)).to eq true
     end
 
     it "should delete the given value from the contact's attributes" do
       phone_numbers = double(Array)
-      phone_numbers.should_receive(:delete)
+      expect(phone_numbers).to receive(:delete)
 
-      @storage.should_receive(:require_contact).and_return(@contact)
-      @contact.should_receive(:phone_numbers).and_return(phone_numbers)
-      @storage.should_receive(:save_contact).and_return(true)
+      expect(@storage).to receive(:require_contact).and_return(@contact)
+      expect(@contact).to receive(:phone_numbers).and_return(phone_numbers)
+      expect(@storage).to receive(:save_contact).and_return(true)
       @input.arguments = ["jdoe", "somevalue"]
       @input.options   = { :delete => true }
-      @command.execute(@input, @output).should eq true
+      expect(@command.execute(@input, @output)).to eq true
     end
 
   end

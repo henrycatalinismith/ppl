@@ -6,13 +6,13 @@ describe Ppl::Entity::PostalAddress do
 
   describe "#preferred" do
     it "should be false by default" do
-      @address.preferred.should eq false
+      expect(@address.preferred).to eq false
     end
   end
 
   describe "#street" do
     it "should return a value" do
-      @address.street.should be nil
+      expect(@address.street).to be nil
     end
   end
 

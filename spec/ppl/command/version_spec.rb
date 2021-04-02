@@ -8,16 +8,16 @@ describe Ppl::Command::Version do
 
   describe "#name" do
     it "should be 'version'" do
-      @command.name.should eq "version"
+      expect(@command.name).to eq "version"
     end
   end
 
   describe "#execute" do
     it "should show the version number" do
-      @output.should_receive(:line) do |line|
-        line.should include Ppl::Version
+      expect(@output).to receive(:line) do |line|
+        expect(line).to include Ppl::Version
       end
-      @command.execute(@input, @output).should eq true
+      expect(@command.execute(@input, @output)).to eq true
     end
   end
 

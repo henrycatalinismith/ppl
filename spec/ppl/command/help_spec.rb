@@ -11,13 +11,13 @@ describe Ppl::Command::Help do
     it "should accept a value" do
       suite = Object.new
       @command.command_suite = suite
-      @command.command_suite.should be suite
+      expect(@command.command_suite).to be suite
     end
   end
 
   describe "#name" do
     it "should be 'help'" do
-      @command.name.should eq "help"
+      expect(@command.name).to eq "help"
     end
   end
 
@@ -26,23 +26,23 @@ describe Ppl::Command::Help do
     it "should not list itself" do
       @command.command_suite.add_command(@command)
 
-      @output.should_receive(:line).with("usage: ppl <command>")
-      @output.should_receive(:line).with(nil)
-      @output.should_receive(:line).with(nil)
+      expect(@output).to receive(:line).with("usage: ppl <command>")
+      expect(@output).to receive(:line).with(nil)
+      expect(@output).to receive(:line).with(nil)
 
       @command.execute(nil, @output)
     end
 
     it "should list available commands" do
       command = double(Ppl::Application::Command)
-      command.should_receive(:name).twice.and_return("one")
-      command.should_receive(:description).and_return("The first command")
+      expect(command).to receive(:name).twice.and_return("one")
+      expect(command).to receive(:description).and_return("The first command")
       @command.command_suite.add_command(command)
 
-      @output.should_receive(:line).with("usage: ppl <command>")
-      @output.should_receive(:line).with(nil)
-      @output.should_receive(:line).with("   one   The first command")
-      @output.should_receive(:line).with(nil)
+      expect(@output).to receive(:line).with("usage: ppl <command>")
+      expect(@output).to receive(:line).with(nil)
+      expect(@output).to receive(:line).with("   one   The first command")
+      expect(@output).to receive(:line).with(nil)
 
       @command.execute(nil, @output)
     end
@@ -59,15 +59,15 @@ describe Ppl::Command::Help do
       @command.command_suite.add_command(command_foo)
       @command.command_suite.add_command(command_bar)
 
-      @output.should_receive(:line).with("usage: ppl <command>")
-      @output.should_receive(:line).with(nil)
+      expect(@output).to receive(:line).with("usage: ppl <command>")
+      expect(@output).to receive(:line).with(nil)
       [
         "   shortname          This is a command with a short name",
         "   veryverylongname   This is a command with a longer name",
       ].each do |line|
-        @output.should_receive(:line).with(line)
+        expect(@output).to receive(:line).with(line)
       end
-      @output.should_receive(:line).with(nil)
+      expect(@output).to receive(:line).with(nil)
 
       @command.execute(nil, @output)
     end

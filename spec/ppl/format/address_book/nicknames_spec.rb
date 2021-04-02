@@ -2,7 +2,7 @@ describe Ppl::Format::AddressBook::Nicknames do
   describe "#initialize" do
     it "should pass the colors through to the table" do
       colors = {"id" => "blue"}
-      Ppl::Format::Table.should_receive(:new).with([:id, :nicknames], colors)
+      expect(Ppl::Format::Table).to receive(:new).with([:id, :nicknames], colors)
       format = Ppl::Format::AddressBook::Nicknames.new(colors)
     end
   end
@@ -25,7 +25,7 @@ describe Ppl::Format::AddressBook::Nicknames do
   describe "#process" do
 
     it "should at least show the contact's id" do
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :id        => "test:",
         :nicknames => "",
       })
@@ -34,7 +34,7 @@ describe Ppl::Format::AddressBook::Nicknames do
 
     it "should show a nickname if it's available" do
       @contact.nicknames.push("Stupid")
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :id        => "test:",
         :nicknames => "Stupid",
       })
@@ -45,7 +45,7 @@ describe Ppl::Format::AddressBook::Nicknames do
 
   describe "#disable_colors!" do
     it "should turn off the table's colors" do
-      @table.should_receive(:disable_colors!)
+      expect(@table).to receive(:disable_colors!)
       @format.disable_colors!
     end
   end

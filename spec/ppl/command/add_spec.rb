@@ -12,7 +12,7 @@ describe Ppl::Command::Add do
 
   describe "#name" do
     it "should be 'add'" do
-      @command.name.should eq "add"
+      expect(@command.name).to eq "add"
     end
   end
 
@@ -28,12 +28,12 @@ describe Ppl::Command::Add do
     end
 
     it "should save a new contact" do
-      @storage.should_receive(:save_contact) do |contact|
-        contact.id.should eq "john"
-        contact.name.should be_a(Ppl::Entity::Name)
+      expect(@storage).to receive(:save_contact) do |contact|
+        expect(contact.id).to eq "john"
+        expect(contact.name).to be_a(Ppl::Entity::Name)
       end
-      @name_service
-        .should_receive(:parse)
+      expect(@name_service)
+        .to receive(:parse)
         .with("John Doe")
         .and_return(Ppl::Entity::Name.new)
       @input.arguments = ["john", "John Doe"]

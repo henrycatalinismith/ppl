@@ -9,7 +9,7 @@ describe Ppl::Format::Table do
         :name,
         :email,
       ])
-      @table.columns.length.should eq 3
+      expect(@table.columns.length).to eq 3
     end
   end
 
@@ -27,7 +27,7 @@ describe Ppl::Format::Table do
 
   describe "#colors" do
     it "should be a hash" do
-      @table.colors.should be_a(Hash)
+      expect(@table.colors).to be_a(Hash)
     end
   end
 
@@ -38,14 +38,14 @@ describe Ppl::Format::Table do
         :name  => "John Doe",
         :email => "jdoe@example.org",
       })
-      @table.rows.length.should eq 1
+      expect(@table.rows.length).to eq 1
     end
   end
 
   describe "#to_s" do
 
     it "should return an empty string if the table is empty" do
-      @table.to_s.should eq ""
+      expect(@table.to_s).to eq ""
     end
 
     it "should return a string represenation of its rows" do
@@ -54,7 +54,7 @@ describe Ppl::Format::Table do
         :name  => "John Doe",
         :email => "jdoe@example.org",
       })
-      @table.to_s.should eq "12345  John Doe  jdoe@example.org"
+      expect(@table.to_s).to eq "12345  John Doe  jdoe@example.org"
     end
 
     it "should use tabs if requested" do
@@ -64,7 +64,7 @@ describe Ppl::Format::Table do
         :email => "jdoe@example.org",
       })
       @table.separator = Ppl::Format::Table::SEPARATOR_TABS
-      @table.to_s.should eq "12345\tJohn Doe\tjdoe@example.org"
+      expect(@table.to_s).to eq "12345\tJohn Doe\tjdoe@example.org"
     end
 
     it "should colorize columns if requested" do
@@ -78,7 +78,7 @@ describe Ppl::Format::Table do
         :name  => "John Doe",
         :email => "jdoe@example.org",
       })
-      @table.to_s.should eq "\e[31m12345  \e[0m\e[33mJohn Doe  \e[0m\e[34mjdoe@example.org  \e[0m"
+      expect(@table.to_s).to eq "\e[31m12345  \e[0m\e[33mJohn Doe  \e[0m\e[34mjdoe@example.org  \e[0m"
     end
 
     it "should align multiple rows into neat columns" do
@@ -93,8 +93,8 @@ describe Ppl::Format::Table do
         :email => "lula@planalto.biz",
       })
 
-      @table.to_s.should include "12345  John Doe                    jdoe@example.org"
-      @table.to_s.should include "123    Luis Ignacio Lula da Silva  lula@planalto.biz"
+      expect(@table.to_s).to include "12345  John Doe                    jdoe@example.org"
+      expect(@table.to_s).to include "123    Luis Ignacio Lula da Silva  lula@planalto.biz"
     end
 
     it "copes with mixed encodings" do
@@ -104,7 +104,7 @@ describe Ppl::Format::Table do
         :email => "fv@example.org",
       })
       expect{ @table.to_s }.not_to raise_error()
-      @table.to_s.should include "franz_viehböck  Franz Viehböck  fv@example.org"
+      expect(@table.to_s).to include "franz_viehböck  Franz Viehböck  fv@example.org"
     end
 
   end
@@ -122,7 +122,7 @@ describe Ppl::Format::Table do
         :email => "jdoe@example.org",
       })
       @table.disable_colors!
-      @table.to_s.should eq "12345  John Doe  jdoe@example.org"
+      expect(@table.to_s).to eq "12345  John Doe  jdoe@example.org"
     end
   end
 

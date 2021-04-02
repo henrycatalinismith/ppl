@@ -13,7 +13,7 @@ describe Ppl::Command::Rm do
 
   describe "#name" do
     it "should be 'rm'" do
-      @command.name.should eq "rm"
+      expect(@command.name).to eq "rm"
     end
   end
 
@@ -25,8 +25,8 @@ describe Ppl::Command::Rm do
     end
 
     it "should delete the given contact" do
-      @storage.should_receive(:require_contact).and_return(@contact)
-      @storage.should_receive(:delete_contact).with(@contact)
+      expect(@storage).to receive(:require_contact).and_return(@contact)
+      expect(@storage).to receive(:delete_contact).with(@contact)
       @command.execute(@input, @output)
     end
 

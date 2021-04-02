@@ -10,18 +10,18 @@ describe Ppl::Format::Name::FullOnly do
   describe "#process" do
 
     it "should return an empty string if the contact lacks a name" do
-      @format.process(@name).should eq ""
+      expect(@format.process(@name)).to eq ""
     end
 
     it "should return just the full name" do
       @name.full = "John Doe"
-      @format.process(@name).should eq "John Doe"
+      expect(@format.process(@name)).to eq "John Doe"
     end
 
     it "should colorize the string if configured to do so" do
       @format.colors = { "name" => "blue" }
-      @color.should_receive(:colorize).and_return("name in blue")
-      @format.process(@name).should eq "name in blue"
+      expect(@color).to receive(:colorize).and_return("name in blue")
+      expect(@format.process(@name)).to eq "name in blue"
     end
 
   end
