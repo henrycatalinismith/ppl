@@ -13,11 +13,11 @@ describe Ppl::Adapter::Storage::Git do
     @vcard   = double(Ppl::Adapter::Vcard)
     @target  = double(Rugged::Commit)
 
-    Rugged::Repository.stub(:new).and_return(@repo)
+    allow(Rugged::Repository).to receive(:new).and_return(@repo)
 
-    @disk.stub(:directory).and_return(Dir.new("/contacts"))
-    @disk.stub(:path).and_return("/contacts")
-    @contact.stub(:id).and_return("test")
+    allow(@disk).to receive(:directory).and_return(Dir.new("/contacts"))
+    allow(@disk).to receive(:path).and_return("/contacts")
+    allow(@contact).to receive(:id).and_return("test")
 
     @git = Ppl::Adapter::Storage::Git.new(@disk)
     @git.vcard_adapter = @vcard
@@ -30,16 +30,16 @@ describe Ppl::Adapter::Storage::Git do
 
   describe "#path" do
     it "should return the path of the repository" do
-      @git.path.should eq "/contacts"
+      expect(@git.path).to eq "/contacts"
     end
   end
 
   describe "#initialize" do
     it "should accept a disk storage adapter" do
-      @git.disk.should be @disk
+      expect(@git.disk).to be @disk
     end
     it "should instantiate rugged" do
-      @git.repository.should be @repo
+      expect(@git.repository).to be @repo
     end
   end
 
@@ -50,12 +50,12 @@ describe Ppl::Adapter::Storage::Git do
 
       @files = [{:name => "test.vcf"}]
 
-      @commit.should_receive(:target).and_return(@target)
-      @target.should_receive(:oid)
-      @repo.should_receive(:lookup).and_return(@head)
-      @repo.should_receive(:head).and_return(@commit)
+      expect(@commit).to receive(:target).and_return(@target)
+      expect(@target).to receive(:oid)
+      expect(@repo).to receive(:lookup).and_return(@head)
+      expect(@repo).to receive(:head).and_return(@commit)
 
-      @git.stub(:load_contact) do |id|
+      allow(@git).to receive(:load_contact) do |id|
         contact    = Ppl::Entity::Contact.new
         contact.id = id
         contact
@@ -64,17 +64,17 @@ describe Ppl::Adapter::Storage::Git do
     end
 
     it "should return an address book" do
-      @head.should_receive(:tree).and_return(@files)
-      @git.load_address_book.should be_a(Ppl::Entity::AddressBook)
+      expect(@head).to receive(:tree).and_return(@files)
+      expect(@git.load_address_book).to be_a(Ppl::Entity::AddressBook)
     end
 
     it "should not put anything except contacts in the address book" do
       @files = [{:name => "poop.vcf"}, {:name => ".ppl"}]
-      @head.should_receive(:tree).and_return(@files)
+      expect(@head).to receive(:tree).and_return(@files)
 
       address_book = @git.load_address_book
       address_book.contacts.each do |contact|
-        contact.should be_a(Ppl::Entity::Contact)
+        expect(contact).to be_a(Ppl::Entity::Contact)
       end
     end
 
@@ -91,10 +91,10 @@ describe Ppl::Adapter::Storage::Git do
       blob         = OpenStruct.new
       blob.content = 'vcard contents'
 
-      @repo.should_receive(:head).and_return(head)
-      @repo.should_receive(:blob_at).and_return(blob)
-      @vcard.should_receive(:decode).and_return(@contact)
-      @contact.should_receive(:id=).with("test")
+      expect(@repo).to receive(:head).and_return(head)
+      expect(@repo).to receive(:blob_at).and_return(blob)
+      expect(@vcard).to receive(:decode).and_return(@contact)
+      expect(@contact).to receive(:id=).with("test")
 
       contact = @git.load_contact("test")
     end
@@ -108,9 +108,9 @@ describe Ppl::Adapter::Storage::Git do
       blob         = OpenStruct.new
       blob.content = 'vcard contents'
 
-      @repo.should_receive(:head).and_return(head)
-      @repo.should_receive(:blob_at).and_return(blob)
-      @vcard.should_receive(:decode).and_raise(Vpim::InvalidEncodingError)
+      expect(@repo).to receive(:head).and_return(head)
+      expect(@repo).to receive(:blob_at).and_return(blob)
+      expect(@vcard).to receive(:decode).and_raise(Vpim::InvalidEncodingError)
       expect{ @git.load_contact("test") }.to raise_error(Ppl::Error::InvalidVcard)
     end
 
@@ -119,19 +119,19 @@ describe Ppl::Adapter::Storage::Git do
   describe "#save_contact" do
 
     it "should save the contact to disk" do
-      @disk.should_receive(:save_contact).with(@contact)
-      @git.stub(:add)
-      @git.stub(:commit)
+      expect(@disk).to receive(:save_contact).with(@contact)
+      allow(@git).to receive(:add)
+      allow(@git).to receive(:commit)
       @git.save_contact(@contact)
     end
 
     it "should commit the changes" do
-      @disk.should_receive(:save_contact)
-      @git.stub(:add) do |file|
-        file.should eq "test.vcf"
+      expect(@disk).to receive(:save_contact)
+      allow(@git).to receive(:add) do |file|
+        expect(file).to eq "test.vcf"
       end
-      @git.stub(:commit) do |message|
-        message.should eq "save_contact(test)"
+      allow(@git).to receive(:commit) do |message|
+        expect(message).to eq "save_contact(test)"
       end
       @git.save_contact(@contact)
     end

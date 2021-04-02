@@ -8,13 +8,13 @@ describe Ppl::Adapter::Color::Colored do
 
     it "should colorize the string using the monkeypatched String method" do
       string = "example"
-      string.should_receive(:red).and_return("red example")
-      @adapter.colorize(string, "red").should eq "red example"
+      expect(string).to receive(:red).and_return("red example")
+      expect(@adapter.colorize(string, "red")).to eq "red example"
     end
 
     it "should only attempt to colorize the string if the color exists" do
       string = "example"
-      @adapter.colorize(string, "neon").should eq "example"
+      expect(@adapter.colorize(string, "neon")).to eq "example"
     end
 
   end

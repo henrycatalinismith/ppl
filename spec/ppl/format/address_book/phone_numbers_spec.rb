@@ -2,7 +2,7 @@ describe Ppl::Format::AddressBook::PhoneNumbers do
   describe "#initialize" do
     it "should pass the colors through to the table" do
       colors = {"id" => "blue"}
-      Ppl::Format::Table.should_receive(:new).with([:id, :phone_numbers], colors)
+      expect(Ppl::Format::Table).to receive(:new).with([:id, :phone_numbers], colors)
       format = Ppl::Format::AddressBook::PhoneNumbers.new(colors)
     end
   end
@@ -25,7 +25,7 @@ describe Ppl::Format::AddressBook::PhoneNumbers do
   describe "#process" do
 
     it "should at least show the contact's id" do
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :id            => "test:",
         :phone_numbers => "",
       })
@@ -34,7 +34,7 @@ describe Ppl::Format::AddressBook::PhoneNumbers do
 
     it "should show the phone number if it's available" do
       @contact.phone_numbers << Ppl::Entity::PhoneNumber.new("01234567890")
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :id            => "test:",
         :phone_numbers => "01234567890",
       })

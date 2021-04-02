@@ -13,7 +13,7 @@ describe Ppl::Command::Mv do
 
   describe "#name" do
     it "should be 'mv'" do
-      @command.name.should eq "mv"
+      expect(@command.name).to eq "mv"
     end
   end
 
@@ -30,24 +30,24 @@ describe Ppl::Command::Mv do
     end
 
     it "should return false if the new id is taken" do
-      @storage.should_receive(:require_contact).with("old").and_return(@contact)
-      @storage.should_receive(:load_contact).with("new").and_return(@contact)
-      @output.should_receive(:error)
+      expect(@storage).to receive(:require_contact).with("old").and_return(@contact)
+      expect(@storage).to receive(:load_contact).with("new").and_return(@contact)
+      expect(@output).to receive(:error)
       @input.arguments = ["old", "new"]
 
-      @command.execute(@input, @output).should eq false
+      expect(@command.execute(@input, @output)).to eq false
     end
 
     it "should rename the given contact" do
-      @storage.should_receive(:require_contact).with("old").and_return(@contact)
-      @storage.should_receive(:load_contact).with("new").and_return(nil)
+      expect(@storage).to receive(:require_contact).with("old").and_return(@contact)
+      expect(@storage).to receive(:load_contact).with("new").and_return(nil)
 
-      @storage.should_receive(:delete_contact).with(@contact) do |contact|
-        contact.id.should eq "old"
+      expect(@storage).to receive(:delete_contact).with(@contact) do |contact|
+        expect(contact.id).to eq "old"
       end
 
-      @storage.should_receive(:save_contact).with(@contact) do |contact|
-        contact.id.should eq "new"
+      expect(@storage).to receive(:save_contact).with(@contact) do |contact|
+        expect(contact.id).to eq "new"
       end
 
       @input.arguments = ["old", "new"]

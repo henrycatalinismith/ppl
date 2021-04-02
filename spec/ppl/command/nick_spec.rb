@@ -6,7 +6,7 @@ describe Ppl::Command::Nick do
 
   describe "#name" do
     it "should be 'nick'" do
-      @command.name.should eq "nick"
+      expect(@command.name).to eq "nick"
     end
   end
 

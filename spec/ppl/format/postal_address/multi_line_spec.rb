@@ -21,12 +21,12 @@ describe Ppl::Format::PostalAddress::MultiLine do
 
       it "outputs each address attribute on its own line" do
         @lines = @format.process(@address).split "\n"
-        @lines[0].should eq "123 Happy Lane"
-        @lines[1].should eq "Bristol"
-        @lines[2].should eq "A very nice region indeed"
-        @lines[3].should eq "United Kingdom"
-        @lines[4].should eq "12345"
-        @lines[5].should eq "BS1 1SB"
+        expect(@lines[0]).to eq "123 Happy Lane"
+        expect(@lines[1]).to eq "Bristol"
+        expect(@lines[2]).to eq "A very nice region indeed"
+        expect(@lines[3]).to eq "United Kingdom"
+        expect(@lines[4]).to eq "12345"
+        expect(@lines[5]).to eq "BS1 1SB"
       end
 
     end
@@ -42,10 +42,10 @@ describe Ppl::Format::PostalAddress::MultiLine do
 
       it "doesn't output superfluous blank lines" do
         @lines = @format.process(@address).split "\n"
-        @lines.length.should eq 3
-        @lines[0].should eq "123 Happy Lane"
-        @lines[1].should eq "Bristol"
-        @lines[2].should eq "United Kingdom"
+        expect(@lines.length).to eq 3
+        expect(@lines[0]).to eq "123 Happy Lane"
+        expect(@lines[1]).to eq "Bristol"
+        expect(@lines[2]).to eq "United Kingdom"
       end
 
     end

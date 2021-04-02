@@ -2,7 +2,7 @@ describe Ppl::Format::AddressBook::PostalAddresses do
   describe "#initialize" do
     it "should pass the colors through to the table" do
       colors = {"id" => "blue"}
-      Ppl::Format::Table.should_receive(:new).with([:id, :address_ids], colors)
+      expect(Ppl::Format::Table).to receive(:new).with([:id, :address_ids], colors)
       format = Ppl::Format::AddressBook::PostalAddresses.new(colors)
     end
   end
@@ -28,7 +28,7 @@ describe Ppl::Format::AddressBook::PostalAddresses do
   describe "#process" do
 
     it "shows the contact's and address' IDs" do
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :id          => "test:",
         :address_ids => "home",
       })

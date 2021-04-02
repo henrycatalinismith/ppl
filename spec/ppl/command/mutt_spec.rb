@@ -17,7 +17,7 @@ describe Ppl::Command::Mutt do
 
   describe "#name" do
     it "should be 'mutt'" do
-      @command.name.should eq "mutt"
+      expect(@command.name).to eq "mutt"
     end
   end
 
@@ -29,9 +29,9 @@ describe Ppl::Command::Mutt do
 
     it "should search the address book for the query" do
       @input.arguments.push "query"
-      @command.should_receive(:mutt_search).and_return(Ppl::Entity::AddressBook.new)
-      @output.should_receive(:line).with("No matches")
-      @command.execute(@input, @output).should eq false
+      expect(@command).to receive(:mutt_search).and_return(Ppl::Entity::AddressBook.new)
+      expect(@output).to receive(:line).with("No matches")
+      expect(@command.execute(@input, @output)).to eq false
     end
 
     it "should return email address matches" do
@@ -42,13 +42,13 @@ describe Ppl::Command::Mutt do
 
       @input.arguments.push "example"
 
-      @storage.should_receive(:load_address_book).and_return(@address_book)
-      @format.should_receive(:process).and_return("test@example.org\tTest User")
-      @output.should_receive(:line) do |line|
-        line.should include "Searching address book... 1 email addresses... 1 matching:"
-        line.should include "test@example.org\tTest User"
+      expect(@storage).to receive(:load_address_book).and_return(@address_book)
+      expect(@format).to receive(:process).and_return("test@example.org\tTest User")
+      expect(@output).to receive(:line) do |line|
+        expect(line).to include "Searching address book... 1 email addresses... 1 matching:"
+        expect(line).to include "test@example.org\tTest User"
       end
-      @command.execute(@input, @output).should eq true
+      expect(@command.execute(@input, @output)).to eq true
     end
 
     it "should only return matching email addresses" do
@@ -58,12 +58,12 @@ describe Ppl::Command::Mutt do
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("test@test.org")
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("prova@prova.org")
       @address_book.contacts.push(@contact)
-      @storage.stub(:load_address_book).and_return(@address_book)
-      @format.should_receive(:process) do |address_book|
-        address_book.contacts[0].email_addresses.length.should eq 1
-        address_book.contacts[0].email_addresses[0].address.should eq "prova@prova.org"
+      allow(@storage).to receive(:load_address_book).and_return(@address_book)
+      expect(@format).to receive(:process) do |address_book|
+        expect(address_book.contacts[0].email_addresses.length).to eq 1
+        expect(address_book.contacts[0].email_addresses[0].address).to eq "prova@prova.org"
       end
-      @output.stub(:line)
+      allow(@output).to receive(:line)
       @command.execute(@input, @output)
     end
 
@@ -75,13 +75,13 @@ describe Ppl::Command::Mutt do
 
       @input.arguments.push "User"
 
-      @storage.should_receive(:load_address_book).and_return(@address_book)
-      @format.should_receive(:process).and_return("test@example.org\tTest User")
-      @output.should_receive(:line) do |line|
-        line.should include "Searching address book... 1 email addresses... 1 matching:"
-        line.should include "test@example.org\tTest User"
+      expect(@storage).to receive(:load_address_book).and_return(@address_book)
+      expect(@format).to receive(:process).and_return("test@example.org\tTest User")
+      expect(@output).to receive(:line) do |line|
+        expect(line).to include "Searching address book... 1 email addresses... 1 matching:"
+        expect(line).to include "test@example.org\tTest User"
       end
-      @command.execute(@input, @output).should eq true
+      expect(@command.execute(@input, @output)).to eq true
     end
 
 
@@ -93,11 +93,11 @@ describe Ppl::Command::Mutt do
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("prova@prova.org")
       @address_book.contacts << @contact
 
-      @storage.stub(:load_address_book).and_return(@address_book)
-      @format.stub(:process)
-      @output.stub(:line)
-      @output.should_receive(:line) do |line|
-        line.should include "Searching address book... 2 email addresses... 2 matching:"
+      allow(@storage).to receive(:load_address_book).and_return(@address_book)
+      allow(@format).to receive(:process)
+      allow(@output).to receive(:line)
+      expect(@output).to receive(:line) do |line|
+        expect(line).to include "Searching address book... 2 email addresses... 2 matching:"
       end
       @command.execute(@input, @output)
     end
@@ -112,23 +112,23 @@ describe Ppl::Command::Mutt do
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("joe@somewhere.com")
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("LOUD@SHOUTING.COM")
       @address_book.contacts << @contact
-      @storage.stub(:load_address_book).and_return(@address_book)
-      @output.stub(:line)
+      allow(@storage).to receive(:load_address_book).and_return(@address_book)
+      allow(@output).to receive(:line)
     end
 
     it "should ignore case when matching names" do
       @input.arguments.push "joe schmoe"
-      @format.should_receive(:process) do |address_book|
-        address_book.contacts[0].email_addresses.length.should eq 2
+      expect(@format).to receive(:process) do |address_book|
+        expect(address_book.contacts[0].email_addresses.length).to eq 2
       end
       @command.execute(@input, @output)
     end
 
     it "should ignore case when matching email addresses" do
       @input.arguments.push "loud"
-      @format.should_receive(:process) do |address_book|
-        address_book.contacts[0].email_addresses.length.should eq 1
-        address_book.contacts[0].email_addresses[0].address.should eq "LOUD@SHOUTING.COM"
+      expect(@format).to receive(:process) do |address_book|
+        expect(address_book.contacts[0].email_addresses.length).to eq 1
+        expect(address_book.contacts[0].email_addresses[0].address).to eq "LOUD@SHOUTING.COM"
       end
       @command.execute(@input, @output)
     end

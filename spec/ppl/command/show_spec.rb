@@ -14,7 +14,7 @@ describe Ppl::Command::Show do
 
   describe "#name" do
     it "should be 'show'" do
-      @command.name.should eq "show"
+      expect(@command.name).to eq "show"
     end
   end
 
@@ -26,12 +26,12 @@ describe Ppl::Command::Show do
     end
 
     it "should show the contact's name" do
-      @storage.should_receive(:require_contact).and_return(@contact)
-      @format.should_receive(:process).and_return("John Doe")
+      expect(@storage).to receive(:require_contact).and_return(@contact)
+      expect(@format).to receive(:process).and_return("John Doe")
 
       @input.arguments = ["john"]
 
-      @output.should_receive(:line).with("John Doe")
+      expect(@output).to receive(:line).with("John Doe")
       @command.execute(@input, @output)
     end
   end

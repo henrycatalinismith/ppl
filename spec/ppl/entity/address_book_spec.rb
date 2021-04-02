@@ -6,7 +6,7 @@ describe Ppl::Entity::AddressBook do
 
   describe "#contacts" do
     it "should be an array" do
-      @address_book.contacts.should be_an(Array)
+      expect(@address_book.contacts).to be_an(Array)
     end
   end
 

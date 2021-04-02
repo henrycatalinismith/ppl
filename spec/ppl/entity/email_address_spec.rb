@@ -6,20 +6,20 @@ describe Ppl::Entity::EmailAddress do
 
   describe "#address" do
     it "should return a value" do
-      @email_address.address.should eq nil
+      expect(@email_address.address).to eq nil
     end
   end
 
   describe "#preferred" do
     it "should be false by default" do
-      @email_address.preferred.should eq false
+      expect(@email_address.preferred).to eq false
     end
   end
 
   describe "#initialize" do
     it "should accept an address" do
       email = Ppl::Entity::EmailAddress.new("bob@example.org")
-      email.address.should eq "bob@example.org"
+      expect(email.address).to eq "bob@example.org"
     end
   end
 

@@ -2,7 +2,7 @@ describe Ppl::Format::AddressBook::Birthdays do
   describe "#initialize" do
     it "should pass the colors through to the table" do
       colors = {"id" => "blue"}
-      Ppl::Format::Table.should_receive(:new).with([:id, :birthday], colors)
+      expect(Ppl::Format::Table).to receive(:new).with([:id, :birthday], colors)
       format = Ppl::Format::AddressBook::Birthdays.new(colors)
     end
   end
@@ -25,7 +25,7 @@ describe Ppl::Format::AddressBook::Birthdays do
   describe "#process" do
 
     it "should at least show the contact's id" do
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :id       => "test:",
         :birthday => nil,
       })
@@ -34,7 +34,7 @@ describe Ppl::Format::AddressBook::Birthdays do
 
     it "should show the birthday if it's available" do
       @contact.birthday = Date.parse("2001-02-03")
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :id        => "test:",
         :birthday  => "2001-02-03",
       })

@@ -7,7 +7,7 @@ describe Ppl::Entity::Name do
   describe "#to_s" do
     it "returns the full name" do
       @name.full = "Mr. Testing"
-      @name.to_s.should eq "Mr. Testing"
+      expect(@name.to_s).to eq "Mr. Testing"
     end
   end
 

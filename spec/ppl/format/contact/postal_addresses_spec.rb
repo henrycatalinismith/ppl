@@ -2,7 +2,7 @@ describe Ppl::Format::Contact::PostalAddresses do
   describe "#initialize" do
     it "should pass the colors through to the table" do
       colors = {"address_id" => "blue"}
-      Ppl::Format::Table.should_receive(:new).with([:star, :address_id, :address_text], colors)
+      expect(Ppl::Format::Table).to receive(:new).with([:star, :address_id, :address_text], colors)
       format = Ppl::Format::Contact::PostalAddresses.new(colors)
     end
   end
@@ -24,8 +24,8 @@ describe Ppl::Format::Contact::PostalAddresses do
 
     it "passes each postal address to the postal address formatter" do
       @contact.postal_addresses << @address
-      @pa_fmt.should_receive(:process).with(@address, @table)
-      @table.should_receive(:to_s)
+      expect(@pa_fmt).to receive(:process).with(@address, @table)
+      expect(@table).to receive(:to_s)
       @format.process(@contact)
     end
 

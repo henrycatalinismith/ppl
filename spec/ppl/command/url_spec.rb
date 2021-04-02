@@ -6,7 +6,7 @@ describe Ppl::Command::Url do
 
   describe "#name" do
     it "should be 'url'" do
-      @command.name.should eq "url"
+      expect(@command.name).to eq "url"
     end
   end
 
