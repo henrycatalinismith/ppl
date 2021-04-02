@@ -18,4 +18,9 @@ jobs:
         run: bundle exec rake spec
       - name: cucumber
         run: bundle exec rake features
+      - uses: dawidd6/action-publish-gem@v1
+        continue-on-error: true
+        if: ${{ github.ref == "refs/heads/trunk" }}
+        with:
+          api_key: ${{secrets.RUBYGEMS_API_KEY}}
 
