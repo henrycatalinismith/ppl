@@ -1,4 +1,3 @@
-
 describe Ppl::Command::Org do
 
   before(:each) do

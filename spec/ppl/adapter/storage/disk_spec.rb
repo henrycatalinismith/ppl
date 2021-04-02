@@ -1,4 +1,3 @@
-
 describe Ppl::Adapter::Storage::Disk, "#create_address_book" do
 
   before(:each) do

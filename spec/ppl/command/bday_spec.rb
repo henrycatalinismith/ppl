@@ -1,4 +1,3 @@
-
 describe Ppl::Command::Bday do
 
   before(:each) do

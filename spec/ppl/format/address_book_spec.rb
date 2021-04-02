@@ -1,4 +1,3 @@
-
 describe Ppl::Format::AddressBook do
 
   before(:each) do

@@ -1,4 +1,3 @@
-
 describe Ppl::Format::Contact::PostalAddress do
 
   before(:each) do

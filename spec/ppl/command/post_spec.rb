@@ -1,4 +1,3 @@
-
 describe Ppl::Command::Post do
 
   before(:each) do

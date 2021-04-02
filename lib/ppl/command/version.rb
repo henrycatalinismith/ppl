@@ -1,4 +1,3 @@
-
 class Ppl::Command::Version < Ppl::Application::Command
 
   name        "version"

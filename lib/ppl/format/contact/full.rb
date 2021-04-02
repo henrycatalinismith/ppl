@@ -1,4 +1,3 @@
-
 class Ppl::Format::Contact::Full < Ppl::Format::Contact
 
   attr_writer :email_address_format

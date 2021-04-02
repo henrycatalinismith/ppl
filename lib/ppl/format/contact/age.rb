@@ -1,4 +1,3 @@
-
 class Ppl::Format::Contact::Age < Ppl::Format::Contact
 
   attr_writer :color_adapter

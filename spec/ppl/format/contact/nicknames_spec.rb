@@ -1,4 +1,3 @@
-
 describe Ppl::Format::Contact::Nicknames do
 
   before(:each) do

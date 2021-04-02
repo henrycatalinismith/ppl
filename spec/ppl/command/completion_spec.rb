@@ -1,4 +1,3 @@
-
 describe Ppl::Command::Completion do
 
   before(:each) do

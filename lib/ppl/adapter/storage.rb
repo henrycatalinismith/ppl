@@ -1,4 +1,3 @@
-
 class Ppl::Adapter::Storage
 
   def self.create_address_book(path)

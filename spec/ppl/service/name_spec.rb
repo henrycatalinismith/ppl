@@ -1,4 +1,3 @@
-
 describe Ppl::Service::Name do
 
   before(:each) do

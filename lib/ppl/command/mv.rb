@@ -1,4 +1,3 @@
-
 class Ppl::Command::Mv < Ppl::Application::Command
 
   name        "mv"

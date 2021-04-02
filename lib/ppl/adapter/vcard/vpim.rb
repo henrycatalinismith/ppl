@@ -1,4 +1,3 @@
-
 require "vpim/vcard"
 require "digest/sha1"
 

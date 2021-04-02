@@ -1,4 +1,3 @@
-
 class Ppl::Format::Contact::Birthday < Ppl::Format::Contact
 
   attr_writer :color_adapter

@@ -1,4 +1,3 @@
-
 require "readline"
 
 class Ppl::Command::Scrape < Ppl::Application::Command

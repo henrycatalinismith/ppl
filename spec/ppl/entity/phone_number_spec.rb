@@ -1,4 +1,3 @@
-
 describe Ppl::Entity::PhoneNumber do
 
   before(:each) do

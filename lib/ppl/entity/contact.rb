@@ -1,4 +1,3 @@
-
 class Ppl::Entity::Contact
 
   attr_accessor :id

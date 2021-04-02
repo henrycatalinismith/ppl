@@ -1,4 +1,3 @@
-
 describe Ppl::Command::Url do
 
   before(:each) do

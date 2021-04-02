@@ -1,4 +1,3 @@
-
 class Ppl::Command::Email < Ppl::Application::Command
 
   name        "email"

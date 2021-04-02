@@ -1,4 +1,3 @@
-
 class Ppl::Command::Mutt < Ppl::Application::Command
 
   name        "mutt"

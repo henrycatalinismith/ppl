@@ -1,4 +1,3 @@
-
 class Ppl::Command::Ls < Ppl::Application::Command
 
   name        "ls"

@@ -1,4 +1,3 @@
-
 describe Ppl::Command::Mutt do
 
   before(:each) do

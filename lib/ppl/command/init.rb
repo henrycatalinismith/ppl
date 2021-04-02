@@ -1,4 +1,3 @@
-
 class Ppl::Command::Init < Ppl::Application::Command
 
   name        "init"

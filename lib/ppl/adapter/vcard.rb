@@ -1,4 +1,3 @@
-
 class Ppl::Adapter::Vcard
 
   def encode(contact)

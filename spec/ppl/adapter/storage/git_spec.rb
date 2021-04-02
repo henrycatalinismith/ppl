@@ -1,4 +1,3 @@
-
 require "ostruct"
 
 describe Ppl::Adapter::Storage::Git do

@@ -1,4 +1,3 @@
-
 class Ppl::Service::PostalAddress
 
   def add(contact, address_id, options)

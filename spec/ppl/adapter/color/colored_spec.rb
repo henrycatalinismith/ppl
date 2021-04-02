@@ -1,4 +1,3 @@
-
 describe Ppl::Adapter::Color::Colored do
 
   before(:each) do

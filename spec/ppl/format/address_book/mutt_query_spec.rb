@@ -1,4 +1,3 @@
-
 describe Ppl::Format::AddressBook::MuttQuery do
 
   before(:each) do

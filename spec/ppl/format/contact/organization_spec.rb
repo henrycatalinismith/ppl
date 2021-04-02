@@ -1,4 +1,3 @@
-
 describe Ppl::Format::Contact::Organization do
 
   before(:each) do

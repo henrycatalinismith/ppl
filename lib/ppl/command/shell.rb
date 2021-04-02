@@ -1,4 +1,3 @@
-
 require "readline"
 
 class Ppl::Command::Shell < Ppl::Application::Command

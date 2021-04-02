@@ -1,4 +1,3 @@
-
 describe Ppl::Application::Bootstrap do
 
   before(:each) do

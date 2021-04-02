@@ -1,4 +1,3 @@
-
 class Ppl::Command::Name < Ppl::Application::Command
 
   name        "name"

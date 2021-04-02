@@ -1,4 +1,3 @@
-
 describe Ppl::Format::Contact::Birthday do
 
   before(:each) do

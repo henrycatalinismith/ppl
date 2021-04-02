@@ -1,4 +1,3 @@
-
 class Ppl::Command::Phone < Ppl::Application::Command
 
   name        "phone"

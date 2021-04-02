@@ -1,4 +1,3 @@
-
 class Ppl::Application::Router
 
   attr_accessor :aliases

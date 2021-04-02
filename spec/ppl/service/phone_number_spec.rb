@@ -1,4 +1,3 @@
-
 describe Ppl::Service::PhoneNumber do
 
   before(:each) do

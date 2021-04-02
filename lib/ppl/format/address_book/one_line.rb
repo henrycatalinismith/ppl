@@ -1,4 +1,3 @@
-
 class Ppl::Format::AddressBook::OneLine < Ppl::Format::AddressBook
 
   attr_writer :table
