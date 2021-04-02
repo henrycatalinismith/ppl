@@ -4,22 +4,17 @@
     |__|   |__|   |_____|
 
 
-[ppl](http://ppladdressbook.org) aims to be address book software for
-command-line users. It's pronounced like "people". You might be interested in
-ppl if:
+ppl aims to be address book software for command-line users. It's pronounced
+like "people". You might be interested in ppl if:
 
 * You like using the command-line
 * You want ownership of your address book data back from the cloud
 * You prefer to keep your data stored in an open format
 
-[![Build Status](https://travis-ci.org/ppladdressbook/ppl.svg?branch=2.3.3)](https://travis-ci.org/ppladdressbook/ppl)
-[![Code Climate](https://codeclimate.com/github/ppladdressbook/ppl/badges/gpa.svg)](https://codeclimate.com/github/ppladdressbook/ppl)
-
-Installation
 ------------
 
 ```bash
-$ sudo gem install ppl
+$ gem install ppl
 ```
 
 Usage
@@ -75,9 +70,9 @@ Contributing
 ------------
 
 Bug reports, fixes, and additional features are encouraged. The project uses
-[Github issues](https://github.com/hnrysmth/ppl/issues) to track bug reports.
+[Github issues](https://github.com/hendotcat/ppl/issues) to track bug reports.
 
-Everyone interacting in ppl’s codebases, issue trackers etc is expected to follow the [code of conduct](https://github.com/ppladdressbook/ppl/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in ppl’s codebases, issue trackers etc is expected to follow the [code of conduct](https://github.com/hendotcat/ppl/blob/master/code_of_conduct.md).
 
 License
 -------
@@ -85,3 +80,4 @@ License
 ppl is released under the [MIT License].
 
 [MIT License]: http://www.opensource.org/licenses/MIT
+
