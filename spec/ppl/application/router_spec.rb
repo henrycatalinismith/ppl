@@ -1,4 +1,3 @@
-
 describe Ppl::Application::Router do
 
   before(:each) do

@@ -1,4 +1,3 @@
-
 class Ppl::Command::Url < Ppl::Command::Attribute
 
   name        "url"

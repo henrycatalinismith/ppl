@@ -1,4 +1,3 @@
-
 class Ppl::Service::EmailAddress
 
   attr_writer :storage

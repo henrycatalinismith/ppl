@@ -1,4 +1,3 @@
-
 describe Ppl::Entity::Name do
 
   before(:each) do

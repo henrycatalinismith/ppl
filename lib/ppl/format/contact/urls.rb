@@ -1,4 +1,3 @@
-
 class Ppl::Format::Contact::Urls < Ppl::Format::Contact
 
   attr_writer :color_adapter

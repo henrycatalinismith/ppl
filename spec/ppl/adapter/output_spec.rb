@@ -1,4 +1,3 @@
-
 describe Ppl::Application::Output, "#initialize" do
 
   it "should accept stdout" do

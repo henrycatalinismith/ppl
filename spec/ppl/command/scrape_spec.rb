@@ -1,4 +1,3 @@
-
 describe Ppl::Command::Scrape do
 
   before(:each) do

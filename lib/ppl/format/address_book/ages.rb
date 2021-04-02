@@ -1,4 +1,3 @@
-
 class Ppl::Format::AddressBook::Ages < Ppl::Format::AddressBook
 
   attr_writer :table

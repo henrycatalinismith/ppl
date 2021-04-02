@@ -1,4 +1,3 @@
-
 describe Ppl::Format::Custom::Contact do
 
   before(:each) do

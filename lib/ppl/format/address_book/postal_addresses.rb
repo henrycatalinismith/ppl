@@ -1,4 +1,3 @@
-
 class Ppl::Format::AddressBook::PostalAddresses < Ppl::Format::AddressBook
 
   attr_writer :table

@@ -1,4 +1,3 @@
-
 class Ppl::Format::Custom::PhoneNumber < Ppl::Format::Custom
 
   format :n do |phone_number|

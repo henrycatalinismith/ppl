@@ -1,4 +1,3 @@
-
 class Ppl::Format::Contact::PhoneNumber < Ppl::Format::Contact
 
   attr_writer :table

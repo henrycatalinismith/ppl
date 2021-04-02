@@ -1,4 +1,3 @@
-
 class Ppl::Application::Command
 
   @@property_values = {}

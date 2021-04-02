@@ -1,4 +1,3 @@
-
 class Ppl::Format::Contact::PostalAddresses < Ppl::Format::Contact
 
   attr_writer :table

@@ -1,4 +1,3 @@
-
 require "colored"
 
 class Ppl::Format::Table

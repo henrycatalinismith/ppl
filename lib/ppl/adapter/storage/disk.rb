@@ -1,4 +1,3 @@
-
 require "fileutils"
 
 class Ppl::Adapter::Storage::Disk < Ppl::Adapter::Storage

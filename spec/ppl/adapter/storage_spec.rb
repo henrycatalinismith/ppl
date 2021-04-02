@@ -1,4 +1,3 @@
-
 describe Ppl::Adapter::Storage do
 
   before(:each) do

@@ -1,4 +1,3 @@
-
 class Ppl::Format::Name::FullOnly < Ppl::Format::Name
 
   attr_writer :color_adapter

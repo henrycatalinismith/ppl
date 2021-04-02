@@ -1,4 +1,3 @@
-
 class Ppl::Format::PostalAddress::MultiLine < Ppl::Format::AddressBook
 
   def process(postal_address)

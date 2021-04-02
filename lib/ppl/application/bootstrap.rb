@@ -1,4 +1,3 @@
-
 require "morphine"
 
 class Ppl::Application::Bootstrap

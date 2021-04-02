@@ -1,4 +1,3 @@
-
 class Ppl::Format::Contact::Organization < Ppl::Format::Contact
 
   attr_writer :color_adapter

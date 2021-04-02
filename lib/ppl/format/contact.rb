@@ -1,4 +1,3 @@
-
 class Ppl::Format::Contact
 
   def process(contact)

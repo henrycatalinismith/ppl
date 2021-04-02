@@ -1,4 +1,3 @@
-
 describe Ppl::Adapter::EmailScraper do
 
   before(:each) do

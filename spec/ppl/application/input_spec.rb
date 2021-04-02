@@ -1,4 +1,3 @@
-
 describe Ppl::Application::Input do
 
   before(:each) do

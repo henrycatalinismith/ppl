@@ -1,4 +1,3 @@
-
 require "mail"
 
 class Ppl::Adapter::EmailScraper::Mail

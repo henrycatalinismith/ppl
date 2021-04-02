@@ -1,4 +1,3 @@
-
 describe Ppl::Format::Custom::EmailAddress do
 
   before(:each) do

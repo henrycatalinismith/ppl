@@ -1,4 +1,3 @@
-
 class Ppl::Command::Help < Ppl::Application::Command
 
   name        "help"

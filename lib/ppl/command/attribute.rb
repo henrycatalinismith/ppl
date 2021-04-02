@@ -1,4 +1,3 @@
-
 class Ppl::Command::Attribute < Ppl::Application::Command
 
   attr_writer :attribute

@@ -1,4 +1,3 @@
-
 require "optparse"
 
 class Ppl::Application::Shell

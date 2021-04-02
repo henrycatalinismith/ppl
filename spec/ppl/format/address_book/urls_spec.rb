@@ -1,4 +1,3 @@
-
 describe Ppl::Format::AddressBook::Urls do
   describe "#initialize" do
     it "should pass the colors through to the table" do

@@ -1,4 +1,3 @@
-
 describe Ppl::Adapter::Vcard, "#encode" do
 
   describe "#encode" do

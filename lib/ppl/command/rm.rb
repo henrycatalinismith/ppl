@@ -1,4 +1,3 @@
-
 class Ppl::Command::Rm < Ppl::Application::Command
 
   name        "rm"

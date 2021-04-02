@@ -1,4 +1,3 @@
-
 describe Ppl::Application::Configuration do
 
   before(:each) do

@@ -1,4 +1,3 @@
-
 describe Ppl::Command::Phone do
 
   before(:each) do

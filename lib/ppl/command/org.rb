@@ -1,4 +1,3 @@
-
 class Ppl::Command::Org < Ppl::Command::Attribute
 
   name        "org"

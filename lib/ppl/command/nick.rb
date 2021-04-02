@@ -1,4 +1,3 @@
-
 class Ppl::Command::Nick < Ppl::Command::Attribute
 
   name        "nick"

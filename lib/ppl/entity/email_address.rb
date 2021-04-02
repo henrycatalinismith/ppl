@@ -1,4 +1,3 @@
-
 class Ppl::Entity::EmailAddress
 
   attr_accessor :address

@@ -1,4 +1,3 @@
-
 require "colored"
 
 class Ppl::Adapter::Color::Colored

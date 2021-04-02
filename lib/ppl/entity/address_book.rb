@@ -1,4 +1,3 @@
-
 class Ppl::Entity::AddressBook
 
   attr_accessor :contacts

@@ -1,4 +1,3 @@
-
 describe Ppl::Format::Contact::PhoneNumber do
 
   describe "#initialize" do

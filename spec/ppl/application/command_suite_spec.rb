@@ -1,4 +1,3 @@
-
 describe Ppl::Application::CommandSuite do
 
   before(:each) do

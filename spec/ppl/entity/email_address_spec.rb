@@ -1,4 +1,3 @@
-
 describe Ppl::Entity::EmailAddress do
 
   before(:each) do

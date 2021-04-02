@@ -1,4 +1,3 @@
-
 class Ppl::Application::Input
 
   attr_accessor :arguments
