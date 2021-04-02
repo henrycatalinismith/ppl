@@ -11,11 +11,11 @@ When /^I run "ppl ([^"]+)"$/ do |command|
 end
 
 Then /^it should succeed$/ do
-  $?.exitstatus.should eq 0
+  expect($?.exitstatus).to eq 0
 end
 
 Then /^it should fail$/ do
-  $?.exitstatus.should_not eq 0
+  expect($?.exitstatus).not_to eq 0
 end
 
 Then /^there should be (\d+) contacts?$/ do |n|
@@ -28,7 +28,7 @@ end
 
 Then /^(bob) should have (\d+) email addresse?s?$/ do |name, number|
   @email_addresses = ppl("email #{name}").split("\n")
-  @email_addresses.length.should eq number.to_i
+  expect(@email_addresses.length).to eq number.to_i
 end
 
 Then /^(bob) should have (\d+) nicknames?$/ do |name, number|
