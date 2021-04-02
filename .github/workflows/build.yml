@@ -29,4 +29,5 @@ jobs:
         if: ${{ github.ref == 'refs/heads/trunk' }}
         with:
           api_key: ${{secrets.RUBYGEMS_API_KEY}}
+          github_token: ${{secrets.GITHUB_TOKEN}}
 
