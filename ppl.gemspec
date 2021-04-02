@@ -1,7 +1,7 @@
 Gem::Specification.new do |spec|
 
   spec.name = "ppl"
-  spec.version = "4.0.0"
+  spec.version = "4.0.1"
   spec.date = "2021-04-02"
 
   spec.required_ruby_version = ">= 3.0.0"
@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency("vpim", "13.11.11")
 
   spec.add_development_dependency("cucumber")
+  spec.add_development_dependency("pry")
   spec.add_development_dependency("rspec")
   spec.add_development_dependency("rake")
   spec.add_development_dependency("fakefs")
