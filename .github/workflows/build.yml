@@ -15,6 +15,8 @@ jobs:
           cmake-version: "3.16.x"
       - name: Install dependencies
         run: bundle install
-      - name: Run unit tests
+      - name: rspec
         run: bundle exec rake spec
+      - name: cucumber
+        run: bundle exec rake features
 
