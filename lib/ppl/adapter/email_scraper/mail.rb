@@ -4,8 +4,8 @@ class Ppl::Adapter::EmailScraper::Mail
 
   attr_writer :storage_adapter
 
-  def scrape_contacts(email)
-    email = Mail.new(email)
+  def scrape_contacts(message)
+    email = Mail.new(message)
     contacts = []
 
     sender = scrape_sender(email)
@@ -23,9 +23,9 @@ class Ppl::Adapter::EmailScraper::Mail
     unless from.nil?
       sender = Ppl::Entity::Contact.new
       sender.name = Ppl::Entity::Name.new
-      display_name = from.tree.addresses.first.display_name
+      display_name = from.address_list.addresses.first.display_name
       sender.name.full = Mail::Encodings.value_decode(display_name) unless display_name.nil?
-      sender.email_addresses << Ppl::Entity::EmailAddress.new(from.tree.addresses.first.address)
+      sender.email_addresses << Ppl::Entity::EmailAddress.new(from.address_list.addresses.first.address)
       sender.id = generate_contact_id(sender)
       sender.name.full = sender.id if display_name.nil?
       sender
