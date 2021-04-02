@@ -1,14 +1,14 @@
 Gem::Specification.new do |spec|
 
-  spec.name        = "ppl"
-  spec.version     = "3.0.1"
-  spec.date        = "2018-01-03"
+  spec.name = "ppl"
+  spec.version = "4.0.0"
+  spec.date = "2021-04-02"
 
-  spec.required_ruby_version = ">= 1.9.3"
+  spec.required_ruby_version = ">= 3.0.0"
 
-  spec.summary     = "The command line address book"
+  spec.summary = "The command line address book"
   spec.description = "ppl is a command-line address book using vCard & git for storage and synchronisation"
-  spec.license     = "GPL-2"
+  spec.license = "MIT"
 
   spec.add_dependency("colored", "1.2")
   spec.add_dependency("inifile", "3.0.0")
@@ -22,13 +22,14 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency("rake")
   spec.add_development_dependency("fakefs")
 
-  spec.authors     = ["Henry Smith"]
-  spec.email       = "henry@henrysmith.org"
+  spec.authors = ["Henry Catalini Smith"]
+  spec.email = "hen@hey.com"
 
   spec.executables = "ppl"
 
-  spec.files        = `git ls-files`.split("\n")
+  spec.files = `git ls-files`.split("\n")
   spec.require_path = "lib"
-  spec.homepage     = "http://ppladdressbook.org"
+  spec.homepage = "https://github.com/hendotcat/ppl"
 
 end
+
