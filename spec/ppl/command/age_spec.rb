@@ -15,24 +15,24 @@ describe Ppl::Command::Age do
 
   describe "#name" do
     it "should be 'age'" do
-      @command.name.should eq "age"
+      expect(@command.name).to eq "age"
     end
   end
 
   describe "#execute" do
 
     it "should list contacts' ages if no arguments are given" do
-      @storage.should_receive(:load_address_book)
-      @list_format.should_receive(:process)
-      @output.should_receive(:line)
+      expect(@storage).to receive(:load_address_book)
+      expect(@list_format).to receive(:process)
+      expect(@output).to receive(:line)
       @command.execute(@input, @output)
     end
 
     it "should show a single contact's ages if one is specified" do
       @input.arguments = ["jdoe"]
-      @storage.should_receive(:require_contact)
-      @show_format.should_receive(:process)
-      @output.should_receive(:line)
+      expect(@storage).to receive(:require_contact)
+      expect(@show_format).to receive(:process)
+      expect(@output).to receive(:line)
       @command.execute(@input, @output)
     end
 

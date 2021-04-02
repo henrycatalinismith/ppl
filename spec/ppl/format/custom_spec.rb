@@ -8,13 +8,13 @@ describe "Ppl::Format::Custom" do
 
   describe "::process" do
     it "should use the block passed to ::format to process the object" do
-      Ppl::Format::Custom::process(:N, {:name => "jdoe"}).should eq "jdoe"
+      expect(Ppl::Format::Custom::process(:N, {:name => "jdoe"})).to eq "jdoe"
     end
   end
 
   describe "#initialize" do
     it "should accept a format string" do
-      Ppl::Format::Custom.new("%N").format.should eq "%N"
+      expect(Ppl::Format::Custom.new("%N").format).to eq "%N"
     end
   end
 
@@ -22,17 +22,17 @@ describe "Ppl::Format::Custom" do
     it "should convert the given object into a string based on the format" do
       custom = Ppl::Format::Custom.new("%N %N %N")
       object = { :name => "jdoe" }
-      custom.process(object).should eq "jdoe jdoe jdoe"
+      expect(custom.process(object)).to eq "jdoe jdoe jdoe"
     end
     it "should pad with leading spaces if a positive width is given" do
       custom = Ppl::Format::Custom.new("%10N")
       object = { :name => "jdoe" }
-      custom.process(object).should eq "      jdoe"
+      expect(custom.process(object)).to eq "      jdoe"
     end
     it "should pad with trailing spaces if a negative width is given" do
       custom = Ppl::Format::Custom.new("%-10N")
       object = { :name => "jdoe" }
-      custom.process(object).should eq "jdoe      "
+      expect(custom.process(object)).to eq "jdoe      "
     end
   end
 
@@ -41,7 +41,7 @@ describe "Ppl::Format::Custom" do
       custom = Ppl::Format::Custom.new
       custom.preset_formats = { "example" => "%N (%N)" }
       custom.use_preset "example"
-      custom.process({:name => "a"}).should eq "a (a)"
+      expect(custom.process({:name => "a"})).to eq "a (a)"
     end
   end
 

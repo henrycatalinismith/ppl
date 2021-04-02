@@ -19,35 +19,35 @@ describe Ppl::Format::PostalAddress::OneLine do
     end
 
     it "inserts a blank 'star' column" do
-      @table.should_receive(:add_row) { |r| r[:star].should eq " " }
+      expect(@table).to receive(:add_row) { |r| expect(r[:star]).to eq " " }
     end
 
     it "marks preferred addresses with a star" do
       @address.preferred = true
-      @table.should_receive(:add_row) { |r| r[:star].should eq "*" }
+      expect(@table).to receive(:add_row) { |r| expect(r[:star]).to eq "*" }
     end
 
     it "puts the ID in its own column" do
-      @table.should_receive(:add_row) { |r| r[:address_id].should eq "home" }
+      expect(@table).to receive(:add_row) { |r| expect(r[:address_id]).to eq "home" }
     end
 
     it "concatenates the rest of the address in its own column" do
       @address.country = nil
-      @table.should_receive(:add_row) do |row|
-        row[:address_text].should eq "123 Happy Lane"
+      expect(@table).to receive(:add_row) do |row|
+        expect(row[:address_text]).to eq "123 Happy Lane"
       end
     end
 
     it "separates address elements with commas" do
-      @table.should_receive(:add_row) do |row|
-        row[:address_text].should eq "123 Happy Lane, United Kingdom"
+      expect(@table).to receive(:add_row) do |row|
+        expect(row[:address_text]).to eq "123 Happy Lane, United Kingdom"
       end
     end
 
     it "prunes elements that are empty" do
       @address.country = ""
-      @table.should_receive(:add_row) do |row|
-        row[:address_text].should eq "123 Happy Lane"
+      expect(@table).to receive(:add_row) do |row|
+        expect(row[:address_text]).to eq "123 Happy Lane"
       end
     end
 

@@ -14,7 +14,7 @@ describe Ppl::Application::Command do
     it "should accept a storage adapter" do
       storage = double(Ppl::Adapter::Storage)
       @command.storage = storage
-      @command.storage.should be storage
+      expect(@command.storage).to be storage
     end
   end
 
@@ -30,7 +30,7 @@ describe Ppl::Application::Command do
         add_property :some_property
         some_property "a value"
       end
-      TestCommand456.some_property.should eq "a value"
+      expect(TestCommand456.some_property).to eq "a value"
     end
 
     it "should expose properties as instance variables too" do
@@ -39,7 +39,7 @@ describe Ppl::Application::Command do
         some_property "a value"
       end
       instance = TestCommand789.new
-      instance.some_property.should eq "a value"
+      expect(instance.some_property).to eq "a value"
     end
 
     it "should allow properties to be overwritten by instance variables" do
@@ -49,21 +49,21 @@ describe Ppl::Application::Command do
       end
       instance = TestCommand901.new
       instance.some_property = "different"
-      instance.some_property.should eq "different"
+      expect(instance.some_property).to eq "different"
     end
   end
 
   describe "#name=" do
     it "should allow the name to be set as an instance variable" do
       @command.name = "testing"
-      @command.name.should eq "testing"
+      expect(@command.name).to eq "testing"
     end
   end
 
   describe "#description=" do
     it "should allow the description to be set as an instance variable" do
       @command.description = "testing"
-      @command.description.should eq "testing"
+      expect(@command.description).to eq "testing"
     end
   end
 
@@ -73,7 +73,7 @@ describe Ppl::Application::Command do
         name "new_for_test"
       end
       command = TestCommand123.new
-      command.name.should eq "new_for_test"
+      expect(command.name).to eq "new_for_test"
     end
   end
 
@@ -83,7 +83,7 @@ describe Ppl::Application::Command do
         description "desc_for_test"
       end
       command = TestCommand123.new
-      command.description.should eq "desc_for_test"
+      expect(command.description).to eq "desc_for_test"
     end
   end
 

@@ -31,13 +31,13 @@ describe Ppl::Adapter::Storage do
   describe "#require_contact" do
 
     it "should raise Ppl::Error::ContactNotFound if load fails" do
-      @storage.stub(:load_contact) do |id| end
+      allow(@storage).to receive(:load_contact) do |id| end
       expect{@storage.require_contact("joe")}.to raise_error(Ppl::Error::ContactNotFound)
     end
 
     it "should return the loaded contact" do
-      @storage.stub(:load_contact) do |id| Object.new end
-      @storage.require_contact("joe").should be_an(Object)
+      allow(@storage).to receive(:load_contact) do |id| Object.new end
+      expect(@storage.require_contact("joe")).to be_an(Object)
     end
   end
 

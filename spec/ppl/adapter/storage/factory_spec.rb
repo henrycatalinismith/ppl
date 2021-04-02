@@ -8,7 +8,7 @@ describe Ppl::Adapter::Storage::Factory do
     @directory = Dir.new("/contacts")
     @repo      = double(Rugged::Repository)
 
-    Rugged::Repository.stub(:new).and_return(@repo)
+    allow(Rugged::Repository).to receive(:new).and_return(@repo)
   end
 
   after(:each) do
@@ -19,12 +19,12 @@ describe Ppl::Adapter::Storage::Factory do
   describe "#load_adapter" do
 
     it "should return a disk adapter by default" do
-      @factory.load_adapter(@directory).should be_a(Ppl::Adapter::Storage::Disk)
+      expect(@factory.load_adapter(@directory)).to be_a(Ppl::Adapter::Storage::Disk)
     end
 
     it "should return a git adapter if the directory is a git repository" do
       Dir.mkdir "/contacts/.git"
-      @factory.load_adapter(@directory).should be_a(Ppl::Adapter::Storage::Git)
+      expect(@factory.load_adapter(@directory)).to be_a(Ppl::Adapter::Storage::Git)
     end
 
   end

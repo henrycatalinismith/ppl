@@ -10,21 +10,21 @@ describe Ppl::Format::Contact::Age do
   describe "#process" do
 
     it "should return an empty string if the contact lacks a birth date" do
-      @color.stub(:colorize)
-      @contact.should_receive(:age).and_return(nil)
-      @format.process(@contact).should eq ""
+      allow(@color).to receive(:colorize)
+      expect(@contact).to receive(:age).and_return(nil)
+      expect(@format.process(@contact)).to eq ""
     end
 
     it "should return the contact's age if the birthdate is known" do
-      @contact.should_receive(:age).and_return(10)
-      @format.process(@contact).should eq "10"
+      expect(@contact).to receive(:age).and_return(10)
+      expect(@format.process(@contact)).to eq "10"
     end
 
     it "should colorize the string if configured to do so" do
-      @contact.should_receive(:age).and_return(10)
+      expect(@contact).to receive(:age).and_return(10)
       @format.colors = { "age" => "blue" }
-      @color.should_receive(:colorize).and_return("age in blue")
-      @format.process(@contact).should eq "age in blue"
+      expect(@color).to receive(:colorize).and_return("age in blue")
+      expect(@format.process(@contact)).to eq "age in blue"
     end
 
   end

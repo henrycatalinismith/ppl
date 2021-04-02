@@ -6,13 +6,13 @@ describe Ppl::Application::Input do
 
   describe "#arguments" do
     it "should be an array" do
-      @input.arguments.should be_an(Array)
+      expect(@input.arguments).to be_an(Array)
     end
   end
 
   describe "#options" do
     it "should be a hash" do
-      @input.options.should be_a(Hash)
+      expect(@input.options).to be_a(Hash)
     end
   end
 

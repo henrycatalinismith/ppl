@@ -6,7 +6,7 @@ describe Ppl::Command::Org do
 
   describe "#name" do
     it "should be 'org'" do
-      @command.name.should eq "org"
+      expect(@command.name).to eq "org"
     end
   end
 

@@ -26,7 +26,7 @@ describe Ppl::Command::Post do
 
   describe "#name" do
     it "should be 'post'" do
-      @command.name.should eq "post"
+      expect(@command.name).to eq "post"
     end
   end
 
@@ -37,9 +37,9 @@ describe Ppl::Command::Post do
       before { @input.arguments = [] }
 
       it "displays postal address information for the whole address book" do
-        @storage.should_receive(:load_address_book).and_return(@address_book)
-        @address_book_format.should_receive(:process).and_return("all the postal addresses")
-        @output.should_receive(:line).with("all the postal addresses")
+        expect(@storage).to receive(:load_address_book).and_return(@address_book)
+        expect(@address_book_format).to receive(:process).and_return("all the postal addresses")
+        expect(@output).to receive(:line).with("all the postal addresses")
         @input.arguments = []
         @command.execute(@input, @output)
       end
@@ -50,16 +50,16 @@ describe Ppl::Command::Post do
       before { @input.arguments = ["jim"] }
 
       it "shows all of a contact's postal addresses" do
-        @storage.should_receive(:require_contact).and_return(@contact)
-        @contact_format.should_receive(:process).and_return("1 Test Road")
-        @output.should_receive(:line).with("1 Test Road")
-        @command.execute(@input, @output).should eq true
+        expect(@storage).to receive(:require_contact).and_return(@contact)
+        expect(@contact_format).to receive(:process).and_return("1 Test Road")
+        expect(@output).to receive(:line).with("1 Test Road")
+        expect(@command.execute(@input, @output)).to eq true
       end
 
       it "outputs nothing if the contact has no addresses" do
-        @storage.should_receive(:require_contact).and_return(@contact)
-        @contact_format.should_receive(:process).and_return("")
-        @command.execute(@input, @output).should eq false
+        expect(@storage).to receive(:require_contact).and_return(@contact)
+        expect(@contact_format).to receive(:process).and_return("")
+        expect(@command.execute(@input, @output)).to eq false
       end
 
     end
@@ -69,16 +69,16 @@ describe Ppl::Command::Post do
       before { @input.arguments = ["jim", "home"] }
 
       it "shows a single postal address" do
-        @storage.should_receive(:require_contact).and_return(@contact)
-        @postal_address_format.should_receive(:process).with(@address).and_return("1 Test Road")
-        @output.should_receive(:line).with("1 Test Road")
-        @command.execute(@input, @output).should eq true
+        expect(@storage).to receive(:require_contact).and_return(@contact)
+        expect(@postal_address_format).to receive(:process).with(@address).and_return("1 Test Road")
+        expect(@output).to receive(:line).with("1 Test Road")
+        expect(@command.execute(@input, @output)).to eq true
       end
 
       it "raises an error if there's no such address" do
         @input.arguments[1] = "other"
-        @storage.should_receive(:require_contact).and_return(@contact)
-        expect{@command.execute(@input, @output).should eq true}.to raise_error(Ppl::Error::PostalAddressNotFound)
+        expect(@storage).to receive(:require_contact).and_return(@contact)
+        expect{expect(@command.execute(@input, @output)).to eq true}.to raise_error(Ppl::Error::PostalAddressNotFound)
       end
 
     end
@@ -89,10 +89,10 @@ describe Ppl::Command::Post do
       before { @input.options = { :delete => true }}
 
       it "deletes the postal address" do
-        @storage.should_receive(:require_contact).and_return(@contact)
-        @service.should_receive(:remove).with(@contact, "home")
-        @storage.should_receive(:save_contact)
-        @command.execute(@input, @output).should eq true
+        expect(@storage).to receive(:require_contact).and_return(@contact)
+        expect(@service).to receive(:remove).with(@contact, "home")
+        expect(@storage).to receive(:save_contact)
+        expect(@command.execute(@input, @output)).to eq true
       end
 
     end
@@ -103,10 +103,10 @@ describe Ppl::Command::Post do
       before { @input.options = { :country => "New Country" }}
 
       it "updates the postal address" do
-        @storage.should_receive(:require_contact).and_return(@contact)
-        @service.should_receive(:update).with(@contact, "home", {:country => "New Country"})
-        @storage.should_receive(:save_contact)
-        @command.execute(@input, @output).should eq true
+        expect(@storage).to receive(:require_contact).and_return(@contact)
+        expect(@service).to receive(:update).with(@contact, "home", {:country => "New Country"})
+        expect(@storage).to receive(:save_contact)
+        expect(@command.execute(@input, @output)).to eq true
       end
 
     end
@@ -118,10 +118,10 @@ describe Ppl::Command::Post do
       before { @input.options = { :street => "123 Swim St" }}
 
       it "adds the postal address" do
-        @storage.should_receive(:require_contact).and_return(@contact)
-        @service.should_receive(:add).with(@contact, "newaddress", {:street => "123 Swim St"})
-        @storage.should_receive(:save_contact)
-        @command.execute(@input, @output).should eq true
+        expect(@storage).to receive(:require_contact).and_return(@contact)
+        expect(@service).to receive(:add).with(@contact, "newaddress", {:street => "123 Swim St"})
+        expect(@storage).to receive(:save_contact)
+        expect(@command.execute(@input, @output)).to eq true
       end
 
     end

@@ -10,18 +10,18 @@ describe Ppl::Format::Contact::Organization do
   describe "#process" do
 
     it "should return an empty string if the contact lacks an organization" do
-      @format.process(Ppl::Entity::Contact.new).should eq ""
+      expect(@format.process(Ppl::Entity::Contact.new)).to eq ""
     end
 
     it "should return the contact's organization if it is set" do
       @contact.organizations.push("Example Ltd")
-      @format.process(@contact).should eq "Example Ltd"
+      expect(@format.process(@contact)).to eq "Example Ltd"
     end
 
     it "should colorize the string if configured to do so" do
       @format.colors = { "organizations" => "blue" }
-      @color.should_receive(:colorize).and_return("organizations in blue")
-      @format.process(@contact).should eq "organizations in blue"
+      expect(@color).to receive(:colorize).and_return("organizations in blue")
+      expect(@format.process(@contact)).to eq "organizations in blue"
     end
 
   end

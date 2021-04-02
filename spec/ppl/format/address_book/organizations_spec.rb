@@ -2,7 +2,7 @@ describe Ppl::Format::AddressBook::Organizations do
   describe "#initialize" do
     it "should pass the colors through to the table" do
       colors = {"id" => "blue"}
-      Ppl::Format::Table.should_receive(:new).with([:id, :organizations], colors)
+      expect(Ppl::Format::Table).to receive(:new).with([:id, :organizations], colors)
       format = Ppl::Format::AddressBook::Organizations.new(colors)
     end
   end
@@ -25,7 +25,7 @@ describe Ppl::Format::AddressBook::Organizations do
   describe "#process" do
 
     it "should at least show the contact's id" do
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :id            => "test:",
         :organizations => "",
       })
@@ -34,7 +34,7 @@ describe Ppl::Format::AddressBook::Organizations do
 
     it "should show the organization if it's available" do
       @contact.organizations.push("Example Ltd")
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :id            => "test:",
         :organizations => "Example Ltd",
       })

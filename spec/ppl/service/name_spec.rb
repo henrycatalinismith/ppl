@@ -8,15 +8,15 @@ describe Ppl::Service::Name do
   describe "#parse" do
 
     it "uses the whole string for the full name" do
-      @service.parse("John Smith").full.should eq "John Smith"
+      expect(@service.parse("John Smith").full).to eq "John Smith"
     end
 
     it "uses the first word for the given name" do
-      @service.parse("John Smith").given.should eq "John"
+      expect(@service.parse("John Smith").given).to eq "John"
     end
 
     it "uses the rest of the string for the family names" do
-      @service.parse("John Fitzgerald Donald Smith").family.should eq "Fitzgerald Donald Smith"
+      expect(@service.parse("John Fitzgerald Donald Smith").family).to eq "Fitzgerald Donald Smith"
     end
 
   end
@@ -25,32 +25,32 @@ describe Ppl::Service::Name do
 
     it "updates the full name" do
       @service.update(@name, {:full => "Abc Def"})
-      @name.full.should eq "Abc Def"
+      expect(@name.full).to eq "Abc Def"
     end
 
     it "updates the given names" do
       @service.update(@name, {:given => "John"})
-      @name.given.should eq "John"
+      expect(@name.given).to eq "John"
     end
 
     it "updates the family names" do
       @service.update(@name, {:family => "Smith"})
-      @name.family.should eq "Smith"
+      expect(@name.family).to eq "Smith"
     end
 
     it "updates the middle names" do
       @service.update(@name, {:middle => "Arnold"})
-      @name.middle.should eq "Arnold"
+      expect(@name.middle).to eq "Arnold"
     end
 
     it "updates the name prefix" do
       @service.update(@name, {:prefix => "Mr"})
-      @name.prefix.should eq "Mr"
+      expect(@name.prefix).to eq "Mr"
     end
 
     it "updates the name suffix" do
       @service.update(@name, {:suffix => "BSc"})
-      @name.suffix.should eq "BSc"
+      expect(@name.suffix).to eq "BSc"
     end
 
   end

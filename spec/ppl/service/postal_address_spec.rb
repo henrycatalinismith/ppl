@@ -21,26 +21,26 @@ describe Ppl::Service::PostalAddress do
     end
 
     it "adds one postal address to the contact" do
-      @contact.postal_addresses.length.should eq 1
+      expect(@contact.postal_addresses.length).to eq 1
     end
 
     it "sets the country of the new address" do
-      @address.country.should eq "United Kingdom"
+      expect(@address.country).to eq "United Kingdom"
     end
     it "sets the locality of the new address" do
-      @address.locality.should eq "Bristol"
+      expect(@address.locality).to eq "Bristol"
     end
     it "sets the street of the new address" do
-      @address.street.should eq "1 Broad Mead"
+      expect(@address.street).to eq "1 Broad Mead"
     end
     it "sets the PO box of the new address" do
-      @address.po_box.should eq "550011"
+      expect(@address.po_box).to eq "550011"
     end
     it "sets the postal code of the new address" do
-      @address.postal_code.should eq "BS1 1SB"
+      expect(@address.postal_code).to eq "BS1 1SB"
     end
     it "sets the region of the new address" do
-      @address.region.should eq "South West"
+      expect(@address.region).to eq "South West"
     end
   end
 
@@ -61,25 +61,25 @@ describe Ppl::Service::PostalAddress do
     end
 
     it "doesn't change the number of addresses owned by the contact" do
-      @contact.postal_addresses.length.should eq 1
+      expect(@contact.postal_addresses.length).to eq 1
     end
     it "sets the country of the new address" do
-      @address.country.should eq "United Kingdom"
+      expect(@address.country).to eq "United Kingdom"
     end
     it "sets the locality of the new address" do
-      @address.locality.should eq "Bristol"
+      expect(@address.locality).to eq "Bristol"
     end
     it "sets the street of the new address" do
-      @address.street.should eq "1 Broad Mead"
+      expect(@address.street).to eq "1 Broad Mead"
     end
     it "sets the PO box of the new address" do
-      @address.po_box.should eq "550011"
+      expect(@address.po_box).to eq "550011"
     end
     it "sets the postal code of the new address" do
-      @address.postal_code.should eq "BS1 1SB"
+      expect(@address.postal_code).to eq "BS1 1SB"
     end
     it "sets the region of the new address" do
-      @address.region.should eq "South West"
+      expect(@address.region).to eq "South West"
     end
   end
 
@@ -92,7 +92,7 @@ describe Ppl::Service::PostalAddress do
     end
 
     it "allows addresses to be moved" do
-      @service.should_receive(:move)
+      expect(@service).to receive(:move)
       @service.update(@contact, "home", {:new_id => "work"})
     end
 
@@ -102,14 +102,14 @@ describe Ppl::Service::PostalAddress do
       second_address.preferred = true
       @contact.postal_addresses << second_address
       @service.update(@contact, "home", {:preferred => true})
-      @address.preferred.should eq true
-      second_address.preferred.should eq false
+      expect(@address.preferred).to eq true
+      expect(second_address.preferred).to eq false
     end
 
     it "sets addresses as not preferred" do
       @address.preferred = true
       @service.update(@contact, "home", {:preferred => false})
-      @address.preferred.should eq false
+      expect(@address.preferred).to eq false
     end
 
   end
@@ -127,7 +127,7 @@ describe Ppl::Service::PostalAddress do
     end
     it "moves the address to the new ID" do
       @service.move(@contact, "home", "available")
-      @address.id.should eq "available"
+      expect(@address.id).to eq "available"
     end
   end
 
@@ -139,7 +139,7 @@ describe Ppl::Service::PostalAddress do
     end
 
     it "removes the specified address" do
-      @contact.postal_addresses.length.should eq 0
+      expect(@contact.postal_addresses.length).to eq 0
     end
 
     it "raises an error if there is no such address" do

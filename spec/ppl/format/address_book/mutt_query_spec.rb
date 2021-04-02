@@ -16,7 +16,7 @@ describe Ppl::Format::AddressBook::MuttQuery do
   describe "#process" do
 
     it "should list the given contacts" do
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :email => "test@example.org",
         :name  => "Test Contact",
       })
@@ -25,11 +25,11 @@ describe Ppl::Format::AddressBook::MuttQuery do
 
     it "should list all of each contact's email addresses" do
       @contact.email_addresses << Ppl::Entity::EmailAddress.new("test2@example.com")
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :email => "test@example.org",
         :name  => "Test Contact",
       })
-      @table.should_receive(:add_row).with({
+      expect(@table).to receive(:add_row).with({
         :email => "test2@example.com",
         :name  => "Test Contact",
       })

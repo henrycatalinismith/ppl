@@ -8,15 +8,15 @@ describe Ppl::Command::Init do
 
   describe "#name" do
     it "should be 'init'" do
-      @command.name.should eq "init"
+      expect(@command.name).to eq "init"
     end
   end
 
   describe "#execute" do
 
     it "should pass the given path through to the storage adapter" do
-      Ppl::Adapter::Storage::Git.stub(:create_address_book) do |path|
-        path.should eq "/contacts"
+      allow(Ppl::Adapter::Storage::Git).to receive(:create_address_book) do |path|
+        expect(path).to eq "/contacts"
       end
       @input.arguments.push "/contacts"
       @command.execute(@input, @output)
@@ -26,8 +26,8 @@ describe Ppl::Command::Init do
       FakeFS.activate!
       Dir.mkdir "/current"
       Dir.chdir "/current"
-      Ppl::Adapter::Storage::Git.stub(:create_address_book) do |path|
-        path.should eq "/current"
+      allow(Ppl::Adapter::Storage::Git).to receive(:create_address_book) do |path|
+        expect(path).to eq "/current"
       end
       @command.execute(@input, @output)
       FakeFS.deactivate!

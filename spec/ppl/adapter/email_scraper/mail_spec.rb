@@ -11,7 +11,7 @@ describe Ppl::Adapter::EmailScraper::Mail do
   describe "#scrape_contacts" do
 
     it "should return an array" do
-      @adapter.scrape_contacts("").should eq []
+      expect(@adapter.scrape_contacts("")).to eq []
     end
 
     it "should scrape the sender's name" do
@@ -26,9 +26,9 @@ describe Ppl::Adapter::EmailScraper::Mail do
         "This is a test email.",
         "Bye!",
       ].join("\n")
-      @storage.should_receive(:load_contact).and_return(nil)
+      expect(@storage).to receive(:load_contact).and_return(nil)
       contacts = @adapter.scrape_contacts(email)
-      contacts.first.name.full.should eq "Test User"
+      expect(contacts.first.name.full).to eq "Test User"
     end
 
     it "should scrape the sender's email address" do
@@ -43,9 +43,9 @@ describe Ppl::Adapter::EmailScraper::Mail do
         "This is a test email.",
         "Bye!",
       ].join("\n")
-      @storage.should_receive(:load_contact).and_return(nil)
+      expect(@storage).to receive(:load_contact).and_return(nil)
       contacts = @adapter.scrape_contacts(email)
-      contacts.first.email_addresses.first.address.should eq "test@example.org"
+      expect(contacts.first.email_addresses.first.address).to eq "test@example.org"
     end
 
     it "should generate an ID for the sender based on their name" do
@@ -60,9 +60,9 @@ describe Ppl::Adapter::EmailScraper::Mail do
         "This is a test email.",
         "Bye!",
       ].join("\n")
-      @storage.should_receive(:load_contact).and_return(nil)
+      expect(@storage).to receive(:load_contact).and_return(nil)
       contacts = @adapter.scrape_contacts(email)
-      contacts.first.id.should eq "test_user"
+      expect(contacts.first.id).to eq "test_user"
     end
 
     it "should generate a sender ID based on email address if there's no name" do
@@ -78,7 +78,7 @@ describe Ppl::Adapter::EmailScraper::Mail do
         "Bye!",
       ].join("\n")
       contacts = @adapter.scrape_contacts(email)
-      contacts.first.id.should eq "test@example.org"
+      expect(contacts.first.id).to eq "test@example.org"
     end
 
     it "avoids overwriting an existing contact ID" do
@@ -93,10 +93,10 @@ describe Ppl::Adapter::EmailScraper::Mail do
         "This is a test email.",
         "Bye!",
       ].join("\n")
-      @storage.should_receive(:load_contact).with("test_user").and_return(Ppl::Entity::Contact.new)
-      @storage.should_receive(:load_contact).with("test_user_1").and_return(nil)
+      expect(@storage).to receive(:load_contact).with("test_user").and_return(Ppl::Entity::Contact.new)
+      expect(@storage).to receive(:load_contact).with("test_user_1").and_return(nil)
       contacts = @adapter.scrape_contacts(email)
-      contacts.first.id.should eq "test_user_1"
+      expect(contacts.first.id).to eq "test_user_1"
     end
 
     it "allows non-ASCII sender names" do
@@ -112,10 +112,10 @@ describe Ppl::Adapter::EmailScraper::Mail do
         "Bye!",
       ].join("\n")
 
-      @storage.should_receive(:load_contact).and_return(nil)
+      expect(@storage).to receive(:load_contact).and_return(nil)
       contacts = @adapter.scrape_contacts(email)
 
-      contacts.first.name.full.should eq "Александр"
+      expect(contacts.first.name.full).to eq "Александр"
     end
 
   end
