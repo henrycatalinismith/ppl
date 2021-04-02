@@ -1,4 +1,3 @@
-
 require "inifile"
 
 class Ppl::Application::Configuration

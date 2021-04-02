@@ -1,4 +1,3 @@
-
 describe Ppl::Format::PostalAddress::MultiLine do
 
   before(:each) do

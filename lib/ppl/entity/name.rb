@@ -1,4 +1,3 @@
-
 class Ppl::Entity::Name
   attr_accessor :full
   attr_accessor :family

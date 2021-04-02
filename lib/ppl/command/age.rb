@@ -1,4 +1,3 @@
-
 class Ppl::Command::Age < Ppl::Application::Command
 
   name        "age"

@@ -1,4 +1,3 @@
-
 class Ppl::Service::PhoneNumber
 
   attr_writer :storage

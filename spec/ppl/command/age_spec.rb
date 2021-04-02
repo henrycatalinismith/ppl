@@ -1,4 +1,3 @@
-
 describe Ppl::Command::Age do
 
   before(:each) do

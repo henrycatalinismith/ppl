@@ -1,4 +1,3 @@
-
 class Ppl::Command::Show < Ppl::Application::Command
 
   name        "show"

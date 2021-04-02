@@ -1,4 +1,3 @@
-
 class Ppl::Format::AddressBook
 
   def process(address_book)

@@ -1,4 +1,3 @@
-
 describe Ppl::Format::Name do
 
   before(:each) do

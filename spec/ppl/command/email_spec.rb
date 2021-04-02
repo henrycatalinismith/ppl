@@ -1,4 +1,3 @@
-
 describe Ppl::Command::Email do
 
   before(:each) do

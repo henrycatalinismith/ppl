@@ -1,4 +1,3 @@
-
 describe "Ppl::Format::Custom" do
 
   describe "::format" do

@@ -1,4 +1,3 @@
-
 class Ppl::Entity::PhoneNumber
 
   attr_accessor :number

@@ -1,4 +1,3 @@
-
 class Ppl::Command::Post < Ppl::Application::Command
 
   name        "post"

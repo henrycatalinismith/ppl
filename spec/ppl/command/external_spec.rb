@@ -1,4 +1,3 @@
-
 describe Ppl::Command::External do
 
   before(:each) do

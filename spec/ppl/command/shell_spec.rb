@@ -1,4 +1,3 @@
-
 describe Ppl::Command::Shell do
 
   before(:each) do

@@ -1,4 +1,3 @@
-
 describe Ppl::Format::Name::FullOnly do
 
   before(:each) do

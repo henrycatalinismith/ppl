@@ -1,4 +1,3 @@
-
 describe Ppl::Format::Contact::Age do
 
   before(:each) do

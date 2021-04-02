@@ -1,4 +1,3 @@
-
 describe Ppl::Format::Contact::Urls do
 
   before(:each) do

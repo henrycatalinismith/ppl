@@ -1,4 +1,3 @@
-
 describe Ppl::Command::Nick do
 
   before(:each) do

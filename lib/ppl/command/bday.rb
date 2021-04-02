@@ -1,4 +1,3 @@
-
 class Ppl::Command::Bday < Ppl::Application::Command
 
   name        "bday"

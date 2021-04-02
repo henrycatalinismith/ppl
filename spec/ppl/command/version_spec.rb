@@ -1,4 +1,3 @@
-
 describe Ppl::Command::Version do
 
   before(:each) do

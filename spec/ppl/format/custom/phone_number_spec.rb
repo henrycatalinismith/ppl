@@ -1,4 +1,3 @@
-
 describe Ppl::Format::Custom::PhoneNumber do
 
   before(:each) do

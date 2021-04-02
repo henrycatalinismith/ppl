@@ -1,4 +1,3 @@
-
 describe Ppl::Adapter::Storage::Factory do
 
   before(:each) do

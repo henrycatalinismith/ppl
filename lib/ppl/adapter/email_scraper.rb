@@ -1,4 +1,3 @@
-
 class Ppl::Adapter::EmailScraper
 
   def scrape_contacts(email)

@@ -1,4 +1,3 @@
-
 class Ppl::Command::Add < Ppl::Application::Command
 
   attr_writer :name_service

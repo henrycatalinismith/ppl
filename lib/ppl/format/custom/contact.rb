@@ -1,4 +1,3 @@
-
 class Ppl::Format::Custom::Contact < Ppl::Format::Custom
 
   format :n do |anything|

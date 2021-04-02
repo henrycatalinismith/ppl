@@ -1,4 +1,3 @@
-
 describe Ppl::Entity::PostalAddress do
 
   before(:each) do

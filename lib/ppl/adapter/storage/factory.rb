@@ -1,4 +1,3 @@
-
 class Ppl::Adapter::Storage::Factory
 
   def initialize(vcard_adapter)

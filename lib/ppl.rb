@@ -1,4 +1,3 @@
-
 module Ppl
 
   Version = "3.0.1"
@@ -126,3 +125,4 @@ require "ppl/service/postal_address"
 class String
   alias_method :each, :each_line
 end
+

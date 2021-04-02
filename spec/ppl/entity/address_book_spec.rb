@@ -1,4 +1,3 @@
-
 describe Ppl::Entity::AddressBook do
 
   before(:each) do

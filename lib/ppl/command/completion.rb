@@ -1,4 +1,3 @@
-
 class Ppl::Command::Completion < Ppl::Application::Command
 
   name        "completion"

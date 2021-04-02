@@ -1,4 +1,3 @@
-
 describe Ppl::Command::Mv do
 
   before(:each) do

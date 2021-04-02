@@ -1,4 +1,3 @@
-
 class Ppl::Entity::PostalAddress
 
   attr_accessor :id

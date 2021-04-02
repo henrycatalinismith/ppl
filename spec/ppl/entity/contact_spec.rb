@@ -1,4 +1,3 @@
-
 describe Ppl::Entity::Contact do
 
   before(:each) do
