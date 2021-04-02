@@ -11,6 +11,13 @@ like "people". You might be interested in ppl if:
 * You want ownership of your address book data back from the cloud
 * You prefer to keep your data stored in an open format
 
+<a href="https://github.com/hendotcat/ppl/actions/workflows/build.yml">
+  <img 
+    alt="Build status"
+    src="https://github.com/hendotcat/ppl/actions/workflows/build.yml/badge.svg"
+  />
+</a>
+
 ------------
 
 ```bash
