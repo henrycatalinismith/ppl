@@ -26,7 +26,9 @@ jobs:
           cmake-version: "3.16.x"
 
       - name: Install dependencies
-        run: bundle install
+        run: |
+          bundle install
+          yarn install --pure-lockfile
 
       - name: rspec
         run: bundle exec rake spec
