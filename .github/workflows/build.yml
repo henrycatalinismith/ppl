@@ -35,7 +35,7 @@ jobs:
         run: bundle exec rake features
 
       - name: eleventy
-        run: eleventy
+        run: yarn build
 
       - uses: nwtgck/actions-netlify@v1.1
         with:
