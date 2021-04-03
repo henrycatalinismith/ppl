@@ -29,6 +29,14 @@ description: The command-line address book
           {{ description }}
         </p>
       </header>
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        if (!location.pathname.endsWith("/")) {
+          location.pathname = `${location.pathname}/`
+        }
+      })
+    </script>
   </body>
 </html>
 
