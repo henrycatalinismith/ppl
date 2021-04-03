@@ -13,9 +13,5 @@
     "fs-extra": "^9.1.0",
     "html-minifier": "^4.0.0",
     "sass": "^1.32.8"
-  },
-  "scripts": {
-    "build": "eleventy",
-    "start": "eleventy --serve"
   }
 }

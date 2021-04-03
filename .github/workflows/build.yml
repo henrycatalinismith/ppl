@@ -12,18 +12,44 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: 3.0.0
+
       - uses: jwlawson/actions-setup-cmake@v1.8
         with:
           cmake-version: "3.16.x"
+
       - name: Install dependencies
         run: bundle install
+
       - name: rspec
         run: bundle exec rake spec
+
       - name: cucumber
         run: bundle exec rake features
+
+      - name: eleventy
+        run: eleventy
+
+      - uses: nwtgck/actions-netlify@v1.1
+        with:
+          publish-dir: "./_site"
+          production-branch: trunk
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: ${{ github.event.head_commit.message }}
+          enable-pull-request-comment: false
+          enable-commit-comment: false
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 1
+
       - uses: dawidd6/action-publish-gem@v1
         continue-on-error: true
         if: ${{ github.ref == 'refs/heads/trunk' }}
