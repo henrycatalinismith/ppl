@@ -1,5 +1,5 @@
 task :features => [:disable_config] do
-  system "bundle exec cucumber"
+  system "bundle exec cucumber --publish-quiet"
 end
 
 task :spec do
