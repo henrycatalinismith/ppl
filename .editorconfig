@@ -1,3 +1,7 @@
+[*.js]
+indent_style = space
+indent_size = 2
+
 [*.yml]
 indent_style = space
 indent_size = 2
