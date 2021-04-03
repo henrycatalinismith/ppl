@@ -1,10 +1,13 @@
 ---
 title: ppl
+description: The command-line address book
 ---
 <!doctype html>
 <html
   lang="en"
-  dir="ltr">
+  dir="ltr"
+  itemscope
+  itemtype="http://schema.org/SoftwareApplication">
   <head>
     <meta
       name="viewport"
@@ -17,7 +20,15 @@ title: ppl
     </title>
   </head>
   <body>
-    <h1>{{ title }}</h1>
+    <main>
+      <header>
+        <h1 itemprop="name">
+          {{ title }}
+        </h1>
+        <p itemprop="description">
+          {{ description }}
+        </p>
+      </header>
   </body>
 </html>
 
