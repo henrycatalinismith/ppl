@@ -1,4 +1,3 @@
-const Eleventy = require("@11ty/eleventy/src/Eleventy.js")
 const chokidar = require("chokidar")
 const fs = require("fs-extra")
 const htmlmin = require("html-minifier")
