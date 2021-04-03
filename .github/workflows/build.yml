@@ -8,7 +8,7 @@ on:
       - trunk
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -37,7 +37,7 @@ jobs:
         run: bundle exec rake features
 
       - name: eleventy
-        run: yarn build
+        run: make _site
 
       - uses: nwtgck/actions-netlify@v1.1
         with:

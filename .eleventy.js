@@ -48,6 +48,7 @@ module.exports = function(eleventyConfig) {
   fs.ensureDirSync("_site")
   fs.emptyDirSync("_site")
 
+  eleventyConfig.addPassthroughCopy("site/casts/*.svg")
   eleventyConfig.addPlugin(minifyPlugin)
 
   compileSass()
