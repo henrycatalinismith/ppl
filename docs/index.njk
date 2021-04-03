@@ -14,7 +14,7 @@ description: The command-line address book
       content="width=device-width,initial-scale=1"
     />
 
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="{{ url }}/style.css" />
     <title>
       {{ title }}
     </title>
@@ -30,13 +30,6 @@ description: The command-line address book
         </p>
       </header>
     </main>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        if (!location.pathname.endsWith("/")) {
-          location.pathname = `${location.pathname}/`
-        }
-      })
-    </script>
   </body>
 </html>
 
