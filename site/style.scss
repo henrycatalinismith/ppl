@@ -7,7 +7,6 @@
 
 html {
   box-sizing: border-box;
-  overflow: hidden;
 }
 
 *, *:before, *:after {
@@ -68,6 +67,11 @@ body {
     font-family: "Menlo", monospace;
     font-size: var(--descriptionFontSize);
     margin: 0;
+  }
+
+  img {
+    height: var(--box);
+    width: var(--box);
   }
 }
 

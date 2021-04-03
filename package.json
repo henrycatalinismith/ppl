@@ -13,7 +13,8 @@
     "chokidar": "^3.5.1",
     "fs-extra": "^9.1.0",
     "html-minifier": "^4.0.0",
-    "sass": "^1.32.8"
+    "sass": "^1.32.8",
+    "svg-term-cli": "^2.1.1"
   },
   "scripts": {
     "build": "eleventy",

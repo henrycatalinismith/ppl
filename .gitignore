@@ -4,3 +4,4 @@ tmp
 _site
 yarn-error.log
 node_modules
+site/casts/*.svg
