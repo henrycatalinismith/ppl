@@ -18,14 +18,56 @@ body {
   margin: 0;
 }
 
-main {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
+[itemtype="http://schema.org/SoftwareApplication"] {
+  --descriptionFontSize: 1rem;
 
-header {
-  height: var(--box);
-  width: var(--box);
+  @media (min-width: 24rem) {
+    --descriptionFontSize: 1.2rem;
+  }
+
+  @media (min-width: 34rem) {
+    --descriptionFontSize: 1.8rem;
+  }
+
+  main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: var(--box);
+    width: var(--box);
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  h1 [itemprop="name"] {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    height: 1px; 
+    width: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  h1 svg {
+    height: 4rem;
+    width: 8rem;
+  }
+
+  header [itemprop="description"] {
+    font-family: "Menlo", monospace;
+    font-size: var(--descriptionFontSize);
+    margin: 0;
+  }
 }
 
