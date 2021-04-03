@@ -37,13 +37,13 @@ const minifyPlugin = {
 
 function compileSass() {
   const { css } = sass.renderSync({
-    file: "docs/style.scss",
+    file: "site/style.scss",
   })
   fs.writeFileSync("_site/style.css", css)
 }
 
 module.exports = function(eleventyConfig) {
-  console.log("ppl docs")
+  console.log("ppl site")
 
   fs.ensureDirSync("_site")
   fs.emptyDirSync("_site")
@@ -57,7 +57,7 @@ module.exports = function(eleventyConfig) {
       const Eleventy = require("@11ty/eleventy/src/Eleventy.js")
       if (Eleventy.prototype) {
         function watch(original) {
-          const watcher = chokidar.watch(["./docs/style.scss"], {
+          const watcher = chokidar.watch(["./site/style.scss"], {
             persistent: true
           })
           const compileAndReload = eleventyInstance => () => {
@@ -73,7 +73,7 @@ module.exports = function(eleventyConfig) {
     })
   }
 
-  const input = "docs"
+  const input = "site"
 
   const dir = {
     input,
