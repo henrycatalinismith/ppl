@@ -1,3 +1,22 @@
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+  @if ($index) {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  @return $string;
+}
+
+@function svg-to-data-uri($svg, $fill: null) {
+  $svg: if($fill, str-replace($svg, "<svg", "<svg fill='#{$fill}'"), $svg);
+  $svg: str-replace($svg, "<svg", "<svg xmlns='http://www.w3.org/2000/svg' ");
+  $svg: str-replace($svg, "<", "%3C");
+  $svg: str-replace($svg, ">", "%3E");
+  $svg: str-replace($svg, "\"", "'");
+  $svg: str-replace($svg, "#", "%23");
+  $svg: str-replace($svg, "&", "%26");
+  @return url("data:image/svg+xml,#{$svg}");
+}
+
 :root {
   --padding: 1rem;
   --tiny: calc(100vw - var(--padding) * 2);
@@ -70,6 +89,21 @@ body {
   }
 
   img {
+    background-image: svg-to-data-uri(
+      '<svg viewBox="0 0 64 16">'
+      + '<circle cx="14" cy="4" r="6" fill="#657b83" />'
+      + '<circle cx="30" cy="4" r="6" fill="#839496" />'
+      + '<circle cx="46" cy="4" r="6" fill="#93a1a1" />'
+      + '</svg>'
+    );
+    background-size: 64px 32px;
+    background-repeat: no-repeat;
+    background-position: top left;
+
+    border: 3px solid #282d35;
+    border-radius: 8px;
+    padding-top: 32px;
+    background-color: #282d35;
     height: var(--box);
     width: var(--box);
   }
