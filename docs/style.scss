@@ -1,0 +1,20 @@
+:root {
+  --padding: 1rem;
+  --tiny: calc(100vw - var(--padding) * 2);
+  --wide: 32rem;
+  --box: min(var(--tiny), var(--wide));
+}
+
+html {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+}
+
