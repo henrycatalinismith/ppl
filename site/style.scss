@@ -19,7 +19,7 @@
 
 :root {
   --padding: 1rem;
-  --tiny: calc(100vw - var(--padding) * 2);
+  --tiny: calc(100vmin - var(--padding) * 2);
   --wide: 32rem;
   --box: min(var(--tiny), var(--wide));
 }
@@ -39,11 +39,11 @@ body {
 [itemtype="http://schema.org/SoftwareApplication"] {
   --descriptionFontSize: 1rem;
 
-  @media (min-width: 24rem) {
+  @media (min-width: 24rem) and (min-height: 24rem) {
     --descriptionFontSize: 1.2rem;
   }
 
-  @media (min-width: 34rem) {
+  @media (min-width: 34rem) and (min-height: 34rem) {
     --descriptionFontSize: 1.8rem;
   }
 
@@ -93,7 +93,7 @@ body {
       '<svg viewBox="0 0 64 16">'
       + '<circle cx="14" cy="4" r="6" fill="#657b83" />'
       + '<circle cx="30" cy="4" r="6" fill="#839496" />'
-      + '<circle cx="46" cy="4" r="6" fill="#93a1a1" />'
+      + '<circle cx="46" cy="4" r="6" fill="#008751" />'
       + '</svg>'
     );
     background-size: 64px 32px;
@@ -106,6 +106,35 @@ body {
     background-color: #282d35;
     height: var(--box);
     width: var(--box);
+  }
+
+  footer {
+    align-items: flex-end;
+    display: flex;
+    height: var(--box);
+    justify-content: flex-end;
+    width: var(--box);
+  }
+
+  [itemprop="creator"] {
+    font-family: Futura, Helvetica, sans-serif;
+    margin: 0 0 0.2rem 0;
+    text-align: right;
+  }
+
+  [itemprop="creator"] a {
+    text-decoration: none;
+  }
+
+  [itemprop="creator"] [itemprop="name"] {
+    color: darkslategray;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  [itemprop="creator"] [itemprop="name"]:hover {
+    text-decoration-line: underline;
+    text-decoration-color: deepskyblue;
   }
 }
 
