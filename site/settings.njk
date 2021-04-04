@@ -7,7 +7,7 @@ itemtype: WebPage
   {% for setting in collections.settings %}
     <dt>
       <a href="/settings/{{ setting.data.name | slug }}">
-        {{ setting.data.name }}
+        [{{ setting.data.name }}]
       </a>
     </dt>
     <dd>
