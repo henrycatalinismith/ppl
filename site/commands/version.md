@@ -1,5 +1,5 @@
 ---
-command: version
+name: version
 summary: Display ppl's version number
 synopsis: ppl version
 ---

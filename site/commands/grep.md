@@ -1,5 +1,5 @@
 ---
-command: grep
+name: grep
 summary: Search the address book
 synopsis: ppl grep <options> <search>
 see_also:

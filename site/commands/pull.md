@@ -1,5 +1,5 @@
 ---
-command: pull
+name: pull
 summary: Execute `git pull` in the address book directory
 synopsis: ppl pull <remote> <branch>
 see_also:

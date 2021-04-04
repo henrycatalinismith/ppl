@@ -1,5 +1,5 @@
 ---
-command: phone
+name: phone
 summary: List, show or change phone numbers
 synopsis: |
   ppl phone

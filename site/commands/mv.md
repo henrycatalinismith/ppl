@@ -1,5 +1,5 @@
 ---
-command: mv
+name: mv
 summary: Move a contact to a different ID
 synopsis: ppl mv <source> <destination>
 ---

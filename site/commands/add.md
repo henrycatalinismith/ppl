@@ -1,5 +1,5 @@
 ---
-command: add
+name: add
 summary: Add a new contact
 synopsis: ppl add <contact> <name>
 ---

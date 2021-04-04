@@ -1,5 +1,5 @@
 ---
-command: name
+name: name
 summary: List, show or change names
 synopsis: |
   ppl name

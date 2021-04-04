@@ -1,5 +1,5 @@
 ---
-command: nick
+name: nick
 summary: List, show or change nicknames
 synopsis: |
   ppl nick (--no-color)

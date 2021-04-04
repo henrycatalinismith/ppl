@@ -1,5 +1,5 @@
 ---
-command: show
+name: show
 summary: Display a contact's full details
 synopsis: ppl show <contact>
 ---

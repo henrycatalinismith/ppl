@@ -1,5 +1,5 @@
 ---
-command: init
+name: init
 summary: Create an empty address book
 synopsis: ppl init [<directory>]
 ---
