@@ -14,16 +14,16 @@ clean:
 	rm -f site/casts/*.svg
 	rm -rf _site
 
-COMMANDS_SRC := $(shell git grep -l "layout: command" gh-pages/ )
-COMMANDS := $(patsubst gh-pages/documentation/commands/%/index.md, %, $(COMMANDS_SRC))
-COMMANDS_DST := $(addsuffix .md, $(addprefix site/commands/, $(COMMANDS)))
-site/commands/%.md:
-	git mv gh-pages/documentation/commands/$*/index.md $@
+CONFIG_SRC := $(shell git grep -l "layout: configuration" gh-pages/ )
+CONFIG := $(patsubst gh-pages/documentation/configuration/%/index.md, %, $(CONFIG_SRC))
+CONFIG_DST := $(addsuffix .md, $(addprefix site/configuration/, $(CONFIG)))
+site/configuration/%.md:
+	git mv gh-pages/documentation/configuration/$*/index.md $@
 
-commands: $(COMMANDS_DST)
-	echo $(COMMANDS)
-	echo $(COMMANDS_DST)
+config: $(CONFIG_DST)
+	echo $(CONFIG)
+	echo $(CONFIG_DST)
 
 
-.PHONY: clean releases
+.PHONY: clean
 

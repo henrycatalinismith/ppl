@@ -1,8 +1,6 @@
 ---
-title: ppl [alias] Configuration Guide
-layout: configuration
-section: documentation
-config_section: alias
+name: alias
+summary: Create shortcuts for frequently-used commands
 ---
 
 Sometimes typing the same long commands repeatedly becomes tiresome. The
@@ -28,7 +26,7 @@ ppl as follows:
     Email Addresses
       jdoe@example.org
 
-### Bang Aliases
+## Bang Aliases
 
 ppl's alias system is similar to git's in that it supports executing external
 commands via aliases prefixed with an exclamation mark, or "bang". In your

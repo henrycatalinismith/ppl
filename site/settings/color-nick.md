@@ -1,20 +1,18 @@
 ---
-title: ppl [color "nick"] Configuration Guide
-layout: configuration
-section: documentation
-config_section: color "nick"
+name: color "nick"
+summary: Colorized output for the nick command
 ---
 
 This section dictates the color of the output of the
 [nick](/documentation/commands/nick) command.
 
-### Example
+## Example
 
     [color "nick"]
         id        = green
         nicknames = blue
 
-### See Also
+## See Also
 
 * [List of supported colors](/documentation/configuration/color#list_of_supported_colors)
 
