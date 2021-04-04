@@ -55,6 +55,10 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("site/commands/*.md")
   })
 
+  eleventyConfig.addCollection("releases", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("site/releases/*.*.*.md")
+  })
+
   compileSass()
 
   if (process.argv.includes("--serve")) {

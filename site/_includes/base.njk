@@ -2,11 +2,8 @@
 <html
   lang="en"
   dir="ltr"
-  {% if itemtype %}
-    itemscope
-    itemtype="http://schema.org/{{ itemtype }}">
-  {% endif %}
->
+  {% if itemtype %}itemscope{% endif %}
+  {% if itemtype %}itemtype="http://schema.org/{{ itemtype }}"{% endif %}>
   <head>
     <meta
       name="viewport"
@@ -18,8 +15,6 @@
     </title>
   </head>
   <body>
-    <main>
-    </main>
     {{ content | safe }}
   </body>
 </html>

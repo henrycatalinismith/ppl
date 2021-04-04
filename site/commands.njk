@@ -3,24 +3,6 @@ layout: base
 itemtype: WebPage
 ---
 
-<style>
-dl {
-  display: flex;
-  flex-direction: column;
-}
-
-dt {
-}
-
-dt:not(:first-child) {
-  margin-top: 1rem;
-}
-
-dd {
-  margin: 0;
-}
-</style>
-
 <dl>
   {% for command in collections.commands %}
     <dt>
