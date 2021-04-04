@@ -1,8 +1,6 @@
 ---
-title: ppl [color] Configuration Guide
-layout: configuration
-section: documentation
-config_section: color
+name: color
+summary: Colorized output
 ---
 
 By default, ppl's commands output plain text with no [ANSI color escape
@@ -11,7 +9,7 @@ ppl being a well-behaved, pipeable UNIX CLI program, but some people like a bit
 more color in their life, and this section of the config file allows those
 people to selectively enable color output on a per-command basis.
 
-### Enable color for all commands that support it
+## Enable color for all commands that support it
 
     [color]
             age   = true
@@ -26,7 +24,7 @@ people to selectively enable color output on a per-command basis.
             show  = true
             url   = true
 
-### List of supported colors
+## List of supported colors
 
 * black
 * blue
@@ -37,7 +35,7 @@ people to selectively enable color output on a per-command basis.
 * white
 * yellow
 
-### Unsupported commands
+## Unsupported commands
 
 The [mutt](/documentation/commands/mutt) command doesn't support color output
 and never will. It'd be completely pointless.

@@ -1,11 +1,9 @@
 ---
-title: ppl [address book] Configuration Guide
-layout: configuration
-section: documentation
-config_section: address book
+name: address book
+summary: Tell ppl where your address book is
 ---
 
-### path
+## path
 
     [address book]
         path = ~/contacts

@@ -1,20 +1,18 @@
 ---
-title: ppl [color "org"] Configuration Guide
-layout: configuration
-section: documentation
-config_section: color "org"
+name: color "org"
+summary: Colorized output for the org command
 ---
 
 This section dictates the color of the output of the
 [org](/documentation/commands/org) command.
 
-### Example
+## Example
 
     [color "org"]
         id            = green
         organizations = blue
 
-### See Also
+## See Also
 
 * [List of supported colors](/documentation/configuration/color#list_of_supported_colors)
 

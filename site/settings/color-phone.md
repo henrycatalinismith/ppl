@@ -1,14 +1,12 @@
 ---
-title: ppl [color "phone"] Configuration Guide
-layout: configuration
-section: documentation
-config_section: color "phone"
+name: color "phone"
+summary: Colorized output for the phone command
 ---
 
 This section dictates the color of the output of the
 [phone](/documentation/commands/phone) command.
 
-### Example
+## Example
 
     [color "phone"]
         star          = red
@@ -16,7 +14,7 @@ This section dictates the color of the output of the
         phone_numbers = blue
         type          = red
 
-### See Also
+## See Also
 
 * [List of supported colors](/documentation/configuration/color#list_of_supported_colors)
 

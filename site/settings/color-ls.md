@@ -1,21 +1,19 @@
 ---
-title: ppl [color "ls"] Configuration Guide
-layout: configuration
-section: documentation
-config_section: color "ls"
+name: color "ls"
+summary: Colorized output for the ls command
 ---
 
 This section dictates the color of the output of the
 [ls](/documentation/commands/ls) command.
 
-### Example
+## Example
 
     [color "ls"]
         id    = green
         name  = yellow
         email = blue
 
-### See Also
+## See Also
 
 * [List of supported colors](/documentation/configuration/color#list_of_supported_colors)
 
