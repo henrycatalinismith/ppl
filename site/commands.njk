@@ -6,7 +6,7 @@ itemtype: WebPage
 <dl>
   {% for command in collections.commands %}
     <dt>
-      <a href="/commands/{{ command.data.name }}">
+      <a href="{{ url }}/commands/{{ command.data.name }}">
         {{ command.data.name }}
       </a>
     </dt>

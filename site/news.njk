@@ -7,7 +7,7 @@ title: ppl news
 <dl>
   {% for post in collections.news | reverse %}
     <dt>
-      <a href="/news/{{ post.data.title }}">
+      <a href="{{ url }}/news/{{ post.data.title }}">
         {{ post.data.title }}
       </a>
     </dt>
