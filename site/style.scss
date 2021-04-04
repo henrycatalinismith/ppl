@@ -138,3 +138,16 @@ body {
   }
 }
 
+dl {
+  display: flex;
+  flex-direction: column;
+}
+
+dt:not(:first-child) {
+  margin-top: 1rem;
+}
+
+dd {
+  margin: 0;
+}
+
