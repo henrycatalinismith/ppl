@@ -1,9 +1,6 @@
 ---
 title: Sleep Mode
 date: 2017-10-23
-layout: news
-section: news
-categories: [news]
 ---
 
 This project seems to be in a good stable state. There's a small active

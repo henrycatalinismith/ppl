@@ -1,9 +1,6 @@
 ---
 title: Ruby 2.0 Compatibility
 date: 2013-04-10
-layout: news
-section: news
-categories: [news]
 ---
 
 The latest version of ppl is available now, and it's one of those tiny,
@@ -11,7 +8,7 @@ pointless-sounding ones: `1.15.1`. This release is all about Ruby 2.0
 compatibility.  A recent issue reported on GitHub by
 [@pigmonkey](https://github.com/pigmonkey) brought to my attention that vpim,
 ppl's underlying vCard library, [doesn't work at all in Ruby
-2.0](https://github.com/hnrysmth/ppl/issues/19).
+2.0](https://github.com/hendotcat/ppl/issues/19).
 
     invalid multibyte escape: /^\xFF\xFE/
 
@@ -22,7 +19,6 @@ almost seems misleading to increment only the patch version number.
 Essentially, I forked vpim in order to get this done. While this is an
 unexpected turn of events, it does mean I'm now quite well-placed to fix its
 UTF-8 issues myself instead of depending on the mercy of upstream. By the way,
-if you're interested in helping with this, go take a look at
-[greencard](https://github.com/hnrysmth/greencard). It's vpim stripped down to just
-the vCard functionality used by ppl. Go fork it!
+if you're interested in helping with this, go take a look at greencard. It's
+vpim stripped down to just the vCard functionality used by ppl.  Go fork it!
 

@@ -59,6 +59,10 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("site/integrations/*.md")
   })
 
+  eleventyConfig.addCollection("news", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("site/news/*.md")
+  })
+
   eleventyConfig.addCollection("releases", function(collectionApi) {
     return collectionApi.getFilteredByGlob("site/releases/*.*.*.md")
   })

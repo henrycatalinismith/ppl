@@ -1,19 +1,16 @@
 ---
 title: ppl 2.0.0 released
 date: 2013-05-09
-layout: news
-section: news
-categories: [news]
 ---
 
 It's been almost exactly six months since the very [first
-commit](https://github.com/hnrysmth/ppl/commit/e45917e06afd255271bad51ce216642e7277ce86),
+commit](https://github.com/hendotcat/ppl/commit/e45917e06afd255271bad51ce216642e7277ce86),
 and I'm proud to announce that ppl has now reached the dizzy heights of version
 2.0.0! This is a milestone release for more than one reason, and I'm very happy
 that this project has made it to this point.
 
 Most important of all, the reason for the major version bump is that [ppl
-post](/documentation/commands/post) has been overhauled to support storing
+post](/commands/post) has been overhauled to support storing
 multiple postal addresses per contact. This overhaul introduced a number of
 backwards-incompatible changes to the behaviour of that command and ppl's
 underlying vCard integration, hence the bump to 2.0.0.

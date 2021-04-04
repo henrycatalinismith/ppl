@@ -1,14 +1,11 @@
 ---
 title: UTF-8 Fixed And More
 date: 2013-04-15
-layout: news
-section: news
-categories: [news]
 ---
 
 Over the weekend, in an uncharacteristically late night of coding, I finally put
 an end to that UTF-8 issue that had been preventing the [use of ppl with
-non-ASCII characters](https://github.com/hnrysmth/ppl/issues/17) such as ß or ñ. My
+non-ASCII characters](https://github.com/hendotcat/ppl/issues/17) such as ß or ñ. My
 apologies to anyone who wanted to try ppl and couldn't during the *two entire
 months* that issue sat open. If it's any consolation, fixing it gave me many
 headaches.
