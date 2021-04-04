@@ -4,3 +4,16 @@ title: ppl news
 
 {{ title }}
 
+<dl>
+  {% for post in collections.news | reverse %}
+    <dt>
+      <a href="/news/{{ post.data.title }}">
+        {{ post.data.title }}
+      </a>
+    </dt>
+    <dd>
+      {{ post.data.date }}
+    </dd>
+  {% endfor %}
+</dl>
+

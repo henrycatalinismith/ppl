@@ -14,15 +14,15 @@ clean:
 	rm -f site/casts/*.svg
 	rm -rf _site
 
-CONFIG_SRC := $(shell git grep -l "layout: configuration" gh-pages/ )
-CONFIG := $(patsubst gh-pages/documentation/configuration/%/index.md, %, $(CONFIG_SRC))
-CONFIG_DST := $(addsuffix .md, $(addprefix site/configuration/, $(CONFIG)))
-site/configuration/%.md:
-	git mv gh-pages/documentation/configuration/$*/index.md $@
+NEWS_SRC := $(shell git grep -l "layout: news" gh-pages/ )
+NEWS := $(patsubst gh-pages/_posts/%, %, $(NEWS_SRC))
+NEWS_DST := $(addsuffix .md, $(addprefix site/news/, $(NEWS)))
+site/news/%.md:
+	git mv gh-pages/_posts/$* $@
 
-config: $(CONFIG_DST)
-	echo $(CONFIG)
-	echo $(CONFIG_DST)
+config: $(NEWS_DST)
+	echo $(NEWS)
+	echo $(NEWS_DST)
 
 
 .PHONY: clean
