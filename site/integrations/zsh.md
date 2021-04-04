@@ -1,8 +1,6 @@
 ---
-title: ZSH Integration Guide
-layout: integration
-section: documentation
-integration: zsh
+name: ZSH
+summary: ZSH completion setup
 ---
 
 Similarly to the [Bash completion](/documentation/integration/bash/)

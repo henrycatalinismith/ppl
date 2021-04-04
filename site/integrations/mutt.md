@@ -1,8 +1,6 @@
 ---
-title: Mutt Integration Guide
-layout: integration
-section: documentation
-integration: mutt
+name: Mutt
+summary: Automcompleting & scraping contacts
 ---
 
 The [Mutt E-Mail Client](http://www.mutt.org/)
@@ -29,7 +27,7 @@ is as simple as pressing the `a` key.
 
     macro index,pager a "<pipe-message>ppl scrape --sender<return>"
 
-This macro uses the [scrape](/documentation/commands/scrape) command to pull out
+This macro uses the [scrape](/commands/scrape) command to pull out
 the sender's email address and name (if available), and adds them to the address
 book.
 
