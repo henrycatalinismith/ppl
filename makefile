@@ -18,7 +18,7 @@ COMMANDS_SRC := $(shell git grep -l "layout: command" gh-pages/ )
 COMMANDS := $(patsubst gh-pages/documentation/commands/%/index.md, %, $(COMMANDS_SRC))
 COMMANDS_DST := $(addsuffix .md, $(addprefix site/commands/, $(COMMANDS)))
 site/commands/%.md:
-	echo "git mv gh-pages/documentation/commands/$*/index.md $@"
+	git mv gh-pages/documentation/commands/$*/index.md $@
 
 commands: $(COMMANDS_DST)
 	echo $(COMMANDS)
