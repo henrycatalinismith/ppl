@@ -1,8 +1,6 @@
 ---
-title: Bash Integration Guide
-layout: integration
-section: documentation
-integration: bash
+name: Bash
+summary: Bash completion setup
 ---
 
 If you've ever used a command-line program like Git, you've probably used tab
@@ -16,7 +14,7 @@ that there's one available for ppl.
 
     $ ppl completion bash | sudo tee /etc/bash_completion.d/ppl
 
-The [completion](/documentation/commands/completion) command simply outputs the
+The [completion](/commands/completion) command simply outputs the
 completion function code in its entirety. The above line pipes that code into
 its rightful place in your system's Bash completion function config directory.
 

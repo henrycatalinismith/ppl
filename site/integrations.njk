@@ -1,0 +1,18 @@
+---
+layout: base
+itemtype: WebPage
+---
+
+<dl>
+  {% for integration in collections.integrations %}
+    <dt>
+      <a href="/integrations/{{ integration.data.name | slug }}">
+        {{ integration.data.name }}
+      </a>
+    </dt>
+    <dd>
+      {{ integration.data.summary }}
+    </dd>
+  {% endfor %}
+</dl>
+
