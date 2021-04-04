@@ -3,7 +3,7 @@ require "rubygems"
 module Ppl
 
   spec = Gem::Specification::load("ppl.gemspec")
-  Version = spec.version
+  Version = spec.nil? ? "" : spec.version
 
   module Adapter
   end
