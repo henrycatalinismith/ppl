@@ -6,7 +6,7 @@ itemtype: WebPage
 <dl>
   {% for setting in collections.settings %}
     <dt>
-      <a href="/settings/{{ setting.data.name | slug }}">
+      <a href="{{ url }}/settings/{{ setting.data.name | slug }}">
         [{{ setting.data.name }}]
       </a>
     </dt>
