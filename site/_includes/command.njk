@@ -1,0 +1,60 @@
+<!doctype html>
+<html
+  lang="en"
+  dir="ltr"
+  itemscope
+  itemtype="http://schema.org/SoftwareApplication">
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1"
+    />
+
+    <link rel="stylesheet" href="{{ url }}/style.css" />
+    <title>
+      ppl {{ command }}
+    </title>
+  </head>
+  <body>
+
+    <h1>
+      ppl {{ command }}
+    </h1>
+
+    <h2>
+      Name
+    </h2>
+
+    <p>
+      ppl {{name}} - {{ summary }}
+    </p>
+
+    <h2>
+      Synopsis
+    </h2>
+
+    <pre><code>{{ synopsis }}</code></pre>
+
+    <h2>
+      Description
+    </h2>
+
+    {{ content | safe }}
+
+    {% if see_also | length > 0 %}
+      <h2>
+        See Also
+      </h2>
+
+      <ol>
+        {% for link in see_also %}
+          <li>
+            {{ link.text}} - {{ link.href }}
+          </li>
+        {% endfor %}
+      </ol>
+    {% endif %}
+
+  </body>
+</html>
+
