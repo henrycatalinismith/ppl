@@ -1,9 +1,6 @@
 ---
 title: Thanks For All Your Feedback
 date: 2012-12-21
-layout: news
-section: news
-categories: [news]
 ---
 
 Yesterday I worked up the courage to submit this project to Hacker News under
@@ -20,7 +17,7 @@ The elephant in the room is obviously sync functionality at this point.  Lots
 and lots of people have made it very clear that even though they think this
 project is a great idea it is useless in the extreme to them unless it can sync
 with their GMail or iCloud. Rest assured that [this has not gone
-unnoticed](https://github.com/hnrysmth/ppl/issues/5).
+unnoticed](https://github.com/hendotcat/ppl/issues/5).
 
 Stay tuned!
 
