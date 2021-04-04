@@ -1,5 +1,0 @@
-source: .
-destination: _site
-exclude: [.git, Gemfile, Gemfile.lock, .gitignore, README.md, Rakefile]
-url: "https://hensmith.github.io/ppl"
-permalink: "/news/:title"
