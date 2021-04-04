@@ -6,7 +6,7 @@ itemtype: WebPage
 <dl>
   {% for integration in collections.integrations %}
     <dt>
-      <a href="/integrations/{{ integration.data.name | slug }}">
+      <a href="{{ url }}/integrations/{{ integration.data.name | slug }}">
         {{ integration.data.name }}
       </a>
     </dt>

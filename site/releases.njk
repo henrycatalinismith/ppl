@@ -6,7 +6,7 @@ itemtype: WebPage
 <dl>
   {% for release in collections.releases | reverse %}
     <dt>
-      <a href="/releases/{{ release.data.version }}">
+      <a href="{{ url }}/releases/{{ release.data.version }}">
         {{ release.data.version }}
       </a>
     </dt>
