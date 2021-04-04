@@ -1,5 +1,5 @@
 ---
-command: shell
+name: shell
 summary: Interactive mode
 synopsis: ppl shell
 ---

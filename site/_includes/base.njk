@@ -1,0 +1,25 @@
+<!doctype html>
+<html
+  lang="en"
+  dir="ltr"
+  {% if itemtype %}
+    itemscope
+    itemtype="http://schema.org/{{ itemtype }}">
+  {% endif %}
+>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1"
+    />
+    <link rel="stylesheet" href="{{ url }}/style.css" />
+    <title>
+      {{ title }}
+    </title>
+  </head>
+  <body>
+    <main>
+    </main>
+    {{ content | safe }}
+  </body>
+</html>

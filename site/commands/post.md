@@ -1,5 +1,5 @@
 ---
-command: post
+name: post
 summary: List, show or change postal addresses
 synopsis: |
   ppl post

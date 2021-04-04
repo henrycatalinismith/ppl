@@ -1,5 +1,5 @@
 ---
-command: email
+name: email
 summary: List, show or change email addresses
 synopsis: |
   ppl email
