@@ -14,5 +14,14 @@ clean:
 	rm -f site/casts/*.svg
 	rm -rf _site
 
-.PHONY: clean
+RELEASES_SRC := $(shell git grep -l "layout: changelog" gh-pages/_posts )
+RELEASES_DST := $(addprefix site/releases/, $(notdir $(RELEASES_SRC)))
+site/releases/%:
+	git mv gh-pages/_posts/$* $@
+
+releases: $(RELEASES_DST)
+	echo $(RELEASES_DST)
+
+
+.PHONY: clean releases
 
