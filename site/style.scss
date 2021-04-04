@@ -54,14 +54,19 @@ body {
   }
 
   header {
-    display: flex;
+    align-content: center;
+    display: grid;
+    grid-template-rows: repeat(3, min-content);
     flex-direction: column;
     justify-content: center;
+    row-gap: 1rem;
     height: var(--box);
     width: var(--box);
   }
 
   h1 {
+    display: flex;
+    justify-content: center;
     margin: 0;
   }
 
@@ -86,6 +91,7 @@ body {
     font-family: "Menlo", monospace;
     font-size: var(--descriptionFontSize);
     margin: 0;
+    text-align: center;
   }
 
   img {
@@ -106,6 +112,41 @@ body {
     background-color: #282d35;
     height: var(--box);
     width: var(--box);
+  }
+
+  nav {
+  }
+
+  nav ol {
+    display: grid;
+    column-gap: 1rem;
+    row-gap: 1rem;
+    justify-content: center;
+    flex-direction: row;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav ol li:nth-child(1) { grid-area: 1/1; }
+  nav ol li:nth-child(2) { grid-area: 1/2; }
+  nav ol li:nth-child(3) { grid-area: 2/1; }
+  nav ol li:nth-child(4) { grid-area: 2/2; }
+
+  nav ol li:nth-child(even) {
+    text-align: left;
+  }
+
+  nav ol li:nth-child(odd) {
+    text-align: right;
+  }
+
+  nav ol li a {
+    color: dodgerblue;
+    font-family: Futura, sans-serif;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: none;
   }
 
   footer {
