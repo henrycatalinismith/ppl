@@ -1,8 +1,6 @@
 ---
-title: Google Integration Guide
-layout: integration
-section: documentation
-integration: google
+name: Google
+summary: Importing and converting Google contacts
 ---
 
 Many people have a large set of address book data stored in Google Contacts,
