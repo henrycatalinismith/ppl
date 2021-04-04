@@ -1,6 +1,9 @@
+require "rubygems"
+
 module Ppl
 
-  Version = "3.0.1"
+  spec = Gem::Specification::load("ppl.gemspec")
+  Version = spec.version
 
   module Adapter
   end
