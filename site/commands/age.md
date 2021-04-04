@@ -1,5 +1,5 @@
 ---
-command: age
+name: age
 summary: List or show contacts' ages
 synopsis: ppl age [<contact>]
 see_also:

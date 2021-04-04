@@ -1,5 +1,5 @@
 ---
-command: bday
+name: bday
 summary: List, show or change birthdays
 synopsis: |
   ppl bday

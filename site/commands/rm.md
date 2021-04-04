@@ -1,5 +1,5 @@
 ---
-command: rm
+name: rm
 summary: Delete a contact
 synopsis: ppl rm <contact>
 ---

@@ -1,5 +1,5 @@
 ---
-command: remote
+name: remote
 summary: Execute `git remote` in the address book directory
 synopsis: |
     ppl remote [-v | --verbose]

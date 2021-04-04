@@ -1,5 +1,5 @@
 ---
-command: completion
+name: completion
 summary: Output a completion function for shell integration
 synopsis: ppl completion <shell>
 see_also:

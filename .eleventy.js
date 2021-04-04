@@ -51,6 +51,10 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("site/casts/*.svg")
   eleventyConfig.addPlugin(minifyPlugin)
 
+  eleventyConfig.addCollection("commands", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("site/commands/*.md")
+  })
+
   compileSass()
 
   if (process.argv.includes("--serve")) {

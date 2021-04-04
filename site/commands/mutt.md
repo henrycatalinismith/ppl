@@ -1,5 +1,5 @@
 ---
-command: mutt
+name: mutt
 summary: Integration with mutt's query_command
 synopsis: |
   ppl mutt [<options>] <query>

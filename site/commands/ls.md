@@ -1,5 +1,5 @@
 ---
-command: ls
+name: ls
 summary: List all contacts
 synopsis: |
   ppl ls [<options>]

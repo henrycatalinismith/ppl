@@ -1,75 +1,58 @@
 ---
+layout: base
 title: ppl
 description: The command-line address book
+itemtype: SoftwareApplication
 ---
-<!doctype html>
-<html
-  lang="en"
-  dir="ltr"
-  itemscope
-  itemtype="http://schema.org/SoftwareApplication">
-  <head>
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1"
-    />
 
-    <link rel="stylesheet" href="{{ url }}/style.css" />
-    <title>
-      {{ title }}
-    </title>
-  </head>
-  <body>
-    <main>
-      <header>
-        <h1>
-          <span itemprop="name">
-            {{ title }}
-          </span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="-1 0 15 8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            height="32px"
-            width="64px">
-            <defs>
-              <path id="p" d="M0,6 L0,3 L2,3 L2,5 L0,5" />
-              <path id="l" d="M0,3 L0,6 L2,6" />
-            </defs>
-            <use xlink:href="#p" fill="none" stroke="#000000" stroke-width="2.8" x="0" y="0" />
-            <use xlink:href="#p" fill="none" stroke="#fff1e8" stroke-width="1" x="0" y="0" />
-            <use xlink:href="#p" fill="none" stroke="#000000" stroke-width="2.8" x="4" y="0" />
-            <use xlink:href="#p" fill="none" stroke="#fff1e8" stroke-width="1" x="4" y="0" />
-            <use xlink:href="#l" fill="none" stroke="#000000" stroke-width="2.8" x="8" y="0" />
-            <use xlink:href="#l" fill="none" stroke="#fff1e8" stroke-width="1" x="8" y="0" />
-          </svg>
-        </h1>
-        <p itemprop="description">
-          {{ description }}
-        </p>
-      </header>
+<main>
+  <header>
+    <h1>
+      <span itemprop="name">
+        {{ title }}
+      </span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="-1 0 15 8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        height="32px"
+        width="64px">
+        <defs>
+          <path id="p" d="M0,6 L0,3 L2,3 L2,5 L0,5" />
+          <path id="l" d="M0,3 L0,6 L2,6" />
+        </defs>
+        <use xlink:href="#p" fill="none" stroke="#000000" stroke-width="2.8" x="0" y="0" />
+        <use xlink:href="#p" fill="none" stroke="#fff1e8" stroke-width="1" x="0" y="0" />
+        <use xlink:href="#p" fill="none" stroke="#000000" stroke-width="2.8" x="4" y="0" />
+        <use xlink:href="#p" fill="none" stroke="#fff1e8" stroke-width="1" x="4" y="0" />
+        <use xlink:href="#l" fill="none" stroke="#000000" stroke-width="2.8" x="8" y="0" />
+        <use xlink:href="#l" fill="none" stroke="#fff1e8" stroke-width="1" x="8" y="0" />
+      </svg>
+    </h1>
+    <p itemprop="description">
+      {{ description }}
+    </p>
+  </header>
 
-      <img
-        alt="Animated demo showing Pippi Långstrump being added to a new address book"
-        src="{{ url }}/casts/hero.svg"
-      />
+  <img
+    alt="Animated demo showing Pippi Långstrump being added to a new address book"
+    src="{{ url }}/casts/hero.svg"
+  />
 
-      <footer>
-        <p
-          itemprop="creator"
-          itemscope
-          itemtype="http://schema.org/Person">
-          <a href="https://hen.cat/" target="_blank">
-            <span itemprop="name">
-              Henry Catalini Smith
-            </span>
-          </a>
-        </p>
-      </footer>
+  <footer>
+    <p
+      itemprop="creator"
+      itemscope
+      itemtype="http://schema.org/Person">
+      <a href="https://hen.cat/" target="_blank">
+        <span itemprop="name">
+          Henry Catalini Smith
+        </span>
+      </a>
+    </p>
+  </footer>
 
-    </main>
-  </body>
-</html>
+</main>
 

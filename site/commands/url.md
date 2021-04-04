@@ -1,5 +1,5 @@
 ---
-command: url
+name: url
 summary: List, show or change URLs
 synopsis: |
   ppl url

@@ -1,5 +1,5 @@
 ---
-command: org
+name: org
 summary: List, show or change organizations
 synopsis: |
   ppl org

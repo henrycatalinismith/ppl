@@ -1,5 +1,5 @@
 ---
-command: push
+name: push
 summary: Execute `git push` in the address book directory
 synopsis: ppl push <remote> <branch>
 see_also:

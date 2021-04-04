@@ -1,5 +1,5 @@
 ---
-command: scrape
+name: scrape
 summary: Scrape contact details from an email in `stdin`
 synopsis: |
   ppl scrape [<options>]
