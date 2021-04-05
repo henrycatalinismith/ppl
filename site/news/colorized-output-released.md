@@ -1,11 +1,11 @@
 ---
-title: Coloured Output Released
+title: Colorized Output Released
 date: 2013-03-16
 ---
 
 It's been about a month since the last release, but that's not because of any
 lack of internal activity. Today marks the release of support for git-style
-coloured output, configurable in `~/.pplconfig`.
+colorized output, configurable in `~/.pplconfig`.
 
 This has taken a while to achieve just because I wanted to take my time over it
 and try to really get it right the first time. Some refactoring was necessary in

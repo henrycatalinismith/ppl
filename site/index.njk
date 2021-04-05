@@ -61,6 +61,36 @@ itemtype: SoftwareApplication
       src="{{ url }}/casts/hero.svg"
     />
 
+    {% set article = (collections.news | reverse)[0] %}
+
+    <article itemscope itemtype="http://schema.org/Article">
+      <h2>
+        <a href="/news/{{ article.data.title | slug }}" itemprop="headline">
+          {{ article.data.title }}
+        </a>
+      </h2>
+      <time itemprop="datePublished" datetime="{{ article.data.date.toISOString().slice(0, 10) }}">
+        {{ article.data.date.toISOString().slice(0, 10) }}
+      </time>
+      <div itemprop="text">
+        {{ article.templateContent | safe }}
+      </div>
+      <nav>
+        <ol>
+          <li>
+            <a href="/news/{{ article.data.title | slug }}">
+              permalink
+            </a>
+          </li>
+          <li>
+            <a href="/news">
+              news archive
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </article>
+
     {% include "footer.njk" %}
 
   </article>

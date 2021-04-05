@@ -1,5 +1,5 @@
 ---
-title: Get Involved!
+title: Get Involved
 date: 2015-12-03
 ---
 
