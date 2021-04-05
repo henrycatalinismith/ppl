@@ -2,6 +2,7 @@ const chokidar = require("chokidar")
 const fs = require("fs-extra")
 const htmlmin = require("html-minifier")
 const sass = require("sass")
+const url = require("./site/_data/url")
 
 function minifyHtml(html) {
   return htmlmin.minify(html, {
@@ -28,6 +29,10 @@ const minifyPlugin = {
       function(content, outputPath) {
         if (outputPath && outputPath.endsWith(".html")) {
           return minifyHtml(content)
+            .replaceAll(
+              /href="\//g,
+              `href="${url}/`
+            )
         }
         return content
       }
