@@ -14,7 +14,7 @@ synopsis: |
     ppl post <contact> <address> (-m | --move) <new-name>
 see_also:
   - text: color output
-    href: /configuration/color_post
+    href: /settings/color-post
 ---
 
 With no arguments, the postal addresses of each contact in the address book are

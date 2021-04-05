@@ -11,7 +11,7 @@ synopsis: |
       --format <format>  specify a custom output format
 see_also:
   - text: color output
-    href: /configuration/color_email
+    href: /settings/color-email
 ---
 
 With no arguments, the email addresses of each contact in the address book are

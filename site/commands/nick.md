@@ -8,7 +8,7 @@ synopsis: |
   ppl nick <contact> (-d | --delete) <nickname>
 see_also:
   - text: color output
-    href: /configuration/color_nick
+    href: /settings/color-nick
 ---
 
 With no arguments, the nicknames of each contact in the address book are listed.

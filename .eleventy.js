@@ -29,7 +29,7 @@ const minifyPlugin = {
       function(content, outputPath) {
         if (outputPath && outputPath.endsWith(".html")) {
           return minifyHtml(content)
-            .replaceAll(
+            .replace(
               /href="\//g,
               `href="${url}/`
             )

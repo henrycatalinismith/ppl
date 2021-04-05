@@ -12,7 +12,7 @@ synopsis: |
       -P, --not-preferred  mark as not preferred
 see_also:
   - text: color output
-    href: /configuration/color_phone
+    href: /settings/color-phone
 ---
 
 With no arguments, the phone numbers of each contact in the address book are

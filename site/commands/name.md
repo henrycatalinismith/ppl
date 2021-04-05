@@ -12,7 +12,7 @@ synopsis: |
       -s, --suffix <suffix>
 see_also:
   - text: color output
-    href: /configuration/color_name
+    href: /settings/color-name
 ---
 
 With no arguments, the full names of each contact in the address book are
