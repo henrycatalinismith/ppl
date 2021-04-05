@@ -39,7 +39,7 @@ body {
   margin: var(--padding) 0;
 }
 
-main {
+main, article, [itemprop="text"] {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -224,4 +224,37 @@ footer {
     text-decoration-color: deepskyblue;
   }
 }
+
+pre.synopsis {
+  background: #223;
+  border-to: 0.2rem solid hotpink;
+  border-bottom: 0.2rem solid hotpink;
+  box-shadow:
+    0 -0.1rem 0 cyan,
+    0 0.1rem 0 cyan;
+  display: flex;
+  justify-content: center;
+  overflow-x: scroll;
+  padding: 2rem 0;
+  width: 100vw;
+}
+
+pre.synopsis > code {
+  color: white;
+  font-family: Menlo, monospace;
+  font-size: 0.8rem;
+  min-width: var(--box);
+}
+
+h2, p {
+  width: var(--box);
+}
+
+[itemprop="text"] p {
+  font-family: Helvetica, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.3em;
+  margin: 0 0 1rem 0;
+}
+
 

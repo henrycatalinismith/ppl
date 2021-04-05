@@ -1,31 +1,12 @@
 ---
-layout: base
+layout: page
 itemtype: WebPage
+eleventyComputed:
+  title: "ppl {{ name }}"
+  description: "{{ summary }}"
 ---
 
-<h1>
-  ppl {{ name }}
-</h1>
-
-{{ title }}
-
-<h2>
-  Name
-</h2>
-
-<p>
-  ppl {{name}} - {{ summary }}
-</p>
-
-<h2>
-  Synopsis
-</h2>
-
-<pre><code>{{ synopsis }}</code></pre>
-
-<h2>
-  Description
-</h2>
+<pre class="synopsis"><code>{{ synopsis }}</code></pre>
 
 {{ content | safe }}
 
