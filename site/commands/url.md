@@ -8,7 +8,7 @@ synopsis: |
   ppl url <contact> (-d | --delete) <url>
 see_also:
   - text: color output
-    href: /configuration/color_url
+    href: /settings/color-url
 ---
 
 With no arguments, the URLs of each contact in the address book are listed.

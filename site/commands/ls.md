@@ -7,7 +7,7 @@ synopsis: |
       --pretty <preset>  specify a preset output format
 see_also:
   - text: color output
-    href: /configuration/color_ls
+    href: /settings/color-ls
 ---
 
 List all the contacts in the address book.

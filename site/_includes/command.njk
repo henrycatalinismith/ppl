@@ -11,17 +11,6 @@ eleventyComputed:
 {{ content | safe }}
 
 {% if see_also | length > 0 %}
-  <h2>
-    See Also
-  </h2>
-
-  <ol>
-    {% for link in see_also %}
-      <li>
-        {{ link.text}} - {{ link.href }}
-      </li>
-    {% endfor %}
-  </ol>
+  {% include "see-also.njk" %}
 {% endif %}
-
 

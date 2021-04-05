@@ -6,7 +6,7 @@ see_also:
   - text: ppl bday
     href: /commands/bday
   - text: color output
-    href: /configuration/color_age
+    href: /settings/color-age
 ---
 
 This command calculates contacts' current ages in years based on their date of

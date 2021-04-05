@@ -9,7 +9,7 @@ see_also:
   - text: Date.parse
     href: http://ruby-doc.org/stdlib-1.9.3/libdoc/date/rdoc/Date.html\#method-c-parse
   - text: color output
-    href: /configuration/color_bday
+    href: /settings/color-bday
 ---
 
 With no arguments, the dates of birth of each contact in the address book are
