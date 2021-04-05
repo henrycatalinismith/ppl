@@ -250,11 +250,31 @@ h2, p {
   width: var(--box);
 }
 
-[itemprop="text"] p {
+[itemprop="text"] p,
+[itemprop="text"] ul {
   font-family: Helvetica, sans-serif;
   font-size: 1.2rem;
   line-height: 1.3em;
+}
+
+[itemprop="text"] code {
+  font-family: Menlo, monospace;
+  font-size: 1.2rem;
+}
+
+[itemprop="text"] p {
   margin: 0 0 1rem 0;
+}
+
+[itemprop="text"] ul {
+  margin-left: 2rem;
+  padding: 0;
+  width: calc(var(--box) - 2rem);
+}
+
+[itemprop="text"] a {
+  color: dodgerblue;
+  text-decoration: none;
 }
 
 

@@ -4,7 +4,7 @@ summary: Colorized output for the bday command
 ---
 
 This section dictates the color of the output of the
-[bday](/documentation/commands/bday) command.
+[bday](/commands/bday) command.
 
 ## Example
 
