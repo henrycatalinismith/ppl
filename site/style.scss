@@ -48,15 +48,27 @@ main {
 header {
   align-content: center;
   display: grid;
-  justify-content: center;
+  grid-template-rows: repeat(2, min-content);
   height: var(--box);
+  justify-content: center;
+  row-gap: 1rem;
   width: var(--box);
 }
 
 h1[itemprop="headline"] {
+  color: darkslategray;
   font-family: Futura, sans-serif;
   font-size: 2rem;
   margin: 0;
+  text-align: center;
+}
+
+p[itemprop="description"] {
+  font-family: "Menlo", monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
 }
 
 [itemtype="http://schema.org/SoftwareApplication"] {
