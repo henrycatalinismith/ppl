@@ -3,6 +3,13 @@ layout: page
 itemtype: Article
 eleventyComputed:
   title: "{{ title }}"
+  breadcrumbs:
+    - text: ppl
+      href: /
+    - text: news
+      href: /news
+    - text: "{{ title }}"
+      href: "/news/{{ title | slug }}"
 ---
 
 {{ content | safe }}

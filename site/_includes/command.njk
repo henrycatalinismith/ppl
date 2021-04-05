@@ -4,6 +4,13 @@ itemtype: WebPage
 eleventyComputed:
   title: "ppl {{ name }}"
   description: "{{ summary }}"
+  breadcrumbs:
+    - text: ppl
+      href: /
+    - text: commands
+      href: /commands
+    - text: "{{ name }}"
+      href: "/commands/{{ name }}"
 ---
 
 <pre class="synopsis"><code>{{ synopsis }}</code></pre>

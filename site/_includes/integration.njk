@@ -4,6 +4,13 @@ itemtype: WebPage
 eleventyComputed:
   title: "ppl {{ name | slug }} integration"
   description: "{{ summary }}"
+  breadcrumbs:
+    - text: ppl
+      href: /
+    - text: integrations
+      href: /integrations
+    - text: "{{ name }}"
+      href: "/integrations/{{ name | slug }}"
 ---
 
 {{ content | safe }}
