@@ -13,7 +13,9 @@ itemtype: WebPage
         {{ description }}
       </p>
     </header>
-    {{ content | safe }}
+    <section itemprop="text">
+      {{ content | safe }}
+    </section>
   </article>
 </main>
 
