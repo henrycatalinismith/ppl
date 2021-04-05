@@ -4,7 +4,7 @@ summary: Colorized output for the url command
 ---
 
 This section dictates the color of the output of the
-[url](/documentation/commands/url) command.
+[url](/commands/url) command.
 
 ## Example
 

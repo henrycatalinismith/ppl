@@ -4,7 +4,7 @@ summary: Colorized output for the ls command
 ---
 
 This section dictates the color of the output of the
-[ls](/documentation/commands/ls) command.
+[ls](/commands/ls) command.
 
 ## Example
 

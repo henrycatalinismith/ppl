@@ -4,7 +4,7 @@ summary: Colorized output for the org command
 ---
 
 This section dictates the color of the output of the
-[org](/documentation/commands/org) command.
+[org](/commands/org) command.
 
 ## Example
 

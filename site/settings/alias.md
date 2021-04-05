@@ -36,7 +36,7 @@ commands via aliases prefixed with an exclamation mark, or "bang". In your
         lsx = !ppl ls | grep -i x
 
 The above example creates an alias `lsx` that pipes the output of [ppl
-ls](/documentation/commands/ls) through `grep -i x`. This means that you
+ls](/commands/ls) through `grep -i x`. This means that you
 effectively create a new command - `ppl lsx` - which is identical to `ppl ls`
 except that it only displays lines containing the letter x.
 
