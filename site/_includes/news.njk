@@ -1,13 +1,9 @@
 ---
-layout: base
-itemtype: WebPage
+layout: page
+itemtype: Article
+eleventyComputed:
+  title: "{{ title }}"
 ---
-
-<h1>
-  {{ title }}
-</h1>
-
-{{ date }}
 
 {{ content | safe }}
 

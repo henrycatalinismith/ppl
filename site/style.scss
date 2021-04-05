@@ -63,7 +63,8 @@ h1[itemprop="headline"] {
   text-align: center;
 }
 
-p[itemprop="description"] {
+header [itemprop="datePublished"],
+header p[itemprop="description"] {
   color: deeppink;
   font-family: "Rockwell", serif;
   font-size: 1.4rem;
@@ -171,6 +172,43 @@ p[itemprop="description"] {
     font-size: 1.4rem;
     font-weight: bold;
     text-decoration: none;
+  }
+
+  [itemtype="http://schema.org/Article"] {
+    align-items: flex-start;
+    margin: 2rem 0 0 0;
+    width: var(--box);
+
+    h2 {
+      margin: 0;
+
+      a {
+        color: deeppink;
+        font-family: Rockwell, serif;
+        font-size: 1.4rem;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      &::before {
+        color: tomato;
+        content: "Latest News: ";
+        display: block;
+        font-weight: bold;
+        font-size: 1rem;
+      }
+    }
+
+    time {
+      color: darkslategray;
+      font-family: Rockwell, serif;
+      font-size: 1.2rem;
+      font-weight: normal;
+    }
+
+    [itemprop="text"] {
+      margin: 1rem 0 0 0;
+    }
   }
 }
 

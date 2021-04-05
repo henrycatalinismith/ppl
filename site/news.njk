@@ -1,18 +1,18 @@
 ---
+layout: page
 title: ppl news
+description: Archive of all news posts
 ---
-
-{{ title }}
 
 <dl>
   {% for post in collections.news | reverse %}
     <dt>
-      <a href="{{ url }}/news/{{ post.data.title }}">
+      <a href="{{ url }}/news/{{ post.data.title | slug }}">
         {{ post.data.title }}
       </a>
     </dt>
     <dd>
-      {{ post.data.date }}
+      {{ post.data.date.toISOString().slice(0, 10) }}
     </dd>
   {% endfor %}
 </dl>
