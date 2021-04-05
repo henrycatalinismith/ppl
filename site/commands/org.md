@@ -8,7 +8,7 @@ synopsis: |
   ppl org <contact> (-d | --delete) <organization>
 see_also:
   - text: color output
-    href: /configuration/color_org
+    href: /settings/color-org
 ---
 
 With no arguments, the organizations of each contact in the address book are

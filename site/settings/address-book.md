@@ -1,12 +1,10 @@
 ---
 name: address book
 summary: Tell ppl where your address book is
+example: |
+  [address book]
+      path = ~/contacts
 ---
-
-## path
-
-    [address book]
-        path = ~/contacts
 
 By default, ppl determines the location of the address book based on the user's
 [working directory](http://en.wikipedia.org/wiki/Working_directory). This value

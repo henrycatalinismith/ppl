@@ -57,15 +57,16 @@ header {
 
 h1[itemprop="headline"] {
   color: darkslategray;
-  font-family: Futura, sans-serif;
-  font-size: 2rem;
+  font-family: Rockwell, serif;
+  font-size: 3rem;
   margin: 0;
   text-align: center;
 }
 
 p[itemprop="description"] {
-  font-family: "Menlo", monospace;
-  font-size: 1rem;
+  color: deeppink;
+  font-family: "Rockwell", serif;
+  font-size: 1.4rem;
   font-weight: bold;
   margin: 0;
   text-align: center;
@@ -111,7 +112,7 @@ p[itemprop="description"] {
   }
 
   header [itemprop="description"] {
-    font-family: "Menlo", monospace;
+    font-family: "Rockwell", serif;
     font-size: var(--descriptionFontSize);
     margin: 0;
     text-align: center;
@@ -166,7 +167,7 @@ p[itemprop="description"] {
 
   nav ol li a {
     color: dodgerblue;
-    font-family: Futura, sans-serif;
+    font-family: Rockwell, serif;
     font-size: 1.4rem;
     font-weight: bold;
     text-decoration: none;
@@ -181,8 +182,9 @@ dl {
 
 dt a {
   color: dodgerblue;
-  font-family: Menlo, monospace;
+  font-family: Rockwell, serif;
   font-size: 1.4rem;
+  font-weight: bold;
   text-decoration: none;
 }
 
@@ -191,7 +193,8 @@ dt:not(:first-child) {
 }
 
 dd {
-  font-family: Helvetica, sans-serif;
+  color: darkslategray;
+  font-family: Rockwell, serif;
   font-size: 1.2rem;
   margin: 0.2rem 0 0 0;
 }
@@ -225,6 +228,11 @@ footer {
   }
 }
 
+pre > code {
+  font-family: Menlo, monospace;
+  font-size: 0.8rem;
+}
+
 pre.synopsis {
   background: #223;
   border-to: 0.2rem solid hotpink;
@@ -246,20 +254,34 @@ pre.synopsis > code {
   min-width: var(--box);
 }
 
-h2, p {
+[itemprop="text"] h2 {
+  color: deeppink;
+  font-family: Rockwell, serif;
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin: 2rem 0 1rem 0;
+}
+
+[itemprop="text"] pre:not(.synopsis) {
+  margin: 0 0 1rem 0;
+}
+
+[itemprop="text"] h2,
+[itemprop="text"] p,
+[itemprop="text"] pre:not(.synopsis) {
   width: var(--box);
 }
 
 [itemprop="text"] p,
 [itemprop="text"] ul {
+  color: darkslategray;
   font-family: Helvetica, sans-serif;
+  font-family: "Rockwell";
   font-size: 1.2rem;
-  line-height: 1.3em;
+  line-height: 1.5em;
 }
 
 [itemprop="text"] code {
-  font-family: Menlo, monospace;
-  font-size: 1.2rem;
 }
 
 [itemprop="text"] p {
@@ -272,9 +294,29 @@ h2, p {
   width: calc(var(--box) - 2rem);
 }
 
+.see-also {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: var(--box);
+}
+
+.see-also a {
+  font-family: Rockwell, serif;
+  font-size: 1.2rem;
+}
+
 [itemprop="text"] a {
   color: dodgerblue;
   text-decoration: none;
 }
 
+[itemprop="text"] p code,
+[itemprop="text"] ul code {
+  background-color: azure;
+  color: deeppink;
+  font-family: Monaco;
+  font-size: 0.9em;
+  padding: 2px 4px;
+}
 

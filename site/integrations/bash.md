@@ -10,7 +10,7 @@ Bash accomplishes this through the use of a [completion
 function](http://tldp.org/LDP/abs/html/tabexpansion.html), and the good news is
 that there's one available for ppl.
 
-### Install the completion function globally
+## Install the completion function globally
 
     $ ppl completion bash | sudo tee /etc/bash_completion.d/ppl
 

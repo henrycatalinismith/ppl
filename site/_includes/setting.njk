@@ -6,5 +6,11 @@ eleventyComputed:
   description: "{{ summary }}"
 ---
 
+<pre class="synopsis"><code>{{ example }}</code></pre>
+
 {{ content | safe }}
+
+{% if see_also | length > 0 %}
+  {% include "see-also.njk" %}
+{% endif %}
 

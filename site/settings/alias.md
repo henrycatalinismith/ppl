@@ -1,15 +1,15 @@
 ---
 name: alias
 summary: Create shortcuts for frequently-used commands
+example: |
+  [alias]
+      l = ls
+      s = show
 ---
 
 Sometimes typing the same long commands repeatedly becomes tiresome. The
 `[alias]` section is intended to address this issue by providing a means of
 configuring shorter forms of commands.
-
-    [alias]
-        l = ls
-        s = show
 
 Adding the above lines to `~/.pplconfig` would allow the user to interact with
 ppl as follows:
