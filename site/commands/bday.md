@@ -7,7 +7,7 @@ synopsis: |
   ppl bday <contact> <date>
 see_also:
   - text: Date.parse
-    href: http://ruby-doc.org/stdlib-1.9.3/libdoc/date/rdoc/Date.html\#method-c-parse
+    href: "http://ruby-doc.org/stdlib-1.9.3/libdoc/date/rdoc/Date.html#method-c-parse"
   - text: color output
     href: /settings/color-bday
 ---
