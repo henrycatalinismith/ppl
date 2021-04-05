@@ -4,6 +4,13 @@ itemtype: WebPage
 eleventyComputed:
   title: "ppl version {{ version }}"
   description: "{{ summary }}"
+  breadcrumbs:
+    - text: ppl
+      href: /
+    - text: releases
+      href: /releases
+    - text: "{{ version }}"
+      href: "/releases/{{ version }}"
 ---
 
 {{ content | safe }}
