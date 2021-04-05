@@ -4,7 +4,7 @@ summary: Colorized output for the nick command
 ---
 
 This section dictates the color of the output of the
-[nick](/documentation/commands/nick) command.
+[nick](/commands/nick) command.
 
 ## Example
 

@@ -4,7 +4,7 @@ summary: Colorized output for the email command
 ---
 
 This section dictates the color of the output of the
-[email](/documentation/commands/email) command.
+[email](/commands/email) command.
 
 ## Example
 

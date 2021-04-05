@@ -4,7 +4,7 @@ summary: Colorized output for the post command
 ---
 
 This section dictates the color of the output of the
-[post](/documentation/commands/post) command.
+[post](/commands/post) command.
 
 ## Example
 

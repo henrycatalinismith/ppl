@@ -37,9 +37,9 @@ people to selectively enable color output on a per-command basis.
 
 ## Unsupported commands
 
-The [mutt](/documentation/commands/mutt) command doesn't support color output
+The [mutt](/commands/mutt) command doesn't support color output
 and never will. It'd be completely pointless.
 
-The [show](/documentation/commands/show) command doesn't, either, but this is
+The [show](/commands/show) command doesn't, either, but this is
 due to be added sometime soon.
 

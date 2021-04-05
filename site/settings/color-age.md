@@ -4,7 +4,7 @@ summary: Colorized output for the age command
 ---
 
 This section dictates the color of the output of the
-[age](/documentation/commands/age) command.
+[age](/commands/age) command.
 
 ## Example
 

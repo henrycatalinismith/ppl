@@ -4,7 +4,7 @@ summary: Colorized output for the phone command
 ---
 
 This section dictates the color of the output of the
-[phone](/documentation/commands/phone) command.
+[phone](/commands/phone) command.
 
 ## Example
 

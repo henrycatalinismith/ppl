@@ -4,7 +4,7 @@ summary: Colorized output for the name command
 ---
 
 This section dictates the color of the output of the
-[name](/documentation/commands/name) command.
+[name](/commands/name) command.
 
 ## Example
 

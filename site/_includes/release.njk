@@ -1,32 +1,10 @@
-<!doctype html>
-<html
-  lang="en"
-  dir="ltr"
-  itemscope
-  itemtype="http://schema.org/SoftwareApplication">
-  <head>
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1"
-    />
+---
+layout: page
+itemtype: WebPage
+eleventyComputed:
+  title: "ppl version {{ version }}"
+  description: "{{ summary }}"
+---
 
-    <link rel="stylesheet" href="{{ url }}/style.css" />
-    <title>
-      ppl version {{ version }}
-    </title>
-  </head>
-  <body>
-
-    <h1>
-      ppl version {{ version }}
-    </h1>
-    
-    <p>
-      {{ summary }}
-    </p>
-
-    {{ content | safe }}
-
-  </body>
-</html>
+{{ content | safe }}
 
