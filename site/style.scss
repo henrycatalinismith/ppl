@@ -36,7 +36,47 @@ body {
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: var(--padding) 0;
+  margin: 0 0 var(--padding) 0;
+}
+
+body > aside {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  --spacing: 0.3rem;
+
+  nav {
+  }
+
+  ol {
+    align-items: center;
+    column-gap: var(--spacing);
+    display: grid;
+    grid-template-columns: min-content min-content auto;
+    height: 3rem;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+
+  li:not(:first-child)::before {
+    content: "/";
+    font-family: Rockwell, serif;
+    margin-right: var(--spacing);
+  }
+
+  a {
+    color: dodgerblue;
+    font-family: Rockwell, serif;
+    text-decoration: none;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 main, article, [itemprop="text"] {
