@@ -33,6 +33,29 @@ html {
 }
 
 body {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: var(--padding) 0;
+}
+
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  align-content: center;
+  display: grid;
+  justify-content: center;
+  height: var(--box);
+  width: var(--box);
+}
+
+h1[itemprop="headline"] {
+  font-family: Futura, sans-serif;
+  font-size: 2rem;
   margin: 0;
 }
 
@@ -47,21 +70,9 @@ body {
     --descriptionFontSize: 1.8rem;
   }
 
-  main {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
-
   header {
-    align-content: center;
-    display: grid;
     grid-template-rows: repeat(3, min-content);
-    flex-direction: column;
-    justify-content: center;
     row-gap: 1rem;
-    height: var(--box);
-    width: var(--box);
   }
 
   h1 {
@@ -148,14 +159,37 @@ body {
     font-weight: bold;
     text-decoration: none;
   }
+}
 
-  footer {
-    align-items: flex-end;
-    display: flex;
-    height: var(--box);
-    justify-content: flex-end;
-    width: var(--box);
-  }
+dl {
+  display: flex;
+  flex-direction: column;
+  width: var(--box);
+}
+
+dt a {
+  color: dodgerblue;
+  font-family: Menlo, monospace;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+dt:not(:first-child) {
+  margin-top: 1rem;
+}
+
+dd {
+  font-family: Helvetica, sans-serif;
+  font-size: 1.2rem;
+  margin: 0.2rem 0 0 0;
+}
+
+footer {
+  align-items: flex-end;
+  display: flex;
+  height: var(--box);
+  justify-content: flex-end;
+  width: var(--box);
 
   [itemprop="creator"] {
     font-family: Futura, Helvetica, sans-serif;
@@ -177,18 +211,5 @@ body {
     text-decoration-line: underline;
     text-decoration-color: deepskyblue;
   }
-}
-
-dl {
-  display: flex;
-  flex-direction: column;
-}
-
-dt:not(:first-child) {
-  margin-top: 1rem;
-}
-
-dd {
-  margin: 0;
 }
 
