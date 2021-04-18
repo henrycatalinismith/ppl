@@ -1,6 +1,5 @@
 ---
 layout: page
-itemtype: WebPage
 eleventyComputed:
   title: "ppl {{ name }}"
   description: "{{ summary }}"
@@ -13,9 +12,13 @@ eleventyComputed:
       href: "/commands/{{ name }}"
 ---
 
-<pre class="synopsis"><code>{{ synopsis }}</code></pre>
+<section>
+  <pre><code>{{ synopsis }}</code></pre>
+</section>
 
-{{ content | safe }}
+<section>
+  {{ content | safe }}
+</section>
 
 {% if see_also | length > 0 %}
   {% include "see-also.njk" %}
