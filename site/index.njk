@@ -15,70 +15,36 @@ itemtype: SoftwareApplication
   content="Linux, macOS, Windows, BSD"
 />
 
-<main>
-  <article>
-    <header>
-      <h1>
-        <span itemprop="name">
-          {{ title }}
-        </span>
-        {% include "ppl.njk" %}
-      </h1>
-      <p itemprop="description">
-        {{ description }}
-      </p>
+<article>
+  <header>
+    <h1>
+      <span itemprop="name">
+        {{ title }}
+      </span>
+      {% include "ppl.njk" %}
+    </h1>
+    <p itemprop="description">
+      {{ description }}
+    </p>
 
-      <nav>
-        <ol>
-          <li><a href="{{ url }}/commands">Commands</a></li>
-          <li><a href="{{ url }}/integrations">Integrations</a></li>
-          <li><a href="{{ url }}/releases">Releases</a></li>
-          <li><a href="{{ url }}/settings">Settings</a></li>
-        </ol>
-      </nav>
-    </header>
+    <nav>
+      <ol>
+        <li><a href="{{ url }}/commands">Commands</a></li>
+        <li><a href="{{ url }}/integrations">Integrations</a></li>
+        <li><a href="{{ url }}/releases">Releases</a></li>
+        <li><a href="{{ url }}/settings">Settings</a></li>
+      </ol>
+    </nav>
+  </header>
 
-    <section>
-      <img
-        alt="Animated demo showing Pippi Långstrump being added to a new address book"
-        src="{{ url }}/casts/hero.svg"
-      />
-    </section>
+  <section>
+    <img
+      alt="Animated demo showing Pippi Långstrump being added to a new address book"
+      src="{{ url }}/casts/hero.svg"
+    />
+  </section>
 
-    {% set article = (collections.news | reverse)[0] %}
+  {% include "footer.njk" %}
 
-    <!--
-    <article itemscope itemtype="http://schema.org/Article">
-      <h2>
-        <a href="/news/{{ article.data.title | slug }}" itemprop="headline">
-          {{ article.data.title }}
-        </a>
-      </h2>
-      <time itemprop="datePublished" datetime="{{ article.data.date.toISOString().slice(0, 10) }}">
-        {{ article.data.date.toISOString().slice(0, 10) }}
-      </time>
-      <div itemprop="text">
-        {{ article.templateContent | safe }}
-      </div>
-      <nav>
-        <ol>
-          <li>
-            <a href="/news/{{ article.data.title | slug }}">
-              permalink
-            </a>
-          </li>
-          <li>
-            <a href="/news">
-              news archive
-            </a>
-          </li>
-        </ol>
-      </nav>
-    </article>
-    -->
-
-    {% include "footer.njk" %}
-
-  </article>
-</main>
+</article>
 

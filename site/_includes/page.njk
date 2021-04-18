@@ -5,36 +5,35 @@ itemtype: WebPage
 
 {% include "breadcrumbs.njk" %}
 
-<main>
-  <article>
-    <header>
-      <h1 itemprop="headline">
-        {{ title}}
-      </h1>
-      {% if itemtype == "Article" %}
-        <time itemprop="datePublished" datetime="{{ date.toISOString().slice(0, 10) }}">
-          {{ date.toISOString().slice(0, 10) }}
-        </time>
-      {% else %}
-        <p itemprop="description">
-          {{ description }}
-        </p>
-      {% endif %}
-    </header>
-    {{ content | safe }}
-  </article>
-</main>
+<article>
+  <header>
+    <h1 itemprop="headline">
+      {{ title}}
+    </h1>
+    {% if itemtype == "Article" %}
+      <time itemprop="datePublished" datetime="{{ date.toISOString().slice(0, 10) }}">
+        {{ date.toISOString().slice(0, 10) }}
+      </time>
+    {% else %}
+      <p itemprop="description">
+        {{ description }}
+      </p>
+    {% endif %}
+  </header>
 
-<footer>
-  <p
-    itemprop="creator"
-    itemscope
-    itemtype="http://schema.org/Person">
-    <a href="https://hen.cat/" target="_blank">
-      <span itemprop="name">
-        Henry Catalini Smith
-      </span>
-    </a>
-  </p>
-</footer>
+  {{ content | safe }}
+
+  <footer>
+    <p
+      itemprop="creator"
+      itemscope
+      itemtype="http://schema.org/Person">
+      <a href="https://hen.cat/" target="_blank">
+        <span itemprop="name">
+          Henry Catalini Smith
+        </span>
+      </a>
+    </p>
+  </footer>
+</article>
 

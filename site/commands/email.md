@@ -30,7 +30,7 @@ address as "preferred" or not. Internally, this status is represented with
 vCard's `TYPE=pref` parameter in the `EMAIL` field. Preferred email addresses
 are shown with a `*` next to them in the output of `ppl email <contact>`.
 
-### Formatting Options
+## Formatting Options
 
 Using the `--format` option, it is possible to customize the output of `ppl
 email` in several ways. This customizability is similar in usage to a typical
