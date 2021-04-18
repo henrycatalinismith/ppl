@@ -38,13 +38,16 @@ itemtype: SoftwareApplication
       </nav>
     </header>
 
-    <img
-      alt="Animated demo showing Pippi Långstrump being added to a new address book"
-      src="{{ url }}/casts/hero.svg"
-    />
+    <section>
+      <img
+        alt="Animated demo showing Pippi Långstrump being added to a new address book"
+        src="{{ url }}/casts/hero.svg"
+      />
+    </section>
 
     {% set article = (collections.news | reverse)[0] %}
 
+    <!--
     <article itemscope itemtype="http://schema.org/Article">
       <h2>
         <a href="/news/{{ article.data.title | slug }}" itemprop="headline">
@@ -72,6 +75,7 @@ itemtype: SoftwareApplication
         </ol>
       </nav>
     </article>
+    -->
 
     {% include "footer.njk" %}
 

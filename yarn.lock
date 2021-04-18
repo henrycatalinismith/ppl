@@ -64,6 +64,11 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
+"@hendotcat/picknmix@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@hendotcat/picknmix/-/picknmix-0.0.9.tgz#e7f07bbe846dda636d5cb4c5257f8d84cedf4096"
+  integrity sha512-EFlD6v9tHnCaiHWUdgSP723YtTZLS9EP9DSpzx5R96ijx3RovfuZNL9WbYFTlHSiCcm8VUstxjRGb28bPqSX7w==
+
 "@marionebl/bundle-id@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@marionebl/bundle-id/-/bundle-id-2.0.1.tgz#ea5cec181213e0af93df7c84a1f71b6362b46d87"

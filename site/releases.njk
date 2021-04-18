@@ -9,17 +9,19 @@ breadcrumbs:
     href: /releases
 ---
 
-<dl>
-  {% for release in collections.releases | reverse %}
-    <dt>
-      <a href="{{ url }}/releases/{{ release.data.version }}">
-        {{ release.data.version }}
-      </a>
-    </dt>
-    <dd>
-      {{ release.data.summary }}
-    </dd>
-  {% endfor %}
-</dl>
+<section>
+  <dl>
+    {% for release in collections.releases | reverse %}
+      <dt>
+        <a href="{{ url }}/releases/{{ release.data.version }}">
+          {{ release.data.version }}
+        </a>
+      </dt>
+      <dd>
+        {{ release.data.summary }}
+      </dd>
+    {% endfor %}
+  </dl>
+</section>
 
 
