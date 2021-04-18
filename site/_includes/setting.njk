@@ -13,9 +13,13 @@ eleventyComputed:
       href: "/settings/{{ name | replace('\"', '') | slug }}"
 ---
 
-<pre class="synopsis"><code>{{ example }}</code></pre>
+<section>
+  <pre class="synopsis"><code>{{ example }}</code></pre>
+</section>
 
-{{ content | safe }}
+<section>
+  {{ content | safe }}
+</section>
 
 {% if see_also | length > 0 %}
   {% include "see-also.njk" %}
