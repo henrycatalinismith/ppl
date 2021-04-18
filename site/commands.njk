@@ -9,16 +9,18 @@ breadcrumbs:
     href: /commands
 ---
 
-<dl>
-  {% for command in collections.commands %}
-    <dt>
-      <a href="{{ url }}/commands/{{ command.data.name }}">
-        {{ command.data.name }}
-      </a>
-    </dt>
-    <dd>
-      {{ command.data.summary }}
-    </dd>
-  {% endfor %}
-</dl>
+<section>
+  <dl>
+    {% for command in collections.commands %}
+      <dt>
+        <a href="{{ url }}/commands/{{ command.data.name }}">
+          {{ command.data.name }}
+        </a>
+      </dt>
+      <dd>
+        {{ command.data.summary }}
+      </dd>
+    {% endfor %}
+  </dl>
+</section>
 

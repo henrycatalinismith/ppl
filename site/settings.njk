@@ -9,16 +9,18 @@ breadcrumbs:
     href: /settings
 ---
 
-<dl>
-  {% for setting in collections.settings %}
-    <dt>
-      <a href="{{ url }}/settings/{{ setting.data.name | replace('"', "") | slug }}">
-        [{{ setting.data.name }}]
-      </a>
-    </dt>
-    <dd>
-      {{ setting.data.summary }}
-    </dd>
-  {% endfor %}
-</dl>
+<section>
+  <dl>
+    {% for setting in collections.settings %}
+      <dt>
+        <a href="{{ url }}/settings/{{ setting.data.name | replace('"', "") | slug }}">
+          [{{ setting.data.name }}]
+        </a>
+      </dt>
+      <dd>
+        {{ setting.data.summary }}
+      </dd>
+    {% endfor %}
+  </dl>
+</section>
 

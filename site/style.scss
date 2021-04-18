@@ -1,3 +1,7 @@
+@use "./node_modules/@hendotcat/picknmix/picknmix.scss";
+
+@include picknmix.theme;
+
 @function str-replace($string, $search, $replace: "") {
   $index: str-index($string, $search);
   @if ($index) {
@@ -18,36 +22,19 @@
 }
 
 :root {
-  --padding: 1rem;
-  --tiny: calc(100vmin - var(--padding) * 2);
-  --wide: 32rem;
-  --box: min(var(--tiny), var(--wide));
 }
 
 html {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-body {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  margin: 0 0 var(--padding) 0;
-}
 
 body > aside {
-  background-color: white;
+  background-color: var(--bg0);
   display: flex;
   justify-content: center;
   width: 100%;
   --spacing: 0.3rem;
-
-  nav {
-  }
 
   ol {
     align-items: center;
@@ -69,48 +56,13 @@ body > aside {
   }
 
   a {
-    color: dodgerblue;
-    font-family: Rockwell, serif;
-    text-decoration: none;
+    color: var(--blue);
+    font-family: var(--slab);
     white-space: nowrap;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-}
-
-main, article, [itemprop="text"] {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
-
-header {
-  align-content: center;
-  display: grid;
-  grid-template-rows: repeat(2, min-content);
-  height: var(--box);
-  justify-content: center;
-  row-gap: 1rem;
-  width: var(--box);
-}
-
-h1[itemprop="headline"] {
-  color: darkslategray;
-  font-family: Rockwell, serif;
-  font-size: 3rem;
-  margin: 0;
-  text-align: center;
-}
-
-header [itemprop="datePublished"],
-header p[itemprop="description"] {
-  color: deeppink;
-  font-family: "Rockwell", serif;
-  font-size: 1.4rem;
-  font-weight: bold;
-  margin: 0;
-  text-align: center;
 }
 
 [itemtype="http://schema.org/SoftwareApplication"] {
@@ -152,13 +104,6 @@ header p[itemprop="description"] {
     width: 8rem;
   }
 
-  header [itemprop="description"] {
-    font-family: "Rockwell", serif;
-    font-size: var(--descriptionFontSize);
-    margin: 0;
-    text-align: center;
-  }
-
   img {
     background-image: svg-to-data-uri(
       '<svg viewBox="0 0 64 16">'
@@ -175,11 +120,8 @@ header p[itemprop="description"] {
     border-radius: 8px;
     padding-top: 32px;
     background-color: #282d35;
-    height: var(--box);
-    width: var(--box);
-  }
-
-  nav {
+    height: var(--column);
+    width: var(--column);
   }
 
   nav ol {
@@ -207,9 +149,9 @@ header p[itemprop="description"] {
   }
 
   nav ol li a {
-    color: dodgerblue;
+    color: var(--blue);
     font-family: Rockwell, serif;
-    font-size: 1.4rem;
+    font-size: var(--f14);
     font-weight: bold;
     text-decoration: none;
   }
@@ -252,31 +194,6 @@ header p[itemprop="description"] {
   }
 }
 
-dl {
-  display: flex;
-  flex-direction: column;
-  width: var(--box);
-}
-
-dt a {
-  color: dodgerblue;
-  font-family: Rockwell, serif;
-  font-size: 1.4rem;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-dt:not(:first-child) {
-  margin-top: 1rem;
-}
-
-dd {
-  color: darkslategray;
-  font-family: Rockwell, serif;
-  font-size: 1.2rem;
-  margin: 0.2rem 0 0 0;
-}
-
 footer {
   align-items: flex-end;
   display: flex;
@@ -304,97 +221,5 @@ footer {
     text-decoration-line: underline;
     text-decoration-color: deepskyblue;
   }
-}
-
-pre > code {
-  font-family: Menlo, monospace;
-  font-size: 0.8rem;
-}
-
-pre.synopsis {
-  background: #223;
-  border-to: 0.2rem solid hotpink;
-  border-bottom: 0.2rem solid hotpink;
-  box-shadow:
-    0 -0.1rem 0 cyan,
-    0 0.1rem 0 cyan;
-  display: flex;
-  justify-content: center;
-  overflow-x: scroll;
-  padding: 2rem 0;
-  width: 100vw;
-}
-
-pre.synopsis > code {
-  color: white;
-  font-family: Menlo, monospace;
-  font-size: 0.8rem;
-  min-width: var(--box);
-}
-
-[itemprop="text"] h2 {
-  color: deeppink;
-  font-family: Rockwell, serif;
-  font-weight: bold;
-  font-size: 1.4rem;
-  margin: 2rem 0 1rem 0;
-}
-
-[itemprop="text"] pre:not(.synopsis) {
-  margin: 0 0 1rem 0;
-}
-
-[itemprop="text"] h2,
-[itemprop="text"] p,
-[itemprop="text"] pre:not(.synopsis) {
-  width: var(--box);
-}
-
-[itemprop="text"] p,
-[itemprop="text"] ul {
-  color: darkslategray;
-  font-family: Helvetica, sans-serif;
-  font-family: "Rockwell";
-  font-size: 1.2rem;
-  line-height: 1.5em;
-}
-
-[itemprop="text"] code {
-}
-
-[itemprop="text"] p {
-  margin: 0 0 1rem 0;
-}
-
-[itemprop="text"] ul {
-  margin-left: 2rem;
-  padding: 0;
-  width: calc(var(--box) - 2rem);
-}
-
-.see-also {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: var(--box);
-}
-
-.see-also a {
-  font-family: Rockwell, serif;
-  font-size: 1.2rem;
-}
-
-[itemprop="text"] a {
-  color: dodgerblue;
-  text-decoration: none;
-}
-
-[itemprop="text"] p code,
-[itemprop="text"] ul code {
-  background-color: azure;
-  color: deeppink;
-  font-family: Monaco;
-  font-size: 0.9em;
-  padding: 2px 4px;
 }
 

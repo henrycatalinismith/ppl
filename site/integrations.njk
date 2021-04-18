@@ -9,16 +9,18 @@ breadcrumbs:
     href: /integrations
 ---
 
-<dl>
-  {% for integration in collections.integrations %}
-    <dt>
-      <a href="{{ url }}/integrations/{{ integration.data.name | slug }}">
-        {{ integration.data.name }}
-      </a>
-    </dt>
-    <dd>
-      {{ integration.data.summary }}
-    </dd>
-  {% endfor %}
-</dl>
+<section>
+  <dl>
+    {% for integration in collections.integrations %}
+      <dt>
+        <a href="{{ url }}/integrations/{{ integration.data.name | slug }}">
+          {{ integration.data.name }}
+        </a>
+      </dt>
+      <dd>
+        {{ integration.data.summary }}
+      </dd>
+    {% endfor %}
+  </dl>
+</section>
 
