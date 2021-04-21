@@ -21,14 +21,6 @@
   @return url("data:image/svg+xml,#{$svg}");
 }
 
-:root {
-}
-
-html {
-  box-sizing: border-box;
-}
-
-
 body > aside {
   background-color: var(--bg0);
   display: flex;

@@ -10,9 +10,7 @@ see_also:
     href: /settings/color-ls
 ---
 
-List all the contacts in the address book.
-
-#### Formatting Options
+## Formatting Options
 
 Using the `--format` option, `ppl ls` can be customized to produce output in a
 user-specified format. This is similar functionality to `printf` or the
