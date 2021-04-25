@@ -1,51 +1,9 @@
-const chokidar = require("chokidar")
+const rehype = require("@hendotcat/11tyhype")
+const { sassPlugin } = require("@hendotcat/11tysass")
 const fs = require("fs-extra")
-const htmlmin = require("html-minifier")
-const sass = require("sass")
-const url = require("./site/_data/url")
-
-function minifyHtml(html) {
-  return htmlmin.minify(html, {
-    useShortDoctype: true,
-    removeComments: true,
-    collapseWhitespace: true
-  })
-}
-
-function monkeypatch(cls, fn) {
-  const orig = cls.prototype[fn.name][`_PS_original`] || cls.prototype[fn.name]
-  function wrapped() {
-    return fn.bind(this, orig).apply(this, arguments)
-  }
-  wrapped[`_PS_original`] = orig
-  cls.prototype[fn.name] = wrapped
-}
-
-const minifyPlugin = {
-  initArguments: {},
-  configFunction: function(eleventyConfig) {
-    eleventyConfig.addTransform(
-      "htmlmin",
-      function(content, outputPath) {
-        if (outputPath && outputPath.endsWith(".html")) {
-          return minifyHtml(content)
-            .replace(
-              /href="\//g,
-              `href="${url}/`
-            )
-        }
-        return content
-      }
-    )
-  }
-}
-
-function compileSass() {
-  const { css } = sass.renderSync({
-    file: "site/style.scss",
-  })
-  fs.writeFileSync("_site/style.css", css)
-}
+const rehypeMinifyWhitespace = require("rehype-minify-whitespace")
+const rehypeUrls = require("rehype-urls")
+const siteUrl = require("./site/_data/url")
 
 module.exports = function(eleventyConfig) {
   console.log("ppl site")
@@ -54,7 +12,6 @@ module.exports = function(eleventyConfig) {
   fs.emptyDirSync("_site")
 
   eleventyConfig.addPassthroughCopy("site/casts/*.svg")
-  eleventyConfig.addPlugin(minifyPlugin)
 
   eleventyConfig.addCollection("commands", function(collectionApi) {
     return collectionApi.getFilteredByGlob("site/commands/*.md")
@@ -76,28 +33,25 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("site/settings/*.md")
   })
 
-  compileSass()
+  eleventyConfig.addPlugin(sassPlugin, {
+    files: [{
+      alias: "css",
+      file: "site/style.scss",
+      outFile: "style.css",
+      outputStyle: "compressed",
+    }],
+  })
 
-  if (process.argv.includes("--serve")) {
-    setImmediate(function() {
-      const Eleventy = require("@11ty/eleventy/src/Eleventy.js")
-      if (Eleventy.prototype) {
-        function watch(original) {
-          const watcher = chokidar.watch(["./site/style.scss"], {
-            persistent: true
-          })
-          const compileAndReload = eleventyInstance => () => {
-            compileSass()
-            this.eleventyServe.reload()
-          }
-          watcher.on("add", compileAndReload(this))
-          watcher.on("change", compileAndReload(this))
-          return original.apply(this)
+  eleventyConfig.addPlugin(rehype, {
+    plugins: [
+      [rehypeMinifyWhitespace],
+      [rehypeUrls, url => {
+        if (url.href.startsWith("/")) {
+          return `${siteUrl}/${url.href}`
         }
-        monkeypatch(Eleventy, watch)
-      }
-    })
-  }
+      }],
+    ]
+  })
 
   const input = "site"
 

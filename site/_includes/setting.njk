@@ -10,7 +10,7 @@ eleventyComputed:
     - text: settings
       href: /settings
     - text: "[{{ name }}]"
-      href: "/settings/{{ name | replace('\"', '') | slug }}"
+      href: "/settings/{{ name | slug }}"
 ---
 
 <section>

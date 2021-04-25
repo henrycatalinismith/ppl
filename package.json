@@ -9,11 +9,14 @@
     "url": "https://github.com/hendotcat/ppl"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^0.12.1",
+    "@11ty/eleventy": "11ty/eleventy#v1.0.0-canary.10",
+    "@hendotcat/11tyhype": "^0.0.1",
+    "@hendotcat/11tysass": "^0.0.2",
     "@hendotcat/picknmix": "^0.0.16",
-    "chokidar": "^3.5.1",
     "fs-extra": "^9.1.0",
-    "html-minifier": "^4.0.0",
+    "rehype": "^11.0.0",
+    "rehype-minify-whitespace": "^4.0.5",
+    "rehype-urls": "^1.1.1",
     "sass": "^1.32.8",
     "svg-term-cli": "^2.1.1"
   },
