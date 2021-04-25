@@ -1,9 +1,8 @@
-const rehype = require("@hendotcat/11tyhype")
+const { rehypePlugin } = require("@hendotcat/11tyhype")
 const { sassPlugin } = require("@hendotcat/11tysass")
 const fs = require("fs-extra")
 const rehypeMinifyWhitespace = require("rehype-minify-whitespace")
 const rehypeUrls = require("rehype-urls")
-const siteUrl = require("./site/_data/url")
 
 module.exports = function(eleventyConfig) {
   console.log("ppl site")
@@ -33,24 +32,25 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("site/settings/*.md")
   })
 
-  eleventyConfig.addPlugin(sassPlugin, {
-    files: [{
-      alias: "css",
-      file: "site/style.scss",
-      outFile: "style.css",
-      outputStyle: "compressed",
-    }],
-  })
+  const siteUrl = process.env.GITHUB_ACTIONS ? "https://hen.cat/ppl/" : ""
 
-  eleventyConfig.addPlugin(rehype, {
+  eleventyConfig.addPlugin(rehypePlugin, {
     plugins: [
       [rehypeMinifyWhitespace],
       [rehypeUrls, url => {
         if (url.href.startsWith("/")) {
-          return `${siteUrl}/${url.href}`
+          return `${siteUrl}${url.href}`
         }
       }],
     ]
+  })
+
+  eleventyConfig.addPlugin(sassPlugin, {
+    files: [{
+      file: "site/style.scss",
+      outFile: "style.css",
+      outputStyle: "compressed",
+    }],
   })
 
   const input = "site"
