@@ -11,7 +11,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
     "@hendotcat/11tyhype": "^0.0.3",
-    "@hendotcat/11tysass": "^0.0.6",
+    "@hendotcat/11tysass": "^0.0.8",
     "@hendotcat/picknmix": "^0.0.16",
     "fs-extra": "^9.1.0",
     "rehype": "^11.0.0",
