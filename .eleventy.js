@@ -48,9 +48,10 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(sassPlugin, {
     files: [{
       file: "site/style.scss",
-      outFile: "style.css",
+      outFile: "style.[hash].css",
       outputStyle: "compressed",
     }],
+    verbose: true,
   })
 
   const input = "site"

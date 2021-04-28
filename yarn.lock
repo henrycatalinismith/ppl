@@ -71,19 +71,21 @@
   dependencies:
     eazy-logger "3.1.0"
 
-"@hendotcat/11tysass@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@hendotcat/11tysass/-/11tysass-0.0.8.tgz#046411cf7d3732ee17abfe7ff0fc1785ae9a575f"
-  integrity sha512-KfwmoMD0brV4INrkKoO9ZbGIZNm1IuTU628KPS527UAfHQrctI+gnGM/PxPY7vQ3r7xXxqDfd5ZRUIZKTIdZTQ==
+"@hendotcat/11tysass@^0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@hendotcat/11tysass/-/11tysass-0.0.14.tgz#d83c6bcc0a44afece58c7a1fa20f4a576bdde0f7"
+  integrity sha512-Pk44qcjysG5T8tFJlhzdouxjnvTHwKDGnD+LXNFSv1B1fD7fCeKcsZYvtdEtYemV1Mplzsfifwd5vmOGj06NIA==
   dependencies:
-    "@hendotcat/11tyshim" "^0.0.3"
+    "@hendotcat/11tyshim" "^0.0.4"
     chokidar "^3.5.1"
     eazy-logger "3.1.0"
+    fs-extra "^9.1.0"
+    lodash.debounce "^4.0.8"
 
-"@hendotcat/11tyshim@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@hendotcat/11tyshim/-/11tyshim-0.0.3.tgz#2865332c64974b2597d55e6e70eefb31ec336bb4"
-  integrity sha512-3S9gTKpCT0+j6Y1t3bHwpGQvFOJClIDe/C9EIKhYaWxC5wuPtNdrBoTMG8aolAdr+bcsXGVr+6+aGvAHkHuPkg==
+"@hendotcat/11tyshim@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@hendotcat/11tyshim/-/11tyshim-0.0.4.tgz#b03f5e8cebcf0ae3100d2c05f087a35cf52ae634"
+  integrity sha512-0mCE6fc3MHaMB5BunW1UtkEOrCnN9RTk4J7+M8vD7KUXCxiTJwxCbA8Dumx5M+LgODdWLEkjql0V9Ws/lvw66g==
   dependencies:
     eazy-logger "3.1.0"
 
@@ -2070,6 +2072,11 @@ locate-path@^5.0.0:
   integrity sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==
   dependencies:
     p-locate "^4.1.0"
+
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+  integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
 
 lodash.isfinite@^3.3.2:
   version "3.3.2"
