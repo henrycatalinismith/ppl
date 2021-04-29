@@ -10,8 +10,8 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
-    "@hendotcat/11tyhype": "^0.0.3",
-    "@hendotcat/11tysass": "^0.0.14",
+    "@hendotcat/11tyhype": "^0.0.4",
+    "@hendotcat/11tysass": "^2.0.1",
     "@hendotcat/picknmix": "^0.0.16",
     "fs-extra": "^9.1.0",
     "rehype": "^11.0.0",
