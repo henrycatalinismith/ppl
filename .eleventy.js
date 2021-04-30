@@ -34,6 +34,15 @@ module.exports = function(eleventyConfig) {
 
   const siteUrl = process.env.GITHUB_ACTIONS ? "https://hen.cat/ppl/" : ""
 
+  eleventyConfig.addPlugin(sassPlugin, {
+    files: [{
+      file: "site/style.scss",
+      outFile: "style.[hash].css",
+      outputStyle: "compressed",
+    }],
+    verbose: true,
+  })
+
   eleventyConfig.addPlugin(rehypePlugin, {
     plugins: [
       [rehypeMinifyWhitespace],
@@ -43,15 +52,6 @@ module.exports = function(eleventyConfig) {
         }
       }],
     ]
-  })
-
-  eleventyConfig.addPlugin(sassPlugin, {
-    files: [{
-      file: "site/style.scss",
-      outFile: "style.[hash].css",
-      outputStyle: "compressed",
-    }],
-    verbose: true,
   })
 
   const input = "site"
