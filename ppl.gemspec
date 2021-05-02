@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency("fakefs")
 
   spec.authors = ["Henry Catalini Smith"]
-  spec.email = "hen@hey.com"
+  spec.email = "smith@hen.cat"
 
   spec.executables = "ppl"
 
