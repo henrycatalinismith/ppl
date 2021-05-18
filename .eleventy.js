@@ -1,8 +1,12 @@
 const { rehypePlugin } = require("@hendotcat/11tyhype")
 const { sassPlugin } = require("@hendotcat/11tysass")
+const { reactPlugin } = require("@hendotcat/11tysnap")
+const { register } = require("esbuild-register/dist/node")
 const fs = require("fs-extra")
 const rehypeMinifyWhitespace = require("rehype-minify-whitespace")
 const rehypeUrls = require("rehype-urls")
+
+register()
 
 module.exports = function(eleventyConfig) {
   console.log("ppl site")
@@ -28,6 +32,7 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("site/releases/*.*.*.md")
   })
 
+
   eleventyConfig.addCollection("settings", function(collectionApi) {
     return collectionApi.getFilteredByGlob("site/settings/*.md")
   })
@@ -47,17 +52,21 @@ module.exports = function(eleventyConfig) {
     plugins: [
       [rehypeMinifyWhitespace],
       [rehypeUrls, url => {
-        if (url.href.startsWith("/")) {
-          return `${siteUrl}${url.href}`
+        if (url.href.startsWith("/") && process.env.GITHUB_ACTIONS) {
+          return `https://hen.cat/ppl/${url.href}`
         }
       }],
     ]
   })
 
-  const input = "site"
+  eleventyConfig.addPlugin(reactPlugin, {
+    verbose: true,
+  })
 
   const dir = {
-    input,
+    input: "site",
+    includes: "_includes",
+    layouts: "_layouts",
   }
 
   return {
