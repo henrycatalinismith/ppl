@@ -5,7 +5,7 @@ SVGTERM_BIN := yarn svg-term
 SVGTERM_ARGS := --width 60 --height 28 --padding 8
 
 _site: $(CASTS_DST)
-	yarn eleventy
+	yarn build
 
 $(CASTS_DIR)/%.svg:
 	cat $(CASTS_DIR)/$*.cast | $(SVGTERM_BIN) --out $@ $(SVGTERM_ARGS)
