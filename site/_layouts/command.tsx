@@ -4,15 +4,6 @@ import CodeSection from "../_includes/code-section"
 import HtmlSection from "../_includes/html-section"
 import SeeAlso from "../_includes/see-also"
 
-interface CommandProps {
-  name: string
-  summary: string
-  synopsis: string
-  content: string
-  see_also: any[]
-  date: Date
-}
-
 export default function Command({
   name,
   summary,
@@ -20,7 +11,7 @@ export default function Command({
   synopsis,
   date,
   see_also,
-}: CommandProps): React.ReactElement {
+}: Layout<Command>): React.ReactElement {
   const breadcrumbs = [
     {
       text: "ppl",

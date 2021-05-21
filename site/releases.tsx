@@ -2,15 +2,10 @@ import React from "react"
 import Page from "./_layouts/page"
 import DefinitionList from "./_includes/definition-list"
 
-interface ReleasesProps {
-  collections: any
-  date: Date
-}
-
 export default function Releases({
   collections,
   date,
-}: ReleasesProps): React.ReactElement {
+}: Layout): React.ReactElement {
   const breadcrumbs = [
     {
       text: "ppl",
