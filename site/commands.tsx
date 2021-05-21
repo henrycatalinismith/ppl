@@ -2,15 +2,10 @@ import React from "react"
 import Page from "./_layouts/page"
 import DefinitionList from "./_includes/definition-list"
 
-interface CommandsProps {
-  collections: any
-  date: Date
-}
-
 export default function Commands({
   collections,
   date,
-}: CommandsProps): React.ReactElement {
+}: Layout): React.ReactElement {
   const breadcrumbs = [
     {
       text: "ppl",
