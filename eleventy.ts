@@ -1,12 +1,58 @@
-const { rehypePlugin } = require("@hendotcat/11tyhype")
-const { sassPlugin } = require("@hendotcat/11tysass")
-const { reactPlugin } = require("@hendotcat/11tysnap")
-const { register } = require("esbuild-register/dist/node")
-const fs = require("fs-extra")
-const rehypeMinifyWhitespace = require("rehype-minify-whitespace")
-const rehypeUrls = require("rehype-urls")
+import { rehypePlugin } from "@hendotcat/11tyhype"
+import { sassPlugin } from "@hendotcat/11tysass"
+import { reactPlugin } from "@hendotcat/11tysnap"
+import { EleventyCollection, EleventyLayout } from "@hendotcat/11tytype"
+import fs from "fs-extra"
+import rehypeMinifyWhitespace from "rehype-minify-whitespace"
+import rehypeUrls from "rehype-urls"
 
-register()
+declare global {
+  interface Link {
+    href: string
+    text: string
+  }
+
+  interface Command {
+    name: string
+    summary: string
+    synopsis: string
+    example: string
+    see_also?: Link[]
+  }
+
+  interface Integration {
+    name: string
+    summary: string
+  }
+
+  interface News {
+    title: string
+    date: Date
+  }
+
+  interface Release {
+    version: string
+    summary: string
+    date: Date
+  }
+
+  interface Setting {
+    name: string
+    summary: string
+    example: string
+    see_also?: Link[]
+  }
+
+  type Collections = {
+    commands: EleventyCollection<Command>
+    integrations: EleventyCollection<Integration>
+    news: EleventyCollection<News>
+    releases: EleventyCollection<Release>
+    settings: EleventyCollection<Setting>
+  }
+
+  type Layout<Template = {}> = EleventyLayout<Template, Collections>
+}
 
 module.exports = function(eleventyConfig) {
   console.log("ppl site")

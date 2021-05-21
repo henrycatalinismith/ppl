@@ -2,19 +2,12 @@ import React from "react"
 import Page from "./page"
 import HtmlSection from "../_includes/html-section"
 
-interface ReleaseProps {
-  version: string
-  summary: string
-  content: string
-  date: Date
-}
-
 export default function Release({
   version,
   summary,
   content,
   date,
-}: ReleaseProps): React.ReactElement {
+}: Layout<Release>): React.ReactElement {
   const breadcrumbs = [
     {
       text: "ppl",

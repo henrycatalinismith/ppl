@@ -2,19 +2,12 @@ import React from "react"
 import Page from "./page"
 import HtmlSection from "../_includes/html-section"
 
-interface IntegrationProps {
-  name: string
-  summary: string
-  content: string
-  date: Date
-}
-
 export default function Integration({
   name,
   summary,
   content,
   date,
-}: IntegrationProps): React.ReactElement {
+}: Layout<Integration>): React.ReactElement {
   const breadcrumbs = [
     {
       text: "ppl",

@@ -2,15 +2,10 @@ import React from "react"
 import Page from "./_layouts/page"
 import DefinitionList from "./_includes/definition-list"
 
-interface IntegrationsProps {
-  collections: any
-  date: Date
-}
-
 export default function Integrations({
   collections,
   date,
-}: IntegrationsProps): React.ReactElement {
+}: Layout): React.ReactElement {
   const breadcrumbs = [
     {
       text: "ppl",

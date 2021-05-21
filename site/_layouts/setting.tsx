@@ -4,15 +4,6 @@ import CodeSection from "../_includes/code-section"
 import HtmlSection from "../_includes/html-section"
 import SeeAlso from "../_includes/see-also"
 
-interface SettingProps {
-  name: string
-  summary: string
-  example: string
-  content: string
-  see_also: any[]
-  date: Date
-}
-
 export default function Setting({
   name,
   summary,
@@ -20,7 +11,7 @@ export default function Setting({
   example,
   date,
   see_also,
-}: SettingProps): React.ReactElement {
+}: Layout<Setting>): React.ReactElement {
   const breadcrumbs = [
     {
       text: "ppl",

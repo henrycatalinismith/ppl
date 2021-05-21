@@ -2,19 +2,11 @@ import React from "react"
 import Page from "./page"
 import HtmlSection from "../_includes/html-section"
 
-interface NewsProps {
-  title: string
-  summary: string
-  content: string
-  date: Date
-}
-
 export default function News({
   title,
-  summary,
   content,
   date,
-}: NewsProps): React.ReactElement {
+}: Layout<News>): React.ReactElement {
   const breadcrumbs = [
     {
       text: "ppl",
