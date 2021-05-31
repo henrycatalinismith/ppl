@@ -99,10 +99,10 @@
   dependencies:
     eazy-logger "3.1.0"
 
-"@hendotcat/11tytype@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@hendotcat/11tytype/-/11tytype-0.0.5.tgz#6236ee1b20481b5eb94473477f5ce50f6b1d89a1"
-  integrity sha512-6hIARDgrwkKzt4cEwp+QYd2EH3VzT7EoHcivNadS5mxjJCFs2jJFsOeFkrB+4mr9lMt+Av28mGi80CC2Z8enHg==
+"@hendotcat/11tytype@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@hendotcat/11tytype/-/11tytype-0.0.6.tgz#7ed01860139c07915590a4e77d5a3803d43133f8"
+  integrity sha512-DZPNGfi3MJSfa3EkyBpe+fLUkP8eaVFVGI/C5K+hJvf3oE/XXOuGbuppZlI5k3ljPr6uBWVnFt/ZbPECsRxhsQ==
 
 "@hendotcat/picknmix@^0.0.16":
   version "0.0.16"
@@ -3953,9 +3953,9 @@ wrappy@1:
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
 
 ws@~7.4.2:
-  version "7.4.4"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.4.tgz#383bc9742cb202292c9077ceab6f6047b17f2d59"
-  integrity sha512-Qm8k8ojNQIMx7S+Zp8u/uHOx7Qazv3Yv4q68MiWWWOJhiwG5W3x7iqmRtJo8xxrciZUY4vRxUTJCKuRnF28ZZw==
+  version "7.4.6"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.6.tgz#5654ca8ecdeee47c33a9a4bf6d28e2be2980377c"
+  integrity sha512-YmhHDO4MzaDLB+M9ym/mDA5z0naX8j7SIlT8f8z+I0VtzsRbekxEutHSme7NPS2qE8StCYQNUnfWdXta/Yu85A==
 
 xmlbuilder@8.2.2:
   version "8.2.2"
