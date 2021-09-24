@@ -14,7 +14,7 @@
     "@hendotcat/11tysass": "^2.0.1",
     "@hendotcat/11tysnap": "^0.0.10",
     "@hendotcat/11tytype": "^0.0.6",
-    "@hendotcat/picknmix": "^0.0.16",
+    "@hendotcat/picknmix": "^0.0.20",
     "@types/react": "^17.0.6",
     "fs-extra": "^9.1.0",
     "react": "^17.0.2",

@@ -185,33 +185,3 @@ body > aside {
     }
   }
 }
-
-footer {
-  align-items: flex-end;
-  display: flex;
-  height: var(--box);
-  justify-content: flex-end;
-  width: var(--box);
-
-  [itemprop="creator"] {
-    font-family: Futura, Helvetica, sans-serif;
-    margin: 0 0 0.2rem 0;
-    text-align: right;
-  }
-
-  [itemprop="creator"] a {
-    text-decoration: none;
-  }
-
-  [itemprop="creator"] [itemprop="name"] {
-    color: darkslategray;
-    font-size: 1rem;
-    font-weight: bold;
-  }
-
-  [itemprop="creator"] [itemprop="name"]:hover {
-    text-decoration-line: underline;
-    text-decoration-color: deepskyblue;
-  }
-}
-
