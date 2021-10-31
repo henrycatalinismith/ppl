@@ -36,22 +36,6 @@ jobs:
       - name: cucumber
         run: bundle exec rake features
 
-      - name: eleventy
-        run: make _site
-
-      - uses: nwtgck/actions-netlify@v1.1
-        with:
-          publish-dir: "./_site"
-          production-branch: trunk
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: ${{ github.event.head_commit.message }}
-          enable-pull-request-comment: false
-          enable-commit-comment: false
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 1
-
       - uses: dawidd6/action-publish-gem@v1
         continue-on-error: true
         if: ${{ github.ref == 'refs/heads/trunk' }}
