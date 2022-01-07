@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
 
   spec.files = `git ls-files`.split("\n")
   spec.require_path = "lib"
-  spec.homepage = "https://github.com/hendotcat/ppl"
+  spec.homepage = "https://github.com/henrycatalinismith/ppl"
 
 end
 
