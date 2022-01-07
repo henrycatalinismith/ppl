@@ -11,10 +11,10 @@ like "people". You might be interested in ppl if:
 * You want ownership of your address book data back from the cloud
 * You prefer to keep your data stored in an open format
 
-<a href="https://github.com/hendotcat/ppl/actions/workflows/build.yml">
+<a href="https://github.com/henrycatalinismith/ppl/actions/workflows/build.yml">
   <img 
     alt="Build status"
-    src="https://github.com/hendotcat/ppl/actions/workflows/build.yml/badge.svg"
+    src="https://github.com/henrycatalinismith/ppl/actions/workflows/build.yml/badge.svg"
   />
 </a>
 
@@ -77,9 +77,9 @@ Contributing
 ------------
 
 Bug reports, fixes, and additional features are encouraged. The project uses
-[Github issues](https://github.com/hendotcat/ppl/issues) to track bug reports.
+[Github issues](https://github.com/henrycatalinismith/ppl/issues) to track bug reports.
 
-Everyone interacting in ppl’s codebases, issue trackers etc is expected to follow the [code of conduct](https://github.com/hendotcat/ppl/blob/trunk/code_of_conduct.md).
+Everyone interacting in ppl’s codebases, issue trackers etc is expected to follow the [code of conduct](https://github.com/henrycatalinismith/ppl/blob/trunk/code_of_conduct.md).
 
 License
 -------
