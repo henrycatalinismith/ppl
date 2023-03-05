@@ -15,7 +15,7 @@ describe Ppl::Command::Version do
   describe "#execute" do
     it "should show the version number" do
       expect(@output).to receive(:line) do |line|
-        expect(line).to include Ppl::Version
+        expect(line).to include Ppl::VERSION
       end
       expect(@command.execute(@input, @output)).to eq true
     end

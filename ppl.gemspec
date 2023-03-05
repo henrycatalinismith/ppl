@@ -1,7 +1,11 @@
+# frozen_string_literal: true
+
+require_relative 'lib/ppl/version'
+
 Gem::Specification.new do |spec|
 
   spec.name = "ppl"
-  spec.version = "4.0.3"
+  spec.version = Ppl::VERSION
   spec.date = "2021-04-02"
 
   spec.required_ruby_version = ">= 3.0.0"
