@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency("pry")
   spec.add_development_dependency("rspec")
   spec.add_development_dependency("rake")
-  spec.add_development_dependency("fakefs")
+  spec.add_development_dependency("fakefs", "~> 1.9.0")
 
   spec.authors = ["Henry Catalini Smith"]
   spec.email = "henry@catalinismith.com"
