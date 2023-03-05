@@ -35,7 +35,7 @@ class Ppl::Command::Shell < Ppl::Application::Command
 
   def welcome_user(input, output)
     if input.stdin.tty?
-      output.line("ppl #{Ppl::Version} (type \"exit\" to leave)")
+      output.line("ppl #{Ppl::VERSION} (type \"exit\" to leave)")
     end
   end
 
