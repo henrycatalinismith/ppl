@@ -10,7 +10,7 @@ class Ppl::Command::Version < Ppl::Application::Command
   end
 
   def execute(input, output)
-    output.line("ppl version #{Ppl::Version}")
+    output.line("ppl version #{Ppl::VERSION}")
     true
   end
 

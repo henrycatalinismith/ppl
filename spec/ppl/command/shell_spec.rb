@@ -88,7 +88,7 @@ describe Ppl::Command::Shell do
       allow(@input.stdin).to receive(:tty?) { true }
       expect(@output).to receive(:line) do |line|
         expect(line).to include "ppl"
-        expect(line).to include Ppl::Version
+        expect(line).to include Ppl::VERSION
       end
       expect(Readline).to receive(:readline).and_return(false)
       allow(@command).to receive(:terminate_gracefully)
