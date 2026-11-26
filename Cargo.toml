@@ -1,10 +1,13 @@
 [package]
-name = "ppl"
-version = "4.0.5"
+name = "ppl-cli"
+version = "5.0.0"
 edition = "2021"
 description = "Command-line address book"
 license = "MIT"
 repository = "https://github.com/henrycatalinismith/ppl"
+homepage = "https://henry.catalinismith.com/ppl/"
+readme = "readme.md"
+include = ["src/**/*.rs", "completions/*", "Cargo.toml", "Cargo.lock", "license", "readme.md"]
 
 [[bin]]
 name = "ppl"

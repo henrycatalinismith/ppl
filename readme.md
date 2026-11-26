@@ -21,13 +21,7 @@ like "people". You might be interested in ppl if:
 ------------
 
 ```bash
-$ gem install ppl
-```
-
-Or build the Rust version, which is a drop-in replacement:
-
-```bash
-$ cargo install --path .
+$ cargo install ppl-cli
 ```
 
 Usage
