@@ -1,5 +1,5 @@
 task :features => [:disable_config] do
-  system "bundle exec cucumber --publish-quiet"
+  sh "bundle exec cucumber --publish-quiet"
 end
 
 task :disable_config do
@@ -21,7 +21,7 @@ end
 
 task :feature, :feature_name do |task, params|
   Rake::Task["disable_config"].invoke
-  system "bundle exec cucumber features/#{params[:feature_name]}.feature"
+  sh "bundle exec cucumber features/#{params[:feature_name]}.feature"
   Rake::Task["enable_config"].invoke
 end
 
