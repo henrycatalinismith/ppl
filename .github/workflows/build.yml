@@ -36,6 +36,15 @@ jobs:
       - name: cucumber
         run: bundle exec rake features
 
+      - name: cargo test
+        run: cargo test
+
+      - name: cucumber (rust)
+        run: PPL_BIN=$PWD/target/debug/ppl bundle exec rake features
+
+      - name: compare ruby and rust
+        run: ruby compat/compare.rb
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
