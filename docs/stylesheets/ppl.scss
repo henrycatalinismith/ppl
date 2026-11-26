@@ -233,3 +233,59 @@ footer.global {
   }
 }
 
+
+@media (max-width: 979px) {
+  .container,
+  .navbar-static-top .container {
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .navbar .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .row {
+    margin-left: 0;
+  }
+
+  .row > [class*="span"] {
+    float: none;
+    display: block;
+    width: auto;
+    margin-left: 0;
+  }
+
+  .row > [class*="span"] + [class*="span"] {
+    margin-top: 20px;
+  }
+
+  pre {
+    overflow-x: auto;
+    word-wrap: normal;
+    white-space: pre;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-inner {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .navbar .brand {
+    margin-left: -10px;
+  }
+
+  .navbar .nav > li > a {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
