@@ -10,8 +10,8 @@ section: documentation
   <div class="span8">
     <h3>Requirements</h3>
     <p>
-      ppl depends on <a href="http://rubygems.org/">rubygems</a> for
-      installation, and on <a href="http://git-scm.com/">git</a> for storage and
+      ppl is installed with <a href="https://www.rust-lang.org/tools/install">cargo</a>,
+      the Rust package manager, and depends on <a href="http://git-scm.com/">git</a> for storage and
       syncing.
     </p>
   </div>
@@ -20,7 +20,7 @@ section: documentation
 <div class="row">
   <div class="span8">
     <h3>Installation</h3>
-    <pre><code>$ sudo gem install ppl</code></pre>
+    <pre><code>$ cargo install ppl-cli</code></pre>
   </div>
 </div>
 
@@ -67,21 +67,6 @@ $ ppl org eve "Red Hat"</code></pre>
     <p>
       ppl has many commands for adding new properties to contacts. Further
       information is available in the <a href="{{ "/documentation" | relative_url }}">documentation</a>
-    </p>
-  </div>
-</div>
-
-<div class="row">
-  <div class="span8">
-    <h3>Set Your Default Address Book</h3>
-    <pre><code>$ echo "[address book]" > ~/.pplconfig
-$ echo path = "`pwd`" >> ~/.pplconfig</code></pre>
-  </div>
-  <div class="span4">
-    <h3>&nbsp;</h3>
-    <p>
-      This tells ppl to let you keep working with this address book even after
-      you <code>cd</code> into another directory
     </p>
   </div>
 </div>
