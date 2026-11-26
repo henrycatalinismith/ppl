@@ -18,7 +18,7 @@ back and it's silly, really.
 
 For a while I've been wanting to do something about this. If you want to help
 out in any way, however small, speak up on GitHub, or [email
-me](mailto:henry@catalinismith.com). I'd love to add you to the organization and
+me](mailto:henry@catalinismith.se). I'd love to add you to the organization and
 let you *just get started* making your ideas happen. Even if you just like the
 project, but don't have any immediate plans to do anything in particular, that's
 fine! If you've never contributed to an open source project before, don't let

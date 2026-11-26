@@ -79,8 +79,6 @@ Contributing
 Bug reports, fixes, and additional features are encouraged. The project uses
 [Github issues](https://github.com/henrycatalinismith/ppl/issues) to track bug reports.
 
-Everyone interacting in ppl’s codebases, issue trackers etc is expected to follow the [code of conduct](https://github.com/henrycatalinismith/ppl/blob/trunk/code_of_conduct.md).
-
 License
 -------
 
