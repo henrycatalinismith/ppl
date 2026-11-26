@@ -39,6 +39,9 @@ jobs:
       - name: cargo test
         run: cargo test
 
+      - name: cargo build
+        run: cargo build
+
       - name: cucumber (rust)
         run: PPL_BIN=$PWD/target/debug/ppl bundle exec rake features
 
