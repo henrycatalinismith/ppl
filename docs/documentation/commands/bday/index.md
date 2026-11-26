@@ -23,10 +23,17 @@ listed.
 If a `<contact>` is specified, the date of birth of that contact is shown.
 
 If both a `<contact>` and a `<date>` are given, then the date is stored as the
-date of birth of that contact. The `<date>` parameter must be a valid date
-string parseable by Ruby's
-[Date.parse](http://ruby-doc.org/stdlib-1.9.3/libdoc/date/rdoc/Date.html\#method-c-parse)
-function.
+date of birth of that contact. The `<date>` parameter can be written in
+any of these formats:
+
+* `1980-02-03`, `1980/2/3`, `1980.02.03` or `19800203`
+* `3/2/1980`, `3-2-1980` or `03.02.1980` (day first)
+* `80-02-03` (two-digit year)
+* `3 Feb 1980`, `Feb 3 1980`, `February 3, 1980` or `3rd February 1980`
+* `2 March` (the current year is assumed)
+* `Feb 1980` (the first of the month is assumed)
+
+Month and weekday names may be abbreviated to three or more letters.
 
 ### Examples
 
@@ -40,5 +47,4 @@ function.
 
 ### See Also
 
-* [Date.parse](http://ruby-doc.org/stdlib-1.9.3/libdoc/date/rdoc/Date.html\#method-c-parse)
 * [color output](/documentation/configuration/color_bday)

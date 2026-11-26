@@ -1,7 +1,7 @@
 
 def ppl(command)
   project_root = File.dirname(File.dirname(File.dirname(__FILE__)))
-  ppl_location = File.join(project_root, "bin", "ppl")
+  ppl_location = ENV.fetch("PPL_BIN") { File.join(project_root, "bin", "ppl") }
   real_command = "#{ppl_location} #{command}"
   `#{real_command}`.strip
 end

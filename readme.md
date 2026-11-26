@@ -21,7 +21,7 @@ like "people". You might be interested in ppl if:
 ------------
 
 ```bash
-$ gem install ppl
+$ cargo install ppl-cli
 ```
 
 Usage
