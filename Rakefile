@@ -2,10 +2,6 @@ task :features => [:disable_config] do
   system "bundle exec cucumber --publish-quiet"
 end
 
-task :spec do
-  system "bundle exec rspec"
-end
-
 task :disable_config do
   pplconfig = File.expand_path("~/.pplconfig")
   bkpconfig = File.expand_path("~/.pplconfig.bkp")

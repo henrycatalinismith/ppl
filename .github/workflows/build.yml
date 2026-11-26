@@ -13,28 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 20
-
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.2.0
 
-      - uses: jwlawson/actions-setup-cmake@v1.8
-        with:
-          cmake-version: "3.16.x"
-
       - name: Install dependencies
-        run: |
-          bundle install
-          yarn install --pure-lockfile
-
-      - name: rspec
-        run: bundle exec rake spec
-
-      - name: cucumber
-        run: bundle exec rake features
+        run: bundle install
 
       - name: cargo test
         run: cargo test
@@ -42,11 +26,8 @@ jobs:
       - name: cargo build
         run: cargo build
 
-      - name: cucumber (rust)
-        run: PPL_BIN=$PWD/target/debug/ppl bundle exec rake features
-
-      - name: compare ruby and rust
-        run: ruby compat/compare.rb
+      - name: cucumber
+        run: bundle exec rake features
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
@@ -54,11 +35,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
           enable_jekyll: true
-
-      - uses: dawidd6/action-publish-gem@v1
-        continue-on-error: true
-        if: ${{ github.ref == 'refs/heads/main' }}
-        with:
-          api_key: ${{secrets.RUBYGEMS_API_KEY}}
-          github_token: ${{secrets.GITHUB_TOKEN}}
-

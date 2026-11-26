@@ -1,3 +1,5 @@
 source "https://rubygems.org"
-gemspec
 
+gem "cucumber"
+gem "rake"
+gem "rspec-expectations", "~> 3.0"
