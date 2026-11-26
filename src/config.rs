@@ -7,6 +7,7 @@ use crate::ini::{Ini, Value};
 #[derive(Debug, Default)]
 pub struct Configuration {
     user: Ini,
+    path: Option<PathBuf>,
 }
 
 pub fn home() -> PathBuf {
@@ -50,19 +51,45 @@ impl Configuration {
         let xdg_base = env::var("XDG_CONFIG_HOME").unwrap_or_else(|_| "~/.config".into());
         let xdg_config = expand_path(&xdg_base).join("ppl").join("config");
         let path = [user_config, xdg_config].into_iter().find(|p| p.exists());
-        let user = match path {
+        let user = match &path {
             Some(p) => {
-                let content = std::fs::read(&p).map_err(|e| e.to_string())?;
+                let content = std::fs::read(p).map_err(|e| e.to_string())?;
                 Ini::parse(&String::from_utf8_lossy(&content))?
             }
             None => Ini::default(),
         };
-        Ok(Configuration { user })
+        Ok(Configuration { user, path })
     }
 
     #[cfg(test)]
     pub fn from_ini(user: Ini) -> Configuration {
-        Configuration { user }
+        Configuration { user, path: None }
+    }
+
+    pub fn has_default_address_book(&self) -> bool {
+        !matches!(
+            self.user.get("address book", "path"),
+            None | Some(Value::Nil)
+        )
+    }
+
+    /// Records `path` as the default address book, appending to the existing
+    /// config file or creating `~/.pplconfig` if there isn't one.
+    pub fn set_default_address_book(&self, path: &Path) -> std::io::Result<()> {
+        use std::io::Write;
+        let file = self
+            .path
+            .clone()
+            .unwrap_or_else(|| expand_path("~/.pplconfig"));
+        let existing = std::fs::read(&file).unwrap_or_default();
+        let mut out = std::fs::OpenOptions::new()
+            .create(true)
+            .append(true)
+            .open(&file)?;
+        if !existing.is_empty() && !existing.ends_with(b"\n") {
+            out.write_all(b"\n")?;
+        }
+        writeln!(out, "[address book]\npath = {}", path.display())
     }
 
     pub fn address_book_path(&self) -> Result<PathBuf, String> {

@@ -6,6 +6,7 @@ Feature: ppl init
     When I run "ppl init ./contacts"
     Then it should succeed
     And "./contacts" should be a ppl address book
+    And the default address book should be "./contacts"
 
   Scenario: Incorrect usage
     Given I am in an empty directory

@@ -647,6 +647,10 @@ impl App {
             None => std::env::current_dir()?,
         };
         Git::create_address_book(&path)?;
+        if !self.config.has_default_address_book() {
+            let path = crate::config::expand_path(&path.to_string_lossy());
+            self.config.set_default_address_book(&path)?;
+        }
         Ok(true)
     }
 

@@ -1,9 +1,22 @@
 
+Before do
+  @home = Dir.mktmpdir
+end
+
+After do
+  FileUtils.rm_rf @home
+end
+
 def ppl(command)
   project_root = File.dirname(File.dirname(File.dirname(__FILE__)))
   ppl_location = ENV.fetch("PPL_BIN") { File.join(project_root, "target", "debug", "ppl") }
-  real_command = "#{ppl_location} #{command}"
+  real_command = "HOME=#{@home} XDG_CONFIG_HOME=#{@home}/.config #{ppl_location} #{command}"
   `#{real_command}`.strip
+end
+
+Then /^the default address book should be "([^"]+)"$/ do |path|
+  config = File.read(File.join(@home, ".pplconfig"))
+  expect(config).to include "path = #{File.realpath(path)}"
 end
 
 When /^I run "ppl ([^"]+)"$/ do |command|
