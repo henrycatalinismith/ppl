@@ -1,3 +1,4 @@
+require "date"
 
 Before do
   @home = Dir.mktmpdir
@@ -152,6 +153,24 @@ Then /^(bob)'s birthday should be "([^"]+)"$/ do |id, birthday|
   expect(ppl("bday #{id}")).to eq birthday
 end
 
+And /^(bob)'s birthday was (\d+) years ago today$/ do |id, years|
+  ppl("bday #{id} #{(Date.today << (years.to_i * 12)).iso8601}")
+end
+
+When /^I run "ppl ([^"]+)" with this input:$/ do |command, input|
+  input_file = File.join(@home, "stdin")
+  File.write(input_file, input + "\n")
+  @output = ppl("#{command} < #{input_file}").split("\n")
+end
+
+Then /^it should output (\d+) lines?$/ do |lines|
+  expect(@output.length).to eq lines.to_i
+end
+
+Then /^(bob)'s vcard should include "([^"]+)"$/ do |id, line|
+  expect(File.read("#{id}.vcf").split("\n")).to include line
+end
+
 And /^(bob)'s name is "([^"]+)"$/ do |id, name|
   ppl("name #{id} \"#{name}\"")
 end
@@ -160,3 +179,10 @@ And /^(bob)'s email address is "([^"]+)"$/ do |id, email_address|
   ppl("email #{id} \"#{email_address}\"")
 end
 
+And /^the (\d+).. line should match "([^"]+)"$/ do |nth, pattern|
+  expect(@output[nth.to_i - 1]).to match Regexp.new(pattern)
+end
+
+Then /^running "ppl ([^"]+)" should output a line matching "([^"]+)"$/ do |command, pattern|
+  expect(ppl(command).split("\n")).to include a_string_matching(Regexp.new(pattern))
+end
